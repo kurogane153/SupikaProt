@@ -13,7 +13,7 @@ public class AsteroidSpwanerScript : MonoBehaviour
     {
         spawnTimeRemain += _spawnDuration;
         transform.LookAt(Vector3.zero);
-        Debug.Log(_asteroidPrefab.Length);
+        Debug.Log(gameObject.name + "の隕石プレハブの数:" + _asteroidPrefab.Length);
     }
 
     void Update()

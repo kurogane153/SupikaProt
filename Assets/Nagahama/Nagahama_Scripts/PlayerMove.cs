@@ -7,6 +7,10 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Transform _earthTransform;
     [SerializeField] private Vector3 _rotateAxis;
     [SerializeField] private float _period = 10f;
+    [SerializeField] private float _speedUpRate = 10f;
+    [SerializeField] private float _speedDownRate = 10f;
+    [SerializeField] private float _maxPeriod = 200f;
+    [SerializeField] private float _minPeriod = 10f;
     [SerializeField] private bool _isUpdateRotation = false;
 
     private void Awake()
@@ -23,12 +27,19 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        
+        if(Input.GetButtonDown("SpeedUp") || Input.GetAxis("D_Pad_V") >= 0.5f) {
+            SpeedUp();
+        }
+
+        if(Input.GetButtonDown("SpeedDown") || Input.GetAxis("D_Pad_V") <= -0.5f) {
+            SpeedDown();
+        }
     }
 
     private void FixedUpdate()
     {
         MoveMent();
+        
     }
 
     private void MoveMent()
@@ -47,4 +58,22 @@ public class PlayerMove : MonoBehaviour
         }
 
     }
+
+    private void SpeedUp()
+    {
+        _period += _speedUpRate;
+        if(_maxPeriod < _period) {
+            _period = _maxPeriod;
+        }
+    }
+
+    private void SpeedDown()
+    {
+        _period -= _speedDownRate;
+        if(_period < _minPeriod) {
+            _period = _minPeriod;
+        }
+    }
+
+   
 }
