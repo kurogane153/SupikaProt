@@ -6,6 +6,7 @@ public class PlayerShot : MonoBehaviour
 {
     [SerializeField] private Transform _launchPoint;
     [SerializeField] private float _laserLength = 1000f;
+    [SerializeField] private string _fireButtonName = "Fire1";
 
     [SerializeField] private GameObject _ballPrefab;
     [SerializeField] private float _shotPower = 50f;
@@ -20,7 +21,7 @@ public class PlayerShot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && shotTimeRemain <= 0f) {
+        if (Input.GetButtonDown(_fireButtonName) && shotTimeRemain <= 0f) {
             BallShot();
         }
     }

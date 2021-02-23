@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &492295705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 492295706}
+  m_Layer: 0
+  m_Name: LaunchPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &492295706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492295705}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.4, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7812270437114958487}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,6 +1325,7 @@ GameObject:
   - component: {fileID: 7812151611204260989}
   - component: {fileID: 1958439272634671157}
   - component: {fileID: 4718281315527212042}
+  - component: {fileID: 135166656}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1367,7 +1398,30 @@ MonoBehaviour:
   _earthTransform: {fileID: 0}
   _rotateAxis: {x: 0, y: 1, z: 0}
   _period: 80
+  _speedUpRate: 5
+  _speedDownRate: 5
+  _maxPeriod: 100
+  _minPeriod: 5
   _isUpdateRotation: 1
+--- !u!114 &135166656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7809379644624649669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b4e092e2cd76c4796e7a3afc81c294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _launchPoint: {fileID: 7815201127963658789}
+  _laserLength: 1000
+  _fireButtonName: PlayerFire
+  _ballPrefab: {fileID: 3534247764204492036, guid: e1599801d4684a94ab468a20a79a0eb9,
+    type: 3}
+  _shotPower: 500
+  _shotDelay: 0.1
 --- !u!1 &7809387061465236377
 GameObject:
   m_ObjectHideFlags: 0
@@ -3406,7 +3460,8 @@ Transform:
   m_LocalRotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 492295706}
   m_Father: {fileID: 7815153203503224483}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7969,6 +8024,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 3.2900002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7222572008007360952, guid: a3cab39483b76d9468e227504a39671d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7222572008007360952, guid: a3cab39483b76d9468e227504a39671d,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7222572008007360955, guid: a3cab39483b76d9468e227504a39671d,
         type: 3}

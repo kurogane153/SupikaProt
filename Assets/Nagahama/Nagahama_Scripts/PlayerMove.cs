@@ -59,7 +59,7 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    private void SpeedUp()
+    private void SpeedDown()
     {
         _period += _speedUpRate;
         if(_maxPeriod < _period) {
@@ -67,7 +67,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void SpeedDown()
+    private void SpeedUp()
     {
         _period -= _speedDownRate;
         if(_period < _minPeriod) {
