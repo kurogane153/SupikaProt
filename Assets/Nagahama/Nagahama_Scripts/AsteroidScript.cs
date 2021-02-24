@@ -10,6 +10,11 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField] private Vector3 _rotationAxis;
     [SerializeField] private float _rotationSpeed = 5f;
 
+    public void ChangeSpeed(float speed)
+    {
+        _speed = speed;
+    }
+
     void Start()
     {
         StartCoroutine(nameof(AutoDestroy));
@@ -35,5 +40,13 @@ public class AsteroidScript : MonoBehaviour
     {
         yield return new WaitForSeconds(_destroyTime);
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet")) {
+            StopCoroutine(nameof(AutoDestroy));
+            Destroy(gameObject);
+        }
     }
 }

@@ -31,4 +31,12 @@ public class TimeLeapBallScript : MonoBehaviour
         yield return new WaitForSeconds(_destroyTime);
         Destroy(gameObject);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Asteroid")) {
+            StopCoroutine(nameof(AutoDestroy));
+            Destroy(gameObject);
+        }
+    }
 }

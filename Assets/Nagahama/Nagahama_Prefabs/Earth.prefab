@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6582865643303646979}
   - component: {fileID: 6582865643302556731}
   - component: {fileID: 6582865643306859523}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EarthRendering
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,9 +127,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6582865643300284313}
   - component: {fileID: 6543029160798195067}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Earth
-  m_TagString: Untagged
+  m_TagString: Earth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 6582865643300295165}
   - component: {fileID: 6542905276116750425}
   - component: {fileID: 6582865643311515395}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EarthHalo
   m_TagString: Untagged
   m_Icon: {fileID: 0}

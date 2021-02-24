@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Satelite
+  - Asteroid
+  - Earth
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -13,11 +17,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Satelite
+  - Asteroid
+  - Earth
+  - Bullet
   - 
   - 
   - 

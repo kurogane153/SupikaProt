@@ -39,7 +39,7 @@ public class PlayerShot : MonoBehaviour
         GameObject ball = Instantiate(_ballPrefab, _launchPoint.position, Quaternion.identity);
         TimeLeapBallScript timeLeapBallScript = ball.GetComponent<TimeLeapBallScript>();
 
-        timeLeapBallScript.LaunchBall(_launchPoint.forward, _shotPower);
+        timeLeapBallScript.LaunchBall(_launchPoint.TransformDirection(new Vector3(0,0,1)), _shotPower);
 
         shotTimeRemain += _shotDelay;
     }

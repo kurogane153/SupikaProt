@@ -6,6 +6,9 @@ public class AsteroidSpwanerScript : MonoBehaviour
 {
     [SerializeField] private GameObject[] _asteroidPrefab;
     [SerializeField] private float _spawnDuration = 4f;
+    [Header("生成した隕石のスピードをスポナーから指定"), Space(10)]
+    [SerializeField] private bool _isAsteroidSpeedOverride = false;
+    [SerializeField] private float _spawnedAsteroidSpeed = 50f;
 
     [Header("デバッグ用"), Space(10)]
     [SerializeField] private bool _isDgb = false;
@@ -44,11 +47,22 @@ public class AsteroidSpwanerScript : MonoBehaviour
         spawnTimeRemain += _spawnDuration;
         int spawnNum = Random.Range(0, _asteroidPrefab.Length - 1);
 
-        Instantiate(_asteroidPrefab[spawnNum], transform.position, Quaternion.identity);
+        if (_isAsteroidSpeedOverride) {
+            GameObject asteroid = Instantiate(_asteroidPrefab[spawnNum], transform.position, Quaternion.identity);
+            asteroid.GetComponent<AsteroidScript>().ChangeSpeed(_spawnedAsteroidSpeed);
+
+        } else {
+            Instantiate(_asteroidPrefab[spawnNum], transform.position, Quaternion.identity);
+        }
+
     }
+
+    #region デバッグ用関数
 
     private void Dbg_AsteroidSpawn()
     {
         spawnTimeRemain = 0f;
     }
+
+    #endregion
 }
