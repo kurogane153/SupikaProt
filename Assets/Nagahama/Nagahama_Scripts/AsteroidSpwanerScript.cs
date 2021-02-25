@@ -10,11 +10,22 @@ public class AsteroidSpwanerScript : MonoBehaviour
     [SerializeField] private bool _isAsteroidSpeedOverride = false;
     [SerializeField] private float _spawnedAsteroidSpeed = 50f;
 
+
+    [Header("自動スポーンさせず、メソッド呼び出しのみでスポーンさせる"), Space(10)]
+    [SerializeField] private bool _isNotAutoSpawn = false;
+
     [Header("デバッグ用"), Space(10)]
     [SerializeField] private bool _isDgb = false;
     [SerializeField] private KeyCode _dgb_AsteroidSpawnButton = KeyCode.Alpha1;
 
     private float spawnTimeRemain;
+
+    public void ChangeSpawnMode(bool isnotautospawnFlg)
+    {
+        _isNotAutoSpawn = isnotautospawnFlg;
+        if (isnotautospawnFlg) Debug.Log(gameObject.name + "を手動スポーンに切り替えた");
+        else Debug.Log(gameObject.name + "をオートスポーンに切り替えた");
+    }
 
     void Start()
     {
@@ -36,15 +47,17 @@ public class AsteroidSpwanerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        spawnTimeRemain -= Time.deltaTime;
+        if(!_isNotAutoSpawn) spawnTimeRemain -= Time.deltaTime;
+
         if(spawnTimeRemain <= 0f) {
+            spawnTimeRemain += _spawnDuration;
             AsteroidSpawn();
+            Debug.Log(gameObject.name + "が隕石をオートスポーンした");
         }
     }
 
     private void AsteroidSpawn()
     {
-        spawnTimeRemain += _spawnDuration;
         int spawnNum = Random.Range(0, _asteroidPrefab.Length - 1);
 
         if (_isAsteroidSpeedOverride) {
@@ -57,11 +70,19 @@ public class AsteroidSpwanerScript : MonoBehaviour
 
     }
 
+    public void ManualSpawn()
+    {
+        AsteroidSpawn();
+        Debug.Log(gameObject.name + "が隕石を手動スポーンした");
+    }
+
     #region デバッグ用関数
 
     private void Dbg_AsteroidSpawn()
     {
-        spawnTimeRemain = 0f;
+        spawnTimeRemain = _spawnDuration;
+        AsteroidSpawn();
+        Debug.Log("デバッグ用：" + gameObject.name + "が隕石を強制的にスポーンした");
     }
 
     #endregion

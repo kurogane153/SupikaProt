@@ -18,6 +18,7 @@ public class AsteroidScript : MonoBehaviour
     void Start()
     {
         StartCoroutine(nameof(AutoDestroy));
+        Debug.Log(gameObject.name + "の自動消滅まで：" + _destroyTime + "秒");
     }
 
     void Update()
@@ -47,6 +48,7 @@ public class AsteroidScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet")) {
             StopCoroutine(nameof(AutoDestroy));
             Destroy(gameObject);
+            Debug.Log(gameObject.name + "が弾に当たって消滅した");
         }
     }
 }

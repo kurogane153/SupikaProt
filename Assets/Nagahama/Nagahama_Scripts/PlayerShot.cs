@@ -16,13 +16,20 @@ public class PlayerShot : MonoBehaviour
 
     void Start()
     {
-        
+        if(_launchPoint == null) {
+            Debug.Log(gameObject.name + "の_launchPointが空です");
+        }
+
+        if(_ballPrefab == null) {
+            Debug.Log(gameObject.name + "の_ballPrefabが空です");
+        }
     }
 
     void Update()
     {
         if (Input.GetButtonDown(_fireButtonName) && shotTimeRemain <= 0f) {
             BallShot();
+            Debug.Log(gameObject.name + "が弾を発射した");
         }
     }
 

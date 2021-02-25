@@ -13,6 +13,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _minPeriod = 10f;
     [SerializeField] private bool _isUpdateRotation = false;
 
+    private float beforeVertical;
+
     private void Awake()
     {
             
@@ -22,22 +24,32 @@ public class PlayerMove : MonoBehaviour
     {
         if (_earthTransform == null) {
             _earthTransform = GameObject.Find("Earth").GetComponent<Transform>();
+            Debug.Log(gameObject.name + "がEarthをFindで取得した");
         }
     }
 
     void Update()
     {
-        if(Input.GetButtonDown("SpeedUp") || Input.GetAxis("D_Pad_V") >= 0.5f) {
-            SpeedUp();
-        }
-
-        if(Input.GetButtonDown("SpeedDown") || Input.GetAxis("D_Pad_V") <= -0.5f) {
-            SpeedDown();
-        }
+        
     }
 
     private void FixedUpdate()
     {
+        float nowVertical = Input.GetAxis("Vertical");
+        bool isNotInputedVertical = (-0.5f < beforeVertical && beforeVertical < 0.5f);
+
+        if (nowVertical >= 0.5f && isNotInputedVertical) {
+            SpeedUp();
+            Debug.Log(gameObject.name + "が速度を" + _speedUpRate + "上げた。現在" + _period);
+        }
+
+        if (nowVertical <= -0.5f && isNotInputedVertical) {
+            SpeedDown();
+            Debug.Log(gameObject.name + "が速度を" + _speedDownRate + "下げた。現在" + _period);
+        }
+
+        beforeVertical = nowVertical;
+
         MoveMent();
         
     }
@@ -73,7 +85,5 @@ public class PlayerMove : MonoBehaviour
         if(_period < _minPeriod) {
             _period = _minPeriod;
         }
-    }
-
-   
+    }   
 }

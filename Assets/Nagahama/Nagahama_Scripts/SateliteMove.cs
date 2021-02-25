@@ -17,6 +17,7 @@ public class SateliteMove : MonoBehaviour
     {
         if (_earthTransform == null) {
             _earthTransform = GameObject.Find("Earth").GetComponent<Transform>();
+            Debug.Log(gameObject.name + "がEarthをFindで取得した");
         }
     }
 
