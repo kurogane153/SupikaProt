@@ -6,8 +6,18 @@ public class TimeLeapBallScript : MonoBehaviour
 {
     [SerializeField] private float _destroyTime = 10f;
 
+    private Transform earthTransform;
+    private Transform targetPoint;
+    private Rigidbody rb;
+    private Vector3 direction;
+    private Quaternion angleAxis;
+
     void Start()
     {
+        if (rb == null) {
+            rb = GetComponent<Rigidbody>();
+        }
+
         StartCoroutine(nameof(AutoDestroy));
         Debug.Log(gameObject.name + "の自動消滅まで：" + _destroyTime + "秒");
     }
@@ -19,12 +29,34 @@ public class TimeLeapBallScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //BallMovement();
+        BallMovePhys();
+    }
+
+    public void LaunchBall(Vector3 dir, float pow, Quaternion angleaxis, Transform targetP)
+    {
+        if(rb == null) {
+            rb = GetComponent<Rigidbody>();
+        }
+        targetPoint = targetP;
+        //rb.AddForce(dir * pow, ForceMode.Impulse);
         
     }
 
-    public void LaunchBall(Vector3 direction, float power)
+    private void BallMovement()
     {
-        GetComponent<Rigidbody>().AddForce(direction * power, ForceMode.Impulse);
+        Vector3 newPos = transform.position;
+
+        newPos -= earthTransform.position;
+        newPos = angleAxis * newPos;
+        newPos += earthTransform.position;
+
+        transform.position = newPos;
+    }
+
+    private void BallMovePhys()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, targetPoint.TransformDirection(new Vector3(0, 0, 1)) * 10000f, Time.deltaTime * 1500);        
     }
 
     private IEnumerator AutoDestroy()

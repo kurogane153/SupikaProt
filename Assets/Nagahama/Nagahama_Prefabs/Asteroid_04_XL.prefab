@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8932848997242983192}
   - component: {fileID: -3835706426156979954}
   - component: {fileID: 5514023683928311232}
+  - component: {fileID: -4114360452916410743}
+  - component: {fileID: 3732305515761434884}
   m_Layer: 10
   m_Name: Asteroid_04_XL
   m_TagString: Asteroid
@@ -107,8 +109,38 @@ MeshCollider:
   m_GameObject: {fileID: 8932848997244980696}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: -1
   m_Mesh: {fileID: 4300000, guid: 87a7172321f03484a9f7bf3cdf05c6dc, type: 3}
+--- !u!54 &-4114360452916410743
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932848997244980696}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!136 &3732305515761434884
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932848997244980696}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4975
+  m_Height: 1.6620001
+  m_Direction: 1
+  m_Center: {x: 0.010762483, y: -0.030055046, z: -0.0059359223}

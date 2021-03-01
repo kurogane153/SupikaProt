@@ -12,6 +12,7 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private float _shotPower = 50f;
     [SerializeField] private float _shotDelay = 0.1f;
 
+    private PlayerMove playerMove;
     private float shotTimeRemain;
 
     void Start()
@@ -23,6 +24,8 @@ public class PlayerShot : MonoBehaviour
         if(_ballPrefab == null) {
             Debug.Log(gameObject.name + "の_ballPrefabが空です");
         }
+
+        playerMove = GetComponent<PlayerMove>();
     }
 
     void Update()
@@ -46,7 +49,7 @@ public class PlayerShot : MonoBehaviour
         GameObject ball = Instantiate(_ballPrefab, _launchPoint.position, Quaternion.identity);
         TimeLeapBallScript timeLeapBallScript = ball.GetComponent<TimeLeapBallScript>();
 
-        timeLeapBallScript.LaunchBall(_launchPoint.TransformDirection(new Vector3(0,0,1)), _shotPower);
+        timeLeapBallScript.LaunchBall(_launchPoint.TransformDirection(new Vector3(0,0,1)), _shotPower, playerMove.GetAngleAxis(), _launchPoint);
 
         shotTimeRemain += _shotDelay;
     }
@@ -54,7 +57,7 @@ public class PlayerShot : MonoBehaviour
     private void DrawLaserLine()
     {
         RaycastHit hit;
-        Ray ray = new Ray(_launchPoint.position, _launchPoint.TransformDirection(Vector3.forward));
+        Ray ray = new Ray(_launchPoint.position, _launchPoint.TransformDirection(new Vector3(0, 0, 1)));
 
         Physics.Raycast(ray.origin, ray.direction, out hit, _laserLength);
 

@@ -14,6 +14,17 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private bool _isUpdateRotation = false;
 
     private float beforeVertical;
+    private Quaternion angleAxis;
+
+    public Transform GetEarthTransform()
+    {
+        return _earthTransform;
+    }
+
+    public Quaternion GetAngleAxis()
+    {
+        return angleAxis;
+    }
 
     private void Awake()
     {
@@ -56,7 +67,7 @@ public class PlayerMove : MonoBehaviour
 
     private void MoveMent()
     {
-        Quaternion angleAxis = Quaternion.AngleAxis(360 / _period * Time.deltaTime, _rotateAxis);
+        angleAxis = Quaternion.AngleAxis(360 / _period * Time.deltaTime, _rotateAxis);
         Vector3 newPos = transform.position;
 
         newPos -= _earthTransform.position;

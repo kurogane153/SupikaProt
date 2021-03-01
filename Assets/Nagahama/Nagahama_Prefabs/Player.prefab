@@ -1375,7 +1375,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7809379644624649669}
   serializedVersion: 2
-  m_Mass: 20410
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
@@ -1416,11 +1416,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _launchPoint: {fileID: 7815201127963658789}
-  _laserLength: 5000
+  _laserLength: 10000
   _fireButtonName: PlayerFire
   _ballPrefab: {fileID: 3534247764204492036, guid: e1599801d4684a94ab468a20a79a0eb9,
     type: 3}
-  _shotPower: 1000
+  _shotPower: 500
   _shotDelay: 0.1
 --- !u!1 &7809387061465236377
 GameObject:
