@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class TimeLeapBallScript : MonoBehaviour
 {
+    [SerializeField] private SoundPlayer _soundPlayer;
+    [SerializeField] private AudioClip _se_Explosion;
+
+    [Space(10)]
     [SerializeField] private float _destroyTime = 10f;
 
-    private Transform earthTransform;
     private Transform targetPoint;
     private Rigidbody rb;
-    private Vector3 direction;
-    private Quaternion angleAxis;
 
     void Start()
     {
         if (rb == null) {
             rb = GetComponent<Rigidbody>();
+        }
+
+        if (_soundPlayer == null) {
+            if ((_soundPlayer = GetComponentInChildren<SoundPlayer>()) == null) {
+                Debug.LogError(gameObject.name + "の" + nameof(_soundPlayer) + "が空です");
+            }
+            Debug.Log(gameObject.name + "は、子要素にアタッチされているAudioSourceを自動的に" + nameof(_soundPlayer) + "にアタッチしました");
         }
 
         StartCoroutine(nameof(AutoDestroy));
@@ -29,29 +37,15 @@ public class TimeLeapBallScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //BallMovement();
         BallMovePhys();
     }
 
-    public void LaunchBall(Vector3 dir, float pow, Quaternion angleaxis, Transform targetP)
+    public void LaunchBall(Transform targetP)
     {
         if(rb == null) {
             rb = GetComponent<Rigidbody>();
         }
         targetPoint = targetP;
-        //rb.AddForce(dir * pow, ForceMode.Impulse);
-        
-    }
-
-    private void BallMovement()
-    {
-        Vector3 newPos = transform.position;
-
-        newPos -= earthTransform.position;
-        newPos = angleAxis * newPos;
-        newPos += earthTransform.position;
-
-        transform.position = newPos;
     }
 
     private void BallMovePhys()
@@ -59,18 +53,25 @@ public class TimeLeapBallScript : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, targetPoint.TransformDirection(new Vector3(0, 0, 1)) * 10000f, Time.deltaTime * 1500);        
     }
 
+    #region Coroutine
     private IEnumerator AutoDestroy()
     {
         yield return new WaitForSeconds(_destroyTime);
         Destroy(gameObject);
     }
+    #endregion
 
+    #region OnCollision
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Asteroid")) {
             StopCoroutine(nameof(AutoDestroy));
+            _soundPlayer.gameObject.transform.parent = null;
+            Destroy(_soundPlayer.gameObject, 3f);
+            _soundPlayer.PlaySE(_se_Explosion);
             Destroy(gameObject);
             Debug.Log(gameObject.name + "が隕石に当たって消滅した");
         }
     }
+    #endregion
 }
