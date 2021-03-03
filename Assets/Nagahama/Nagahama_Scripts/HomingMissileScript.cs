@@ -17,6 +17,7 @@ public class HomingMissileScript : MonoBehaviour
     private Vector3 position;
     private Vector3 halfwayPoint;
     private float impactTime = 1.5f;
+    private int giveDamage;
 
     void Start()
     {
@@ -43,18 +44,24 @@ public class HomingMissileScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HomingMove();
+        TargetDestroyedCheck();
+        if (targetPoint != null) {
+            HomingMove();
+        }
+        
     }
 
-    public void LaunchMissile(Transform targetP, Transform halfwaypoint, float impacttime, Vector3 velo)
+    public void LaunchMissile(Transform targetP, Transform halfwaypoint, float impacttime, Vector3 velo, float initpower, int damage)
     {
         if (rb == null) {
             rb = GetComponent<Rigidbody>();
             position = transform.position;
-            velocity = velo.normalized * 100f;
+            velocity = velo.normalized * initpower;
         }
         targetPoint = targetP;
         impactTime = impacttime;
+        giveDamage = damage;
+        gameObject.SetActive(true);
     }
 
     private void HomingMove()
@@ -74,6 +81,22 @@ public class HomingMissileScript : MonoBehaviour
         transform.position = position;
     }
 
+    private void TargetDestroyedCheck()
+    {
+        if(targetPoint == null) {
+            SelfDestroy();
+        }
+    }
+
+    private void SelfDestroy()
+    {
+        StopCoroutine(nameof(AutoDestroy));
+        _soundPlayer.gameObject.transform.parent = null;
+        Destroy(_soundPlayer.gameObject, 3f);
+        _soundPlayer.PlaySE(_se_Explosion);
+        Destroy(gameObject);
+    }
+
     #region Coroutine
     private IEnumerator AutoDestroy()
     {
@@ -86,11 +109,8 @@ public class HomingMissileScript : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Asteroid")) {
-            StopCoroutine(nameof(AutoDestroy));
-            _soundPlayer.gameObject.transform.parent = null;
-            Destroy(_soundPlayer.gameObject, 3f);
-            _soundPlayer.PlaySE(_se_Explosion);
-            Destroy(gameObject);
+            collision.gameObject.GetComponent<AsteroidScript>().ReceiveDamage(giveDamage);
+            SelfDestroy();
             Debug.Log(gameObject.name + "が隕石に当たって消滅した");
         }
     }

@@ -4,31 +4,42 @@ using UnityEngine;
 
 public class PlayerShot : MonoBehaviour
 {
+    [Header("サウンド系")]
     [SerializeField] private SoundPlayer _soundPlayer;
     [SerializeField] private AudioClip _se_MissileLaunch;
 
-    [Space(10)]
+    [Header("発射設定全般"), Space(10)]
+    [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Transform _launchPoint;
     [SerializeField] private float _laserLength = 1000f;
     [SerializeField] private string _fireButtonName = "Fire1";
     [SerializeField] private string _missileFireButtonName = "Fire2";
 
-    [Space(10)]
+    [Header("真っ直ぐ進む弾の設定"), Space(10)]
     [SerializeField] private GameObject _ballPrefab;
     [SerializeField] private float _shotPower = 50f;
-    [SerializeField] private float _shotDelay = 0.1f;
+    [SerializeField] private float _shotDelay = 0.1f;    
 
-    [Space(10)]
-    [SerializeField] private Transform _targetAsteroid;
-
-    [Space(10)]
+    [Header("ミサイルの設定"), Space(10)]
     [SerializeField] private GameObject _missilePrefab;
+    [SerializeField] private float _missileShotPower = 100f;
+    [SerializeField] private float _missileShotDelay = 0.5f;
+    [SerializeField] private int _missileDamage = 1;
     [SerializeField] private Transform[] _halfwayPoints;
     [SerializeField] private float[] _impactTimes;
     [SerializeField] private float[] _instantiateTimes;
 
     private PlayerMove playerMove;
+    private Transform targetAsteroid;
+    private Transform confirmTarget;
     private float shotTimeRemain;
+    private float missileShotTimeRemain;
+
+    #region デバッグ用変数
+    [Watch, HideInInspector]
+    public string _dgb_targetAsteroid = "None";
+
+    #endregion
 
     void Start()
     {
@@ -56,7 +67,10 @@ public class PlayerShot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown(_missileFireButtonName) && shotTimeRemain <= 0f) {
+        // ターゲットを捉えているときに発射ボタンを押すと、そのターゲットを「確定したターゲット」として
+        // confirmTargetに格納します。
+        if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f && targetAsteroid != null) {
+            confirmTarget = targetAsteroid;
             MultiStageFire();
             Debug.Log(gameObject.name + "がミサイルを発射した");
         }
@@ -72,7 +86,12 @@ public class PlayerShot : MonoBehaviour
         if(0f < shotTimeRemain) {
             shotTimeRemain -= Time.deltaTime;
         }
+
+        if (0f < missileShotTimeRemain) {
+            missileShotTimeRemain -= Time.deltaTime;
+        }
         DrawLaserLine();
+        Dbg();
     }
 
     private void BallShot()
@@ -109,7 +128,7 @@ public class PlayerShot : MonoBehaviour
             StartCoroutine(MissileInstantiate(i++));
         }
 
-        shotTimeRemain += _shotDelay;
+        missileShotTimeRemain += _missileShotDelay;
     }
 
     /// <summary>
@@ -122,7 +141,8 @@ public class PlayerShot : MonoBehaviour
         GameObject missile = Instantiate(_missilePrefab, _launchPoint.position, Quaternion.identity);
         HomingMissileScript homingMissileScript = missile.GetComponent<HomingMissileScript>();
 
-        homingMissileScript.LaunchMissile(_targetAsteroid, halfwaypoint, impacttime, halfwaypoint.position - transform.position);
+        homingMissileScript.LaunchMissile(confirmTarget, halfwaypoint, impacttime, halfwaypoint.position - transform.position, _missileShotPower, _missileDamage);
+
         _soundPlayer.PlaySE(_se_MissileLaunch);
     }
 
@@ -137,8 +157,10 @@ public class PlayerShot : MonoBehaviour
         GameObject missile = Instantiate(_missilePrefab, _launchPoint.position, Quaternion.identity);
         HomingMissileScript homingMissileScript = missile.GetComponent<HomingMissileScript>();
 
-        homingMissileScript.LaunchMissile(_targetAsteroid, halfwaypoint, impacttime, halfwaypoint.position - transform.position * 50f);
-        shotTimeRemain += delaytime;
+        homingMissileScript.LaunchMissile(confirmTarget, halfwaypoint, impacttime, halfwaypoint.position - transform.position, _missileShotPower, _missileDamage);
+
+        missileShotTimeRemain += _missileShotDelay;
+
         _soundPlayer.PlaySE(_se_MissileLaunch);
     }
 
@@ -151,11 +173,27 @@ public class PlayerShot : MonoBehaviour
 
     private void DrawLaserLine()
     {
-        RaycastHit hit;
         Ray ray = new Ray(_launchPoint.position, _launchPoint.TransformDirection(new Vector3(0, 0, 1)));
 
-        Physics.Raycast(ray.origin, ray.direction, out hit, _laserLength);
+        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask)) {
+            targetAsteroid = hit.transform;
+
+        } else {
+            targetAsteroid = null;
+
+        }
 
         Debug.DrawRay(ray.origin, ray.direction * _laserLength, Color.green);
+    }
+
+    private void Dbg()
+    {
+        Ray ray = new Ray(_launchPoint.position, _launchPoint.TransformDirection(new Vector3(0, 0, 1)));
+
+        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask)) {
+            _dgb_targetAsteroid = targetAsteroid.name;
+        } else {
+            _dgb_targetAsteroid = "None";
+        }
     }
 }

@@ -15,6 +15,13 @@ public class PlayerMove : MonoBehaviour
 
     private float beforeVertical;
     private Quaternion angleAxis;
+    private float nowAngle;
+
+    #region デバッグ用変数
+    [Watch, HideInInspector]
+    public float _dgb_playerNowAngle;
+
+    #endregion
 
     public Transform GetEarthTransform()
     {
@@ -41,10 +48,18 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        
+        SpeedControllInput();
     }
 
     private void FixedUpdate()
+    {
+        MoveMent();
+        UpdateNowAngle();
+        Dbg();
+        
+    }
+
+    private void SpeedControllInput()
     {
         float nowVertical = Input.GetAxis("Vertical");
         bool isNotInputedVertical = (-0.5f < beforeVertical && beforeVertical < 0.5f);
@@ -60,9 +75,6 @@ public class PlayerMove : MonoBehaviour
         }
 
         beforeVertical = nowVertical;
-
-        MoveMent();
-        
     }
 
     private void MoveMent()
@@ -82,6 +94,18 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+    private void UpdateNowAngle()
+    {
+        Vector3 vec = transform.position - _earthTransform.position;
+        float rad = Mathf.Atan2(vec.x, vec.z);
+        nowAngle = rad * Mathf.Rad2Deg;
+
+        if (nowAngle < 0) {
+            nowAngle += 360;
+        }
+
+    }
+
     private void SpeedDown()
     {
         _period += _speedUpRate;
@@ -96,5 +120,11 @@ public class PlayerMove : MonoBehaviour
         if(_period < _minPeriod) {
             _period = _minPeriod;
         }
-    }   
+    }
+
+    private void Dbg()
+    {
+        _dgb_playerNowAngle = nowAngle;
+    }
+    
 }

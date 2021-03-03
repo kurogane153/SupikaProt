@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8072556475572062524}
   - component: {fileID: 8072556475573193724}
   - component: {fileID: -3067274714345100960}
-  - component: {fileID: -7733646747787076837}
   - component: {fileID: 6338643189823261678}
   - component: {fileID: 9026987587975653193}
   m_Layer: 10
@@ -96,24 +95,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyTime: 45
+  _hp: 100
   _speed: 50
   _isRotation: 1
   _rotationAxis: {x: 1, y: 0, z: 0}
   _rotationSpeed: 1
---- !u!64 &-7733646747787076837
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8072556475575391548}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: -1
-  m_Mesh: {fileID: 4300000, guid: 70a9041ab85428848898c7cab09a41bc, type: 3}
+  _dgb_hp: 0
 --- !u!54 &6338643189823261678
 Rigidbody:
   m_ObjectHideFlags: 0
