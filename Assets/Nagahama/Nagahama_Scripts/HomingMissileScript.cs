@@ -90,10 +90,9 @@ public class HomingMissileScript : MonoBehaviour
 
     private void SelfDestroy()
     {
-        StopCoroutine(nameof(AutoDestroy));
         _soundPlayer.gameObject.transform.parent = null;
-        Destroy(_soundPlayer.gameObject, 3f);
         _soundPlayer.PlaySE(_se_Explosion);
+        _soundPlayer.DestroyCall(3f);
         Destroy(gameObject);
     }
 
@@ -101,7 +100,7 @@ public class HomingMissileScript : MonoBehaviour
     private IEnumerator AutoDestroy()
     {
         yield return new WaitForSeconds(_destroyTime);
-        Destroy(gameObject);
+        SelfDestroy();
     }
     #endregion
 
@@ -110,6 +109,7 @@ public class HomingMissileScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Asteroid")) {
             collision.gameObject.GetComponent<AsteroidScript>().ReceiveDamage(giveDamage);
+            StopCoroutine(nameof(AutoDestroy));
             SelfDestroy();
             Debug.Log(gameObject.name + "が隕石に当たって消滅した");
         }

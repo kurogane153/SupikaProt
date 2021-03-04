@@ -12,7 +12,7 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 5f;
 
     #region デバッグ用変数
-    [Watch, HideInInspector]
+    [HideInInspector]
     public int _dgb_hp;
 
     #endregion

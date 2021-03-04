@@ -25,4 +25,15 @@ public class SoundPlayer : MonoBehaviour
     {
         audioSource.PlayOneShot(audioClip);
     }
+
+    public void DestroyCall(float time)
+    {
+        StartCoroutine(SelfDestroy(time));
+    }
+
+    public IEnumerator SelfDestroy(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(gameObject);
+    }
 }

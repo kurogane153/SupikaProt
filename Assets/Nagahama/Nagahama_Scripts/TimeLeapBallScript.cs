@@ -53,11 +53,19 @@ public class TimeLeapBallScript : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, targetPoint.TransformDirection(new Vector3(0, 0, 1)) * 10000f, Time.deltaTime * 1500);        
     }
 
+    private void SelfDestroy()
+    {
+        _soundPlayer.gameObject.transform.parent = null;
+        _soundPlayer.PlaySE(_se_Explosion);
+        _soundPlayer.DestroyCall(3f);
+        Destroy(gameObject);
+    }
+
     #region Coroutine
     private IEnumerator AutoDestroy()
     {
         yield return new WaitForSeconds(_destroyTime);
-        Destroy(gameObject);
+        SelfDestroy();
     }
     #endregion
 
@@ -66,10 +74,7 @@ public class TimeLeapBallScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Asteroid")) {
             StopCoroutine(nameof(AutoDestroy));
-            _soundPlayer.gameObject.transform.parent = null;
-            Destroy(_soundPlayer.gameObject, 3f);
-            _soundPlayer.PlaySE(_se_Explosion);
-            Destroy(gameObject);
+            SelfDestroy();
             Debug.Log(gameObject.name + "が隕石に当たって消滅した");
         }
     }

@@ -29,7 +29,6 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private float[] _impactTimes;
     [SerializeField] private float[] _instantiateTimes;
 
-    private PlayerMove playerMove;
     private Transform targetAsteroid;
     private Transform confirmTarget;
     private float shotTimeRemain;
@@ -62,7 +61,6 @@ public class PlayerShot : MonoBehaviour
             Debug.Log(gameObject.name + "は、子要素にアタッチされているAudioSourceを自動的に" + nameof(_soundPlayer) + "にアタッチしました");
         }
 
-        playerMove = GetComponent<PlayerMove>();
     }
 
     void Update()
