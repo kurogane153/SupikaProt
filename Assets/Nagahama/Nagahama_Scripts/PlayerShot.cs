@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerShot : MonoBehaviour
 {
+    [SerializeField] private PlayerAnimation _playerAnimation;
     [Header("サウンド系")]
     [SerializeField] private SoundPlayer _soundPlayer;
     [SerializeField] private AudioClip _se_MissileLaunch;
@@ -42,7 +43,12 @@ public class PlayerShot : MonoBehaviour
 
     void Start()
     {
-        if(_launchPoint == null) {
+        if (_playerAnimation == null) {
+            _playerAnimation = GetComponentInChildren<PlayerAnimation>();
+            Debug.Log(gameObject.name + "がPlayerAnimationをGetComponentInChildrenで取得した");
+        }
+
+        if (_launchPoint == null) {
             Debug.LogError(gameObject.name + "の" + nameof(_launchPoint) + "が空です");
         }
 
@@ -70,6 +76,7 @@ public class PlayerShot : MonoBehaviour
         if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f && targetAsteroid != null) {
             confirmTarget = targetAsteroid;
             MultiStageFire();
+            _playerAnimation.AcrobatLoop();
             Debug.Log(gameObject.name + "がミサイルを発射した");
         }
 
@@ -81,15 +88,20 @@ public class PlayerShot : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(0f < shotTimeRemain) {
+        TimeRemainManege();
+        DrawLaserLine();
+        Dbg();
+    }
+
+    private void TimeRemainManege()
+    {
+        if (0f < shotTimeRemain) {
             shotTimeRemain -= Time.deltaTime;
         }
 
         if (0f < missileShotTimeRemain) {
             missileShotTimeRemain -= Time.deltaTime;
         }
-        DrawLaserLine();
-        Dbg();
     }
 
     private void BallShot()

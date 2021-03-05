@@ -9,6 +9,9 @@ public class PlayerMove : MonoBehaviour
         Earth, Spica
     }
 
+    [SerializeField] private PlayerAnimation _playerAnimation;
+
+    [Space(10)]
     [SerializeField] private Transform _earthTransform;
     [SerializeField] private Transform _spicaTransform;
     [SerializeField] private OrbitOriginPlanet _orbitOriginPlanet;
@@ -20,6 +23,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _speedDownRate = 10f;
     [SerializeField] private float _maxPeriod = 200f;
     [SerializeField] private float _minPeriod = 10f;
+    [SerializeField] private float _speedChangeDelay = 1.23f;
     [SerializeField] private bool _isUpdateRotation = false;
 
     [Header("ラグランジュ"), Space(10)]
@@ -36,6 +40,7 @@ public class PlayerMove : MonoBehaviour
     private float nowAngle;
     private bool isAcceptedOrbitChange;
     private float minDistance;
+    private float speedChangeTimeRemain;
 
     #region デバッグ用変数
     [Watch, HideInInspector] public float _dgb_playerNowAngle;
@@ -51,6 +56,11 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
+        if (_playerAnimation == null) {
+            _playerAnimation = GetComponentInChildren<PlayerAnimation>();
+            Debug.Log(gameObject.name + "がPlayerAnimationをGetComponentInChildrenで取得した");
+        }
+
         if (_earthTransform == null) {
             _earthTransform = GameObject.Find("Earth").GetComponent<Transform>();
             Debug.Log(gameObject.name + "がEarthをFindで取得した");
@@ -74,6 +84,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        TimeRemainManege();
         MoveMent();
         UpdateNowAngle();
         FixDistance();
@@ -82,17 +93,24 @@ public class PlayerMove : MonoBehaviour
         
     }
 
+    private void TimeRemainManege()
+    {
+        if (0f < speedChangeTimeRemain) {
+            speedChangeTimeRemain -= Time.deltaTime;
+        }
+    }
+
     private void SpeedControllInput()
     {
         float nowVertical = Input.GetAxis("Vertical");
         bool isNotInputedVertical = (-0.5f < beforeVertical && beforeVertical < 0.5f);
 
-        if (nowVertical >= 0.5f && isNotInputedVertical) {
+        if (speedChangeTimeRemain <= 0f && nowVertical >= 0.5f && isNotInputedVertical) {
             SpeedUp();
             Debug.Log(gameObject.name + "が速度を" + _speedUpRate + "上げた。現在" + _period);
         }
 
-        if (nowVertical <= -0.5f && isNotInputedVertical) {
+        if (speedChangeTimeRemain <= 0f && nowVertical <= -0.5f && isNotInputedVertical) {
             SpeedDown();
             Debug.Log(gameObject.name + "が速度を" + _speedDownRate + "下げた。現在" + _period);
         }
@@ -214,21 +232,24 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    private void SpeedUp()
+    {
+        _period -= _speedDownRate;
+        if (_period < _minPeriod) {
+            _period = _minPeriod;
+        }
+        speedChangeTimeRemain = _speedChangeDelay;
+    }
+
     private void SpeedDown()
     {
         _period += _speedUpRate;
         if(_maxPeriod < _period) {
             _period = _maxPeriod;
         }
-    }
-
-    private void SpeedUp()
-    {
-        _period -= _speedDownRate;
-        if(_period < _minPeriod) {
-            _period = _minPeriod;
-        }
-    }
+        _playerAnimation.AcrobatLoop();
+        speedChangeTimeRemain = _speedChangeDelay;
+    }    
 
     private void Dbg()
     {
