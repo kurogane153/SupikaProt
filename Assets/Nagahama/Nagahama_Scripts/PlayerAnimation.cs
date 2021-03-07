@@ -30,4 +30,9 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator.SetTrigger("AcrobatLoop");
     }
+
+    public void Spiral()
+    {
+        animator.SetTrigger("Spiral");
+    }
 }

@@ -76,7 +76,6 @@ public class PlayerShot : MonoBehaviour
         if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f && targetAsteroid != null) {
             confirmTarget = targetAsteroid;
             MultiStageFire();
-            _playerAnimation.AcrobatLoop();
             Debug.Log(gameObject.name + "がミサイルを発射した");
         }
 

@@ -238,6 +238,7 @@ public class PlayerMove : MonoBehaviour
         if (_period < _minPeriod) {
             _period = _minPeriod;
         }
+        _playerAnimation.Spiral();
         speedChangeTimeRemain = _speedChangeDelay;
     }
 
