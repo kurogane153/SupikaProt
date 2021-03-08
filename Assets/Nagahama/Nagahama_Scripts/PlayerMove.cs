@@ -17,6 +17,10 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private OrbitOriginPlanet _orbitOriginPlanet;
     [SerializeField] private Vector3 _rotateEarthAxis;
     [SerializeField] private Vector3 _rotateSpicaAxis;
+
+    [Header("速度操作"), Space(10)]
+    [SerializeField] private string _speedUpButtonName = "SpeedUp";
+    [SerializeField] private string _speedDownButtonName = "SpeedDown";
     [SerializeField] private float _maxDistance = 457f;
     [SerializeField] private float _period = 10f;
     [SerializeField] private float _speedUpRate = 10f;
@@ -43,7 +47,7 @@ public class PlayerMove : MonoBehaviour
     private float speedChangeTimeRemain;
 
     #region デバッグ用変数
-    [Watch, HideInInspector] public float _dgb_playerNowAngle;
+    [Watch, HideInInspector] public float _dbg_playerNowAngle;
     [Watch, HideInInspector] public bool _dbg_isAcceptedOrbitChange;
     [Watch, HideInInspector] public string _dbg_orbitOriginPlanet;
     [Watch, HideInInspector] public float _dbg_distance_player_to_planet;
@@ -102,20 +106,15 @@ public class PlayerMove : MonoBehaviour
 
     private void SpeedControllInput()
     {
-        float nowVertical = Input.GetAxis("Vertical");
-        bool isNotInputedVertical = (-0.5f < beforeVertical && beforeVertical < 0.5f);
-
-        if (speedChangeTimeRemain <= 0f && nowVertical >= 0.5f && isNotInputedVertical) {
+        if (speedChangeTimeRemain <= 0f && Input.GetButtonDown(_speedUpButtonName)) {
             SpeedUp();
             Debug.Log(gameObject.name + "が速度を" + _speedUpRate + "上げた。現在" + _period);
         }
 
-        if (speedChangeTimeRemain <= 0f && nowVertical <= -0.5f && isNotInputedVertical) {
+        if (speedChangeTimeRemain <= 0f && Input.GetButtonDown(_speedDownButtonName)) {
             SpeedDown();
             Debug.Log(gameObject.name + "が速度を" + _speedDownRate + "下げた。現在" + _period);
         }
-
-        beforeVertical = nowVertical;
     }
 
     private void MoveMent()
@@ -254,7 +253,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Dbg()
     {
-        _dgb_playerNowAngle = nowAngle;
+        _dbg_playerNowAngle = nowAngle;
         _dbg_isAcceptedOrbitChange = isAcceptedOrbitChange;
         _dbg_orbitOriginPlanet = _orbitOriginPlanet.ToString();
         _dbg_distance_player_to_planet = (transform.position - orbitOrigin.position).magnitude;

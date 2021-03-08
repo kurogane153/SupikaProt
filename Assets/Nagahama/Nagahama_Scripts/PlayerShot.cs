@@ -10,16 +10,13 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private AudioClip _se_MissileLaunch;
 
     [Header("発射設定全般"), Space(10)]
+    [SerializeField] private ReticleController _reticle;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Transform _launchPoint;
     [SerializeField] private float _laserLength = 1000f;
-    [SerializeField] private string _fireButtonName = "Fire1";
+    [SerializeField] private string _aimXAxisName = "Aim-Horizontal";
+    [SerializeField] private string _aimYAxisName = "Aim-Vertical";
     [SerializeField] private string _missileFireButtonName = "Fire2";
-
-    [Header("真っ直ぐ進む弾の設定"), Space(10)]
-    [SerializeField] private GameObject _ballPrefab;
-    [SerializeField] private float _shotPower = 50f;
-    [SerializeField] private float _shotDelay = 0.1f;    
 
     [Header("ミサイルの設定"), Space(10)]
     [SerializeField] private GameObject _missilePrefab;
@@ -37,7 +34,7 @@ public class PlayerShot : MonoBehaviour
 
     #region デバッグ用変数
     [Watch, HideInInspector]
-    public string _dgb_targetAsteroid = "None";
+    public string _dbg_targetAsteroid = "None";
 
     #endregion
 
@@ -48,12 +45,13 @@ public class PlayerShot : MonoBehaviour
             Debug.Log(gameObject.name + "がPlayerAnimationをGetComponentInChildrenで取得した");
         }
 
-        if (_launchPoint == null) {
-            Debug.LogError(gameObject.name + "の" + nameof(_launchPoint) + "が空です");
+        if (_reticle == null) {
+            _reticle = GameObject.Find("Reticle").GetComponent<ReticleController>();
+            Debug.Log(gameObject.name + "がReticleをFindで取得した");
         }
 
-        if(_ballPrefab == null) {
-            Debug.LogError(gameObject.name + "の" + nameof(_ballPrefab) + "が空です");
+        if (_launchPoint == null) {
+            Debug.LogError(gameObject.name + "の" + nameof(_launchPoint) + "が空です");
         }
 
         if (_missilePrefab == null) {
@@ -79,17 +77,14 @@ public class PlayerShot : MonoBehaviour
             Debug.Log(gameObject.name + "がミサイルを発射した");
         }
 
-        if (Input.GetButtonDown(_fireButtonName) && shotTimeRemain <= 0f) {
-            BallShot();
-            Debug.Log(gameObject.name + "が弾を発射した");
-        }
     }
 
     private void FixedUpdate()
     {
         TimeRemainManege();
-        DrawLaserLine();
+        GetTargetAsteroid();
         Dbg();
+        _reticle.MoveReticle( Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName));
     }
 
     private void TimeRemainManege()
@@ -101,18 +96,6 @@ public class PlayerShot : MonoBehaviour
         if (0f < missileShotTimeRemain) {
             missileShotTimeRemain -= Time.deltaTime;
         }
-    }
-
-    private void BallShot()
-    {
-        GameObject ball = Instantiate(_ballPrefab, _launchPoint.position, Quaternion.identity);
-        ball.transform.parent = gameObject.transform;
-        TimeLeapBallScript timeLeapBallScript = ball.GetComponent<TimeLeapBallScript>();
-
-        timeLeapBallScript.LaunchBall(_launchPoint);
-
-        shotTimeRemain += _shotDelay;
-        _soundPlayer.PlaySE(_se_MissileLaunch);
     }
 
     /// <summary>
@@ -180,9 +163,9 @@ public class PlayerShot : MonoBehaviour
 
     }
 
-    private void DrawLaserLine()
+    private void GetTargetAsteroid()
     {
-        Ray ray = new Ray(_launchPoint.position, _launchPoint.TransformDirection(new Vector3(0, 0, 1)));
+        Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
 
         if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask)) {
             targetAsteroid = hit.transform;
@@ -197,12 +180,12 @@ public class PlayerShot : MonoBehaviour
 
     private void Dbg()
     {
-        Ray ray = new Ray(_launchPoint.position, _launchPoint.TransformDirection(new Vector3(0, 0, 1)));
+        Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
 
         if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask)) {
-            _dgb_targetAsteroid = targetAsteroid.name;
+            _dbg_targetAsteroid = targetAsteroid.name;
         } else {
-            _dgb_targetAsteroid = "None";
+            _dbg_targetAsteroid = "None";
         }
     }
 }

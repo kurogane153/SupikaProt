@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 4934176583779418549}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -203,6 +204,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
+--- !u!114 &4934176583779418549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53eaa3fb34a1a0b47a8cc7e2cf1741d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1253699402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,8 +1615,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7809379644624649669}
-  m_LocalRotation: {x: 0, y: 0.35003573, z: 0, w: 0.9367364}
-  m_LocalPosition: {x: -350.35, y: 1.8, z: 294}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -1618,7 +1631,7 @@ Transform:
   - {fileID: 1569096299827169309}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 40.979, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1958439272634671157
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1653,6 +1666,8 @@ MonoBehaviour:
   _orbitOriginPlanet: 0
   _rotateEarthAxis: {x: 0, y: 1, z: 0}
   _rotateSpicaAxis: {x: 0, y: -1, z: 0}
+  _speedUpButtonName: SpeedUp
+  _speedDownButtonName: SpeedDown
   _maxDistance: 457
   _period: 20
   _speedUpRate: 5
@@ -1674,7 +1689,7 @@ MonoBehaviour:
   _lagrangePointMaxAngle:
   - 271
   - 271
-  _dgb_playerNowAngle: 0
+  _dbg_playerNowAngle: 0
   _dbg_isAcceptedOrbitChange: 0
   _dbg_orbitOriginPlanet: 
   _dbg_distance_player_to_planet: 0
@@ -1690,19 +1705,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b4e092e2cd76c4796e7a3afc81c294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerAnimation: {fileID: 6295996902850967912}
   _soundPlayer: {fileID: 8727766401157852106}
   _se_MissileLaunch: {fileID: 8300000, guid: 233bbb0a8770f1c4f9e5784058b50872, type: 3}
+  _reticle: {fileID: 0}
   _layerMask:
     serializedVersion: 2
     m_Bits: 1024
   _launchPoint: {fileID: 492295706}
   _laserLength: 10000
-  _fireButtonName: Fire2
+  _aimXAxisName: Aim-Horizontal
+  _aimYAxisName: Aim-Vertical
   _missileFireButtonName: PlayerFire
-  _ballPrefab: {fileID: 3534247764204492036, guid: e1599801d4684a94ab468a20a79a0eb9,
-    type: 3}
-  _shotPower: 1000
-  _shotDelay: 0.1
   _missilePrefab: {fileID: 6991264631999463264, guid: 7b50ed8d5be67664dad8cba1b626f9da,
     type: 3}
   _missileShotPower: 125
@@ -1729,7 +1743,7 @@ MonoBehaviour:
   - 0.25
   - 0.3
   - 0.35
-  _dgb_targetAsteroid: None
+  _dbg_targetAsteroid: None
 --- !u!114 &4099869561920642162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8389,12 +8403,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b599fe3dd41a0746806869b5c9b1276, type: 3}
---- !u!4 &7384748323537559857 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7087519292718275686, guid: 2b599fe3dd41a0746806869b5c9b1276,
-    type: 3}
-  m_PrefabInstance: {fileID: 297246679414701399}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8727766401157852106 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9025012491590506141, guid: 2b599fe3dd41a0746806869b5c9b1276,
@@ -8407,6 +8415,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9a653763c496549a0277713b3db87c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &7384748323537559857 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7087519292718275686, guid: 2b599fe3dd41a0746806869b5c9b1276,
+    type: 3}
+  m_PrefabInstance: {fileID: 297246679414701399}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &603020696892513988
 PrefabInstance:
   m_ObjectHideFlags: 0
