@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyGenerator : MonoBehaviour
 {
@@ -50,33 +51,42 @@ public class EnemyGenerator : MonoBehaviour
     //経過時間
     private float time = 0f;
 
+    //カメラに表示されているか
+    private bool isRendered = false;
+
+    //メインカメラに付いているタグ名
+    private const string MAIN_CAMERA_TAG_NAME = "MainCamera";
+
     void Start()
     {
         //時間間隔を決定する
         interval = GetRandomTime();
-
     }
 
     void Update()
     {
         //時間計測
         time += Time.deltaTime;
-        
+
         //経過時間が生成時間になったとき(生成時間より大きくなったとき)
         if (time > interval)
         {
-            //enemyをインスタンス化する(生成する)
-            GameObject asteroid = Instantiate(enemyPrefab);
-            //生成した敵の位置をランダムに設定する
-            asteroid.transform.position = GetRandomPosition();
-            //enemy.transform.localScale = new Vector3(100, 100, 100);
-            asteroid.GetComponent<AsteroidScript>().ChangeSpeed(_spawnedAsteroidSpeed);
-            //経過時間を初期化して再度時間計測を始める
-            time = 0f;
-            //次に発生する時間間隔を決定する
-            interval = GetRandomTime();
+            if (isRendered) { 
+                //enemyをインスタンス化する(生成する)
+                GameObject asteroid = Instantiate(enemyPrefab);
+                //生成した敵の位置をランダムに設定する
+                asteroid.transform.position = GetRandomPosition();
+                asteroid.GetComponent<AsteroidScript>().ChangeSpeed(_spawnedAsteroidSpeed);
+                //経過時間を初期化して再度時間計測を始める
+                time = 0f;
+                //次に発生する時間間隔を決定する
+                interval = GetRandomTime();
+                isRendered = false;
+            }
         }
-        
+
+        Debug.Log("カメラに映っている？   :" + isRendered);
+
     }
 
     //ランダムな時間を生成する関数
@@ -96,4 +106,13 @@ public class EnemyGenerator : MonoBehaviour
         //Vector3型のPositionを返す
         return new Vector3(x, y, z);
     }
+
+    private void OnWillRenderObject()
+    {
+        if (Camera.current.tag == MAIN_CAMERA_TAG_NAME)
+        {
+            isRendered = true;
+        }
+    }
+
 }
