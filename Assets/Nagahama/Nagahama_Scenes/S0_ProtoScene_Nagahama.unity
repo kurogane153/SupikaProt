@@ -277,10 +277,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2406,6 +2406,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 290852359}
     m_Modifications:
+    - target: {fileID: 7015361749325490768, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490768, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490768, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.94148314
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490768, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490768, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 5dd49b3eacc540408c98eee0de38e0f1, type: 3}
     - target: {fileID: 7015361749325490769, guid: 82af22d6a7c795a42a0e738b02916d6c,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2510,6 +2535,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _lockOnColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _lockOnColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _lockOnColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _lockOnColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7015361749325490782, guid: 82af22d6a7c795a42a0e738b02916d6c,
         type: 3}

@@ -33,8 +33,9 @@ public class PlayerShot : MonoBehaviour
     private float missileShotTimeRemain;
 
     #region デバッグ用変数
-    [Watch, HideInInspector]
-    public string _dbg_targetAsteroid = "None";
+    [Watch, HideInInspector] public string _dbg_targetAsteroid = "None";
+    [Watch, HideInInspector] public float _dbg_horizontal;
+    [Watch, HideInInspector] public float _dbg_vertical;
 
     #endregion
 
@@ -84,7 +85,7 @@ public class PlayerShot : MonoBehaviour
         TimeRemainManege();
         GetTargetAsteroid();
         Dbg();
-        _reticle.MoveReticle( Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName));
+        _reticle.MoveReticle( Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroid);
     }
 
     private void TimeRemainManege()
@@ -187,5 +188,8 @@ public class PlayerShot : MonoBehaviour
         } else {
             _dbg_targetAsteroid = "None";
         }
+
+        _dbg_horizontal = Input.GetAxis(_aimXAxisName);
+        _dbg_vertical = Input.GetAxis(_aimYAxisName);
     }
 }
