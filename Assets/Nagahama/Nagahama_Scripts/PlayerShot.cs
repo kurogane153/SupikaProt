@@ -34,8 +34,6 @@ public class PlayerShot : MonoBehaviour
 
     #region デバッグ用変数
     [Watch, HideInInspector] public string _dbg_targetAsteroid = "None";
-    [Watch, HideInInspector] public float _dbg_horizontal;
-    [Watch, HideInInspector] public float _dbg_vertical;
 
     #endregion
 
@@ -189,7 +187,5 @@ public class PlayerShot : MonoBehaviour
             _dbg_targetAsteroid = "None";
         }
 
-        _dbg_horizontal = Input.GetAxis(_aimXAxisName);
-        _dbg_vertical = Input.GetAxis(_aimYAxisName);
     }
 }

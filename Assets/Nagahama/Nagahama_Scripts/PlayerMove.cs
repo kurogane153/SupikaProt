@@ -84,16 +84,17 @@ public class PlayerMove : MonoBehaviour
     {
         SpeedControllInput();
         AcceptOrbitOriginChange();
-    }
-
-    private void FixedUpdate()
-    {
         TimeRemainManege();
         MoveMent();
         UpdateNowAngle();
         FixDistance();
         OrbitShift();
         Dbg();
+    }
+
+    private void FixedUpdate()
+    {
+        
         
     }
 
