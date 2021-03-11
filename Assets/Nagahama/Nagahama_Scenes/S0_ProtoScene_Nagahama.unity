@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 631.5
+      value: 961
       objectReference: {fileID: 0}
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -151,7 +151,7 @@ PrefabInstance:
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 589.4
+      value: 1006
       objectReference: {fileID: 0}
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -191,12 +191,12 @@ PrefabInstance:
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: maxTime
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: minTime
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -204,6 +204,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5910420717885757576, guid: c64002a477e84b047aded9c5b8441285,
         type: 3}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: xMaxPosition
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: xMinPosition
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: yMaxPosition
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: yMinPosition
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: zMaxPosition
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: zMinPosition
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: _spawnedAsteroidSpeed
@@ -337,6 +367,29 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1774839682}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &295829605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295829604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae8a781e0e0ecc418c111df9be6b9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 9029232486978480037, guid: 7a31abefc1ecad54c99bb32d7ad86569,
+    type: 3}
+  minTime: 5
+  maxTime: 13
+  _spawnedAsteroidSpeed: 20
+  xMinPosition: -100
+  xMaxPosition: 100
+  yMinPosition: -100
+  yMaxPosition: 100
+  zMinPosition: -100
+  zMaxPosition: 100
 --- !u!23 &295829607
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -581,7 +634,7 @@ PrefabInstance:
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -591,7 +644,7 @@ PrefabInstance:
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1588
+      value: -1998
       objectReference: {fileID: 0}
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -601,7 +654,7 @@ PrefabInstance:
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 839
+      value: 1667
       objectReference: {fileID: 0}
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -647,6 +700,11 @@ PrefabInstance:
         type: 3}
       propertyPath: minTime
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -1275,7 +1333,7 @@ PrefabInstance:
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -1285,7 +1343,7 @@ PrefabInstance:
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1570
+      value: -1979
       objectReference: {fileID: 0}
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -1295,7 +1353,7 @@ PrefabInstance:
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -582
+      value: -991
       objectReference: {fileID: 0}
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -1344,24 +1402,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
       propertyPath: enemyPrefab
       value: 
       objectReference: {fileID: 8932848997244980696, guid: 2f1c0e8d7abb46a40acab9ca18e9693d,
         type: 3}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
+      propertyPath: xMaxPosition
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: xMinPosition
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
       propertyPath: yMaxPosition
-      value: 62
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: yMinPosition
-      value: -80
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: zMaxPosition
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: zMinPosition
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -1457,6 +1535,29 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1082485252}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1498046870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498046869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ceeb5a7a61ec644dad2c8ac4728b825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 8932848997244980696, guid: 2f1c0e8d7abb46a40acab9ca18e9693d,
+    type: 3}
+  minTime: 5
+  maxTime: 18
+  _spawnedAsteroidSpeed: 20
+  xMinPosition: -100
+  xMaxPosition: 100
+  yMinPosition: -100
+  yMaxPosition: 100
+  zMinPosition: -100
+  zMaxPosition: 100
 --- !u!23 &1498046872
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1717,7 +1818,7 @@ PrefabInstance:
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -1727,7 +1828,7 @@ PrefabInstance:
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 731.7
+      value: 969
       objectReference: {fileID: 0}
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -1737,7 +1838,7 @@ PrefabInstance:
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -358.4
+      value: -982
       objectReference: {fileID: 0}
     - target: {fileID: 7121624730488383262, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -1777,25 +1878,40 @@ PrefabInstance:
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: maxTime
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: minTime
-      value: 5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: enemyPrefab
       value: 
-      objectReference: {fileID: 8072556475575391548, guid: 5ebd8dc719c0ca14283108719203924f,
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
+      propertyPath: zMaxPosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: zMinPosition
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: _spawnedAsteroidSpeed
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7133d005bba5bfb4ab29c729d8f33769, type: 3}
 --- !u!43 &1959548754
 Mesh:
@@ -1966,6 +2082,29 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 564107692}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1975667893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975667892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 394097421021b1b46887ff7bc20cd848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 9029232486978480037, guid: 7a31abefc1ecad54c99bb32d7ad86569,
+    type: 3}
+  minTime: 5
+  maxTime: 16
+  _spawnedAsteroidSpeed: 20
+  xMinPosition: -100
+  xMaxPosition: 100
+  yMinPosition: -100
+  yMaxPosition: 100
+  zMinPosition: -100
+  zMaxPosition: 100
 --- !u!23 &1975667895
 MeshRenderer:
   m_ObjectHideFlags: 0
