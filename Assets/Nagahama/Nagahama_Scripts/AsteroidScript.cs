@@ -11,12 +11,19 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField] private Vector3 _rotationAxis;
     [SerializeField] private float _rotationSpeed = 5f;
 
+    [SerializeField] private Vector3 targetPosition = Vector3.zero;
+
     #region デバッグ用変数
     [HideInInspector]
     public int _dgb_hp;
 
     #endregion
 
+    public void ChangeParam(float speed, Vector3 pos)
+    {
+        ChangeSpeed(speed);
+        SetTargetPosition(pos);
+    }
 
     public void ChangeSpeed(float speed)
     {
@@ -31,13 +38,16 @@ public class AsteroidScript : MonoBehaviour
             SelfDestroy();
         }
     }
+    
+    public void SetTargetPosition(Vector3 pos)
+    {
+        targetPosition = pos;
+    }
 
     void Start()
     {
         StartCoroutine(nameof(AutoDestroy));
         Debug.Log(gameObject.name + "の自動消滅まで：" + _destroyTime + "秒");
-
-        
     }
 
     void Update()
@@ -47,7 +57,7 @@ public class AsteroidScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, Vector3.zero, _speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, _speed * Time.deltaTime);
 
         if (_isRotation) {
             Quaternion rot = Quaternion.AngleAxis(_rotationSpeed, _rotationAxis);

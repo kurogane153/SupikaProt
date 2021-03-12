@@ -45,8 +45,8 @@ public class ReticleController : MonoBehaviour
 
         if (target) {
             image.color = _lockOnColor;
-            newX /= 4;
-            newY /= 4;
+            newX /= 3;
+            newY /= 3;
         } else {
             image.color = defaultColor;
         }
