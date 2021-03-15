@@ -87,5 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b6dccb04ceed44e98682d923bca8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lockOnColor: {r: 1, g: 0, b: 0, a: 1}
   _speedX: 40
   _speedY: 40
+  _aimAssistDegreeX: 3
+  _aimAssistDegreeY: 3

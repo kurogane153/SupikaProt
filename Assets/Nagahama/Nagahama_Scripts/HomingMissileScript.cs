@@ -10,21 +10,20 @@ public class HomingMissileScript : MonoBehaviour
     [Space(10)]
     [SerializeField] private float _destroyTime = 10f;
 
-    private Transform targetPoint;
-    private Rigidbody rb;
+    private Transform targetTransform;
 
     private Vector3 velocity;
     private Vector3 position;
+    private Vector3 lastTargetPosition;
+    private Vector3 lastAcceleration;
     private Vector3 halfwayPoint;
     private float impactTime = 1.5f;
     private int giveDamage;
+   
 
     void Start()
     {
-        if (rb == null) {
-            rb = GetComponent<Rigidbody>();
-            position = transform.position;
-        }
+        position = transform.position;
 
         if (_soundPlayer == null) {
             if ((_soundPlayer = GetComponentInChildren<SoundPlayer>()) == null) {
@@ -39,26 +38,24 @@ public class HomingMissileScript : MonoBehaviour
 
     void Update()
     {
-
+        TargetDestroyedCheck();
+        if (targetTransform != null) {
+            HomingMove();
+        } else {
+            NonTargetMove();
+        }
     }
 
     private void FixedUpdate()
     {
-        TargetDestroyedCheck();
-        if (targetPoint != null) {
-            HomingMove();
-        }
         
     }
 
     public void LaunchMissile(Transform targetP, Transform halfwaypoint, float impacttime, Vector3 velo, float initpower, int damage)
     {
-        if (rb == null) {
-            rb = GetComponent<Rigidbody>();
-            position = transform.position;
-            velocity = velo.normalized * initpower;
-        }
-        targetPoint = targetP;
+        position = transform.position;
+        velocity = velo.normalized * initpower;
+        targetTransform = targetP;
         impactTime = impacttime;
         giveDamage = damage;
         gameObject.SetActive(true);
@@ -68,7 +65,7 @@ public class HomingMissileScript : MonoBehaviour
     {
         Vector3 acceleration = Vector3.zero;
 
-        Vector3 vec = targetPoint.position - position;
+        Vector3 vec = targetTransform.position - position;
         acceleration += (vec - velocity * impactTime) * 2f / (impactTime * impactTime);
 
         impactTime -= Time.deltaTime;
@@ -79,12 +76,21 @@ public class HomingMissileScript : MonoBehaviour
         velocity += acceleration * Time.deltaTime;
         position += velocity * Time.deltaTime;
         transform.position = position;
+        lastTargetPosition = vec * 10000f;
+        lastAcceleration = acceleration;
+    }
+
+    private void NonTargetMove()
+    {
+        velocity += lastAcceleration * Time.deltaTime;
+        position += velocity * Time.deltaTime;
+        transform.position = position;
     }
 
     private void TargetDestroyedCheck()
     {
-        if(targetPoint == null) {
-            SelfDestroy();
+        if(targetTransform == null) {
+            //SelfDestroy();
         }
     }
 

@@ -13,6 +13,14 @@ public class AsteroidScript : MonoBehaviour
 
     [SerializeField] private Vector3 targetPosition = Vector3.zero;
 
+    private bool isLockedOn;
+
+    public bool IsLockedOn
+    {
+        get { return isLockedOn; }
+        set { isLockedOn = value; }
+    }
+
     #region デバッグ用変数
     [HideInInspector]
     public int _dgb_hp;

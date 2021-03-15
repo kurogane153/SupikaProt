@@ -22,6 +22,7 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private GameObject _missilePrefab;
     [SerializeField] private float _missileShotPower = 100f;
     [SerializeField] private float _missileShotDelay = 0.5f;
+    [SerializeField] private float _multiTargetMissileDelay = 0.1f;
     [SerializeField] private int _missileDamage = 1;
     [SerializeField] private Transform[] _halfwayPoints;
     [SerializeField] private float[] _impactTimes;
@@ -72,7 +73,15 @@ public class PlayerShot : MonoBehaviour
         // confirmTargetに格納します。
         if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f && targetAsteroid != null) {
             confirmTarget = targetAsteroid;
-            MultiStageFire();
+            //MultiStageFire();
+            //MultiTargetFire();
+            //Debug.Log(gameObject.name + "がミサイルを発射した");
+        }
+
+        if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f) {
+            confirmTarget = targetAsteroid;
+            //MultiStageFire();
+            MultiTargetFire();
             Debug.Log(gameObject.name + "がミサイルを発射した");
         }
 
@@ -122,6 +131,29 @@ public class PlayerShot : MonoBehaviour
         missileShotTimeRemain += _missileShotDelay;
     }
 
+    private void MultiTargetFire()
+    {
+        LockedOnReticle[] reticles = FindObjectsOfType<LockedOnReticle>();
+        if(reticles.Length == 0) {
+            Debug.Log(nameof(LockedOnReticle) + "が一つも無かった");
+            return;
+        }
+
+        if (_halfwayPoints.Length != _impactTimes.Length) {
+            Debug.LogError(nameof(_halfwayPoints) + "の要素数が、" + nameof(_impactTimes) + "の要素数と同じになっていません。");
+            return;
+        }
+
+        if (_halfwayPoints.Length != _instantiateTimes.Length) {
+            Debug.LogError(nameof(_halfwayPoints) + "の要素数が、" + nameof(_instantiateTimes) + "の要素数と同じになっていません。");
+            return;
+        }
+
+        StartCoroutine(MultiTargetMissileInstantiate(reticles));
+
+        missileShotTimeRemain += _missileShotDelay;
+    }
+
     /// <summary>
     /// 一度に複数回呼び出すとき用
     /// </summary>
@@ -155,12 +187,48 @@ public class PlayerShot : MonoBehaviour
         _soundPlayer.PlaySE(_se_MissileLaunch);
     }
 
+    /// <summary>
+    /// 複数呼び出すときのターゲット指定版
+    /// </summary>
+    /// <param name="target">ターゲットのTransform</param>
+    /// <param name="halfwaypoint">ミサイルが一度通過する中間地点</param>
+    /// <param name="impacttime">着弾するまでの時間</param>
+    private void MissileShot(Transform target, Transform halfwaypoint, float impacttime)
+    {
+        GameObject missile = Instantiate(_missilePrefab, _launchPoint.position, Quaternion.identity);
+        HomingMissileScript homingMissileScript = missile.GetComponent<HomingMissileScript>();
+
+        homingMissileScript.LaunchMissile(target, halfwaypoint, impacttime, halfwaypoint.position - transform.position, _missileShotPower, _missileDamage);
+
+        _soundPlayer.PlaySE(_se_MissileLaunch);
+    }
+
     private IEnumerator MissileInstantiate(int index)
     {
         yield return new WaitForSeconds(_instantiateTimes[index]);
         MissileShot(_halfwayPoints[index], _impactTimes[index]);
 
     }
+
+    private IEnumerator MissileInstantiate(Transform target, int index)
+    {
+        yield return new WaitForSeconds(_instantiateTimes[index]);
+        MissileShot(target, _halfwayPoints[index], _impactTimes[index]);
+    }
+
+    private IEnumerator MultiTargetMissileInstantiate(LockedOnReticle[] reticles)
+    {
+        int i = 0;
+        foreach (var tgt in reticles) {
+            foreach (var hp in _halfwayPoints) {
+                StartCoroutine(MissileInstantiate(tgt.Target, i++));
+            }
+            yield return new WaitForSeconds(_multiTargetMissileDelay);
+            i = 0;
+        }
+        
+    }
+
 
     private void GetTargetAsteroid()
     {

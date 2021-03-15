@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1476391018}
-  _positionOffset: {x: -3.58, y: 30, z: -5}
+  _positionOffset: {x: -3.58, y: 30, z: -15}
   _rotationOffset: {x: 9.19, y: 15.104, z: 3.29}
   _lerpFactor: 4
 --- !u!81 &437437803
@@ -2685,6 +2685,22 @@ PrefabInstance:
       propertyPath: _lockOnColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _aimAssistDegreeX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _aimAssistDegreeY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _lockedOnReticlePrefab
+      value: 
+      objectReference: {fileID: 2127001005440325914, guid: 293ec4f45d4f025478756b7099bb749e,
+        type: 3}
     - target: {fileID: 7015361749325490782, guid: 82af22d6a7c795a42a0e738b02916d6c,
         type: 3}
       propertyPath: m_Name
@@ -2703,6 +2719,10 @@ PrefabInstance:
       propertyPath: _reticle
       value: 
       objectReference: {fileID: 243210299}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _multiTargetMissileDelay
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 1847801118875527306, guid: f6de751e9dcc43646b9cbbaa467344ab,
         type: 3}
       propertyPath: m_Clip
