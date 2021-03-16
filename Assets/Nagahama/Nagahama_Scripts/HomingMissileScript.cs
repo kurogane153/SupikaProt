@@ -75,7 +75,12 @@ public class HomingMissileScript : MonoBehaviour
 
         velocity += acceleration * Time.deltaTime;
         position += velocity * Time.deltaTime;
+
+        Vector3 diff = transform.position - position;
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(diff), Time.deltaTime * 10f);
         transform.position = position;
+        
         lastTargetPosition = vec * 10000f;
         lastAcceleration = acceleration;
     }
@@ -84,6 +89,10 @@ public class HomingMissileScript : MonoBehaviour
     {
         velocity += lastAcceleration * Time.deltaTime;
         position += velocity * Time.deltaTime;
+
+        Vector3 diff = transform.position - position;
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(diff), Time.deltaTime * 10f);
         transform.position = position;
     }
 
