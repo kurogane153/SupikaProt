@@ -8,6 +8,9 @@ public class HomingMissileScript : MonoBehaviour
     [SerializeField] private AudioClip _se_Explosion;
 
     [Space(10)]
+    [SerializeField] private GameObject _explosionEffect;
+
+    [Space(10)]
     [SerializeField] private float _destroyTime = 10f;
 
     private Transform targetTransform;
@@ -51,13 +54,14 @@ public class HomingMissileScript : MonoBehaviour
         
     }
 
-    public void LaunchMissile(Transform targetP, Transform halfwaypoint, float impacttime, Vector3 velo, float initpower, int damage)
+    public void LaunchMissile(Transform targetP, Transform halfwaypoint, float impacttime, Vector3 vec, float initpower, int damage)
     {
         position = transform.position;
-        velocity = velo.normalized * initpower;
+        velocity = vec.normalized * initpower;
         targetTransform = targetP;
         impactTime = impacttime;
         giveDamage = damage;
+        transform.rotation = Quaternion.LookRotation(vec * -1f).normalized;
         gameObject.SetActive(true);
     }
 
@@ -78,7 +82,7 @@ public class HomingMissileScript : MonoBehaviour
 
         Vector3 diff = transform.position - position;
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(diff), Time.deltaTime * 10f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(diff).normalized, Time.deltaTime * 7f);
         transform.position = position;
         
         lastTargetPosition = vec * 10000f;
@@ -92,7 +96,7 @@ public class HomingMissileScript : MonoBehaviour
 
         Vector3 diff = transform.position - position;
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(diff), Time.deltaTime * 10f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(diff).normalized, Time.deltaTime * 7f);
         transform.position = position;
     }
 
@@ -108,6 +112,7 @@ public class HomingMissileScript : MonoBehaviour
         _soundPlayer.gameObject.transform.parent = null;
         _soundPlayer.PlaySE(_se_Explosion);
         _soundPlayer.DestroyCall(3f);
+        Instantiate(_explosionEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

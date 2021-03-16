@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AsteroidScript : MonoBehaviour
 {
+    [SerializeField] private GameObject _explosionEffect;
+
+    [Space(10)]
     [SerializeField] private float _destroyTime = 10f;
     [SerializeField] private int _hp = 6;
     [SerializeField] private float _speed = 5f;
@@ -44,6 +47,7 @@ public class AsteroidScript : MonoBehaviour
 
         if (_hp <= 0) {
             SelfDestroy();
+            Instantiate(_explosionEffect, transform.position, Quaternion.identity);
             GameClearOver_Process.GameClearCount++;
         }
     }

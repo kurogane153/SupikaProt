@@ -164,7 +164,7 @@ public class PlayerShot : MonoBehaviour
         GameObject missile = Instantiate(_missilePrefab, _launchPoint.position, Quaternion.identity);
         HomingMissileScript homingMissileScript = missile.GetComponent<HomingMissileScript>();
 
-        homingMissileScript.LaunchMissile(confirmTarget, halfwaypoint, impacttime, halfwaypoint.position - transform.position, _missileShotPower, _missileDamage);
+        homingMissileScript.LaunchMissile(confirmTarget, halfwaypoint, impacttime, halfwaypoint.position - _launchPoint.position, _missileShotPower, _missileDamage);
 
         _soundPlayer.PlaySE(_se_MissileLaunch);
     }
@@ -180,7 +180,7 @@ public class PlayerShot : MonoBehaviour
         GameObject missile = Instantiate(_missilePrefab, _launchPoint.position, Quaternion.identity);
         HomingMissileScript homingMissileScript = missile.GetComponent<HomingMissileScript>();
 
-        homingMissileScript.LaunchMissile(confirmTarget, halfwaypoint, impacttime, halfwaypoint.position - transform.position, _missileShotPower, _missileDamage);
+        homingMissileScript.LaunchMissile(confirmTarget, halfwaypoint, impacttime, halfwaypoint.position - _launchPoint.position, _missileShotPower, _missileDamage);
 
         missileShotTimeRemain += _missileShotDelay;
 
@@ -198,7 +198,7 @@ public class PlayerShot : MonoBehaviour
         GameObject missile = Instantiate(_missilePrefab, _launchPoint.position, Quaternion.identity);
         HomingMissileScript homingMissileScript = missile.GetComponent<HomingMissileScript>();
 
-        homingMissileScript.LaunchMissile(target, halfwaypoint, impacttime, halfwaypoint.position - transform.position, _missileShotPower, _missileDamage);
+        homingMissileScript.LaunchMissile(target, halfwaypoint, impacttime, _launchPoint.position - halfwaypoint.position, _missileShotPower, _missileDamage);
 
         _soundPlayer.PlaySE(_se_MissileLaunch);
     }

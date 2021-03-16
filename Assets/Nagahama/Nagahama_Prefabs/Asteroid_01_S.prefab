@@ -94,12 +94,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdadaa82fa3e4824b868117be90c0e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _explosionEffect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
+    type: 3}
   _destroyTime: 45
   _hp: 100
   _speed: 50
   _isRotation: 1
   _rotationAxis: {x: 1, y: 0, z: 1}
   _rotationSpeed: 1
+  targetPosition: {x: 0, y: 0, z: 0}
   _dgb_hp: 0
 --- !u!54 &-5942576487499870013
 Rigidbody:

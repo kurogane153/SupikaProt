@@ -1620,10 +1620,11 @@ MonoBehaviour:
   _aimXAxisName: Aim-Horizontal
   _aimYAxisName: Aim-Vertical
   _missileFireButtonName: PlayerFire
-  _missilePrefab: {fileID: 6991264631999463264, guid: 7b50ed8d5be67664dad8cba1b626f9da,
+  _missilePrefab: {fileID: 3643294739846692036, guid: 6bd3158bc74d06f47b5a320173da873b,
     type: 3}
-  _missileShotPower: 125
+  _missileShotPower: 175
   _missileShotDelay: 0.5
+  _multiTargetMissileDelay: 0.1
   _missileDamage: 18
   _halfwayPoints:
   - {fileID: 1253699403}
@@ -1647,8 +1648,6 @@ MonoBehaviour:
   - 0.3
   - 0.35
   _dbg_targetAsteroid: None
-  _dbg_horizontal: 0
-  _dbg_vertical: 0
 --- !u!114 &4099869561920642162
 MonoBehaviour:
   m_ObjectHideFlags: 0
