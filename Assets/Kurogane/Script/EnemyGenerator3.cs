@@ -86,8 +86,6 @@ public class EnemyGenerator3 : MonoBehaviour
             }
         }
 
-        Debug.Log("カメラに映っている？   :" + isRendered);
-
     }
 
     //ランダムな時間を生成する関数
