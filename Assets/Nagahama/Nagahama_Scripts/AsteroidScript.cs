@@ -44,6 +44,7 @@ public class AsteroidScript : MonoBehaviour
 
         if (_hp <= 0) {
             SelfDestroy();
+            GameClearOver_Process.GameClearCount++;
         }
     }
     
