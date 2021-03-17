@@ -9,6 +9,9 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private SoundPlayer _soundPlayer;
     [SerializeField] private AudioClip _se_MissileLaunch;
 
+    [Header("キルカメラ"), Space(10)]
+    [SerializeField] private KillCameraScript _killCamera;
+
     [Header("発射設定全般"), Space(10)]
     [SerializeField] private ReticleController _reticle;
     [SerializeField] private LayerMask _layerMask;
@@ -28,6 +31,7 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private float[] _impactTimes;
     [SerializeField] private float[] _instantiateTimes;
 
+    private PlayerMove playerMove;
     private Transform targetAsteroid;
     private Transform confirmTarget;
     private float shotTimeRemain;
@@ -37,6 +41,11 @@ public class PlayerShot : MonoBehaviour
     [Watch, HideInInspector] public string _dbg_targetAsteroid = "None";
 
     #endregion
+
+    private void Awake()
+    {
+        playerMove = GetComponent<PlayerMove>();
+    }
 
     void Start()
     {
@@ -108,7 +117,6 @@ public class PlayerShot : MonoBehaviour
 
     /// <summary>
     /// 多段発射ミサイル。
-    /// 
     /// </summary>
     private void MultiStageFire()
     {
@@ -131,6 +139,9 @@ public class PlayerShot : MonoBehaviour
         missileShotTimeRemain += _missileShotDelay;
     }
 
+    /// <summary>
+    /// 複数ターゲット指定して多段発射
+    /// </summary>
     private void MultiTargetFire()
     {
         LockedOnReticle[] reticles = FindObjectsOfType<LockedOnReticle>();
@@ -193,7 +204,7 @@ public class PlayerShot : MonoBehaviour
     /// <param name="target">ターゲットのTransform</param>
     /// <param name="halfwaypoint">ミサイルが一度通過する中間地点</param>
     /// <param name="impacttime">着弾するまでの時間</param>
-    private void MissileShot(Transform target, Transform halfwaypoint, float impacttime)
+    private GameObject MissileShot(Transform target, Transform halfwaypoint, float impacttime)
     {
         GameObject missile = Instantiate(_missilePrefab, _launchPoint.position, Quaternion.identity);
         HomingMissileScript homingMissileScript = missile.GetComponent<HomingMissileScript>();
@@ -201,6 +212,8 @@ public class PlayerShot : MonoBehaviour
         homingMissileScript.LaunchMissile(target, halfwaypoint, impacttime, _launchPoint.position - halfwaypoint.position, _missileShotPower, _missileDamage);
 
         _soundPlayer.PlaySE(_se_MissileLaunch);
+
+        return missile;
     }
 
     private IEnumerator MissileInstantiate(int index)
@@ -210,21 +223,40 @@ public class PlayerShot : MonoBehaviour
 
     }
 
-    private IEnumerator MissileInstantiate(Transform target, int index)
+    private IEnumerator MissileInstantiate(Transform target, int index, int count)
     {
         yield return new WaitForSeconds(_instantiateTimes[index]);
-        MissileShot(target, _halfwayPoints[index], _impactTimes[index]);
+        GameObject missile = MissileShot(target, _halfwayPoints[index], _impactTimes[index]);
+
+        if(count == ReticleController.Instance.GenerateReticleMax && index == _halfwayPoints.Length - 1) {
+            
+            _killCamera.SetFollowMissile(missile);
+            
+        }
     }
 
     private IEnumerator MultiTargetMissileInstantiate(LockedOnReticle[] reticles)
     {
+
+        if(reticles.Length == ReticleController.Instance.GenerateReticleMax) {
+            _killCamera.GetCamera().enabled = true;
+            _killCamera.SwitchStagingPhase_Pan();
+            playerMove.enabled = false;
+            ReticleController.Instance.GetCanvas().enabled = false;
+            Pauser.Pause();
+            Time.timeScale = 1f;
+        }
+
         int i = 0;
+        int count = 0;
         foreach (var tgt in reticles) {
+            count++;
             foreach (var hp in _halfwayPoints) {
-                StartCoroutine(MissileInstantiate(tgt.Target, i++));
+                StartCoroutine(MissileInstantiate(tgt.Target, i++, count));
             }
             yield return new WaitForSeconds(_multiTargetMissileDelay);
             i = 0;
+            
         }
         
     }

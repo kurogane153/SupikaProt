@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -3067274714345100960}
   - component: {fileID: 6338643189823261678}
   - component: {fileID: 9026987587975653193}
+  - component: {fileID: 6706779781784483891}
   m_Layer: 10
   m_Name: Asteroid_02_M
   m_TagString: Asteroid
@@ -133,3 +134,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.72, y: 0.87600005, z: 0.756}
   m_Center: {x: 0.0018343478, y: -0.030993894, z: -0.017543942}
+--- !u!114 &6706779781784483891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8072556475575391548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe42b7f859a03674b8f5ac772538b081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

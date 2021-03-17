@@ -32,6 +32,7 @@ public class LockedOnReticle : MonoBehaviour
         if(target != null) {
             TargetLockOnMove();
         } else {
+            ReticleController.Instance.GeneratedReticleCount -= 1;
             Destroy(gameObject);
         }
         
@@ -62,6 +63,7 @@ public class LockedOnReticle : MonoBehaviour
     private void DestroyProcess()
     {
         target.GetComponent<AsteroidScript>().IsLockedOn = false;
+        ReticleController.Instance.GeneratedReticleCount -= 1;
         Destroy(gameObject);
     }
 }

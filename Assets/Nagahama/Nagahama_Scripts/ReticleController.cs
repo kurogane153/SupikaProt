@@ -5,12 +5,37 @@ using UnityEngine.UI;
 
 public class ReticleController : MonoBehaviour
 {
+    #region Singleton
+    private static ReticleController instance;
+
+    public static ReticleController Instance
+    {
+        get
+        {
+            if (instance == null) {
+                instance = (ReticleController)FindObjectOfType(typeof(ReticleController));
+
+                if (instance == null) {
+                    Debug.LogError(typeof(ReticleController) + "is nothing");
+                }
+            }
+
+            return instance;
+        }
+    }
+    #endregion
+    [Header("サウンド系")]
+    [SerializeField] private SoundPlayer _soundPlayer;
+    [SerializeField] private AudioClip _se_LockOn;
+
+    [Space(10)]
     [SerializeField] private GameObject _lockedOnReticlePrefab;
     [SerializeField] private Color _lockOnColor;
     [SerializeField] private float _speedX = 1f;
     [SerializeField] private float _speedY = 1f;
     [SerializeField] private float _aimAssistDegreeX = 3;
     [SerializeField] private float _aimAssistDegreeY = 3;
+    [SerializeField] private int _generateReticleMax = 3;
 
     private Canvas canvas;
     private RectTransform canvasRectTransform;
@@ -18,6 +43,36 @@ public class ReticleController : MonoBehaviour
     private Image image;
     private Color defaultColor;
     private bool isBeforeTargeting;
+    private int generatedReticleCount;
+
+    public int GeneratedReticleCount
+    {
+        get { return generatedReticleCount; }
+
+        set { generatedReticleCount = value; 
+            if(generatedReticleCount < 0) {
+                generatedReticleCount = 0;
+            }
+        }
+    }
+
+    public int GenerateReticleMax
+    {
+        get { return _generateReticleMax; }
+    }
+
+    public Canvas GetCanvas()
+    {
+        return canvas;
+    }
+
+    private void Awake()
+    {
+        if (this != Instance) {
+            Destroy(this.gameObject);
+            return;
+        }
+    }
 
     void Start()
     {
@@ -26,6 +81,13 @@ public class ReticleController : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
         image = GetComponent<Image>();
         defaultColor = image.color;
+
+        if (_soundPlayer == null) {
+            if ((_soundPlayer = GetComponentInChildren<SoundPlayer>()) == null) {
+                Debug.LogError(gameObject.name + "の" + nameof(_soundPlayer) + "が空です");
+            }
+            Debug.Log(gameObject.name + "は、子要素にアタッチされているAudioSourceを自動的に" + nameof(_soundPlayer) + "にアタッチしました");
+        }
     }
 
     void Update()
@@ -58,13 +120,16 @@ public class ReticleController : MonoBehaviour
             if(isNowTargeting && !isBeforeTargeting) {
                 AsteroidScript asteroid = target.GetComponent<AsteroidScript>();
 
-                if (!asteroid.IsLockedOn) {
+                if (!asteroid.IsLockedOn && generatedReticleCount < _generateReticleMax ) {
                     asteroid.IsLockedOn = true;
 
                     GameObject newLockonReticle = Instantiate(_lockedOnReticlePrefab, transform.position, Quaternion.identity);
                     LockedOnReticle lockedOnReticle = newLockonReticle.GetComponent<LockedOnReticle>();
 
                     lockedOnReticle.InstantiateSettings(canvas, target);
+                    generatedReticleCount += 1;
+
+                    _soundPlayer.PlaySE(_se_LockOn);
                 }
             }
 

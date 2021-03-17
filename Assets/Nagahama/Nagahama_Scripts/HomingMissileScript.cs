@@ -12,6 +12,7 @@ public class HomingMissileScript : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private float _destroyTime = 10f;
+    [SerializeField] private float _lockAtSpeed = 10f;
 
     private Transform targetTransform;
 
@@ -41,17 +42,17 @@ public class HomingMissileScript : MonoBehaviour
 
     void Update()
     {
+       
+    }
+
+    private void FixedUpdate()
+    {
         TargetDestroyedCheck();
         if (targetTransform != null) {
             HomingMove();
         } else {
             NonTargetMove();
         }
-    }
-
-    private void FixedUpdate()
-    {
-        
     }
 
     public void LaunchMissile(Transform targetP, Transform halfwaypoint, float impacttime, Vector3 vec, float initpower, int damage)
@@ -82,7 +83,7 @@ public class HomingMissileScript : MonoBehaviour
 
         Vector3 diff = transform.position - position;
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(diff).normalized, Time.deltaTime * 7f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(diff).normalized, Time.deltaTime * _lockAtSpeed);
         transform.position = position;
         
         lastTargetPosition = vec * 10000f;
@@ -91,12 +92,12 @@ public class HomingMissileScript : MonoBehaviour
 
     private void NonTargetMove()
     {
-        velocity += lastAcceleration * Time.deltaTime;
-        position += velocity * Time.deltaTime;
+        velocity += lastAcceleration * Time.fixedDeltaTime;
+        position += velocity * Time.fixedDeltaTime;
 
         Vector3 diff = transform.position - position;
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(diff).normalized, Time.deltaTime * 7f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(diff).normalized, Time.fixedDeltaTime * _lockAtSpeed);
         transform.position = position;
     }
 

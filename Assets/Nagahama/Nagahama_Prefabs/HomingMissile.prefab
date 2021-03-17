@@ -83,6 +83,7 @@ MonoBehaviour:
   _explosionEffect: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4,
     type: 3}
   _destroyTime: 5
+  _lockAtSpeed: 20
 --- !u!1 &6789452682867617335
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +124,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6789452682867617335}
   serializedVersion: 6
-  lengthInSec: 5
+  lengthInSec: 2.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3

@@ -17,11 +17,18 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField] private Vector3 targetPosition = Vector3.zero;
 
     private bool isLockedOn;
+    private bool isMovePause;
 
     public bool IsLockedOn
     {
         get { return isLockedOn; }
         set { isLockedOn = value; }
+    }
+
+    public bool IsMovePause
+    {
+        get { return isMovePause; }
+        set { isMovePause = value; }
     }
 
     #region デバッグ用変数
@@ -70,6 +77,8 @@ public class AsteroidScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isMovePause) return;
+
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, _speed * Time.deltaTime);
 
         if (_isRotation) {
