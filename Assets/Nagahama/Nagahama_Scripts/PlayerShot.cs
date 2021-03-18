@@ -245,6 +245,7 @@ public class PlayerShot : MonoBehaviour
             ReticleController.Instance.GetCanvas().enabled = false;
             Pauser.Pause();
             Time.timeScale = 1f;
+            enabled = false;
         }
 
         int i = 0;

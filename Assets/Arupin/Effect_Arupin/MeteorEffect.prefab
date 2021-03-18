@@ -9520,7 +9520,7 @@ GameObject:
   - component: {fileID: 198696392922457284}
   - component: {fileID: 199374976460404498}
   m_Layer: 0
-  m_Name: Magic fire pro blue
+  m_Name: MeteorEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9559,7 +9559,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1

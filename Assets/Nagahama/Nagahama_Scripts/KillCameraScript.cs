@@ -14,6 +14,7 @@ public class KillCameraScript : MonoBehaviour
     [SerializeField] private float _lerpFactor = 6;
 
     [SerializeField] private PlayerMove _playerMove;
+    [SerializeField] private PlayerShot _playerShot;
 
     private Transform startFollowTarget;
     private Camera camera;
@@ -161,5 +162,6 @@ public class KillCameraScript : MonoBehaviour
         ReticleController.Instance.GetCanvas().enabled = true;
         Pauser.Resume();
         Time.timeScale = 1f;
+        _playerShot.enabled = true;
     }
 }
