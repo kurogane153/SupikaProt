@@ -801,10 +801,12 @@ MonoBehaviour:
 
     Reticle Move : LStick
 
-    Missile Fire : B
+    LockOn : Y
 
-    Orbit
-    Change : A
+    Missile
+    Fire : B
+
+    Orbit Change : A
 
     Speed Up : RB
 
@@ -1690,7 +1692,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Bulid Version :0.1.2
+  m_text: 'Bulid Version :0.1.3
 
 '
   m_isRightToLeft: 0
@@ -2765,8 +2767,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Keyboard Description\nReticle Move : Mouse\nMissile Fire : Left Click
-    or F\nOrbit Change : Space\nSpeed Up : W or \u2191\nSpeed Down : S or \u2193"
+  m_text: "Keyboard Description\nReticle Move : Mouse\nLockOn : Right Click or R\nMissile
+    Fire : Left Click or F\nOrbit Change : Space\nSpeed Up : W or \u2191\nSpeed Down
+    : S or \u2193"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3573,11 +3576,6 @@ PrefabInstance:
       propertyPath: _followTarget
       value: 
       objectReference: {fileID: 1476391018}
-    - target: {fileID: 5054093584554773743, guid: c09031e83fe7b6e4ba22ad22782021b9,
-        type: 3}
-      propertyPath: _missileFollowXRotate
-      value: 15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c09031e83fe7b6e4ba22ad22782021b9, type: 3}
 --- !u!1001 &5118849827901562410
@@ -4077,6 +4075,11 @@ PrefabInstance:
       propertyPath: _soundPlayer
       value: 
       objectReference: {fileID: 536446024}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _lockOnTargetOnLockOnButtonDown
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7015361749325490782, guid: 82af22d6a7c795a42a0e738b02916d6c,
         type: 3}
       propertyPath: m_Name
@@ -4100,6 +4103,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 341082016}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _layerMask.m_Bits
+      value: 3072
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotDelay
       value: 2.5
       objectReference: {fileID: 0}
@@ -4116,7 +4123,7 @@ PrefabInstance:
     - target: {fileID: 4099869561920642162, guid: f6de751e9dcc43646b9cbbaa467344ab,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4718281315527212042, guid: f6de751e9dcc43646b9cbbaa467344ab,
         type: 3}

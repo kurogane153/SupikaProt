@@ -75,6 +75,9 @@ public class HomingMissileScript : MonoBehaviour
 
         impactTime -= Time.deltaTime;
         if (impactTime < 0f) {
+            targetTransform.GetComponent<AsteroidScript>().ReceiveDamage(giveDamage);
+            StopCoroutine(nameof(AutoDestroy));
+            SelfDestroy();
             return;
         }
 
@@ -129,10 +132,10 @@ public class HomingMissileScript : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Asteroid")) {
-            collision.gameObject.GetComponent<AsteroidScript>().ReceiveDamage(giveDamage);
-            StopCoroutine(nameof(AutoDestroy));
-            SelfDestroy();
-            Debug.Log(gameObject.name + "が隕石に当たって消滅した");
+            //collision.gameObject.GetComponent<AsteroidScript>().ReceiveDamage(giveDamage);
+            //StopCoroutine(nameof(AutoDestroy));
+            //SelfDestroy();
+            //Debug.Log(gameObject.name + "が隕石に当たって消滅した");
         }
     }
     #endregion

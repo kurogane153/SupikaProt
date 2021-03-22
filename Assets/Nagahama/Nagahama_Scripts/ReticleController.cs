@@ -37,6 +37,9 @@ public class ReticleController : MonoBehaviour
     [SerializeField] private float _aimAssistDegreeY = 3;
     [SerializeField] private int _generateReticleMax = 3;
 
+    [Header("ロックオンボタンを押してロックオンする"), Space(10)]
+    [SerializeField] public bool _lockOnTargetOnLockOnButtonDown;
+
     private Canvas canvas;
     private RectTransform canvasRectTransform;
     private RectTransform rectTransform;
@@ -103,19 +106,25 @@ public class ReticleController : MonoBehaviour
     public void MoveReticle(float x, float y, Transform target = null)
     {   
         if (target && (Mathf.Abs(x) < 0.2f) && (Mathf.Abs(y)) < 0.2f) {
-            //TargetLockOnMove(target);
+            TargetLockOnMove(target);
         }
 
         float newX = x * _speedX;
         float newY = y * _speedY;
-        bool isNowTargeting;
+        bool isNowTargeting = false;
 
         if (target) {
             image.color = _lockOnColor;
             newX /= _aimAssistDegreeX;
             newY /= _aimAssistDegreeY;
 
-            isNowTargeting = true;
+            if (_lockOnTargetOnLockOnButtonDown && Input.GetButton("LockOn")) {
+                isNowTargeting = true;
+            } else if(!_lockOnTargetOnLockOnButtonDown){
+                isNowTargeting = true;
+            }
+
+            
 
             if(isNowTargeting && !isBeforeTargeting) {
                 AsteroidScript asteroid = target.GetComponent<AsteroidScript>();

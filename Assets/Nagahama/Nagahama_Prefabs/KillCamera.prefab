@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5054093584554773712}
-  m_LocalRotation: {x: -0.2660808, y: 0.120210096, z: 0.033463206, w: 0.95584035}
+  m_LocalRotation: {x: -0.26608407, y: 0.12020831, z: 0.033463266, w: 0.9558397}
   m_LocalPosition: {x: -327.77817, y: -23.423264, z: 208.50845}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -31.112001, y: 14.336, z: 0}
 --- !u!20 &5054093584554773741
 Camera:
   m_ObjectHideFlags: 0
@@ -57,7 +57,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 2500
+  far clip plane: 5000
   field of view: 70
   orthographic: 0
   orthographic size: 5
@@ -100,9 +100,10 @@ MonoBehaviour:
   _positionOffset: {x: 73.10423, y: -25.22326, z: -20}
   _rotationOffset: {x: -31.112, y: -26.643, z: 0}
   _missileFollowOffset: {x: 0, y: 5, z: -10}
-  _missileFollowXRotate: 1
+  _missileFollowXRotate: 15
   _cameraPanSpeed: 20
   _followModeSwitchDelay: 0.75
   _resetDelay: 2.2
   _lerpFactor: 6
   _playerMove: {fileID: 0}
+  _playerShot: {fileID: 0}

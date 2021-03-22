@@ -267,7 +267,7 @@ public class PlayerShot : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
 
-        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask)) {
+        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
             targetAsteroid = hit.transform;
 
         } else {
@@ -282,7 +282,7 @@ public class PlayerShot : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
 
-        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask)) {
+        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
             _dbg_targetAsteroid = targetAsteroid.name;
         } else {
             _dbg_targetAsteroid = "None";
