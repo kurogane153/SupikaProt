@@ -56,6 +56,7 @@ public class ReticleController : MonoBehaviour
             if(generatedReticleCount < 0) {
                 generatedReticleCount = 0;
             }
+            LockedOnCountMarkScript.LockedOnCountCheck();
         }
     }
 
@@ -136,7 +137,7 @@ public class ReticleController : MonoBehaviour
                     LockedOnReticle lockedOnReticle = newLockonReticle.GetComponent<LockedOnReticle>();
 
                     lockedOnReticle.InstantiateSettings(canvas, target);
-                    generatedReticleCount += 1;
+                    GeneratedReticleCount += 1;
 
                     _soundPlayer.PlaySE(_se_LockOn);
                 }
