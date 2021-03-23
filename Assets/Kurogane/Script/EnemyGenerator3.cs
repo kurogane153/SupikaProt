@@ -23,26 +23,26 @@ public class EnemyGenerator3 : MonoBehaviour
 
     [Header("X座標の最大値と最小値")]
     //X座標の最小値
-    [Range(-100f, 0f)]
+    [Range(-500f, 0f)]
     public float xMinPosition = -10f;
     //X座標の最大値
-    [Range(0f, 100f)]
+    [Range(0f, 500f)]
     public float xMaxPosition = 10f;
 
     [Header("Y座標の最大値と最小値")]
     //Y座標の最小値
-    [Range(-100f, 0f)]
+    [Range(-500f, 0f)]
     public float yMinPosition = 0f;
     //Y座標の最大値
-    [Range(0f, 100f)]
+    [Range(0f, 500f)]
     public float yMaxPosition = 10f;
 
     [Header("Z座標の最大値と最小値")]
     //Z座標の最小値
-    [Range(-100f, 0f)]
+    [Range(-500f, 0f)]
     public float zMinPosition = 0f;
     //Z座標の最大値
-    [Range(0f, 100f)]
+    [Range(0f, 500f)]
     public float zMaxPosition = 0f;
 
     //敵生成時間間隔
