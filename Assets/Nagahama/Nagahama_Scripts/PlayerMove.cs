@@ -31,6 +31,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private bool _isUpdateRotation = false;
 
     [Header("ラグランジュ"), Space(10)]
+    [SerializeField] private TooltipScript _orbitShiftTooltip;
     [SerializeField] private string _orbitOriginChangeButtonName = "OrbitOriginChange";
     [SerializeField] private float[] _orbitOriginChangeCanMinAngle;
     [SerializeField] private float[] _orbitOriginChangeCanMaxAngle;
@@ -39,7 +40,6 @@ public class PlayerMove : MonoBehaviour
 
     private Transform orbitOrigin;
     private Vector3 rotateAxis;
-    private float beforeVertical;
     private Quaternion angleAxis;
     private float nowAngle;
     private bool isAcceptedOrbitChange;
@@ -168,6 +168,14 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void AcceptOrbitOriginChange()
     {
+        if((_orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
+            !isAcceptedOrbitChange) {
+
+            _orbitShiftTooltip.SetTooltipActive(true);
+        } else {
+            _orbitShiftTooltip.SetTooltipActive(false);
+        }
+
         if (Input.GetButtonDown(_orbitOriginChangeButtonName) && 
             ( _orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
             !isAcceptedOrbitChange) {

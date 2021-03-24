@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CursorLockManager : MonoBehaviour
 {
@@ -9,15 +10,36 @@ public class CursorLockManager : MonoBehaviour
         CursorLock();
     }
 
+    private void Start()
+    {
+        Application.targetFrameRate = 60;
+    }
+
     private void Update()
     {
-        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.F1)) {
-            if(Cursor.lockState == CursorLockMode.Locked) {
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.F1)) {
+            if (Cursor.lockState == CursorLockMode.Locked) {
                 CursorUnLock();
             } else if (Cursor.lockState == CursorLockMode.None) {
                 CursorLock();
             }
         }
+
+        // 強制終了
+        if (Input.GetButtonDown("RStickButton")) {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+            UnityEngine.Application.Quit();
+#endif
+        }
+
+        // シーンリロード
+        if (Input.GetButtonDown("LStickButton")) {
+            Scene loadScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(loadScene.name);
+        }
+
     }
 
     // カーソルをロックし非表示にする

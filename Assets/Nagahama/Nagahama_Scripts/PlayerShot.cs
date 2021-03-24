@@ -275,7 +275,7 @@ public class PlayerShot : MonoBehaviour
 
         }
 
-        Debug.DrawRay(ray.origin, ray.direction * _laserLength, Color.green);
+        //Debug.DrawRay(ray.origin, ray.direction * _laserLength, Color.green);
     }
 
     private void Dbg()
