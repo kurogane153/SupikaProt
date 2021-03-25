@@ -52,7 +52,7 @@ public class EnemyGenerator3 : MonoBehaviour
 
     //カメラに表示されているか
     private bool isRendered = false;
-    private Vector3 SpikaPos = new Vector3 (-925, 0, 0);
+    private Vector3 SpikaPos = new Vector3 (-2000, 0, 0);
 
     //メインカメラに付いているタグ名
     private const string MAIN_CAMERA_TAG_NAME = "MainCamera";
