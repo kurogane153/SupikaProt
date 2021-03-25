@@ -119,7 +119,7 @@ public class ReticleController : MonoBehaviour
             newX /= _aimAssistDegreeX;
             newY /= _aimAssistDegreeY;
 
-            if (_lockOnTargetOnLockOnButtonDown && Input.GetButton("LockOn")) {
+            if (_lockOnTargetOnLockOnButtonDown && Input.GetButtonDown("LockOn")) {
                 isNowTargeting = true;
             } else if(!_lockOnTargetOnLockOnButtonDown){
                 isNowTargeting = true;
