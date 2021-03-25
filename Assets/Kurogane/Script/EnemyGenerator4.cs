@@ -56,7 +56,7 @@ public class EnemyGenerator4 : MonoBehaviour
     //メインカメラに付いているタグ名
     private const string MAIN_CAMERA_TAG_NAME = "MainCamera";
 
-    private Vector3 SpikaPos = new Vector3(-1425, 0, 0);
+    private Vector3 SpikaPos = new Vector3(-2000, 0, 0);
 
     void Start()
     {
