@@ -56,6 +56,8 @@ public class EnemyGenerator2 : MonoBehaviour
     //メインカメラに付いているタグ名
     private const string MAIN_CAMERA_TAG_NAME = "MainCamera";
 
+    private Vector3 SpikaPos = new Vector3(500, 0, 0);
+
     void Start()
     {
         //時間間隔を決定する
@@ -76,7 +78,7 @@ public class EnemyGenerator2 : MonoBehaviour
                 GameObject asteroid = Instantiate(enemyPrefab);
                 //生成した敵の位置をランダムに設定する
                 asteroid.transform.position = GetRandomPosition();
-                asteroid.GetComponent<AsteroidScript>().ChangeSpeed(_spawnedAsteroidSpeed);
+                asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, SpikaPos);
                 //経過時間を初期化して再度時間計測を始める
                 time = 0f;
                 //次に発生する時間間隔を決定する

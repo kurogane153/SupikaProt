@@ -382,7 +382,7 @@ PrefabInstance:
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: _spawnedAsteroidSpeed
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7133d005bba5bfb4ab29c729d8f33769, type: 3}
@@ -753,7 +753,7 @@ MonoBehaviour:
     type: 3}
   minTime: 5
   maxTime: 13
-  _spawnedAsteroidSpeed: 20
+  _spawnedAsteroidSpeed: 40
   xMinPosition: -500
   xMaxPosition: 500
   yMinPosition: -500
@@ -1147,7 +1147,7 @@ PrefabInstance:
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: _spawnedAsteroidSpeed
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7133d005bba5bfb4ab29c729d8f33769, type: 3}
@@ -2325,7 +2325,7 @@ PrefabInstance:
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: _spawnedAsteroidSpeed
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7133d005bba5bfb4ab29c729d8f33769, type: 3}
