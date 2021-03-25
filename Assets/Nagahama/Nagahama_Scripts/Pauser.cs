@@ -129,11 +129,11 @@ public class Pauser : MonoBehaviour
                 if (asteroidScript.IsLockedOn) {
                     asteroidScript.IsMovePause = false;
                 } else {
-                    obj.OnPause();
+                    obj.OnResume();
                 }
 
             } else {
-                obj.OnPause();
+                obj.OnResume();
             }
         }
     }
