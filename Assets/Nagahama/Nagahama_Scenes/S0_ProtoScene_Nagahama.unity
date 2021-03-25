@@ -5395,6 +5395,10 @@ PrefabInstance:
       propertyPath: _missileShotDelay
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotPower
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 1069749330573770299, guid: f6de751e9dcc43646b9cbbaa467344ab,
         type: 3}
       propertyPath: _positionOffset.y
