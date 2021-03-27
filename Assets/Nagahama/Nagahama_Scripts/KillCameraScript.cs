@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class KillCameraScript : MonoBehaviour
 {
+    private enum CameraType
+    {
+        KillCamera,
+        ConflictEventCamera,
+    }
+    [SerializeField] private CameraType _cameraType;
+
     [SerializeField] private Transform _followTarget;
     [SerializeField] private Vector3 _positionOffset = new Vector3(0, 1, 0);
     [SerializeField] private Vector3 _rotationOffset = new Vector3(0, 0, 0);
@@ -15,6 +22,10 @@ public class KillCameraScript : MonoBehaviour
 
     [SerializeField] private PlayerMove _playerMove;
     [SerializeField] private PlayerShot _playerShot;
+
+    [Space(10)]
+    [SerializeField] private TooltipScript _conflictTooltip;
+    [SerializeField] private TooltipScript _orbitShiftTooltip;
 
     private Transform startFollowTarget;
     private Camera camera;
@@ -36,6 +47,13 @@ public class KillCameraScript : MonoBehaviour
         ShowExplosion
     }
     private StagingPhase stagingPhase = StagingPhase.Yet;
+
+    private enum ConflictStagingPhase
+    {
+        Yet,
+        ShowExplosion
+    }
+    private ConflictStagingPhase conflictStagingPhase = ConflictStagingPhase.Yet;
 
     void Start()
     {
@@ -103,6 +121,17 @@ public class KillCameraScript : MonoBehaviour
 
     private void LateUpdate()
     {
+
+        if (_cameraType == CameraType.KillCamera) {
+            KillCameraProcess();
+        } else if (_cameraType == CameraType.ConflictEventCamera) {
+            ConflictEventCameraProcess();
+        }
+        
+    }
+
+    private void KillCameraProcess()
+    {
         switch (stagingPhase) {
             case StagingPhase.Yet:
                 NormalMove();
@@ -125,6 +154,19 @@ public class KillCameraScript : MonoBehaviour
                 break;
         }
     }
+
+    private void ConflictEventCameraProcess()
+    {
+        switch (conflictStagingPhase) {
+            case ConflictStagingPhase.Yet:
+                break;
+            case ConflictStagingPhase.ShowExplosion:
+                StopPhase_CameraPanMove();
+                break;
+        }
+    }
+
+    #region キルカメラ
 
     public void SetFollowMissile(GameObject target)
     {
@@ -153,7 +195,18 @@ public class KillCameraScript : MonoBehaviour
         Reset();
     }
 
-    private void Reset()
+    public void KillCameraActive()
+    {
+        GetCamera().enabled = true;
+        SwitchStagingPhase_Pan();
+        _playerMove.enabled = false;
+        ReticleController.Instance.GetCanvas().enabled = false;
+        Pauser.Pause();
+        Time.timeScale = 1f;
+
+    }
+
+    public void Reset()
     {
         camera.enabled = false;
         _followTarget = startFollowTarget;
@@ -164,4 +217,54 @@ public class KillCameraScript : MonoBehaviour
         Time.timeScale = 1f;
         _playerShot.enabled = true;
     }
+
+    #endregion
+
+    #region 衝突イベント
+
+    private IEnumerator ConflictSwitchStagingPhase_ShowExplosion()
+    {
+        _orbitShiftTooltip.SetTooltipActive(false);
+        conflictStagingPhase = ConflictStagingPhase.ShowExplosion;
+        yield return new WaitForSeconds(0.2f);
+
+        _conflictTooltip.SetTooltipActive(true);
+
+        yield return new WaitForSeconds(_resetDelay);
+        CFCameraReset();
+    }
+
+    public void ConflictEventCameraActive(GameObject target, Vector3 pos)
+    {
+        transform.position = pos;
+        _followTarget = target.transform;
+        GetCamera().enabled = true;
+        
+        _playerMove.enabled = false;
+        _playerShot.enabled = false;
+        ReticleController.Instance.gameObject.SetActive(false);
+        Pauser.Pause();
+        Time.timeScale = 1f;
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((_followTarget.position - transform.position).normalized), 1);
+
+        StartCoroutine(nameof(ConflictSwitchStagingPhase_ShowExplosion));
+    }
+
+    public void CFCameraReset()
+    {
+        camera.enabled = false;
+        _followTarget = startFollowTarget;
+        conflictStagingPhase = ConflictStagingPhase.Yet;
+
+        _playerMove.enabled = true;
+        _playerShot.enabled = true;
+        ReticleController.Instance.gameObject.SetActive(true);
+        Pauser.Resume();
+        Time.timeScale = 1f;
+
+        _conflictTooltip.SetTooltipActive(false);
+    }
+
+    #endregion
 }

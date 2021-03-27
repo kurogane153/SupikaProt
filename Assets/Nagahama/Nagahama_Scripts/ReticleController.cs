@@ -35,6 +35,8 @@ public class ReticleController : MonoBehaviour
     [SerializeField] private float _speedY = 1f;
     [SerializeField] private float _aimAssistDegreeX = 3;
     [SerializeField] private float _aimAssistDegreeY = 3;
+    [SerializeField] private float _aimDeadZoneX = 0.2f;
+    [SerializeField] private float _aimDeadZoneY = 0.2f;
     [SerializeField] private int _generateReticleMax = 3;
 
     [Header("ロックオンボタンを押してロックオンする"), Space(10)]
@@ -106,7 +108,7 @@ public class ReticleController : MonoBehaviour
 
     public void MoveReticle(float x, float y, Transform target = null)
     {   
-        if (target && (Mathf.Abs(x) < 0.2f) && (Mathf.Abs(y)) < 0.2f) {
+        if (target && (Mathf.Abs(x) < _aimDeadZoneX) && (Mathf.Abs(y)) < _aimDeadZoneY) {
             TargetLockOnMove(target);
         }
 
