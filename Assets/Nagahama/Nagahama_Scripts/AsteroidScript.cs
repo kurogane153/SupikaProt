@@ -106,7 +106,7 @@ public class AsteroidScript : MonoBehaviour
             //SelfDestroy();
             //Debug.Log(gameObject.name + "が弾に当たって消滅した");
         }
-    }
+    }    
 
     private void Dbg()
     {

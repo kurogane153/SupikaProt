@@ -11,6 +11,7 @@ public class PlayerShot : MonoBehaviour
 
     [Header("キルカメラ"), Space(10)]
     [SerializeField] private KillCameraScript _killCamera;
+    [SerializeField] private int _killCameraActiveCount = 3;
 
     [Header("発射設定全般"), Space(10)]
     [SerializeField] private ReticleController _reticle;
@@ -223,12 +224,12 @@ public class PlayerShot : MonoBehaviour
 
     }
 
-    private IEnumerator MissileInstantiate(Transform target, int index, int count)
+    private IEnumerator MissileInstantiate(Transform target, int index, int count, bool islastinstantiate)
     {
         yield return new WaitForSeconds(_instantiateTimes[index]);
         GameObject missile = MissileShot(target, _halfwayPoints[index], _impactTimes[index]);
 
-        if(count == ReticleController.Instance.GenerateReticleMax && index == _halfwayPoints.Length - 1) {
+        if(islastinstantiate && index == _halfwayPoints.Length - 1) {
             
             _killCamera.SetFollowMissile(missile);
             
@@ -238,28 +239,33 @@ public class PlayerShot : MonoBehaviour
     private IEnumerator MultiTargetMissileInstantiate(LockedOnReticle[] reticles)
     {
 
-        if(reticles.Length == ReticleController.Instance.GenerateReticleMax) {
-            _killCamera.GetCamera().enabled = true;
-            _killCamera.SwitchStagingPhase_Pan();
-            playerMove.enabled = false;
-            ReticleController.Instance.GetCanvas().enabled = false;
-            Pauser.Pause();
-            Time.timeScale = 1f;
-            enabled = false;
+        if(reticles.Length >= _killCameraActiveCount) {
+            KillCameraActiveProcess();
         }
 
         int i = 0;
         int count = 0;
+        bool isLastInstantiate;
+
         foreach (var tgt in reticles) {
             count++;
+            isLastInstantiate = (count == reticles.Length) ;
+
             foreach (var hp in _halfwayPoints) {
-                StartCoroutine(MissileInstantiate(tgt.Target, i++, count));
+                StartCoroutine(MissileInstantiate(tgt.Target, i++, count, isLastInstantiate));
             }
             yield return new WaitForSeconds(_multiTargetMissileDelay);
             i = 0;
             
         }
         
+    }
+
+    public void KillCameraActiveProcess()
+    {
+        _killCamera.KillCameraActive();
+        enabled = false;
+
     }
 
 
