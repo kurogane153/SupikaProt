@@ -10,6 +10,17 @@ public class EnemyGenerator : MonoBehaviour
     //敵プレハブ
     public GameObject enemyPrefab;
 
+    [Header("Set Spika Prefab")]
+    //隕石が向かう場所の指定
+    public GameObject Spika;
+
+    [Header("Set Earth Prefab")]
+    //隕石が向かう場所の指定
+    public GameObject Earth;
+
+    [Header("隕石をスピカに向かわせるならONに")]
+    public bool Spikaflg;
+
     [Header("Set Interval Min and Max")]
     //時間間隔の最小値
     [Range(1f, 5f)]
@@ -54,7 +65,9 @@ public class EnemyGenerator : MonoBehaviour
     //カメラに表示されているか
     private bool isRendered = false;
 
-    private Vector3 SpikaPos = new Vector3(0, 0, 0);
+    private Vector3 SpikaPos;
+
+    private Vector3 EarthPos;
 
     //メインカメラに付いているタグ名
     private const string MAIN_CAMERA_TAG_NAME = "MainCamera";
@@ -63,6 +76,8 @@ public class EnemyGenerator : MonoBehaviour
     {
         //時間間隔を決定する
         interval = GetRandomTime();
+        SpikaPos = new Vector3(Spika.transform.position.x, 0, 0);
+        EarthPos = new Vector3(Earth.transform.position.x, 0, 0);
     }
 
     void Update()
@@ -78,7 +93,15 @@ public class EnemyGenerator : MonoBehaviour
                 GameObject asteroid = Instantiate(enemyPrefab);
                 //生成した敵の位置をランダムに設定する
                 asteroid.transform.position = GetRandomPosition();
-                asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, SpikaPos);
+
+                if (Spikaflg) 
+                {
+                    asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, SpikaPos);
+                }
+                else
+                {
+                    asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, EarthPos);
+                }
                 //経過時間を初期化して再度時間計測を始める
                 time = 0f;
                 //次に発生する時間間隔を決定する

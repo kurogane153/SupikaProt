@@ -48,7 +48,7 @@ public class GameClearOver_Process : MonoBehaviour
             Invoke("DelayMethod", GameOverReloadTime);
         }
 
-        Debug.Log(GameClearCount);
+        //Debug.Log(GameClearCount);
         GameOverCcunt_text.text = "地球滅亡まで残り:" + (GameOverAsteroid - GameOverCount);
         GameClearCcunt_text.text = "防衛成功まで残り:" + (GameClearAsteroid - GameClearCount);
     }

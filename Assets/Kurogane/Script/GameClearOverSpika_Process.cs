@@ -4,25 +4,28 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameClearOvercolony_Process : MonoBehaviour
+public class GameClearOverSpika_Process : MonoBehaviour
 {
     private int GameOverCount = 0;
+    public static int GameClearCount = 0;
 
     public GameObject GameOverCountText = null; // Textオブジェクト
     public GameObject GameOverText = null; // Textオブジェクト
     private Text GameOverCcunt_text;
 
     [Header("ゲームオーバーまでの隕石の個数")]
-    //隕石の速さ
     public int GameOverAsteroid = 3;
 
+    [Header("ゲームクリアまでの隕石の個数")]
+    public int GameClearAsteroid = 20;
+
     [Header("ゲームオーバーのリロード時間")]
-    //隕石の速さ
     public float GameOverReloadTime = 3.5f;
 
     void Start()
     {
         GameOverCcunt_text = GameOverCountText.GetComponent<Text>();
+        GameClearCount = 0;
     }
 
     void Update()
@@ -32,6 +35,8 @@ public class GameClearOvercolony_Process : MonoBehaviour
             GameOverText.SetActive(true);
             Invoke("DelayMethod", GameOverReloadTime);
         }
+
+        //Debug.Log(GameClearCount);
         GameOverCcunt_text.text = "コロニー滅亡まで残り:" + (GameOverAsteroid - GameOverCount);
     }
 
@@ -40,8 +45,6 @@ public class GameClearOvercolony_Process : MonoBehaviour
         if (other.gameObject.tag == "Asteroid")
         {
             GameOverCount++;
-            Debug.Log("当たった");
-            Debug.Log(GameOverCount);
         }
     }
 

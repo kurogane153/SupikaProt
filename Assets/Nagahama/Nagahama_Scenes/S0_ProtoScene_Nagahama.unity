@@ -335,6 +335,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
+      propertyPath: Earth
+      value: 
+      objectReference: {fileID: 867824042}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: Spika
+      value: 
+      objectReference: {fileID: 942463261}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
       propertyPath: maxTime
       value: 10
       objectReference: {fileID: 0}
@@ -746,14 +756,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 295829604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ae8a781e0e0ecc418c111df9be6b9df, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f9bec2cdd322624090ead83bd397acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 9029232486978480037, guid: 7a31abefc1ecad54c99bb32d7ad86569,
+  enemyPrefab: {fileID: 8072556475575391548, guid: 5ebd8dc719c0ca14283108719203924f,
     type: 3}
-  minTime: 5
-  maxTime: 13
-  _spawnedAsteroidSpeed: 40
+  Spika: {fileID: 942463261}
+  Earth: {fileID: 867824042}
+  Spikaflg: 0
+  minTime: 2
+  maxTime: 5
+  _spawnedAsteroidSpeed: 50
   xMinPosition: -500
   xMaxPosition: 500
   yMinPosition: -500
@@ -1115,6 +1128,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
+      propertyPath: Earth
+      value: 
+      objectReference: {fileID: 867824042}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: Spika
+      value: 
+      objectReference: {fileID: 942463261}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
       propertyPath: maxTime
       value: 20
       objectReference: {fileID: 0}
@@ -1125,8 +1148,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
+      propertyPath: Spikaflg
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -1136,18 +1164,38 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
+      propertyPath: xMaxPosition
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
       propertyPath: xMinPosition
-      value: -59
+      value: -500
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: yMaxPosition
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: yMinPosition
-      value: -58
+      value: -500
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: zMaxPosition
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: zMinPosition
+      value: -500
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: _spawnedAsteroidSpeed
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7133d005bba5bfb4ab29c729d8f33769, type: 3}
@@ -1473,6 +1521,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853597969}
   m_CullTransparentMesh: 0
+--- !u!1 &867824042 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00,
+    type: 3}
+  m_PrefabInstance: {fileID: 6582865642158403310}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &918738630
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2002,6 +2056,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04fd351ff9ac4684bb68f657ee769d0d, type: 3}
+--- !u!1 &942463261 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00,
+    type: 3}
+  m_PrefabInstance: {fileID: 845500646}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &950959775 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
@@ -2273,6 +2333,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
+      propertyPath: Earth
+      value: 
+      objectReference: {fileID: 867824042}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
+      propertyPath: Spika
+      value: 
+      objectReference: {fileID: 942463261}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
       propertyPath: maxTime
       value: 20
       objectReference: {fileID: 0}
@@ -2283,8 +2353,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
+      propertyPath: Spikaflg
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
+        type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -2295,37 +2370,37 @@ PrefabInstance:
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: xMaxPosition
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: xMinPosition
-      value: -100
+      value: -500
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: yMaxPosition
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: yMinPosition
-      value: -100
+      value: -500
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: zMaxPosition
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: zMinPosition
-      value: -100
+      value: -500
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: _spawnedAsteroidSpeed
-      value: 40
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7133d005bba5bfb4ab29c729d8f33769, type: 3}
@@ -3527,29 +3602,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1082485252}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1498046870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1498046869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ceeb5a7a61ec644dad2c8ac4728b825, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8932848997244980696, guid: 2f1c0e8d7abb46a40acab9ca18e9693d,
-    type: 3}
-  minTime: 5
-  maxTime: 18
-  _spawnedAsteroidSpeed: 100
-  xMinPosition: -500
-  xMaxPosition: 500
-  yMinPosition: -500
-  yMaxPosition: 500
-  zMinPosition: -500
-  zMaxPosition: 500
 --- !u!23 &1498046872
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3829,12 +3881,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1616511281}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd716275e45d3ee4c8810831d8ca0203, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ad3bae368eb6904fa374a084bace875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverCountText: {fileID: 1946261730}
   GameOverText: {fileID: 1114204702}
   GameOverAsteroid: 3
+  GameClearAsteroid: 20
   GameOverReloadTime: 3.5
 --- !u!136 &1616511284
 CapsuleCollider:
@@ -4557,29 +4610,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 564107692}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1975667893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1975667892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 394097421021b1b46887ff7bc20cd848, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 9029232486978480037, guid: 7a31abefc1ecad54c99bb32d7ad86569,
-    type: 3}
-  minTime: 5
-  maxTime: 16
-  _spawnedAsteroidSpeed: 20
-  xMinPosition: -500
-  xMaxPosition: 500
-  yMinPosition: -500
-  yMaxPosition: 500
-  zMinPosition: -500
-  zMaxPosition: 500
 --- !u!23 &1975667895
 MeshRenderer:
   m_ObjectHideFlags: 0
