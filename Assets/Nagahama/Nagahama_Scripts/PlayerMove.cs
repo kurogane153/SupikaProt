@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    private enum OrbitOriginPlanet
+    public enum OrbitOriginPlanet
     {
         Earth, Spica
     }
@@ -45,6 +45,11 @@ public class PlayerMove : MonoBehaviour
     private bool isAcceptedOrbitChange;
     private float minDistance;
     private float speedChangeTimeRemain;
+
+    public OrbitOriginPlanet OriginPlanet
+    {
+        get { return _orbitOriginPlanet; }
+    }
 
     #region デバッグ用変数
     [Watch, HideInInspector] public float _dbg_playerNowAngle;
