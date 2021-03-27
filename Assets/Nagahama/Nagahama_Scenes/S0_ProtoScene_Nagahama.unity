@@ -750,17 +750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae8a781e0e0ecc418c111df9be6b9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 9029232486978480037, guid: 7a31abefc1ecad54c99bb32d7ad86569,
-    type: 3}
-  minTime: 5
-  maxTime: 13
-  _spawnedAsteroidSpeed: 40
-  xMinPosition: -500
-  xMaxPosition: 500
-  yMinPosition: -500
-  yMaxPosition: 500
-  zMinPosition: -500
-  zMaxPosition: 500
 --- !u!23 &295829607
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3559,17 +3548,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ceeb5a7a61ec644dad2c8ac4728b825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8932848997244980696, guid: 2f1c0e8d7abb46a40acab9ca18e9693d,
-    type: 3}
-  minTime: 5
-  maxTime: 18
-  _spawnedAsteroidSpeed: 100
-  xMinPosition: -500
-  xMaxPosition: 500
-  yMinPosition: -500
-  yMaxPosition: 500
-  zMinPosition: -500
-  zMaxPosition: 500
 --- !u!23 &1498046872
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4159,6 +4137,29 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7133d005bba5bfb4ab29c729d8f33769, type: 3}
+--- !u!1 &1799453316 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5150451266749896438, guid: d93b3bdea398b344b8780824a0695eff,
+    type: 3}
+  m_PrefabInstance: {fileID: 2026933534194550649}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1799453318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799453316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ad3bae368eb6904fa374a084bace875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameOverCountText: {fileID: 1946261730}
+  GameOverText: {fileID: 1114204702}
+  GameOverAsteroid: 3
+  GameClearAsteroid: 20
+  GameOverReloadTime: 3.5
 --- !u!1001 &1819215592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4553,17 +4554,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 394097421021b1b46887ff7bc20cd848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 9029232486978480037, guid: 7a31abefc1ecad54c99bb32d7ad86569,
-    type: 3}
-  minTime: 5
-  maxTime: 16
-  _spawnedAsteroidSpeed: 20
-  xMinPosition: -500
-  xMaxPosition: 500
-  yMinPosition: -500
-  yMaxPosition: 500
-  zMinPosition: -500
-  zMaxPosition: 500
 --- !u!23 &1975667895
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4963,7 +4953,8 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1959548754}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2026933532578039370, guid: d93b3bdea398b344b8780824a0695eff, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d93b3bdea398b344b8780824a0695eff, type: 3}
 --- !u!114 &3377832811824385024 stripped
 MonoBehaviour:
