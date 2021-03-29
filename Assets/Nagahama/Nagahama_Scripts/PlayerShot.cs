@@ -9,6 +9,7 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private float _reloadTime;
     [SerializeField] private int _missileMaxNum;
     [SerializeField] private int _consumptionPerShot;   // ミサイル1回発射ごとの消費量
+    [SerializeField] private string _reloadButtonName = "Reload";
 
     private float reloadTimeRemain;
     private int missileNum;
@@ -24,6 +25,7 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private int _killCameraActiveCount = 3;
 
     [Header("発射設定全般"), Space(10)]
+    [SerializeField] private bool _onDrawGizmosFlags;
     [SerializeField] private ReticleController _reticle;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Transform _launchPoint;
@@ -90,6 +92,8 @@ public class PlayerShot : MonoBehaviour
             _reticle._missileGuage.gameObject.SetActive(false);
         }
 
+        _onDrawGizmosFlags = true;
+
     }
 
     void Update()
@@ -122,12 +126,16 @@ public class PlayerShot : MonoBehaviour
         }
 
         // リロード用　あとで消すこと
-        if(Input.GetAxis("D_Pad_V") > 0.5f) {
+        if (Input.GetAxis("D_Pad_V") > 0.5f) {
             _reloadFlags = true;
             _reticle._missileGuage.gameObject.SetActive(true);
+            reloadTimeRemain = 0f;
+            missileNum = 6;
         } else if (Input.GetAxis("D_Pad_V") < -0.5f) {
             _reloadFlags = false;
             _reticle._missileGuage.gameObject.SetActive(false);
+            reloadTimeRemain = 0f;
+            missileNum = 6;
         }
 
     }
@@ -340,23 +348,42 @@ public class PlayerShot : MonoBehaviour
     private void GetTargetAsteroid()
     {
         Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
+        float radius = 100f;
 
-        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
+        if (Physics.SphereCast(ray.origin, radius, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
             targetAsteroid = hit.transform;
-
+            
         } else {
             targetAsteroid = null;
-
+            
         }
 
         //Debug.DrawRay(ray.origin, ray.direction * _laserLength, Color.green);
     }
 
+    private void OnDrawGizmos()
+    {
+        if (!_onDrawGizmosFlags) return;
+
+        Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
+        float radius = 100f;
+
+        if (Physics.SphereCast(ray.origin, radius, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
+            Gizmos.DrawRay(ray.origin, ray.direction * hit.distance);
+            Gizmos.DrawWireSphere(ray.origin + ray.direction * hit.distance, radius);
+
+        } else {
+            Gizmos.DrawRay(ray.origin, ray.direction * _laserLength);
+
+        }
+    }
+
     private void Dbg()
     {
         Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
+        float radius = 100f;
 
-        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
+        if (Physics.SphereCast(ray.origin, radius, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
             _dbg_targetAsteroid = targetAsteroid.name;
         } else {
             _dbg_targetAsteroid = "None";
