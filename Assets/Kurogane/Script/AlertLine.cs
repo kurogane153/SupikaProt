@@ -59,11 +59,11 @@ public class AlertLine : MonoBehaviour
     {
         if (Spikaflg)
         {
-            ArertMessage.text = "スピカに隕石襲来";
+            ArertMessage.text = "コロニーに隕石接近";
         }
         else
         {
-            ArertMessage.text = "地球に隕石襲来";
+            ArertMessage.text = "地球に隕石接近";
         }
         Invoke("ArertFalse", drawingTime);
     }

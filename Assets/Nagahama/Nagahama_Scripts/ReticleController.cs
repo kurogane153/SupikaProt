@@ -24,7 +24,10 @@ public class ReticleController : MonoBehaviour
         }
     }
     #endregion
-    [Header("サウンド系")]
+    [Header("リロード")]
+    [SerializeField] public Image _missileGuage;
+
+    [Header("サウンド系"), Space(10)]
     [SerializeField] private SoundPlayer _soundPlayer;
     [SerializeField] private AudioClip _se_LockOn;
 

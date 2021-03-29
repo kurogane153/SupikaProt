@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class PlayerShot : MonoBehaviour
 {
+    [Header("リロード")]
+    [SerializeField] public bool _reloadFlags;
+    [SerializeField] private float _reloadTime;
+    [SerializeField] private int _missileMaxNum;
+    [SerializeField] private int _consumptionPerShot;   // ミサイル1回発射ごとの消費量
+
+    private float reloadTimeRemain;
+    private int missileNum;
+
+    [Space(10)]
     [SerializeField] private PlayerAnimation _playerAnimation;
     [Header("サウンド系")]
     [SerializeField] private SoundPlayer _soundPlayer;
@@ -46,6 +56,7 @@ public class PlayerShot : MonoBehaviour
     private void Awake()
     {
         playerMove = GetComponent<PlayerMove>();
+        missileNum = _missileMaxNum;
     }
 
     void Start()
@@ -75,24 +86,48 @@ public class PlayerShot : MonoBehaviour
             Debug.Log(gameObject.name + "は、子要素にアタッチされているAudioSourceを自動的に" + nameof(_soundPlayer) + "にアタッチしました");
         }
 
+        if (!_reloadFlags) {
+            _reticle._missileGuage.gameObject.SetActive(false);
+        }
+
     }
 
     void Update()
     {
         // ターゲットを捉えているときに発射ボタンを押すと、そのターゲットを「確定したターゲット」として
         // confirmTargetに格納します。
-        if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f && targetAsteroid != null) {
-            confirmTarget = targetAsteroid;
-            //MultiStageFire();
-            //MultiTargetFire();
-            //Debug.Log(gameObject.name + "がミサイルを発射した");
+        //if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f && targetAsteroid != null) {
+        //confirmTarget = targetAsteroid;
+        //MultiStageFire();
+        //MultiTargetFire();
+        //Debug.Log(gameObject.name + "がミサイルを発射した");
+        //}
+
+        
+        if (_reloadFlags) {
+            // リロードありバージョン
+            // リロード中でない、弾が残っていれば発射
+            if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f && reloadTimeRemain <= 0f && 0 < missileNum) {
+                confirmTarget = targetAsteroid;
+                //MultiStageFire();
+                MultiTargetFire();
+            }
+        } else {
+            // リロード無しバージョン
+            if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f) {
+                confirmTarget = targetAsteroid;
+                //MultiStageFire();
+                MultiTargetFire();
+            }
         }
 
-        if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f) {
-            confirmTarget = targetAsteroid;
-            //MultiStageFire();
-            MultiTargetFire();
-            Debug.Log(gameObject.name + "がミサイルを発射した");
+        // リロード用　あとで消すこと
+        if(Input.GetAxis("D_Pad_V") > 0.5f) {
+            _reloadFlags = true;
+            _reticle._missileGuage.gameObject.SetActive(true);
+        } else if (Input.GetAxis("D_Pad_V") < -0.5f) {
+            _reloadFlags = false;
+            _reticle._missileGuage.gameObject.SetActive(false);
         }
 
     }
@@ -102,7 +137,7 @@ public class PlayerShot : MonoBehaviour
         TimeRemainManege();
         GetTargetAsteroid();
         Dbg();
-        _reticle.MoveReticle( Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroid);
+        _reticle.MoveReticle(Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroid);
     }
 
     private void TimeRemainManege()
@@ -113,6 +148,16 @@ public class PlayerShot : MonoBehaviour
 
         if (0f < missileShotTimeRemain) {
             missileShotTimeRemain -= Time.deltaTime;
+        }
+
+        if (!_reloadFlags) return;
+
+        if (0f < reloadTimeRemain) {
+            reloadTimeRemain -= Time.deltaTime;
+            _reticle._missileGuage.fillAmount = (_reloadTime - reloadTimeRemain) / _reloadTime;
+            if(reloadTimeRemain <= 0f) {
+                missileNum = _missileMaxNum;
+            }
         }
     }
 
@@ -164,6 +209,8 @@ public class PlayerShot : MonoBehaviour
         StartCoroutine(MultiTargetMissileInstantiate(reticles));
 
         missileShotTimeRemain += _missileShotDelay;
+
+        Debug.Log(gameObject.name + "がミサイルを発射した");
     }
 
     /// <summary>
@@ -248,15 +295,36 @@ public class PlayerShot : MonoBehaviour
         bool isLastInstantiate;
 
         foreach (var tgt in reticles) {
+
+            // リロード用
+            if (_reloadFlags) {
+                missileNum -= _consumptionPerShot;
+                _reticle._missileGuage.fillAmount = (float)missileNum / _missileMaxNum;
+                if (missileNum <= 0) {
+                    reloadTimeRemain = _reloadTime;
+                }
+            }
+
             count++;
-            isLastInstantiate = (count == reticles.Length) ;
+
+            // リロード用
+            if (_reloadFlags) {
+                isLastInstantiate = count == reticles.Length || missileNum <= 0;
+            } else {
+                isLastInstantiate = (count == reticles.Length);
+            }
+            
 
             foreach (var hp in _halfwayPoints) {
                 StartCoroutine(MissileInstantiate(tgt.Target, i++, count, isLastInstantiate));
             }
             yield return new WaitForSeconds(_multiTargetMissileDelay);
             i = 0;
-            
+
+            // リロード用
+            if (_reloadFlags && 0 < reloadTimeRemain) {
+                yield break;
+            }
         }
         
     }
