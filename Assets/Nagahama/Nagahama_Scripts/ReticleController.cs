@@ -36,6 +36,7 @@ public class ReticleController : MonoBehaviour
     [SerializeField] private Color _lockOnColor;
     [SerializeField] private float _speedX = 1f;
     [SerializeField] private float _speedY = 1f;
+    [SerializeField] private float _reticleRectSizeScaling = 1.2f;
     [SerializeField] private float _aimAssistDegreeX = 3;
     [SerializeField] private float _aimAssistDegreeY = 3;
     [SerializeField] private float _aimDeadZoneX = 0.2f;
@@ -106,11 +107,25 @@ public class ReticleController : MonoBehaviour
     {
         Rect rect = GetReticleRect();
         if (Input.GetKeyDown(KeyCode.P)) {
-            Debug.Log(rect.x);
-            Debug.Log(rect.y);
-            Debug.Log(rect.width);
-            Debug.Log(rect.height);
+            Debug.Log("<color=yellow>ReticleRect.X : " + rect.x + "</color>");
+            Debug.Log("<color=yellow>ReticleRect.Y : " + rect.y + "</color>");
+            Debug.Log("<color=yellow>ReticleRect.Width : " + rect.width + "</color>");
+            Debug.Log("<color=yellow>ReticleRect.Height : " + rect.height + "</color>");
         }
+
+        #region デバッグ用
+        // Lトリガー押しながら
+        if (Input.GetAxis("L_R_Trigger") >= 0.5f && Input.GetButtonDown("LockOn")) {
+            _lockOnTargetOnLockOnButtonDown = !_lockOnTargetOnLockOnButtonDown;
+        }
+
+        // Rトリガー押しながら
+        if (Input.GetAxis("L_R_Trigger") <= -0.5f && Input.GetButtonDown("LockOn")) {
+            _targetLockonmoveFlags = !_targetLockonmoveFlags;
+        }
+
+        #endregion
+
     }
 
     private void FixedUpdate()
@@ -120,7 +135,7 @@ public class ReticleController : MonoBehaviour
 
     public void MoveReticle(float x, float y, Transform target = null)
     {   
-        if (_targetLockonmoveFlags && target && (Mathf.Abs(x) < _aimDeadZoneX) && (Mathf.Abs(y)) < _aimDeadZoneY) {
+        if (_targetLockonmoveFlags && target && Mathf.Abs(x) < _aimDeadZoneX && Mathf.Abs(y) < _aimDeadZoneY) {
             TargetLockOnMove(target);
         }
 
@@ -201,21 +216,10 @@ public class ReticleController : MonoBehaviour
 
     public Rect GetReticleRect()
     {
-        Vector3[] corners = new Vector3[4];
+        Vector2 rectsize = rectTransform.rect.size;
 
-        rectTransform.GetWorldCorners(corners);
-
-        corners[0] = RectTransformUtility.WorldToScreenPoint(canvas.worldCamera, corners[0]);
-        corners[2] = RectTransformUtility.WorldToScreenPoint(canvas.worldCamera, corners[2]);
-
-        Rect rect = new Rect
-        {
-            x = corners[0].x,
-            y = corners[2].y
-        };
-
-        rect.width = corners[0].x - rect.x;
-        rect.height = corners[2].y - rect.y;
+        Vector2 size = Vector2.Scale(rectTransform.rect.size / canvasRectTransform.rect.size, rectTransform.lossyScale);
+        Rect rect = new Rect((Vector2)(rectTransform.position / canvasRectTransform.sizeDelta) - (size * 0.5f), size * _reticleRectSizeScaling);
 
         return rect;
     }

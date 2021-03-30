@@ -59,7 +59,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 5000
+  far clip plane: 10000
   field of view: 70
   orthographic: 0
   orthographic size: 5
@@ -103,8 +103,8 @@ MonoBehaviour:
   - {x: -5, y: 30, z: 5}
   - {x: 5, y: 30, z: 5}
   _rotationOffset:
-  - {x: 9.19, y: 15.104, z: 3.29}
-  - {x: 9.19, y: -15.104, z: 3.29}
+  - {x: 9.19, y: 20, z: 3.29}
+  - {x: 9.19, y: -20, z: 3.29}
   _lerpFactor: 4
 --- !u!114 &1332817175
 MonoBehaviour:
@@ -121,7 +121,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 6712438191241676575}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 7937
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 3
@@ -160,8 +160,8 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
+  m_ShowToolkit: 1
+  m_ShowCustomSorter: 1
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []

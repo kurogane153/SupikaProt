@@ -6,6 +6,7 @@ public class PlayerShot : MonoBehaviour
 {
     [Header("リロード")]
     [SerializeField] public bool _reloadFlags;
+    [SerializeField] public bool _autoReloadFlags;
     [SerializeField] private float _reloadTime;
     [SerializeField] private int _missileMaxNum;
     [SerializeField] private int _consumptionPerShot;   // ミサイル1回発射ごとの消費量
@@ -110,6 +111,12 @@ public class PlayerShot : MonoBehaviour
         
         if (_reloadFlags) {
             // リロードありバージョン
+            // 手動リロード
+            // リロード中でない、ミサイルが最大じゃないときできる
+            if(Input.GetButtonDown(_reloadButtonName) && missileShotTimeRemain <= 0f && reloadTimeRemain <= 0f && missileNum != _missileMaxNum) {
+                reloadTimeRemain = _reloadTime * ((float)(_missileMaxNum - missileNum) / _missileMaxNum);
+            }
+
             // リロード中でない、弾が残っていれば発射
             if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f && reloadTimeRemain <= 0f && 0 < missileNum) {
                 confirmTarget = targetAsteroid;
@@ -160,6 +167,13 @@ public class PlayerShot : MonoBehaviour
         }
 
         if (!_reloadFlags) return;
+
+        // 自動リロード弾切れ時
+        if (missileShotTimeRemain <= 0f && missileNum <= 0 && reloadTimeRemain <= 0f) {
+            if (_autoReloadFlags) {
+                reloadTimeRemain = _reloadTime;
+            }
+        }
 
         if (0f < reloadTimeRemain) {
             reloadTimeRemain -= Time.deltaTime;
@@ -309,9 +323,7 @@ public class PlayerShot : MonoBehaviour
             if (_reloadFlags) {
                 missileNum -= _consumptionPerShot;
                 _reticle._missileGuage.fillAmount = (float)missileNum / _missileMaxNum;
-                if (missileNum <= 0) {
-                    reloadTimeRemain = _reloadTime;
-                }
+                
             }
 
             count++;
@@ -331,7 +343,7 @@ public class PlayerShot : MonoBehaviour
             i = 0;
 
             // リロード用
-            if (_reloadFlags && 0 < reloadTimeRemain) {
+            if (_reloadFlags && missileNum <= 0) {
                 yield break;
             }
         }
@@ -344,7 +356,6 @@ public class PlayerShot : MonoBehaviour
         enabled = false;
 
     }
-
 
     private void GetTargetAsteroid()
     {
@@ -365,10 +376,18 @@ public class PlayerShot : MonoBehaviour
     {
         Rect rect = _reticle.GetReticleRect();
 
-        foreach(var ast in RectInAsteroidContainer.Instance.asteroids) {
-            if (rect.Contains(Camera.main.WorldToScreenPoint(ast.transform.position))) {
-                targetAsteroid = ast.transform;
-                return;
+        foreach (var ast in RectInAsteroidContainer.Instance.asteroids) {
+            Vector3 viewportPos = Camera.main.WorldToViewportPoint(ast.transform.position);
+
+            if (rect.Contains(viewportPos) && 0f < viewportPos.z) {
+
+                Ray ray = new Ray(transform.position, ast.transform.position - transform.position);
+                if(Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
+                    targetAsteroid = ast.transform;
+                    Debug.Log("照準内に隕石発見");
+                    return;
+                }
+                //Debug.DrawRay(ray.origin, ray.direction * _laserLength, Color.green);
             }
         }
 
@@ -388,9 +407,16 @@ public class PlayerShot : MonoBehaviour
         Rect rect = _reticle.GetReticleRect();
 
         foreach (var ast in RectInAsteroidContainer.Instance.asteroids) {
-            if (rect.Contains(Camera.main.WorldToViewportPoint(ast.transform.position))) {
-                _dbg_targetAsteroid = targetAsteroid.name;
-                return;
+            Vector3 viewportPos = Camera.main.WorldToViewportPoint(ast.transform.position);
+
+            if (rect.Contains(viewportPos) && 0f < viewportPos.z) {
+
+                Ray ray = new Ray(transform.position, ast.transform.position - transform.position);
+                if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
+                    _dbg_targetAsteroid = targetAsteroid.name;
+                    return;
+                }
+
             }
         }
 

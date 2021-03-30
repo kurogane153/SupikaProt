@@ -57,7 +57,7 @@ public class AsteroidScript : MonoBehaviour
             SelfDestroy();
             Instantiate(_explosionEffect, transform.position, Quaternion.identity);
             GameClearOver_Process.GameClearCount++;
-            RectInAsteroidContainer.Instance.asteroids.Remove(this);
+            
         }
     }
     
@@ -90,10 +90,10 @@ public class AsteroidScript : MonoBehaviour
 
         bool isNowInScreen = IsScreenPositionScreenInsite();
 
-        if (isNowInScreen && !beforeInScreenFlags) {
+        if (isNowInScreen != beforeInScreenFlags) {
             if (isNowInScreen) {
                 RectInAsteroidContainer.Instance.asteroids.Add(this);
-                Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListに追加された！");
+                Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListに追加された！" + Camera.main.WorldToViewportPoint(transform.position));
 
             } else {
                 RectInAsteroidContainer.Instance.asteroids.Remove(this);
@@ -109,8 +109,9 @@ public class AsteroidScript : MonoBehaviour
     private bool IsScreenPositionScreenInsite()
     {
         Rect rect = new Rect(0, 0, 1, 1);
+        Vector3 viewportPos = Camera.main.WorldToViewportPoint(transform.position);
 
-        if (rect.Contains(Camera.main.WorldToViewportPoint(transform.position))) {
+        if (rect.Contains(viewportPos) && 0f < viewportPos.z) {
             return true;
         }
         return false;
@@ -125,6 +126,7 @@ public class AsteroidScript : MonoBehaviour
     private void SelfDestroy()
     {
         StopCoroutine(nameof(AutoDestroy));
+        RectInAsteroidContainer.Instance.asteroids.Remove(this);
         Destroy(gameObject);
     }
 
