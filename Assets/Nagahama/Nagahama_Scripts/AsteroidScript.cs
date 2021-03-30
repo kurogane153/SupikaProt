@@ -18,6 +18,7 @@ public class AsteroidScript : MonoBehaviour
 
     private bool isLockedOn;
     private bool isMovePause;
+    private bool beforeInScreenFlags;
 
     public bool IsLockedOn
     {
@@ -56,6 +57,7 @@ public class AsteroidScript : MonoBehaviour
             SelfDestroy();
             Instantiate(_explosionEffect, transform.position, Quaternion.identity);
             GameClearOver_Process.GameClearCount++;
+            RectInAsteroidContainer.Instance.asteroids.Remove(this);
         }
     }
     
@@ -85,7 +87,33 @@ public class AsteroidScript : MonoBehaviour
             Quaternion rot = Quaternion.AngleAxis(_rotationSpeed, _rotationAxis);
             transform.rotation = transform.rotation * rot;
         }
-        
+
+        bool isNowInScreen = IsScreenPositionScreenInsite();
+
+        if (isNowInScreen && !beforeInScreenFlags) {
+            if (isNowInScreen) {
+                RectInAsteroidContainer.Instance.asteroids.Add(this);
+                Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListに追加された！");
+
+            } else {
+                RectInAsteroidContainer.Instance.asteroids.Remove(this);
+                Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListから削除された……");
+            }
+
+        }
+
+        beforeInScreenFlags = isNowInScreen;
+
+    }
+
+    private bool IsScreenPositionScreenInsite()
+    {
+        Rect rect = new Rect(0, 0, 1, 1);
+
+        if (rect.Contains(Camera.main.WorldToViewportPoint(transform.position))) {
+            return true;
+        }
+        return false;
     }
 
     private IEnumerator AutoDestroy()

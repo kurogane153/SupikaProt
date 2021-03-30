@@ -143,7 +143,8 @@ public class PlayerShot : MonoBehaviour
     private void FixedUpdate()
     {
         TimeRemainManege();
-        GetTargetAsteroid();
+        //GetTargetAsteroid();
+        GetTargetAsteroid_InRectVersion();
         Dbg();
         _reticle.MoveReticle(Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroid);
     }
@@ -348,9 +349,8 @@ public class PlayerShot : MonoBehaviour
     private void GetTargetAsteroid()
     {
         Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
-        float radius = 100f;
 
-        if (Physics.SphereCast(ray.origin, radius, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
+        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
             targetAsteroid = hit.transform;
             
         } else {
@@ -361,33 +361,40 @@ public class PlayerShot : MonoBehaviour
         //Debug.DrawRay(ray.origin, ray.direction * _laserLength, Color.green);
     }
 
-    private void OnDrawGizmos()
+    private void GetTargetAsteroid_InRectVersion()
     {
-        if (!_onDrawGizmosFlags) return;
+        Rect rect = _reticle.GetReticleRect();
 
-        Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
-        float radius = 100f;
-
-        if (Physics.SphereCast(ray.origin, radius, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
-            Gizmos.DrawRay(ray.origin, ray.direction * hit.distance);
-            Gizmos.DrawWireSphere(ray.origin + ray.direction * hit.distance, radius);
-
-        } else {
-            Gizmos.DrawRay(ray.origin, ray.direction * _laserLength);
-
+        foreach(var ast in RectInAsteroidContainer.Instance.asteroids) {
+            if (rect.Contains(Camera.main.WorldToScreenPoint(ast.transform.position))) {
+                targetAsteroid = ast.transform;
+                return;
+            }
         }
+
+        targetAsteroid = null;
     }
 
     private void Dbg()
     {
-        Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
-        float radius = 100f;
+        //Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
 
-        if (Physics.SphereCast(ray.origin, radius, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
-            _dbg_targetAsteroid = targetAsteroid.name;
-        } else {
-            _dbg_targetAsteroid = "None";
+       // if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
+            //_dbg_targetAsteroid = targetAsteroid.name;
+        //} else {
+           // _dbg_targetAsteroid = "None";
+        //}
+
+        Rect rect = _reticle.GetReticleRect();
+
+        foreach (var ast in RectInAsteroidContainer.Instance.asteroids) {
+            if (rect.Contains(Camera.main.WorldToViewportPoint(ast.transform.position))) {
+                _dbg_targetAsteroid = targetAsteroid.name;
+                return;
+            }
         }
+
+        _dbg_targetAsteroid = "None";
 
     }
 }

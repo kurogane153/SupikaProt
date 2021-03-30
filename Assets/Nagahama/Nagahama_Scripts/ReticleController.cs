@@ -45,6 +45,9 @@ public class ReticleController : MonoBehaviour
     [Header("ロックオンボタンを押してロックオンする"), Space(10)]
     [SerializeField] public bool _lockOnTargetOnLockOnButtonDown;
 
+    [Header("無操作時ターゲットを追跡する"), Space(10)]
+    [SerializeField] public bool _targetLockonmoveFlags;
+
     private Canvas canvas;
     private RectTransform canvasRectTransform;
     private RectTransform rectTransform;
@@ -101,7 +104,13 @@ public class ReticleController : MonoBehaviour
 
     void Update()
     {
-        
+        Rect rect = GetReticleRect();
+        if (Input.GetKeyDown(KeyCode.P)) {
+            Debug.Log(rect.x);
+            Debug.Log(rect.y);
+            Debug.Log(rect.width);
+            Debug.Log(rect.height);
+        }
     }
 
     private void FixedUpdate()
@@ -111,7 +120,7 @@ public class ReticleController : MonoBehaviour
 
     public void MoveReticle(float x, float y, Transform target = null)
     {   
-        if (target && (Mathf.Abs(x) < _aimDeadZoneX) && (Mathf.Abs(y)) < _aimDeadZoneY) {
+        if (_targetLockonmoveFlags && target && (Mathf.Abs(x) < _aimDeadZoneX) && (Mathf.Abs(y)) < _aimDeadZoneY) {
             TargetLockOnMove(target);
         }
 
@@ -188,5 +197,26 @@ public class ReticleController : MonoBehaviour
     public Vector2 GetReticlePos()
     {
         return RectTransformUtility.WorldToScreenPoint(canvas.worldCamera, rectTransform.position);
+    }
+
+    public Rect GetReticleRect()
+    {
+        Vector3[] corners = new Vector3[4];
+
+        rectTransform.GetWorldCorners(corners);
+
+        corners[0] = RectTransformUtility.WorldToScreenPoint(canvas.worldCamera, corners[0]);
+        corners[2] = RectTransformUtility.WorldToScreenPoint(canvas.worldCamera, corners[2]);
+
+        Rect rect = new Rect
+        {
+            x = corners[0].x,
+            y = corners[2].y
+        };
+
+        rect.width = corners[0].x - rect.x;
+        rect.height = corners[2].y - rect.y;
+
+        return rect;
     }
 }
