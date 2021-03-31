@@ -23,10 +23,10 @@ public class EnemyGenerator : MonoBehaviour
 
     [Header("Set Interval Min and Max")]
     //時間間隔の最小値
-    [Range(1f, 5f)]
+    [Range(1f, 10f)]
     public float minTime = 2f;
     //時間間隔の最大値
-    [Range(5f, 20f)]
+    [Range(10f, 30f)]
     public float maxTime = 5f;
     
     [Header("隕石の速さ")]
