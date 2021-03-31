@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 4231365030200066370}
   - component: {fileID: 4231365030200066373}
   - component: {fileID: 4231365030200066375}
-  m_Layer: 10
+  - component: {fileID: -8475006790684186766}
+  - component: {fileID: 4484572748818871001}
+  m_Layer: 13
   m_Name: AsteroidCollider1
-  m_TagString: Asteroid
+  m_TagString: AsteroidTargetCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,7 +60,31 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 3
+--- !u!114 &-8475006790684186766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4231365030200066371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe42b7f859a03674b8f5ac772538b081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4484572748818871001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4231365030200066371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c675c488edb07c44a2a5bd29f8b9235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

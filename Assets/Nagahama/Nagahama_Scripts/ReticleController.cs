@@ -157,10 +157,10 @@ public class ReticleController : MonoBehaviour
             
 
             if(isNowTargeting && !isBeforeTargeting) {
-                AsteroidScript asteroid = target.GetComponent<AsteroidScript>();
+                TargetCollider targetCollider = target.GetComponent<TargetCollider>();
 
-                if (!asteroid.IsLockedOn && generatedReticleCount < _generateReticleMax ) {
-                    asteroid.IsLockedOn = true;
+                if (!targetCollider.IsLockedOn && generatedReticleCount < _generateReticleMax ) {
+                    targetCollider.IsLockedOn = true;
 
                     GameObject newLockonReticle = Instantiate(_lockedOnReticlePrefab, transform.position, Quaternion.identity);
                     LockedOnReticle lockedOnReticle = newLockonReticle.GetComponent<LockedOnReticle>();

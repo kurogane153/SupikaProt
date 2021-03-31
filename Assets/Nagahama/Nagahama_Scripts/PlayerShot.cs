@@ -46,7 +46,7 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private float[] _instantiateTimes;
 
     private PlayerMove playerMove;
-    private Transform targetAsteroid;
+    private Transform targetAsteroidCollider;
     private Transform confirmTarget;
     private float shotTimeRemain;
     private float missileShotTimeRemain;
@@ -119,14 +119,14 @@ public class PlayerShot : MonoBehaviour
 
             // リロード中でない、弾が残っていれば発射
             if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f && reloadTimeRemain <= 0f && 0 < missileNum) {
-                confirmTarget = targetAsteroid;
+                confirmTarget = targetAsteroidCollider;
                 //MultiStageFire();
                 MultiTargetFire();
             }
         } else {
             // リロード無しバージョン
             if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f) {
-                confirmTarget = targetAsteroid;
+                confirmTarget = targetAsteroidCollider;
                 //MultiStageFire();
                 MultiTargetFire();
             }
@@ -153,7 +153,7 @@ public class PlayerShot : MonoBehaviour
         //GetTargetAsteroid();
         GetTargetAsteroid_InRectVersion();
         Dbg();
-        _reticle.MoveReticle(Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroid);
+        _reticle.MoveReticle(Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroidCollider);
     }
 
     private void TimeRemainManege()
@@ -362,10 +362,10 @@ public class PlayerShot : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
 
         if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
-            targetAsteroid = hit.transform;
+            targetAsteroidCollider = hit.transform;
             
         } else {
-            targetAsteroid = null;
+            targetAsteroidCollider = null;
             
         }
 
@@ -376,22 +376,22 @@ public class PlayerShot : MonoBehaviour
     {
         Rect rect = _reticle.GetReticleRect();
 
-        foreach (var ast in RectInAsteroidContainer.Instance.asteroids) {
-            Vector3 viewportPos = Camera.main.WorldToViewportPoint(ast.transform.position);
+        foreach (var tarcol in RectInAsteroidContainer.Instance.targetColliders) {
+            Vector3 viewportPos = Camera.main.WorldToViewportPoint(tarcol.transform.position);
 
             if (rect.Contains(viewportPos) && 0f < viewportPos.z) {
 
-                Ray ray = new Ray(transform.position, ast.transform.position - transform.position);
-                if(Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
-                    targetAsteroid = ast.transform;
-                    Debug.Log("照準内に隕石発見");
+                Ray ray = new Ray(transform.position, tarcol.transform.position - transform.position);
+                if(Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("AsteroidTargetCollider")) {
+                    targetAsteroidCollider = tarcol.transform;
+                    Debug.DrawRay(ray.origin, ray.direction * _laserLength, Color.green);
+                    Debug.Log("照準内に隕石コライダー発見");
                     return;
                 }
-                //Debug.DrawRay(ray.origin, ray.direction * _laserLength, Color.green);
             }
         }
 
-        targetAsteroid = null;
+        targetAsteroidCollider = null;
     }
 
     private void Dbg()
@@ -406,14 +406,14 @@ public class PlayerShot : MonoBehaviour
 
         Rect rect = _reticle.GetReticleRect();
 
-        foreach (var ast in RectInAsteroidContainer.Instance.asteroids) {
+        foreach (var ast in RectInAsteroidContainer.Instance.targetColliders) {
             Vector3 viewportPos = Camera.main.WorldToViewportPoint(ast.transform.position);
 
             if (rect.Contains(viewportPos) && 0f < viewportPos.z) {
 
                 Ray ray = new Ray(transform.position, ast.transform.position - transform.position);
-                if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
-                    _dbg_targetAsteroid = targetAsteroid.name;
+                if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("AsteroidTargetCollider")) {
+                    _dbg_targetAsteroid = targetAsteroidCollider.name;
                     return;
                 }
 

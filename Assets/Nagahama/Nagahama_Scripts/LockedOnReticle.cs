@@ -62,7 +62,7 @@ public class LockedOnReticle : MonoBehaviour
 
     private void DestroyProcess()
     {
-        target.GetComponent<AsteroidScript>().IsLockedOn = false;
+        target.GetComponent<TargetCollider>().IsLockedOn = false;
         ReticleController.Instance.GeneratedReticleCount -= 1;
         Destroy(gameObject);
     }

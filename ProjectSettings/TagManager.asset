@@ -9,6 +9,7 @@ TagManager:
   - Earth
   - Bullet
   - SabCamera
+  - AsteroidTargetCollider
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Asteroid
   - Earth
   - Bullet
-  - 
+  - AsteroidTargetCollider
   - 
   - 
   - 

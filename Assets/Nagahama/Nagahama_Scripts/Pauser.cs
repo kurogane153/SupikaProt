@@ -103,11 +103,11 @@ public class Pauser : MonoBehaviour
     public static void Pause()
     {
         foreach (var obj in targets) {
-            if (obj.CompareTag("Asteroid")) {
+            if (obj.CompareTag("AsteroidTargetCollider")) {
 
-                AsteroidScript asteroidScript = obj.GetComponent<AsteroidScript>();
-                if (asteroidScript.IsLockedOn) {
-                    asteroidScript.IsMovePause = true;
+                TargetCollider targetCollider = obj.GetComponent<TargetCollider>();
+                if (targetCollider.IsLockedOn) {
+                    targetCollider.GetAsteroidScript.IsMovePause = true;
                 } else {
                     obj.OnPause();
                 }
@@ -123,11 +123,11 @@ public class Pauser : MonoBehaviour
     public static void Resume()
     {
         foreach (var obj in targets) {
-            if (obj.CompareTag("Asteroid")) {
+            if (obj.CompareTag("AsteroidTargetCollider")) {
 
-                AsteroidScript asteroidScript = obj.GetComponent<AsteroidScript>();
-                if (asteroidScript.IsLockedOn) {
-                    asteroidScript.IsMovePause = false;
+                TargetCollider targetCollider = obj.GetComponent<TargetCollider>();
+                if (targetCollider.IsLockedOn) {
+                    targetCollider.GetAsteroidScript.IsMovePause = false;
                 } else {
                     obj.OnResume();
                 }

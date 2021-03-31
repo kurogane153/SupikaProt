@@ -16,15 +16,8 @@ public class AsteroidScript : MonoBehaviour
 
     [SerializeField] private Vector3 targetPosition = Vector3.zero;
 
-    private bool isLockedOn;
+    
     private bool isMovePause;
-    private bool beforeInScreenFlags;
-
-    public bool IsLockedOn
-    {
-        get { return isLockedOn; }
-        set { isLockedOn = value; }
-    }
 
     public bool IsMovePause
     {
@@ -88,34 +81,8 @@ public class AsteroidScript : MonoBehaviour
             transform.rotation = transform.rotation * rot;
         }
 
-        bool isNowInScreen = IsScreenPositionScreenInsite();
-
-        if (isNowInScreen != beforeInScreenFlags) {
-            if (isNowInScreen) {
-                RectInAsteroidContainer.Instance.asteroids.Add(this);
-                Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListに追加された！" + Camera.main.WorldToViewportPoint(transform.position));
-
-            } else {
-                RectInAsteroidContainer.Instance.asteroids.Remove(this);
-                Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListから削除された……");
-            }
-
-        }
-
-        beforeInScreenFlags = isNowInScreen;
-
     }
-
-    private bool IsScreenPositionScreenInsite()
-    {
-        Rect rect = new Rect(0, 0, 1, 1);
-        Vector3 viewportPos = Camera.main.WorldToViewportPoint(transform.position);
-
-        if (rect.Contains(viewportPos) && 0f < viewportPos.z) {
-            return true;
-        }
-        return false;
-    }
+  
 
     private IEnumerator AutoDestroy()
     {
@@ -126,7 +93,10 @@ public class AsteroidScript : MonoBehaviour
     private void SelfDestroy()
     {
         StopCoroutine(nameof(AutoDestroy));
-        RectInAsteroidContainer.Instance.asteroids.Remove(this);
+        TargetCollider[] targetColliders = GetComponentsInChildren<TargetCollider>();
+        foreach(var tarcol in targetColliders) {
+            RectInAsteroidContainer.Instance.targetColliders.Remove(tarcol);
+        }
         Destroy(gameObject);
     }
 

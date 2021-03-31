@@ -25,13 +25,13 @@ public class RectInAsteroidContainer : MonoBehaviour
     }
     #endregion
 
-    public List<AsteroidScript> asteroids = new List<AsteroidScript>(); // 当たり判定対象の隕石たち
+    public List<TargetCollider> targetColliders = new List<TargetCollider>(); // 当たり判定対象の隕石たち
 
     private void Update()
     {
         // list内の隕石をすべて出力する
         if (Input.GetKeyDown(KeyCode.L)) {
-            ShowListContentsInTheDebugLog(asteroids);
+            ShowListContentsInTheDebugLog(targetColliders);
         }
     }
 

@@ -75,7 +75,7 @@ public class HomingMissileScript : MonoBehaviour
 
         impactTime -= Time.deltaTime;
         if (impactTime < 0f) {
-            targetTransform.GetComponent<AsteroidScript>().ReceiveDamage(giveDamage);
+            targetTransform.GetComponent<TargetCollider>().ReceiveDamage(giveDamage);
             StopCoroutine(nameof(AutoDestroy));
             SelfDestroy();
             return;
