@@ -8,6 +8,7 @@ public class LockedOnReticle : MonoBehaviour
     private RectTransform canvasRectTransform;
     private RectTransform rectTransform;
     private Transform target;
+    private Camera mainCamera;
 
     public Transform Target
     {
@@ -38,20 +39,21 @@ public class LockedOnReticle : MonoBehaviour
         
     }
 
-    public void InstantiateSettings(Canvas canvas, Transform target)
+    public void InstantiateSettings(Canvas canvas, Transform target, Camera maincamera)
     {
         this.canvas = canvas;
         Target = target;
+        mainCamera = maincamera;
 
         transform.parent = canvas.transform;
     }
 
     private void TargetLockOnMove()
     {
-        Vector3 newPoint = Camera.main.WorldToScreenPoint(target.position);
+        Vector3 newPoint = mainCamera.WorldToScreenPoint(target.position);
         Rect rect = new Rect(0, 0, 1, 1);
 
-        if (rect.Contains(Camera.main.WorldToViewportPoint(target.position))) {
+        if (rect.Contains(mainCamera.WorldToViewportPoint(target.position))) {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, newPoint, canvas.worldCamera, out Vector2 newPos);
             rectTransform.localPosition = newPos;
         } else {

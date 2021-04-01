@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 7015361749325490771}
   - component: {fileID: 7015361749325490768}
   - component: {fileID: 7015361749325490770}
+  - component: {fileID: 1856922241}
   m_Layer: 5
   m_Name: Reticle
   m_TagString: Untagged
@@ -243,20 +244,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b6dccb04ceed44e98682d923bca8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _missileGuage: {fileID: 0}
+  _missileGuage: {fileID: 3904580153728244075}
   _soundPlayer: {fileID: 4063978718862799842}
   _se_LockOn: {fileID: 8300000, guid: ccc5cd169785fc34bb3cceedef0f2ffe, type: 3}
   _lockedOnReticlePrefab: {fileID: 2127001005440325914, guid: 293ec4f45d4f025478756b7099bb749e,
     type: 3}
+  _mainCamera: {fileID: 0}
   _lockOnColor: {r: 1, g: 0, b: 0, a: 1}
   _speedX: 40
   _speedY: 40
+  _reticleRectSizeScaling: 1.03
   _aimAssistDegreeX: 1
   _aimAssistDegreeY: 1
-  _aimDeadZoneX: 0.2
-  _aimDeadZoneY: 0.2
+  _aimDeadZoneX: 0.1
+  _aimDeadZoneY: 0.1
   _generateReticleMax: 5
   _lockOnTargetOnLockOnButtonDown: 1
+  _targetLockonmoveFlags: 1
+--- !u!114 &1856922241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015361749325490782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe42b7f859a03674b8f5ac772538b081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _killCameraPause: 0
 --- !u!1001 &774455793344192268
 PrefabInstance:
   m_ObjectHideFlags: 0

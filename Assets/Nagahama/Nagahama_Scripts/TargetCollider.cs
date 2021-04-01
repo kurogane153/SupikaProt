@@ -7,6 +7,7 @@ public class TargetCollider : MonoBehaviour
     private AsteroidScript parentAsteroidSc;
     private bool isLockedOn;
     private bool beforeInScreenFlags;
+    private Camera mainCamera;
 
     public bool IsLockedOn
     {
@@ -28,6 +29,11 @@ public class TargetCollider : MonoBehaviour
     void Start()
     {
         parentAsteroidSc = transform.root.GetComponent<AsteroidScript>();
+
+        if (mainCamera == null) {
+            mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+            Debug.Log(gameObject.name + "がmainCameraをFindで取得した");
+        }
     }
 
     private void FixedUpdate()
@@ -37,7 +43,7 @@ public class TargetCollider : MonoBehaviour
         if (isNowInScreen != beforeInScreenFlags) {
             if (isNowInScreen) {
                 RectInAsteroidContainer.Instance.targetColliders.Add(this);
-                Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListに追加された！" + Camera.main.WorldToViewportPoint(transform.position));
+                Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListに追加された！" + mainCamera.WorldToViewportPoint(transform.position));
 
             } else {
                 RectInAsteroidContainer.Instance.targetColliders.Remove(this);
@@ -52,7 +58,7 @@ public class TargetCollider : MonoBehaviour
     private bool IsScreenPositionScreenInsite()
     {
         Rect rect = new Rect(0, 0, 1, 1);
-        Vector3 viewportPos = Camera.main.WorldToViewportPoint(transform.position);
+        Vector3 viewportPos = mainCamera.WorldToViewportPoint(transform.position);
 
         if (rect.Contains(viewportPos) && 0f < viewportPos.z) {
             return true;

@@ -26,6 +26,7 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private int _killCameraActiveCount = 3;
 
     [Header("発射設定全般"), Space(10)]
+    [SerializeField] private Camera _mainCamera;
     [SerializeField] private bool _onDrawGizmosFlags;
     [SerializeField] private ReticleController _reticle;
     [SerializeField] private LayerMask _layerMask;
@@ -87,6 +88,11 @@ public class PlayerShot : MonoBehaviour
                 Debug.LogError(gameObject.name + "の" + nameof(_soundPlayer) + "が空です");
             }
             Debug.Log(gameObject.name + "は、子要素にアタッチされているAudioSourceを自動的に" + nameof(_soundPlayer) + "にアタッチしました");
+        }
+
+        if (_mainCamera == null) {
+            _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+            Debug.Log(gameObject.name + "が_mainCameraをFindで取得した");
         }
 
         if (!_reloadFlags) {
@@ -359,7 +365,7 @@ public class PlayerShot : MonoBehaviour
 
     private void GetTargetAsteroid()
     {
-        Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
+        Ray ray = _mainCamera.ScreenPointToRay(_reticle.GetReticlePos());
 
         if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
             targetAsteroidCollider = hit.transform;
@@ -377,7 +383,7 @@ public class PlayerShot : MonoBehaviour
         Rect rect = _reticle.GetReticleRect();
 
         foreach (var tarcol in RectInAsteroidContainer.Instance.targetColliders) {
-            Vector3 viewportPos = Camera.main.WorldToViewportPoint(tarcol.transform.position);
+            Vector3 viewportPos = _mainCamera.WorldToViewportPoint(tarcol.transform.position);
 
             if (rect.Contains(viewportPos) && 0f < viewportPos.z) {
 
@@ -396,18 +402,18 @@ public class PlayerShot : MonoBehaviour
 
     private void Dbg()
     {
-        //Ray ray = Camera.main.ScreenPointToRay(_reticle.GetReticlePos());
+        //Ray ray = _mainCamera.ScreenPointToRay(_reticle.GetReticlePos());
 
-       // if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
-            //_dbg_targetAsteroid = targetAsteroid.name;
+        // if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
+        //_dbg_targetAsteroid = targetAsteroid.name;
         //} else {
-           // _dbg_targetAsteroid = "None";
+        // _dbg_targetAsteroid = "None";
         //}
 
         Rect rect = _reticle.GetReticleRect();
 
         foreach (var ast in RectInAsteroidContainer.Instance.targetColliders) {
-            Vector3 viewportPos = Camera.main.WorldToViewportPoint(ast.transform.position);
+            Vector3 viewportPos = _mainCamera.WorldToViewportPoint(ast.transform.position);
 
             if (rect.Contains(viewportPos) && 0f < viewportPos.z) {
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1070784834}
   m_Layer: 0
   m_Name: PausingCamera
-  m_TagString: Untagged
+  m_TagString: SubCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56,7 +56,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 5800
   field of view: 60
   orthographic: 0
   orthographic size: 5
