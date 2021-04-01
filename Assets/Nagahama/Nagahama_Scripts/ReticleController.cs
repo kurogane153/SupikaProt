@@ -33,6 +33,7 @@ public class ReticleController : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private GameObject _lockedOnReticlePrefab;
+    [SerializeField] private Camera _mainCamera;
     [SerializeField] private Color _lockOnColor;
     [SerializeField] private float _speedX = 1f;
     [SerializeField] private float _speedY = 1f;
@@ -101,6 +102,11 @@ public class ReticleController : MonoBehaviour
             }
             Debug.Log(gameObject.name + "は、子要素にアタッチされているAudioSourceを自動的に" + nameof(_soundPlayer) + "にアタッチしました");
         }
+
+        if (_mainCamera == null) {
+            _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+            Debug.Log(gameObject.name + "が_mainCameraをFindで取得した");
+        }
     }
 
     void Update()
@@ -111,6 +117,7 @@ public class ReticleController : MonoBehaviour
             Debug.Log("<color=yellow>ReticleRect.Y : " + rect.y + "</color>");
             Debug.Log("<color=yellow>ReticleRect.Width : " + rect.width + "</color>");
             Debug.Log("<color=yellow>ReticleRect.Height : " + rect.height + "</color>");
+            
         }
 
         #region デバッグ用
@@ -165,7 +172,7 @@ public class ReticleController : MonoBehaviour
                     GameObject newLockonReticle = Instantiate(_lockedOnReticlePrefab, transform.position, Quaternion.identity);
                     LockedOnReticle lockedOnReticle = newLockonReticle.GetComponent<LockedOnReticle>();
 
-                    lockedOnReticle.InstantiateSettings(canvas, target);
+                    lockedOnReticle.InstantiateSettings(canvas, target, _mainCamera);
                     GeneratedReticleCount += 1;
 
                     _soundPlayer.PlaySE(_se_LockOn);
@@ -191,7 +198,7 @@ public class ReticleController : MonoBehaviour
     {
         Rect rect = new Rect(0, 0, 1, 1);
 
-        if (rect.Contains(Camera.main.ScreenToViewportPoint(pos))){
+        if (rect.Contains(_mainCamera.ScreenToViewportPoint(pos))){
             return false;
         }
         return true;
@@ -199,10 +206,10 @@ public class ReticleController : MonoBehaviour
 
     private void TargetLockOnMove(Transform target)
     {
-        Vector3 newPoint = Camera.main.WorldToScreenPoint(target.position);
+        Vector3 newPoint = _mainCamera.WorldToScreenPoint(target.position);
         Rect rect = new Rect(0, 0, 1, 1);
 
-        if (rect.Contains(Camera.main.WorldToViewportPoint(target.position))) {
+        if (rect.Contains(_mainCamera.WorldToViewportPoint(target.position))) {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, newPoint, canvas.worldCamera, out Vector2 newPos);
             rectTransform.localPosition = newPos;
         }
@@ -217,9 +224,10 @@ public class ReticleController : MonoBehaviour
     public Rect GetReticleRect()
     {
         Vector2 rectsize = rectTransform.rect.size;
+        Vector2 screensize = new Vector2(Screen.width, Screen.height);
 
-        Vector2 size = Vector2.Scale(rectTransform.rect.size / canvasRectTransform.rect.size, rectTransform.lossyScale);
-        Rect rect = new Rect((Vector2)(rectTransform.position / canvasRectTransform.sizeDelta) - (size * 0.5f), size * _reticleRectSizeScaling);
+        Vector2 size = Vector2.Scale(rectTransform.rect.size / screensize, rectTransform.localScale);
+        Rect rect = new Rect((Vector2)(rectTransform.position / screensize) - (size * 0.5f), size * _reticleRectSizeScaling);
 
         return rect;
     }

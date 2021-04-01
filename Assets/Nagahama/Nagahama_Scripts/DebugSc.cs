@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DebugSc : MonoBehaviour
 {
-
+    [SerializeField] private GameObject[] _canvasRenderers;
+    [SerializeField] private bool isUIEnabled = true;
 
     void Start()
     {
@@ -28,6 +29,31 @@ public class DebugSc : MonoBehaviour
             }
         }
 
+        // Lトリガー押しながらビューボタンでデバッグ用ポーズ
+        if ((Input.GetAxis("L_R_Trigger") <= -0.5f && Input.GetButtonDown("Reload")) || Input.GetKeyDown(KeyCode.U)) {
+            if (isUIEnabled) {
+                UIRendererDisable();
+            } else {
+                UIRendererEnable();
+            }
+        }
+
         #endregion
+    }
+
+    void UIRendererDisable()
+    {
+        foreach(var ui in _canvasRenderers) {
+            ui.SetActive(false);
+        }
+        isUIEnabled = false;
+    }
+
+    void UIRendererEnable()
+    {
+        foreach (var ui in _canvasRenderers) {
+            ui.SetActive(true);
+        }
+        isUIEnabled = true;
     }
 }

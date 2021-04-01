@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6548341347137923444}
   m_Layer: 0
   m_Name: DebugCamera
-  m_TagString: Untagged
+  m_TagString: SubCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,7 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abdc158578640643b06c09fbda88016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isEnable: 0
   moveSpeed: 10
   rotateSpeed: 10
 --- !u!81 &6548341347137923444
