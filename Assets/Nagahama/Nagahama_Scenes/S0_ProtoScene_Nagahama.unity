@@ -352,12 +352,12 @@ PrefabInstance:
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: maxTime
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: minTime
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -855,8 +855,8 @@ MonoBehaviour:
   Spika: {fileID: 329334729}
   Earth: {fileID: 897722549}
   Spikaflg: 0
-  minTime: 2
-  maxTime: 5
+  minTime: 7
+  maxTime: 20
   _spawnedAsteroidSpeed: 50
   xMinPosition: -500
   xMaxPosition: 500
@@ -1594,7 +1594,7 @@ PrefabInstance:
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: minTime
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -2195,7 +2195,7 @@ PrefabInstance:
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: minTime
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
