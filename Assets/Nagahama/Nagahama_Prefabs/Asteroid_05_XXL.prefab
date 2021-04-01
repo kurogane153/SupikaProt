@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe42b7f859a03674b8f5ac772538b081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _killCameraPause: 1
 --- !u!1001 &4114038552214217111
 PrefabInstance:
   m_ObjectHideFlags: 0

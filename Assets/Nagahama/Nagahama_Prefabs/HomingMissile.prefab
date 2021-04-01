@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &866951080626005269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4761063321719143700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe42b7f859a03674b8f5ac772538b081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _killCameraPause: 0
 --- !u!1 &3643294739846692036
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,6 +25,7 @@ GameObject:
   - component: {fileID: 3643294739846692037}
   - component: {fileID: 7420715931958043417}
   - component: {fileID: 3948526218033004127}
+  - component: {fileID: 8920846510512806720}
   m_Layer: 12
   m_Name: HomingMissile
   m_TagString: Bullet
@@ -84,6 +98,19 @@ MonoBehaviour:
     type: 3}
   _destroyTime: 5
   _lockAtSpeed: 20
+--- !u!114 &8920846510512806720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3643294739846692036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe42b7f859a03674b8f5ac772538b081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _killCameraPause: 0
 --- !u!1 &6789452682867617335
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +122,7 @@ GameObject:
   - component: {fileID: 6789452682867431011}
   - component: {fileID: 6789452682849038403}
   - component: {fileID: 6789452682849737583}
+  - component: {fileID: 8632879149796892727}
   m_Layer: 0
   m_Name: smoke
   m_TagString: Untagged
@@ -4829,6 +4857,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &8632879149796892727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789452682867617335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe42b7f859a03674b8f5ac772538b081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _killCameraPause: 0
 --- !u!1 &6789452682867659059
 GameObject:
   m_ObjectHideFlags: 0
@@ -4840,6 +4881,7 @@ GameObject:
   - component: {fileID: 6789452682867463835}
   - component: {fileID: 6789452682866698779}
   - component: {fileID: 6789452682865162263}
+  - component: {fileID: 2540988194407058205}
   m_Layer: 0
   m_Name: missile
   m_TagString: Untagged
@@ -4908,6 +4950,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &2540988194407058205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789452682867659059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe42b7f859a03674b8f5ac772538b081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _killCameraPause: 0
 --- !u!1 &6789452682867663163
 GameObject:
   m_ObjectHideFlags: 0
@@ -4920,6 +4975,7 @@ GameObject:
   - component: {fileID: 6789452682849131033}
   - component: {fileID: 6789452682849696129}
   - component: {fileID: 6789452682858338213}
+  - component: {fileID: 4092143657527373752}
   m_Layer: 0
   m_Name: fire
   m_TagString: Untagged
@@ -9679,6 +9735,19 @@ LensFlare:
     serializedVersion: 2
     m_Bits: 6
   m_Directional: 0
+--- !u!114 &4092143657527373752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789452682867663163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe42b7f859a03674b8f5ac772538b081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _killCameraPause: 0
 --- !u!1001 &3142573173521540414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9788,6 +9857,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b599fe3dd41a0746806869b5c9b1276, type: 3}
+--- !u!1 &4761063321719143700 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7606043737576806442, guid: 2b599fe3dd41a0746806869b5c9b1276,
+    type: 3}
+  m_PrefabInstance: {fileID: 3142573173521540414}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5316293306594834776 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7087519292718275686, guid: 2b599fe3dd41a0746806869b5c9b1276,
@@ -9800,7 +9875,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 3142573173521540414}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4761063321719143700}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f9a653763c496549a0277713b3db87c, type: 3}

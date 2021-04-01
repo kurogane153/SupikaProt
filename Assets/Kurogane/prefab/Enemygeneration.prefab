@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 100000, guid: 72fd38d3d1566e74b8726177e8de153f, type: 3}
+  Spika: {fileID: 0}
+  Earth: {fileID: 0}
+  Spikaflg: 0
   minTime: 2
   maxTime: 5
   _spawnedAsteroidSpeed: 50
@@ -66,3 +69,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe42b7f859a03674b8f5ac772538b081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _killCameraPause: 1

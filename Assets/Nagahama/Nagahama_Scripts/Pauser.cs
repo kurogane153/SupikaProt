@@ -6,6 +6,9 @@ using System;
 public class Pauser : MonoBehaviour
 {
     static List<Pauser> targets = new List<Pauser>();   // ポーズ対象のスクリプト
+    public static bool isPaused;
+
+    [SerializeField] private bool _killCameraPause; // キルカメラ中に止ってほしいときやつだけオンにする
 
     // ポーズ対象のコンポーネント
     Behaviour[] pauseBehavs = null;
@@ -62,6 +65,8 @@ public class Pauser : MonoBehaviour
             rg2dBodyAVels[i] = rg2dBodies[i].angularVelocity;
             rg2dBodies[i].Sleep();
         }
+
+        
     }
 
     // ポーズ解除されたとき
@@ -97,12 +102,15 @@ public class Pauser : MonoBehaviour
         rg2dBodies = null;
         rg2dBodyVels = null;
         rg2dBodyAVels = null;
+
+       
     }
 
-    // ポーズ
-    public static void Pause()
+    // キルカメラ用ポーズ
+    public static void SoftPause()
     {
         foreach (var obj in targets) {
+            if (!obj._killCameraPause) continue;
             if (obj.CompareTag("AsteroidTargetCollider")) {
 
                 TargetCollider targetCollider = obj.GetComponent<TargetCollider>();
@@ -119,10 +127,11 @@ public class Pauser : MonoBehaviour
         }
     }
 
-    // ポーズ解除
-    public static void Resume()
+    // キルカメラ用ポーズ解除
+    public static void SoftResume()
     {
         foreach (var obj in targets) {
+            if (!obj._killCameraPause) continue;
             if (obj.CompareTag("AsteroidTargetCollider")) {
 
                 TargetCollider targetCollider = obj.GetComponent<TargetCollider>();
@@ -136,5 +145,25 @@ public class Pauser : MonoBehaviour
                 obj.OnResume();
             }
         }
+    }
+
+    // 強制ポーズ
+    public static void Pause()
+    {
+        foreach (var obj in targets) {
+            obj.OnPause();
+        }
+        isPaused = true;
+        Time.timeScale = 0f;
+    }
+
+    // 強制ポーズ解除
+    public static void Resume()
+    {
+        foreach (var obj in targets) {
+            obj.OnResume();
+        }
+        isPaused = false;
+        Time.timeScale = 1f;
     }
 }

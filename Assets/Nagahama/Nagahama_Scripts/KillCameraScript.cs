@@ -201,7 +201,7 @@ public class KillCameraScript : MonoBehaviour
         SwitchStagingPhase_Pan();
         _playerMove.enabled = false;
         ReticleController.Instance.GetCanvas().enabled = false;
-        Pauser.Pause();
+        Pauser.SoftPause();
         Time.timeScale = 1f;
 
     }
@@ -213,7 +213,7 @@ public class KillCameraScript : MonoBehaviour
         stagingPhase = StagingPhase.Yet;
         _playerMove.enabled = true;
         ReticleController.Instance.GetCanvas().enabled = true;
-        Pauser.Resume();
+        Pauser.SoftResume();
         Time.timeScale = 1f;
         _playerShot.enabled = true;
     }
@@ -243,7 +243,7 @@ public class KillCameraScript : MonoBehaviour
         _playerMove.enabled = false;
         _playerShot.enabled = false;
         ReticleController.Instance.gameObject.SetActive(false);
-        Pauser.Pause();
+        Pauser.SoftPause();
         Time.timeScale = 1f;
 
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((_followTarget.position - transform.position).normalized), 1);
@@ -260,7 +260,7 @@ public class KillCameraScript : MonoBehaviour
         _playerMove.enabled = true;
         _playerShot.enabled = true;
         ReticleController.Instance.gameObject.SetActive(true);
-        Pauser.Resume();
+        Pauser.SoftResume();
         Time.timeScale = 1f;
 
         _conflictTooltip.SetTooltipActive(false);
