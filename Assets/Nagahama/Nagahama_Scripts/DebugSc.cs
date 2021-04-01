@@ -14,13 +14,13 @@ public class DebugSc : MonoBehaviour
     void Update()
     {
         #region デバッグ用
-        // Lトリガー押しながらビューボタンでデバッグカメラ起動
-        if (Input.GetAxis("L_R_Trigger") >= 0.5f && Input.GetButtonDown("DebugPause")) {
+        // Rトリガー押しながらビューボタンでデバッグカメラ起動
+        if ((Input.GetAxis("L_R_Trigger") >= 0.5f && Input.GetButtonDown("DebugPause")) || Input.GetButtonDown("DebugCamera")) {
             DebugCamera.Instance.IsEnable = !DebugCamera.Instance.IsEnable;
         }
 
-        // Rトリガー押しながらビューボタンでデバッグ用ポーズ
-        if (Input.GetAxis("L_R_Trigger") <= -0.5f && Input.GetButtonDown("DebugPause")) {
+        // Lトリガー押しながらビューボタンでデバッグ用ポーズ
+        if ((Input.GetAxis("L_R_Trigger") <= -0.5f && Input.GetButtonDown("DebugPause")) || Input.GetButtonDown("DebugPause_TAB")) {
             if (Pauser.isPaused) {
                 Pauser.Resume();
             } else {
