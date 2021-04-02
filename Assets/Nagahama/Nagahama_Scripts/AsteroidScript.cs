@@ -87,6 +87,10 @@ public class AsteroidScript : MonoBehaviour
     private IEnumerator AutoDestroy()
     {
         yield return new WaitForSeconds(_destroyTime);
+        TargetCollider[] targetColliders = GetComponentsInChildren<TargetCollider>();
+        foreach (var tarcol in targetColliders) {
+            RectInAsteroidContainer.Instance.targetColliders.Remove(tarcol);
+        }
         Destroy(gameObject);
     }
 
