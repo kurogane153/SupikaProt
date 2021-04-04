@@ -49,8 +49,13 @@ public class AsteroidScript : MonoBehaviour
         if (_hp <= 0) {
             SelfDestroy();
             Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+
             GameClearOver_Process.GameClearCount++;
-            
+
+            if (this.transform.localScale.x >= 1000) {
+                AsteroidWaveManager.Instansflg = true;
+                AsteroidWaveManager.InstantiatePosition = this.transform.position;
+            }
         }
     }
     
