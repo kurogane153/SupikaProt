@@ -21,7 +21,8 @@ public class PlayerMove : MonoBehaviour
     [Header("速度操作"), Space(10)]
     [SerializeField] private string _speedUpButtonName = "SpeedUp";
     [SerializeField] private string _speedDownButtonName = "SpeedDown";
-    [SerializeField] private float _maxDistance = 457f;
+    [SerializeField] private float[] _maxDistances;
+    [SerializeField] private float[] _minDistances;
     [SerializeField] private float _period = 10f;
     [SerializeField] private float _speedUpRate = 10f;
     [SerializeField] private float _speedDownRate = 10f;
@@ -43,7 +44,6 @@ public class PlayerMove : MonoBehaviour
     private Quaternion angleAxis;
     private float nowAngle;
     private bool isAcceptedOrbitChange;
-    private float minDistance;
     private float speedChangeTimeRemain;
 
     public OrbitOriginPlanet OriginPlanet
@@ -82,7 +82,7 @@ public class PlayerMove : MonoBehaviour
 
         OrbitVarChange();
 
-        minDistance = (transform.position - orbitOrigin.position).magnitude;
+        
     }
 
     void Update()
@@ -144,10 +144,10 @@ public class PlayerMove : MonoBehaviour
     {
         float distance_player_from_planet = (transform.position - orbitOrigin.position).magnitude;
 
-        if(_maxDistance < distance_player_from_planet) {
-            transform.position = Vector3.MoveTowards(transform.position, (transform.position - orbitOrigin.position).normalized * _maxDistance, Time.deltaTime * 5f);
-        } else if (distance_player_from_planet < minDistance) {
-            transform.position = Vector3.MoveTowards(transform.position, (transform.position - orbitOrigin.position).normalized * minDistance, Time.deltaTime * 5f);
+        if(_maxDistances[(int)_orbitOriginPlanet] < distance_player_from_planet) {
+            transform.position = Vector3.MoveTowards(transform.position, (transform.position - orbitOrigin.position).normalized * _maxDistances[(int)_orbitOriginPlanet], Time.deltaTime * 5f);
+        } else if (distance_player_from_planet < _minDistances[(int)_orbitOriginPlanet]) {
+            transform.position = Vector3.MoveTowards(transform.position, (transform.position - orbitOrigin.position).normalized * _minDistances[(int)_orbitOriginPlanet], Time.deltaTime * 5f);
         }
     }
 

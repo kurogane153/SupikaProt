@@ -22,6 +22,7 @@ public class KillCameraScript : MonoBehaviour
 
     [SerializeField] private PlayerMove _playerMove;
     [SerializeField] private PlayerShot _playerShot;
+    [SerializeField] private Camera _mainCamera;
 
     [Space(10)]
     [SerializeField] private TooltipScript _conflictTooltip;
@@ -65,6 +66,11 @@ public class KillCameraScript : MonoBehaviour
         if (_playerMove == null) {
             _playerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
             Debug.Log(gameObject.name + "が_playerMoveをFindで取得した");
+        }
+
+        if(_mainCamera == null) {
+            _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+            Debug.Log(gameObject.name + "が_mainCameraをFindで取得した");
         }
 
         camera = GetComponent<Camera>();
@@ -203,6 +209,8 @@ public class KillCameraScript : MonoBehaviour
         ReticleController.Instance.GetCanvas().enabled = false;
         Pauser.SoftPause();
         Time.timeScale = 1f;
+        transform.position = _mainCamera.transform.position;
+        transform.rotation = _mainCamera.transform.rotation;
 
     }
 
