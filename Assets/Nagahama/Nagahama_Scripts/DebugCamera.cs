@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 自由に動かせるカメラ
 public class DebugCamera : MonoBehaviour
 {
     #region Singleton

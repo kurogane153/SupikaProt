@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 使用していません
 public class AsteroidSpwanerScript : MonoBehaviour
 {
     [SerializeField] private GameObject[] _asteroidPrefab;
     [SerializeField] private float _spawnDuration = 4f;
+
     [Header("生成した隕石のスピードをスポナーから指定"), Space(10)]
     [SerializeField] private bool _isAsteroidSpeedOverride = false;
     [SerializeField] private float _spawnedAsteroidSpeed = 50f;

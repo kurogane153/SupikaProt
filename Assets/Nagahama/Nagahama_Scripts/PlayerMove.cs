@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// プレイヤー移動処理
 public class PlayerMove : MonoBehaviour
 {
     public enum OrbitOriginPlanet
@@ -12,22 +13,21 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private PlayerAnimation _playerAnimation;
 
     [Space(10)]
-    [SerializeField] private Transform _earthTransform;
-    [SerializeField] private Transform _spicaTransform;
-    [SerializeField] private OrbitOriginPlanet _orbitOriginPlanet;
-    [SerializeField] private Vector3 _rotateEarthAxis;
-    [SerializeField] private Vector3 _rotateSpicaAxis;
+    [SerializeField, Tooltip("地球")] private Transform _earthTransform;
+    [SerializeField, Tooltip("コロニー")] private Transform _colonyTransform;
+    [SerializeField, Tooltip("軌道の中心の惑星")] private OrbitOriginPlanet _orbitOriginPlanet;
+    [SerializeField, Tooltip("地球の外周を移動するときの回転軸")] private Vector3 _rotateEarthAxis;
+    [SerializeField, Tooltip("コロニーの外周を移動するときの回転軸")] private Vector3 _rotateSpicaAxis;
 
     [Header("速度操作"), Space(10)]
     [SerializeField] private string _speedUpButtonName = "SpeedUp";
     [SerializeField] private string _speedDownButtonName = "SpeedDown";
     [SerializeField] private float[] _maxDistances;
     [SerializeField] private float[] _minDistances;
-    [SerializeField] private float _period = 10f;
-    [SerializeField] private float _speedUpRate = 10f;
-    [SerializeField] private float _speedDownRate = 10f;
-    [SerializeField] private float _maxPeriod = 200f;
-    [SerializeField] private float _minPeriod = 10f;
+    [SerializeField] private float _startPeriod = 10f;
+
+    [Header("各段階での移動速度。数字が小さいほど速い"), Space(10)]
+    [SerializeField] private float[] _periods;
     [SerializeField] private float _speedChangeDelay = 1.23f;
     [SerializeField] private bool _isUpdateRotation = false;
 
@@ -45,6 +45,8 @@ public class PlayerMove : MonoBehaviour
     private float nowAngle;
     private bool isAcceptedOrbitChange;
     private float speedChangeTimeRemain;
+    private float period;
+    private int periodNum;
 
     public OrbitOriginPlanet OriginPlanet
     {
@@ -60,7 +62,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
-            
+        period = _startPeriod;
     }
 
     void Start()
@@ -75,8 +77,8 @@ public class PlayerMove : MonoBehaviour
             Debug.Log(gameObject.name + "がEarthをFindで取得した");
         }
 
-        if (_spicaTransform == null) {
-            _spicaTransform = GameObject.Find("Spica").GetComponent<Transform>();
+        if (_colonyTransform == null) {
+            _colonyTransform = GameObject.Find("Spica").GetComponent<Transform>();
             Debug.Log(gameObject.name + "がSpicaをFindで取得した");
         }
 
@@ -100,7 +102,6 @@ public class PlayerMove : MonoBehaviour
     private void FixedUpdate()
     {
         
-        
     }
 
     private void TimeRemainManege()
@@ -114,18 +115,18 @@ public class PlayerMove : MonoBehaviour
     {
         if (speedChangeTimeRemain <= 0f && Input.GetButtonDown(_speedUpButtonName)) {
             SpeedUp();
-            Debug.Log(gameObject.name + "が速度を" + _speedUpRate + "上げた。現在" + _period);
+            Debug.Log(gameObject.name + "が速度を上げた。現在" + period);
         }
 
         if (speedChangeTimeRemain <= 0f && Input.GetButtonDown(_speedDownButtonName)) {
             SpeedDown();
-            Debug.Log(gameObject.name + "が速度を" + _speedDownRate + "下げた。現在" + _period);
+            Debug.Log(gameObject.name + "が速度を下げた。現在" + period);
         }
     }
 
     private void MoveMent()
     {
-        angleAxis = Quaternion.AngleAxis(360 / _period * Time.deltaTime, rotateAxis);
+        angleAxis = Quaternion.AngleAxis(360 / period * Time.deltaTime, rotateAxis);
         Vector3 newPos = transform.position;
 
         newPos -= orbitOrigin.position;
@@ -235,7 +236,7 @@ public class PlayerMove : MonoBehaviour
                 rotateAxis = _rotateEarthAxis;
                 break;
             case OrbitOriginPlanet.Spica:
-                orbitOrigin = _spicaTransform;
+                orbitOrigin = _colonyTransform;
                 rotateAxis = _rotateSpicaAxis;
                 break;
             default:
@@ -247,20 +248,20 @@ public class PlayerMove : MonoBehaviour
 
     private void SpeedUp()
     {
-        _period -= _speedDownRate;
-        if (_period < _minPeriod) {
-            _period = _minPeriod;
+        if (++periodNum >= _periods.Length) {
+            periodNum = _periods.Length - 1;
         }
+        period = _periods[periodNum];
         _playerAnimation.Spiral();
         speedChangeTimeRemain = _speedChangeDelay;
     }
 
     private void SpeedDown()
     {
-        _period += _speedUpRate;
-        if(_maxPeriod < _period) {
-            _period = _maxPeriod;
+        if(--periodNum < 0) {
+            periodNum = 0;
         }
+        period = _periods[periodNum];
         _playerAnimation.AcrobatLoop();
         speedChangeTimeRemain = _speedChangeDelay;
     }    

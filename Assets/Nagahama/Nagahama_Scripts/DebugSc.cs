@@ -29,7 +29,7 @@ public class DebugSc : MonoBehaviour
             }
         }
 
-        // Lトリガー押しながらビューボタンでデバッグ用ポーズ
+        // Lトリガー押しながらビューボタンで操作説明非表示切り替え
         if ((Input.GetAxis("L_R_Trigger") <= -0.5f && Input.GetButtonDown("Reload")) || Input.GetKeyDown(KeyCode.U)) {
             if (isUIEnabled) {
                 UIRendererDisable();

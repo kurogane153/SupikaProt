@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class AsteroidScript : MonoBehaviour
 {
-    [SerializeField] private GameObject _explosionEffect;
+    [SerializeField] private GameObject _explosionEffect;   // 隕石消滅時爆発エフェクト
 
     [Space(10)]
-    [SerializeField] private float _destroyTime = 10f;
+    [SerializeField] private float _destroyTime = 10f;      // 自動消滅までの時間
     [SerializeField] private int _hp = 6;
     [SerializeField] private float _speed = 5f;
-    [SerializeField] private bool _isRotation = false;
-    [SerializeField] private Vector3 _rotationAxis;
-    [SerializeField] private float _rotationSpeed = 5f;
+    [SerializeField] private bool _isRotation = false;      // 浮遊中に隕石が自転するか
+    [SerializeField] private Vector3 _rotationAxis;         // 自転の回転軸
+    [SerializeField] private float _rotationSpeed = 5f;     // 回転速度
 
     [SerializeField] private Vector3 targetPosition = Vector3.zero;
 
     
-    private bool isMovePause;
+    private bool isMovePause;   // 惑星への接近を停止するか
 
     public bool IsMovePause
     {
@@ -31,17 +31,20 @@ public class AsteroidScript : MonoBehaviour
 
     #endregion
 
+    // 速度と接近対象位置を変更
     public void ChangeParam(float speed, Vector3 pos)
     {
         ChangeSpeed(speed);
         SetTargetPosition(pos);
     }
 
+    // 速度を変更
     public void ChangeSpeed(float speed)
     {
         _speed = speed;
     }
 
+    // 隕石にダメージを与える
     public void ReceiveDamage(int damage)
     {
         _hp -= damage;
@@ -59,6 +62,7 @@ public class AsteroidScript : MonoBehaviour
         }
     }
     
+    // 接近対象位置を変更
     public void SetTargetPosition(Vector3 pos)
     {
         targetPosition = pos;
@@ -79,16 +83,18 @@ public class AsteroidScript : MonoBehaviour
     {
         if (isMovePause) return;
 
+        // 地球に接近
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, _speed * Time.deltaTime);
 
         if (_isRotation) {
+            // 自転
             Quaternion rot = Quaternion.AngleAxis(_rotationSpeed, _rotationAxis);
             transform.rotation = transform.rotation * rot;
         }
 
     }
   
-
+    // 時間経過で自動消滅させる
     private IEnumerator AutoDestroy()
     {
         yield return new WaitForSeconds(_destroyTime);
@@ -99,6 +105,7 @@ public class AsteroidScript : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // 消滅時の処理まとめ
     private void SelfDestroy()
     {
         StopCoroutine(nameof(AutoDestroy));
@@ -111,10 +118,7 @@ public class AsteroidScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bullet")) {
-            //SelfDestroy();
-            //Debug.Log(gameObject.name + "が弾に当たって消滅した");
-        }
+        
     }    
 
     private void Dbg()

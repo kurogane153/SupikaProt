@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// カーソルを非表示にさせるためにスクリプト
 public class CursorLockManager : MonoBehaviour
 {
     private void Awake()
     {
         CursorLock();
-    }
-
-    private void Start()
-    {
         Application.targetFrameRate = 60;
     }
 
