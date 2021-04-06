@@ -15,8 +15,9 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 5f;     // 回転速度
 
     [SerializeField] private Vector3 targetPosition = Vector3.zero;
+    [SerializeField] private int _asteroidnumber = 0;
 
-    
+
     private bool isMovePause;   // 惑星への接近を停止するか
 
     public bool IsMovePause
@@ -55,9 +56,10 @@ public class AsteroidScript : MonoBehaviour
 
             GameClearOver_Process.GameClearCount++;
 
-            if (this.transform.localScale.x >= 1000) {
-                AsteroidWaveManager.Instansflg = true;
-                AsteroidWaveManager.InstantiatePosition = this.transform.position;
+            if (_asteroidnumber == AsteroidWaveManager._asteroidnum)
+            {
+                AsteroidWaveManager._instansflg = true;
+                AsteroidWaveManager._instantiatePosition = this.transform.position;
             }
         }
     }

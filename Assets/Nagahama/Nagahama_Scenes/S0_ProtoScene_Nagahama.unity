@@ -2387,17 +2387,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950959775}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebf58c024ff8c2549b6ffb0202c9cee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8072556475575391548, guid: 5ebd8dc719c0ca14283108719203924f,
+  _enemyPrefab: {fileID: 8072556475575391548, guid: 5ebd8dc719c0ca14283108719203924f,
     type: 3}
-  Spika: {fileID: 329334729}
-  Earth: {fileID: 897722549}
-  Spikaflg: 0
-  _spawnedAsteroidSpeed: 50
+  _selectPrefab: {fileID: 9029232486978480037, guid: 7a31abefc1ecad54c99bb32d7ad86569,
+    type: 3}
+  _spika: {fileID: 329334729}
+  _earth: {fileID: 897722549}
+  _spikaflg: 0
+  _spawnedAsteroidSpeed: 40
 --- !u!1 &955550759
 GameObject:
   m_ObjectHideFlags: 0
