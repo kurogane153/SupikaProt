@@ -33,6 +33,7 @@ public class ReticleController : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private GameObject _lockedOnReticlePrefab;
+    [SerializeField] private Button _firstSelectButton;
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private Color _lockOnColor;
     [SerializeField] private float _speedX = 1f;
@@ -78,6 +79,11 @@ public class ReticleController : MonoBehaviour
     public Canvas GetCanvas()
     {
         return canvas;
+    }
+
+    public void SelectFirstButton()
+    {
+        _firstSelectButton.Select();
     }
 
     private void Awake()
@@ -192,6 +198,25 @@ public class ReticleController : MonoBehaviour
 
         isBeforeTargeting = isNowTargeting;
 
+    }
+
+    public void SetTarget(Transform target)
+    {
+        TargetCollider targetCollider = target.GetComponent<TargetCollider>();
+
+        if (!targetCollider.IsLockedOn && generatedReticleCount < _generateReticleMax) {
+            targetCollider.IsLockedOn = true;
+
+            GameObject newLockonReticle = Instantiate(_lockedOnReticlePrefab, transform.position, Quaternion.identity);
+            LockedOnReticle lockedOnReticle = newLockonReticle.GetComponent<LockedOnReticle>();
+
+            lockedOnReticle.InstantiateSettings(canvas, target, _mainCamera);
+            GeneratedReticleCount += 1;
+
+            _soundPlayer.PlaySE(_se_LockOn);
+        }
+
+        TargetLockOnMove(target);
     }
 
     private bool IsNewScreenPositionScreenOutsite(Vector3 pos)

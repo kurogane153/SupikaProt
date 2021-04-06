@@ -89,3 +89,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c675c488edb07c44a2a5bd29f8b9235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetButtonPrefab: {fileID: 52382856474990220, guid: 6726b52a99ff5dc46b98bfcfb07842a5,
+    type: 3}

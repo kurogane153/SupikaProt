@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TargetCollider : MonoBehaviour
 {
+    [SerializeField] private GameObject _targetButtonPrefab;
+
     private AsteroidScript parentAsteroidSc;
     private bool isLockedOn;
     private bool beforeInScreenFlags;
@@ -43,6 +45,13 @@ public class TargetCollider : MonoBehaviour
         if (isNowInScreen != beforeInScreenFlags) {
             if (isNowInScreen) {
                 RectInAsteroidContainer.Instance.targetColliders.Add(this);
+
+                // スティックの動きでロックオン対象を変更するためのボタンプレハブを隕石の子要素に登録させる。
+                // canvasを親要素にさせる
+                GameObject buttonObj = Instantiate(_targetButtonPrefab, transform.position, Quaternion.identity);
+                buttonObj.transform.parent = ReticleController.Instance.GetCanvas().transform;
+                buttonObj.GetComponent<AsteroidSelectButton>().SetTooltipActive(true, transform);
+
                 Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListに追加された！" + mainCamera.WorldToViewportPoint(transform.position));
 
             } else {

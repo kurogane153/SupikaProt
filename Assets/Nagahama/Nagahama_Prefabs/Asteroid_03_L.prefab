@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _explosionEffect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
     type: 3}
-  _destroyTime: 45
+  _destroyTime: 270
   _hp: 100
   _speed: 50
   _isRotation: 0

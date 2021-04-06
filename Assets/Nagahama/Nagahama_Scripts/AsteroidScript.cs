@@ -102,6 +102,7 @@ public class AsteroidScript : MonoBehaviour
         foreach (var tarcol in targetColliders) {
             RectInAsteroidContainer.Instance.targetColliders.Remove(tarcol);
         }
+        ReticleController.Instance.SelectFirstButton();
         Destroy(gameObject);
     }
 
@@ -114,6 +115,7 @@ public class AsteroidScript : MonoBehaviour
             RectInAsteroidContainer.Instance.targetColliders.Remove(tarcol);
         }
         Destroy(gameObject);
+        ReticleController.Instance.SelectFirstButton();
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -6,16 +6,16 @@ using UnityEngine;
 public class HomingMissileScript : MonoBehaviour
 {
     [Header("音関係のフィールド")]
-    [SerializeField] private SoundPlayer _soundPlayer;
-    [SerializeField] private AudioClip _se_Explosion;
+    [SerializeField, Tooltip("子要素のAudioSource")] private SoundPlayer _soundPlayer;
+    [SerializeField, Tooltip("効果音_爆発")] private AudioClip _se_Explosion;
 
     [Header("爆発エフェクト"), Space(10)]
-    [SerializeField] private GameObject _explosionEffect;   // 消滅時爆発エフェクト
+    [SerializeField, Tooltip("爆発エフェクト")] private GameObject _explosionEffect;   // 消滅時爆発エフェクト
 
     [Space(10)]
-    [SerializeField] private float _destroyTime = 10f;      // 自動消滅までの時間
-    [SerializeField] private float _lockAtSpeed = 10f;      // ターゲットの方を向くスピード
-    [SerializeField] private bool _onTargetDestroySelfDestroy;  // 対象が消滅したときに自分も消滅するか
+    [SerializeField, Tooltip("自動消滅までの時間")] private float _destroyTime = 10f;      // 自動消滅までの時間
+    [SerializeField, Tooltip("ターゲットの方を向くスピード")] private float _lockAtSpeed = 10f;      // ターゲットの方を向くスピード
+    [SerializeField, Tooltip("対象が消滅したときに自分も即座に消滅するか")] private bool _selfDestroyOnTargetDestroy;  // 対象が消滅したときに自分も消滅するか
 
     private Transform targetTransform;
 
@@ -120,7 +120,7 @@ public class HomingMissileScript : MonoBehaviour
     // 対象が消滅していないか
     private void TargetDestroyedCheck()
     {
-        if(targetTransform == null && _onTargetDestroySelfDestroy) {
+        if(targetTransform == null && _selfDestroyOnTargetDestroy) {
             SelfDestroy();
         }
     }

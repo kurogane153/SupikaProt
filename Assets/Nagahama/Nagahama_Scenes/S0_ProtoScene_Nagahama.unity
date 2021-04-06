@@ -1829,6 +1829,11 @@ PrefabInstance:
       propertyPath: _killCameraPause
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2412486874701841780, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3520247187089437556, guid: c64002a477e84b047aded9c5b8441285,
         type: 3}
       propertyPath: _killCameraPause
@@ -2213,6 +2218,12 @@ Light:
   m_CorrespondingSourceObject: {fileID: 5118849827465686192, guid: 435c93045eb096b44994d7c2cbeef942,
     type: 3}
   m_PrefabInstance: {fileID: 5118849827901562410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &728992078 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7015361749751168581, guid: 82af22d6a7c795a42a0e738b02916d6c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7015361749085303401}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &845576047 stripped
 MonoBehaviour:
@@ -4738,7 +4749,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_ForceModuleActive: 1
 --- !u!114 &1724046100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4751,7 +4762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 728992078}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1724046101
@@ -5507,6 +5518,12 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!20 &2071430909 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6712438191241676570, guid: 519d9e5f37953274ebde284e2026baf0,
+    type: 3}
+  m_PrefabInstance: {fileID: 6712438191408480886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2077428503 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
@@ -6781,6 +6798,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5054093584554773743, guid: c09031e83fe7b6e4ba22ad22782021b9,
         type: 3}
+      propertyPath: _mainCamera
+      value: 
+      objectReference: {fileID: 2071430909}
+    - target: {fileID: 5054093584554773743, guid: c09031e83fe7b6e4ba22ad22782021b9,
+        type: 3}
       propertyPath: _playerMove
       value: 
       objectReference: {fileID: 1076666452}
@@ -7732,6 +7754,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Reticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749751168603, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _destroyOnScreenOut
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82af22d6a7c795a42a0e738b02916d6c, type: 3}

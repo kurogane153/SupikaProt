@@ -159,7 +159,13 @@ public class PlayerShot : MonoBehaviour
         //GetTargetAsteroid();
         GetTargetAsteroid_InRectVersion();
         Dbg();
-        _reticle.MoveReticle(Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroidCollider);
+
+        if(targetAsteroidCollider == null) {
+            _reticle.MoveReticle(Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroidCollider);
+        } else {
+            _reticle.MoveReticle(0, 0, targetAsteroidCollider);
+        }
+        
     }
 
     private void TimeRemainManege()
