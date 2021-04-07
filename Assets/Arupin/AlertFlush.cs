@@ -4,22 +4,34 @@ using UnityEngine.UI;
 public class AlertFlush : MonoBehaviour
 {
     Image img;
+    Animator anim;
 
     void Start()
     {
         img = GetComponent<Image>();
+        anim = GetComponent<Animator>();
         img.color = Color.clear;
+        anim.SetBool("AretKey", false);
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (AlertLine._alertflg)
         {
-            this.img.color = new Color(0.5f, 0f, 0f, 0.5f);
+            OnAlert();
         }
         else
         {
-            this.img.color = Color.Lerp(this.img.color, Color.clear, Time.deltaTime);
+            OffAlert();
         }
+    }
+
+    public void OnAlert()
+    {
+        anim.SetBool("AretKey", true);
+    }
+    public void OffAlert()
+    {
+        anim.SetBool("AretKey", false);
     }
 }
