@@ -127,11 +127,14 @@ public class ReticleController : MonoBehaviour
     {
         Rect rect = GetReticleRect();
         if (Input.GetKeyDown(KeyCode.P)) {
-            Debug.Log("<color=yellow>ReticleRect.X : " + rect.x + "</color>");
+            /* Debug.Log("<color=yellow>ReticleRect.X : " + rect.x + "</color>");
             Debug.Log("<color=yellow>ReticleRect.Y : " + rect.y + "</color>");
             Debug.Log("<color=yellow>ReticleRect.Width : " + rect.width + "</color>");
-            Debug.Log("<color=yellow>ReticleRect.Height : " + rect.height + "</color>");
-            
+            Debug.Log("<color=yellow>ReticleRect.Height : " + rect.height + "</color>"); */
+
+            Debug.Log("<color=yellow>GetReticlePos : " + _mainCamera.ScreenToViewportPoint(GetReticlePos()) + "</color>");
+
+
         }
 
         #region デバッグ用
@@ -170,9 +173,28 @@ public class ReticleController : MonoBehaviour
         bool isNowTargeting = false;
 
         if (target) {
-            image.color = _lockOnColor;
             newX /= _aimAssistDegreeX;
             newY /= _aimAssistDegreeY;
+        }
+
+        Vector3 movePos = new Vector3(newX, newY);
+        Vector3 newvec = Vector3.zero;
+
+        if (tmptarget && (Mathf.Abs(x) > _aimDeadZoneX || Mathf.Abs(y) > _aimDeadZoneY)) {
+            newvec = _mainCamera.WorldToScreenPoint(tmptarget.position) - rectTransform.position;
+            newvec.z = 0;
+            Debug.Log("<color=red>movePos : " + movePos + "</color>");
+            Debug.Log("<color=red>newvec : " + newvec.normalized * 10f + "</color>");
+        }
+
+        if (!IsNewScreenPositionScreenOutsite(rectTransform.position + movePos + newvec.normalized * 10f)) {
+            rectTransform.position += movePos + newvec.normalized * 10f;
+
+        }
+
+        if (target) {
+            image.color = _lockOnColor;
+            
 
             if (_lockOnTargetOnLockOnButtonDown && Input.GetButtonDown("LockOn")) {
                 isNowTargeting = true;
@@ -198,19 +220,10 @@ public class ReticleController : MonoBehaviour
                 }
             }
 
-        } else if(tmptarget) {
-            newX /= _aimAssistAcceleDegreeX;
-            newY /= _aimAssistAcceleDegreeY;
         } else {
             image.color = defaultColor;
             isNowTargeting = false;
-        }
-
-        Vector3 movePos = new Vector3(newX, newY);
-
-        if(!IsNewScreenPositionScreenOutsite(rectTransform.position + movePos)) {
-            rectTransform.position += movePos;
-        }
+        }        
 
         isBeforeTargeting = isNowTargeting;
 

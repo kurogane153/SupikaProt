@@ -6,7 +6,8 @@ public class TargetCollider : MonoBehaviour
 {
     [SerializeField] private GameObject _targetButtonPrefab;
     [SerializeField] private float _reticleRectSizeScaling = 1.2f;  // 2D矩形の大きさ
-    [SerializeField] private RectTransform _rectTransform;
+
+    private RectTransform _rectTransform;
 
     private AsteroidScript parentAsteroidSc;
     private bool isLockedOn;
@@ -58,6 +59,12 @@ public class TargetCollider : MonoBehaviour
                 buttonObj.GetComponent<AsteroidSelectButton>().SetTooltipActive(true, transform);
                 _rectTransform = buttonObj.GetComponent<RectTransform>();
 
+                Rect rect = GetReticleRect();
+                Debug.Log("<color=yellow>ReticleRect.X : " + rect.x + "</color>");
+                Debug.Log("<color=yellow>ReticleRect.Y : " + rect.y + "</color>");
+                Debug.Log("<color=yellow>ReticleRect.Width : " + rect.width + "</color>");
+                Debug.Log("<color=yellow>ReticleRect.Height : " + rect.height + "</color>");
+
                 if (ReticleController.Instance._userSuperAimAssistSystemFlags) {
                     
                 }                
@@ -95,6 +102,15 @@ public class TargetCollider : MonoBehaviour
         Rect rect = new Rect((Vector2)(_rectTransform.position / screensize) - (size * 0.5f), size * _reticleRectSizeScaling);
 
         return rect;
+    }
+
+    public bool IsExistsButtonRect()
+    {
+        if(_rectTransform == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private void OnDestroy()

@@ -91,3 +91,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetButtonPrefab: {fileID: 52382856474990220, guid: 6726b52a99ff5dc46b98bfcfb07842a5,
     type: 3}
+  _reticleRectSizeScaling: 2

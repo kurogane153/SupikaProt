@@ -394,10 +394,15 @@ public class PlayerShot : MonoBehaviour
 
     private void GetTargetAsteroid_InRectVersion()
     {
+        tmpTarget = null;
+        targetAsteroidCollider = null;
         //Rect rect = _reticle.GetReticleRect();
-
-
+        // 隕石コライダーがボタンレクト持ってなかったら飛ばす
+        // ボタンレクトを取得して、レティクルの座標がその範囲内に入っているか確認する
+        // 入っていたらエイムアシストオンにする
+        // さらにraycastがあたったらターゲットにする
         foreach (var tarcol in RectInAsteroidContainer.Instance.targetColliders) {
+            if (!tarcol.IsExistsButtonRect()) continue;
             Rect rect = tarcol.GetReticleRect();
             Vector3 viewportPos = _mainCamera.ScreenToViewportPoint(_reticle.GetReticlePos());
             Vector3 tarcolpos = _mainCamera.WorldToViewportPoint(tarcol.transform.position);
@@ -405,17 +410,24 @@ public class PlayerShot : MonoBehaviour
             if (rect.Contains(viewportPos) && 0f < tarcolpos.z) {
 
                 tmpTarget = tarcol.transform;
-                Ray ray = new Ray(transform.position, tarcol.transform.position - transform.position);
-                if(Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("AsteroidTargetCollider")) {
-                    targetAsteroidCollider = tarcol.transform;
-                    Debug.DrawRay(ray.origin, ray.direction * _laserLength, Color.green);
-                    Debug.Log("照準内に隕石コライダー発見");
-                    return;
+
+                rect = _reticle.GetReticleRect();
+
+                if (rect.Contains(tarcolpos) && 0f < tarcolpos.z) {
+                    Ray ray = new Ray(transform.position, tarcol.transform.position - transform.position);
+                    //Ray ray = _mainCamera.ScreenPointToRay(_reticle.GetReticlePos());
+                    if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("AsteroidTargetCollider")) {
+                        targetAsteroidCollider = tarcol.transform;
+                        Debug.DrawRay(ray.origin, ray.direction * _laserLength, Color.green);
+                        Debug.Log("照準内に隕石コライダー発見");
+                        return;
+                    }
                 }
+                   
             }
         }
 
-        targetAsteroidCollider = null;
+        
     }
 
     private void Dbg()
