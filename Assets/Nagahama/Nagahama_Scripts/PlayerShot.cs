@@ -49,7 +49,6 @@ public class PlayerShot : MonoBehaviour
     private PlayerMove playerMove;
     private Transform targetAsteroidCollider;
     private Transform confirmTarget;
-    private float shotTimeRemain;
     private float missileShotTimeRemain;
 
     #region デバッグ用変数
@@ -158,26 +157,35 @@ public class PlayerShot : MonoBehaviour
         TimeRemainManege();
         //GetTargetAsteroid();
         GetTargetAsteroid_InRectVersion();
-        Dbg();
+        //Dbg();
 
-        if(targetAsteroidCollider == null) {
-            _reticle.MoveReticle(Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroidCollider);
+        if (ReticleController.Instance._userSuperAimAssistSystemFlags) {
+            // 強力エイムアシスト機能がオンのとき
+
+            if (targetAsteroidCollider == null) {
+                _reticle.MoveReticle(Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroidCollider);
+            } else {
+                _reticle.MoveReticle(0, 0, targetAsteroidCollider);
+            }
+
         } else {
-            _reticle.MoveReticle(0, 0, targetAsteroidCollider);
-        }
+            // 強力エイムアシスト機能がOFFのとき
+
+            if (targetAsteroidCollider == null) {
+                _reticle.MoveReticle(Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroidCollider);
+            }
+        }        
         
     }
 
     private void TimeRemainManege()
     {
-        if (0f < shotTimeRemain) {
-            shotTimeRemain -= Time.deltaTime;
-        }
-
+        // 次弾発射までのクールダウン
         if (0f < missileShotTimeRemain) {
             missileShotTimeRemain -= Time.deltaTime;
         }
 
+        // リロードシステムがオフのときは以下の処理は行わない
         if (!_reloadFlags) return;
 
         // 自動リロード弾切れ時
@@ -187,6 +195,7 @@ public class PlayerShot : MonoBehaviour
             }
         }
 
+        // リロードの残り時間
         if (0f < reloadTimeRemain) {
             reloadTimeRemain -= Time.deltaTime;
             _reticle._missileGuage.fillAmount = (_reloadTime - reloadTimeRemain) / _reloadTime;

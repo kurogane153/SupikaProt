@@ -45,7 +45,7 @@ public class LockedOnReticle : MonoBehaviour
         Target = target;
         mainCamera = maincamera;
 
-        transform.parent = canvas.transform;
+        transform.SetParent(canvas.transform);
     }
 
     private void TargetLockOnMove()

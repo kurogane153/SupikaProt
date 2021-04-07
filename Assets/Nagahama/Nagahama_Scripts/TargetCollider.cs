@@ -48,9 +48,12 @@ public class TargetCollider : MonoBehaviour
 
                 // スティックの動きでロックオン対象を変更するためのボタンプレハブを隕石の子要素に登録させる。
                 // canvasを親要素にさせる
-                GameObject buttonObj = Instantiate(_targetButtonPrefab, transform.position, Quaternion.identity);
-                buttonObj.transform.parent = ReticleController.Instance.GetCanvas().transform;
-                buttonObj.GetComponent<AsteroidSelectButton>().SetTooltipActive(true, transform);
+                // 強力エイムアシスト機能がオンの状態のときのみ処理する
+                if (ReticleController.Instance._userSuperAimAssistSystemFlags) {
+                    GameObject buttonObj = Instantiate(_targetButtonPrefab, transform.position, Quaternion.identity);
+                    buttonObj.transform.SetParent(ReticleController.Instance.GetCanvas().transform, false);
+                    buttonObj.GetComponent<AsteroidSelectButton>().SetTooltipActive(true, transform);
+                }                
 
                 Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListに追加された！" + mainCamera.WorldToViewportPoint(transform.position));
 

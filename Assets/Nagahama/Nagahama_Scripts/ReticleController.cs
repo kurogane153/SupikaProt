@@ -24,7 +24,10 @@ public class ReticleController : MonoBehaviour
         }
     }
     #endregion
-    [Header("リロード")]
+    [Header("デバッグ用")]
+    [SerializeField] public bool _debug;
+
+    [Header("リロード"), Space(10)]
     [SerializeField] public Image _missileGuage;
 
     [Header("サウンド系"), Space(10)]
@@ -50,6 +53,9 @@ public class ReticleController : MonoBehaviour
 
     [Header("無操作時ターゲットを追跡する"), Space(10)]
     [SerializeField] public bool _targetLockonmoveFlags;
+
+    [Header("Unityのボタン選択の挙動を利用したロックオンシステム"), Space(10)]
+    [SerializeField] public bool _userSuperAimAssistSystemFlags;
 
     private Canvas canvas;
     private RectTransform canvasRectTransform;
@@ -128,13 +134,18 @@ public class ReticleController : MonoBehaviour
 
         #region デバッグ用
         // Lトリガー押しながら
-        if (Input.GetAxis("L_R_Trigger") >= 0.5f && Input.GetButtonDown("LockOn")) {
+        if (_debug && Input.GetAxis("L_R_Trigger") >= 0.5f && Input.GetButtonDown("LockOn")) {
             _lockOnTargetOnLockOnButtonDown = !_lockOnTargetOnLockOnButtonDown;
         }
 
         // Rトリガー押しながら
-        if (Input.GetAxis("L_R_Trigger") <= -0.5f && Input.GetButtonDown("LockOn")) {
+        if (_debug && Input.GetAxis("L_R_Trigger") <= -0.5f && Input.GetButtonDown("LockOn")) {
             _targetLockonmoveFlags = !_targetLockonmoveFlags;
+        }
+
+        // Rトリガー押しながら
+        if (_debug && Input.GetAxis("L_R_Trigger") <= -0.5f && Input.GetButtonDown("OrbitOriginChange")) {
+            _userSuperAimAssistSystemFlags = !_userSuperAimAssistSystemFlags;
         }
 
         #endregion
@@ -251,7 +262,7 @@ public class ReticleController : MonoBehaviour
         Vector2 rectsize = rectTransform.rect.size;
         Vector2 screensize = new Vector2(Screen.width, Screen.height);
 
-        Vector2 size = Vector2.Scale(rectTransform.rect.size / screensize, rectTransform.localScale);
+        Vector2 size = Vector2.Scale(rectsize / screensize, rectTransform.localScale);
         Rect rect = new Rect((Vector2)(rectTransform.position / screensize) - (size * 0.5f), size * _reticleRectSizeScaling);
 
         return rect;
