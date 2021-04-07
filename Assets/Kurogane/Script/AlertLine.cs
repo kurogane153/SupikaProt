@@ -22,6 +22,7 @@ public class AlertLine : MonoBehaviour
 
     [Header("ArertTextObject")]
     public GameObject ArertText = null; // Textオブジェクト
+    public static bool _alertflg;
 
     private Text ArertMessage;
 
@@ -39,17 +40,10 @@ public class AlertLine : MonoBehaviour
 
     }
 
-    void Update()
-    {
-
-
-    }
-
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Asteroid")
         {
-            Debug.Log("隕石だああああああああああああうわああああああああああああああ");
             DelayMethod();
             ArertText.SetActive(true);
         }
@@ -57,6 +51,7 @@ public class AlertLine : MonoBehaviour
 
     void DelayMethod()
     {
+        _alertflg = true;
         if (Spikaflg)
         {
             ArertMessage.text = "コロニーに隕石接近";
@@ -70,6 +65,8 @@ public class AlertLine : MonoBehaviour
 
     void ArertFalse()
     {
+        _alertflg = false;
         ArertText.SetActive(false);
     }
+
 }
