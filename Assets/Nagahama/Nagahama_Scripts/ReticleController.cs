@@ -44,6 +44,8 @@ public class ReticleController : MonoBehaviour
     [SerializeField] private float _reticleRectSizeScaling = 1.2f;
     [SerializeField] private float _aimAssistDegreeX = 3;
     [SerializeField] private float _aimAssistDegreeY = 3;
+    [SerializeField] private float _aimAssistAcceleDegreeX = 3;
+    [SerializeField] private float _aimAssistAcceleDegreeY = 3;
     [SerializeField] private float _aimDeadZoneX = 0.2f;
     [SerializeField] private float _aimDeadZoneY = 0.2f;
     [SerializeField] private int _generateReticleMax = 3;
@@ -157,7 +159,7 @@ public class ReticleController : MonoBehaviour
         
     }
 
-    public void MoveReticle(float x, float y, Transform target = null)
+    public void MoveReticle(float x, float y, Transform target = null, Transform tmptarget = null)
     {   
         if (_targetLockonmoveFlags && target && Mathf.Abs(x) < _aimDeadZoneX && Mathf.Abs(y) < _aimDeadZoneY) {
             TargetLockOnMove(target);
@@ -196,6 +198,9 @@ public class ReticleController : MonoBehaviour
                 }
             }
 
+        } else if(tmptarget) {
+            newX /= _aimAssistAcceleDegreeX;
+            newY /= _aimAssistAcceleDegreeY;
         } else {
             image.color = defaultColor;
             isNowTargeting = false;

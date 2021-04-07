@@ -49,6 +49,7 @@ public class PlayerShot : MonoBehaviour
     private PlayerMove playerMove;
     private Transform targetAsteroidCollider;
     private Transform confirmTarget;
+    private Transform tmpTarget;
     private float missileShotTimeRemain;
 
     #region デバッグ用変数
@@ -171,9 +172,7 @@ public class PlayerShot : MonoBehaviour
         } else {
             // 強力エイムアシスト機能がOFFのとき
 
-            if (targetAsteroidCollider == null) {
-                _reticle.MoveReticle(Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroidCollider);
-            }
+            _reticle.MoveReticle(Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroidCollider, tmpTarget);
         }        
         
     }
@@ -395,13 +394,17 @@ public class PlayerShot : MonoBehaviour
 
     private void GetTargetAsteroid_InRectVersion()
     {
-        Rect rect = _reticle.GetReticleRect();
+        //Rect rect = _reticle.GetReticleRect();
+
 
         foreach (var tarcol in RectInAsteroidContainer.Instance.targetColliders) {
-            Vector3 viewportPos = _mainCamera.WorldToViewportPoint(tarcol.transform.position);
+            Rect rect = tarcol.GetReticleRect();
+            Vector3 viewportPos = _mainCamera.ScreenToViewportPoint(_reticle.GetReticlePos());
+            Vector3 tarcolpos = _mainCamera.WorldToViewportPoint(tarcol.transform.position);
 
-            if (rect.Contains(viewportPos) && 0f < viewportPos.z) {
+            if (rect.Contains(viewportPos) && 0f < tarcolpos.z) {
 
+                tmpTarget = tarcol.transform;
                 Ray ray = new Ray(transform.position, tarcol.transform.position - transform.position);
                 if(Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("AsteroidTargetCollider")) {
                     targetAsteroidCollider = tarcol.transform;

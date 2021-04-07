@@ -13,11 +13,12 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField] private bool _isRotation = false;      // 浮遊中に隕石が自転するか
     [SerializeField] private Vector3 _rotationAxis;         // 自転の回転軸
     [SerializeField] private float _rotationSpeed = 5f;     // 回転速度
+    
 
     [SerializeField] private Vector3 targetPosition = Vector3.zero;
     [SerializeField] private int _asteroidnumber = 0;
 
-
+    
     private bool isMovePause;   // 惑星への接近を停止するか
 
     public bool IsMovePause
@@ -95,7 +96,9 @@ public class AsteroidScript : MonoBehaviour
         }
 
     }
-  
+
+    
+
     // 時間経過で自動消滅させる
     private IEnumerator AutoDestroy()
     {
