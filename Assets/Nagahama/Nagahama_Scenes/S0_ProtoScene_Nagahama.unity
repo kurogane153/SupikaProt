@@ -1840,6 +1840,11 @@ PrefabInstance:
       propertyPath: _killCameraPause
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5910420717883754056, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5910420717885757576, guid: c64002a477e84b047aded9c5b8441285,
         type: 3}
       propertyPath: m_Name
@@ -4887,7 +4892,7 @@ PrefabInstance:
     - target: {fileID: 4652410217915762485, guid: 9be8b172db3968646b0ec70bf86e4a32,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4652410217915762490, guid: 9be8b172db3968646b0ec70bf86e4a32,
         type: 3}
@@ -6675,16 +6680,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5150451266749802096, guid: d93b3bdea398b344b8780824a0695eff,
+        type: 3}
+      propertyPath: m_TagString
+      value: Earth
+      objectReference: {fileID: 0}
     - target: {fileID: 5150451266749893708, guid: d93b3bdea398b344b8780824a0695eff,
         type: 3}
       propertyPath: m_Name
       value: Spica
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150451266749896438, guid: d93b3bdea398b344b8780824a0695eff,
+        type: 3}
+      propertyPath: m_TagString
+      value: Earth
       objectReference: {fileID: 0}
     - target: {fileID: 5150451266751013020, guid: d93b3bdea398b344b8780824a0695eff,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1959548754}
+    - target: {fileID: 6356724228067497024, guid: d93b3bdea398b344b8780824a0695eff,
+        type: 3}
+      propertyPath: m_TagString
+      value: Earth
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2026933532578039370, guid: d93b3bdea398b344b8780824a0695eff, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d93b3bdea398b344b8780824a0695eff, type: 3}
@@ -7947,6 +7967,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7015361749325490769, guid: 82af22d6a7c795a42a0e738b02916d6c,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490769, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490769, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -8008,17 +8038,42 @@ PrefabInstance:
     - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
         type: 3}
       propertyPath: _speedX
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
         type: 3}
       propertyPath: _speedY
-      value: 30
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _mainCamera
+      value: 
+      objectReference: {fileID: 2071430909}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _aimAssistDegreeX
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _aimAssistDegreeY
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _aimAssistIntensity
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _aimSpeedDecreaseTime
+      value: 0.28
       objectReference: {fileID: 0}
     - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
         type: 3}
       propertyPath: _targetLockonmoveFlags
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
         type: 3}
@@ -8039,6 +8094,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Reticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749751168580, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749751168580, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749751168580, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749751168580, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749751168581, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749751168601, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7015361749751168603, guid: 82af22d6a7c795a42a0e738b02916d6c,
         type: 3}
@@ -8074,6 +8159,10 @@ PrefabInstance:
       propertyPath: _killCamera
       value: 
       objectReference: {fileID: 341082016}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _mainCamera
+      value: 
+      objectReference: {fileID: 2071430909}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _reloadTime
       value: 3

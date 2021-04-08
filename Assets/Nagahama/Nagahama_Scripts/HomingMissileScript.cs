@@ -108,6 +108,15 @@ public class HomingMissileScript : MonoBehaviour
     // 対象が消失したときの挙動
     private void NonTargetMove()
     {
+        impactTime -= Time.deltaTime;
+
+        // 命中までの時間になったらその位置についているので対象にダメージを与えて自分は消滅する
+        if (impactTime < 0f) {
+            StopCoroutine(nameof(AutoDestroy));
+            SelfDestroy();
+            return;
+        }
+
         velocity += lastAcceleration * Time.fixedDeltaTime;
         position += velocity * Time.fixedDeltaTime;
 

@@ -27,7 +27,7 @@ public class ReticleController : MonoBehaviour
     [Header("デバッグ用")]
     [SerializeField] public bool _debug;
 
-    [Header("リロード"), Space(10)]
+    [Header("リロードゲージUI"), Space(10)]
     [SerializeField] public Image _missileGuage;
 
     [Header("サウンド系"), Space(10)]
@@ -42,10 +42,10 @@ public class ReticleController : MonoBehaviour
     [SerializeField] private float _speedX = 1f;
     [SerializeField] private float _speedY = 1f;
     [SerializeField] private float _reticleRectSizeScaling = 1.2f;
-    [SerializeField] private float _aimAssistDegreeX = 3;
-    [SerializeField] private float _aimAssistDegreeY = 3;
-    [SerializeField] private float _aimAssistAcceleDegreeX = 3;
-    [SerializeField] private float _aimAssistAcceleDegreeY = 3;
+    [SerializeField] private float _aimAssistDegreeX = 3f;
+    [SerializeField] private float _aimAssistDegreeY = 3f;
+    [SerializeField] private float _aimSpeedDecreaseTime = 0.16f;   // 隕石のロックオン時に一瞬だけ操作不能になる時間
+    [SerializeField] private float _aimAssistIntensity = 10f;
     [SerializeField] private float _aimDeadZoneX = 0.2f;
     [SerializeField] private float _aimDeadZoneY = 0.2f;
     [SerializeField] private int _generateReticleMax = 3;
@@ -63,7 +63,9 @@ public class ReticleController : MonoBehaviour
     private RectTransform canvasRectTransform;
     private RectTransform rectTransform;
     private Image image;
+    private Transform tmpTarget;
     private Color defaultColor;
+    private float canNotReticleMoveTime;
     private bool isBeforeTargeting;
     private int generatedReticleCount;
 
@@ -133,8 +135,6 @@ public class ReticleController : MonoBehaviour
             Debug.Log("<color=yellow>ReticleRect.Height : " + rect.height + "</color>"); */
 
             Debug.Log("<color=yellow>GetReticlePos : " + _mainCamera.ScreenToViewportPoint(GetReticlePos()) + "</color>");
-
-
         }
 
         #region デバッグ用
@@ -159,50 +159,65 @@ public class ReticleController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        TimeRemainManege();
     }
 
-    public void MoveReticle(float x, float y, Transform target = null, Transform tmptarget = null)
+    private void TimeRemainManege()
+    {
+        // 照準操作が一瞬だけできなくなる時間
+        if(0 < canNotReticleMoveTime) {
+            canNotReticleMoveTime -= Time.deltaTime;
+            if(canNotReticleMoveTime <= 0) {
+                tmpTarget = null;
+            }
+        }
+    }
+
+    public void MoveReticle(float x, float y, Transform target = null, Transform aimassisttarget = null)
     {   
+       
+        if (0 < canNotReticleMoveTime) {
+            x = 0;
+            y = 0;
+        }
+
         if (_targetLockonmoveFlags && target && Mathf.Abs(x) < _aimDeadZoneX && Mathf.Abs(y) < _aimDeadZoneY) {
             TargetLockOnMove(target);
+        }
+        
+        Vector3 newvec = Vector3.zero;
+
+        if (aimassisttarget && (Mathf.Abs(x) > _aimDeadZoneX || Mathf.Abs(y) > _aimDeadZoneY || 0 < canNotReticleMoveTime)) {
+            newvec = _mainCamera.WorldToScreenPoint(aimassisttarget.position) - rectTransform.position;
+            newvec.z = 0;
+            newvec = newvec.normalized;
+
         }
 
         float newX = x * _speedX;
         float newY = y * _speedY;
         bool isNowTargeting = false;
 
-        if (target) {
+        if (aimassisttarget) {
             newX /= _aimAssistDegreeX;
             newY /= _aimAssistDegreeY;
         }
 
         Vector3 movePos = new Vector3(newX, newY);
-        Vector3 newvec = Vector3.zero;
 
-        if (tmptarget && (Mathf.Abs(x) > _aimDeadZoneX || Mathf.Abs(y) > _aimDeadZoneY)) {
-            newvec = _mainCamera.WorldToScreenPoint(tmptarget.position) - rectTransform.position;
-            newvec.z = 0;
-            Debug.Log("<color=red>movePos : " + movePos + "</color>");
-            Debug.Log("<color=red>newvec : " + newvec.normalized * 10f + "</color>");
-        }
-
-        if (!IsNewScreenPositionScreenOutsite(rectTransform.position + movePos + newvec.normalized * 10f)) {
-            rectTransform.position += movePos + newvec.normalized * 10f;
-
+        if (!IsNewScreenPositionScreenOutsite(rectTransform.position + movePos + newvec * _aimAssistIntensity)) {
+            rectTransform.position += movePos + newvec * _aimAssistIntensity;
+            Debug.Log("<color=yellow>^p^newvec : " + newvec + "</color>");
         }
 
         if (target) {
             image.color = _lockOnColor;
-            
 
             if (_lockOnTargetOnLockOnButtonDown && Input.GetButtonDown("LockOn")) {
                 isNowTargeting = true;
             } else if(!_lockOnTargetOnLockOnButtonDown){
                 isNowTargeting = true;
-            }
-
-            
+            }            
 
             if(isNowTargeting && !isBeforeTargeting) {
                 TargetCollider targetCollider = target.GetComponent<TargetCollider>();
@@ -216,6 +231,9 @@ public class ReticleController : MonoBehaviour
                     lockedOnReticle.InstantiateSettings(canvas, target, _mainCamera);
                     GeneratedReticleCount += 1;
 
+                    canNotReticleMoveTime = _aimSpeedDecreaseTime;
+                    tmpTarget = target;
+
                     _soundPlayer.PlaySE(_se_LockOn);
                 }
             }
@@ -223,7 +241,11 @@ public class ReticleController : MonoBehaviour
         } else {
             image.color = defaultColor;
             isNowTargeting = false;
-        }        
+        }
+
+        if(0 < canNotReticleMoveTime && tmpTarget) {
+            TargetLockOnMove(tmpTarget);
+        }
 
         isBeforeTargeting = isNowTargeting;
 
