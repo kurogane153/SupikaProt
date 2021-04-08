@@ -28,6 +28,8 @@ public class AlertLine : MonoBehaviour
 
     void Start()
     {
+
+        _alertflg = false;
         if (Spikaflg)
         {
             this.transform.position = Spika.transform.position;
