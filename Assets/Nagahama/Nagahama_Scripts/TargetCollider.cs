@@ -46,14 +46,14 @@ public class TargetCollider : MonoBehaviour
         bool isNowInScreen = IsScreenPositionScreenInsite();
 
         if (isNowInScreen != beforeInScreenFlags) {
+            
             if (isNowInScreen) {
+                // 画面内に収まった1回目だけ処理します
                 RectInAsteroidContainer.Instance.targetColliders.Add(this);
 
-                // スティックの動きでロックオン対象を変更するためのボタンプレハブを隕石の子要素に登録させる。
+                // エイムアシスト用のボタンプレハブを隕石の子要素に登録させる。
                 // canvasを親要素にさせる
-                // 強力エイムアシスト機能がオンの状態のときのみ処理する
 
-                // 2021/4/7　池村先生の仕様書に合わせるために一時的にif文の外に置く。
                 GameObject buttonObj = Instantiate(_targetButtonPrefab, transform.position, Quaternion.identity);
                 buttonObj.transform.SetParent(ReticleController.Instance.GetCanvas().transform, false);
                 buttonObj.GetComponent<AsteroidSelectButton>().SetTooltipActive(true, transform);
@@ -65,13 +65,10 @@ public class TargetCollider : MonoBehaviour
                 Debug.Log("<color=yellow>ReticleRect.Width : " + rect.width + "</color>");
                 Debug.Log("<color=yellow>ReticleRect.Height : " + rect.height + "</color>");
 
-                if (ReticleController.Instance._userSuperAimAssistSystemFlags) {
-                    
-                }                
-
                 Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListに追加された！" + mainCamera.WorldToViewportPoint(transform.position));
 
             } else {
+                // 画面外に出たとき1回目だけ処理ます
                 RectInAsteroidContainer.Instance.targetColliders.Remove(this);
                 Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListから削除された……");
             }
@@ -81,6 +78,7 @@ public class TargetCollider : MonoBehaviour
         beforeInScreenFlags = isNowInScreen;
     }
 
+    // 画面内に収まっているか返します
     private bool IsScreenPositionScreenInsite()
     {
         Rect rect = new Rect(0, 0, 1, 1);
@@ -104,6 +102,7 @@ public class TargetCollider : MonoBehaviour
         return rect;
     }
 
+    // ボタンUIがあるかを返します
     public bool IsExistsButtonRect()
     {
         if(_rectTransform == null) {

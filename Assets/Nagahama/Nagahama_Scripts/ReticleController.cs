@@ -81,6 +81,11 @@ public class ReticleController : MonoBehaviour
         }
     }
 
+    public bool IsCanNotReticleMoveTime
+    {
+        get { return 0 < canNotReticleMoveTime; }
+    }
+
     public int GenerateReticleMax
     {
         get { return _generateReticleMax; }
@@ -181,13 +186,13 @@ public class ReticleController : MonoBehaviour
             y = 0;
         }
 
-        if (_targetLockonmoveFlags && target && Mathf.Abs(x) < _aimDeadZoneX && Mathf.Abs(y) < _aimDeadZoneY) {
+        if (0 < canNotReticleMoveTime &&_targetLockonmoveFlags && target && Mathf.Abs(x) < _aimDeadZoneX && Mathf.Abs(y) < _aimDeadZoneY) {
             TargetLockOnMove(target);
         }
         
         Vector3 newvec = Vector3.zero;
 
-        if (aimassisttarget && (Mathf.Abs(x) > _aimDeadZoneX || Mathf.Abs(y) > _aimDeadZoneY || 0 < canNotReticleMoveTime)) {
+        if (aimassisttarget && (Mathf.Abs(x) > _aimDeadZoneX || Mathf.Abs(y) > _aimDeadZoneY)) {
             newvec = _mainCamera.WorldToScreenPoint(aimassisttarget.position) - rectTransform.position;
             newvec.z = 0;
             newvec = newvec.normalized;
@@ -244,7 +249,7 @@ public class ReticleController : MonoBehaviour
         }
 
         if(0 < canNotReticleMoveTime && tmpTarget) {
-            TargetLockOnMove(tmpTarget);
+            //TargetLockOnMove(tmpTarget);
         }
 
         isBeforeTargeting = isNowTargeting;

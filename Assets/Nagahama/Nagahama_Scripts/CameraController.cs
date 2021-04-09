@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Vector3[] _positionOffset;
     [SerializeField] private Vector3[] _rotationOffset;
     [SerializeField] private float _lerpFactor = 6;
+    [SerializeField] private float _rotLerpFactor = 3;
 
     private PlayerMove pm;
 
@@ -29,6 +30,6 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * _lerpFactor);
 
         Vector3 desiredRotation = _player.rotation.eulerAngles + _rotationOffset[(int)pm.OriginPlanet];
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(desiredRotation), Time.deltaTime * _lerpFactor);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(desiredRotation), Time.deltaTime * _rotLerpFactor);
     }
 }

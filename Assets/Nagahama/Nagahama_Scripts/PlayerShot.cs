@@ -54,6 +54,7 @@ public class PlayerShot : MonoBehaviour
 
     #region デバッグ用変数
     [Watch, HideInInspector] public string _dbg_targetAsteroid = "None";
+    [Watch, HideInInspector] public string _dbg_tmptarget = "None";
 
     #endregion
 
@@ -158,7 +159,7 @@ public class PlayerShot : MonoBehaviour
         TimeRemainManege();
         //GetTargetAsteroid();
         GetTargetAsteroid_InRectVersion();
-        //Dbg();
+        Dbg();
 
         if (ReticleController.Instance._userSuperAimAssistSystemFlags) {
             // 強力エイムアシスト機能がオンのとき
@@ -395,14 +396,20 @@ public class PlayerShot : MonoBehaviour
     private void GetTargetAsteroid_InRectVersion()
     {
         tmpTarget = null;
-        targetAsteroidCollider = null;
+        
+        // レティクルが一時的に操作不能になっているかロックオン数が最大値に達していたら新規でターゲットを探索しない
+        if (_reticle.IsCanNotReticleMoveTime || _reticle.GeneratedReticleCount >= _reticle.GenerateReticleMax) {
+            return;
+        }
 
+        targetAsteroidCollider = null;
         //Rect rect = _reticle.GetReticleRect();
         // 隕石コライダーがボタンレクト持ってなかったら飛ばす
         // ボタンレクトを取得して、レティクルの座標がその範囲内に入っているか確認する
         // 入っていたらエイムアシストオンにする
         // さらにraycastがあたったらターゲットにする
         foreach (var tarcol in RectInAsteroidContainer.Instance.targetColliders) {
+            
             if (!tarcol.IsExistsButtonRect()) continue;
             if (tarcol.IsLockedOn) continue;
             
@@ -411,26 +418,35 @@ public class PlayerShot : MonoBehaviour
             Vector3 reticleviewportPos = _mainCamera.ScreenToViewportPoint(_reticle.GetReticlePos());
             Vector3 tarcolviewportpos = _mainCamera.WorldToViewportPoint(tarcol.transform.position);
 
-            Ray ray = new Ray(transform.position, tarcol.transform.position - transform.position);
-            //Ray ray = _mainCamera.ScreenPointToRay(_reticle.GetReticlePos());
-
-            if (!Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("AsteroidTargetCollider")) {
-                continue;
-            }
-
+            // レティクルの真ん中の座標点が隕石のエイムアシスト範囲内かを判断します。
             if (rect.Contains(reticleviewportPos) && 0f < tarcolviewportpos.z) {
 
+                Ray ray = new Ray(transform.position, tarcol.transform.position - transform.position);  // プレイヤーの位置から対象の位置までのレイです
+                //Ray ray = _mainCamera.ScreenPointToRay(_reticle.GetReticlePos()); // レティクルの真ん中からそのワールド座標までのレイです
+
+                // プレイヤーの位置から対象にレイキャストを飛ばし、
+                //当たったコライダーのタグが隕石コライダー以外であれば、今回のループを飛ばして次の物の参照に行きます。
+                if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && !hit.transform.CompareTag("AsteroidTargetCollider")) {
+                    continue;
+                }
+                Debug.DrawRay(ray.origin, ray.direction * _laserLength, Color.green);
+                Debug.Log("照準内に隕石コライダー発見");
+
+                // 隕石がすでにロックオンされていたら、エイムアシストの対象にしません。
                 if (!tarcol.IsLockedOn) {
                     tmpTarget = tarcol.transform;
                 }
                 
                 rect = _reticle.GetReticleRect();
 
+                // 隕石コライダーの真ん中の座標点がレティクルの画像の範囲内かを判断します。
                 if (rect.Contains(tarcolviewportpos) && 0f < tarcolviewportpos.z) {
+                    // ここまで来たら、プレイヤーが狙っているものとし、ターゲットに設定します。
                     targetAsteroidCollider = tarcol.transform;
-                    Debug.DrawRay(ray.origin, ray.direction * _laserLength, Color.green);
-                    Debug.Log("照準内に隕石コライダー発見");
-                    continue;
+                    tmpTarget = null;
+
+                    // それがターゲットだと確定したので、処理を抜けます。
+                    return;
                 }
             }
         }        
@@ -446,23 +462,17 @@ public class PlayerShot : MonoBehaviour
         // _dbg_targetAsteroid = "None";
         //}
 
-        Rect rect = _reticle.GetReticleRect();
-
-        foreach (var ast in RectInAsteroidContainer.Instance.targetColliders) {
-            Vector3 viewportPos = _mainCamera.WorldToViewportPoint(ast.transform.position);
-
-            if (rect.Contains(viewportPos) && 0f < viewportPos.z) {
-
-                Ray ray = new Ray(transform.position, ast.transform.position - transform.position);
-                if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("AsteroidTargetCollider")) {
-                    _dbg_targetAsteroid = targetAsteroidCollider.name;
-                    return;
-                }
-
-            }
+        if (targetAsteroidCollider) {
+            _dbg_targetAsteroid = targetAsteroidCollider.root.name;
+        } else {
+            _dbg_targetAsteroid = "Null";
         }
 
-        _dbg_targetAsteroid = "None";
+        if (tmpTarget) {
+            _dbg_tmptarget = tmpTarget.root.name;
+        } else {
+            _dbg_tmptarget = "Null";
+        }
 
     }
 }

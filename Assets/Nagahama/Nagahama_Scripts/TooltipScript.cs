@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class TooltipScript : MonoBehaviour
 {
-    [SerializeField] private Vector2 _offset;
-    [SerializeField] private Transform _target;
-    [SerializeField] private bool _destroyOnScreenOut;
-    [SerializeField] private bool _destroyOnTimeOver;
-    [SerializeField] private float _destroyTime;
+    [SerializeField, Tooltip("オフのときはOffsetの位置に固定されターゲットに追従しません")] private bool _targetFollowFlag;
+    [SerializeField, Tooltip("オフセット")] private Vector2 _offset;
+    [SerializeField, Tooltip("追従するターゲット")] private Transform _target;
+    [SerializeField, Tooltip("画面外に出たときに削除します")] private bool _destroyOnScreenOut;
+    [SerializeField, Tooltip("指定の時間が経過したときに削除します")] private bool _destroyOnTimeOver;
+    [SerializeField, Tooltip("削除するまでの時間")] private float _destroyTime;
 
     private Canvas canvas;
     private RectTransform canvasRectTransform;
@@ -25,6 +26,7 @@ public class TooltipScript : MonoBehaviour
             Debug.Log(gameObject.name + "が_targetをFindで取得した");
         }
 
+        // 指定の時間が経過したときに削除するフラグがオンの場合、自動破壊コルーチンを実行します
         if (_destroyOnTimeOver) {
             StartCoroutine(nameof(AutoDestroy));
         }
@@ -35,6 +37,7 @@ public class TooltipScript : MonoBehaviour
         if (_target != null) {
             TargetLockOnMove();
         } else {
+            // 画面外に出たときに削除するフラグがオンの場合、削除します
             if (_destroyOnScreenOut) {
                 Destroy(gameObject);
             }
@@ -46,10 +49,13 @@ public class TooltipScript : MonoBehaviour
         Vector3 newPoint = Camera.main.WorldToScreenPoint(_target.position);
         Rect rect = new Rect(0, 0, 1, 1);
 
-        if (rect.Contains(Camera.main.WorldToViewportPoint(_target.position))) {
+        // ターゲットが画面内にいるときかつ追従フラグがオンのときに座標を更新します
+        if (_targetFollowFlag && rect.Contains(Camera.main.WorldToViewportPoint(_target.position))) {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, newPoint, canvas.worldCamera, out Vector2 newPos);
             rectTransform.localPosition = newPos + _offset;
+
         } else {
+            // 画面外に出たときに削除するフラグがオンの場合、削除します
             if (_destroyOnScreenOut) {
                 DestroyProcess();
             }
@@ -62,11 +68,14 @@ public class TooltipScript : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // 参照先に、このツールチップがアクティブかどうか返します
     public bool GetTooltipActiveSelf()
     {
         return gameObject.activeSelf;
     }
 
+    // このツールチップのアクティブ状況を変更します
+    // canvasの参照が取れていない場合はStartを呼び出し初期化を済ませます
     public void SetTooltipActive(bool flag)
     {
         gameObject.SetActive(flag);
