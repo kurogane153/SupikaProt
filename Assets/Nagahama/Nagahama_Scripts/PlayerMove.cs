@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField] private PlayerAnimation _playerAnimation;
     [SerializeField] private CameraController _mainCameraController;
+    [SerializeField] private RadialBlur _mainCameraRadialBlur;
 
     [Space(10)]
     [SerializeField, Tooltip("地球")] private Transform _earthTransform;
@@ -86,6 +87,11 @@ public class PlayerMove : MonoBehaviour
         if (_mainCameraController == null) {
             _mainCameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
             Debug.Log(gameObject.name + "が_mainCameraControllerをFindで取得した");
+        }
+
+        if (_mainCameraRadialBlur == null) {
+            _mainCameraRadialBlur = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RadialBlur>();
+            Debug.Log(gameObject.name + "が_mainCameraRadialBlurをFindで取得した");
         }
 
         OrbitVarChange();
@@ -262,9 +268,15 @@ public class PlayerMove : MonoBehaviour
 
     private void SpeedUp()
     {
+        int beforennum = periodNum;
         if (++periodNum >= _periods.Length) {
             periodNum = _periods.Length - 1;
         }
+
+        if(beforennum != periodNum && periodNum == _periods.Length - 1) {
+            _mainCameraRadialBlur.EnableRadialBlur();
+        }
+
         period = _periods[periodNum];
         _playerAnimation.Spiral();
         speedChangeTimeRemain = _speedChangeDelay;
@@ -272,9 +284,16 @@ public class PlayerMove : MonoBehaviour
 
     private void SpeedDown()
     {
-        if(--periodNum < 0) {
+        int beforennum = periodNum;
+
+        if (--periodNum < 0) {
             periodNum = 0;
         }
+
+        if (beforennum != periodNum && beforennum == _periods.Length - 1) {
+            _mainCameraRadialBlur.DisableRadialBlur();
+        }
+
         period = _periods[periodNum];
         _playerAnimation.AcrobatLoop();
         speedChangeTimeRemain = _speedChangeDelay;

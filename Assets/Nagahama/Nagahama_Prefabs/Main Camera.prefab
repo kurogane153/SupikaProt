@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6712438191241676570}
   - component: {fileID: 6712438191241676573}
   - component: {fileID: 6712438191241676572}
+  - component: {fileID: 5653100032212224630}
   - component: {fileID: 1332817175}
   - component: {fileID: 609716114416226856}
   m_Layer: 8
@@ -111,6 +112,21 @@ MonoBehaviour:
   _orbitShiftPostionLerpFactor: 2
   _orbitShiftRotationLerpFactor: 2
   _orbitShiftDelayTime: 7
+--- !u!114 &5653100032212224630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6712438191241676574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b824c2648ce12f469b57f0fed2429ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shader: {fileID: 4800000, guid: c09ef855bec33c6439a0ee830bfcff70, type: 3}
+  _sampleCount: 8
+  _strength: 0.5
 --- !u!114 &1332817175
 MonoBehaviour:
   m_ObjectHideFlags: 0
