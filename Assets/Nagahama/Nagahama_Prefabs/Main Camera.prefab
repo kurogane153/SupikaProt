@@ -101,12 +101,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _positionOffset:
-  - {x: -5, y: 30, z: 5}
+  - {x: -5, y: 30, z: 65}
   - {x: 5, y: 30, z: 5}
   _rotationOffset:
   - {x: 9.19, y: 20, z: 3.29}
   - {x: 9.19, y: -20, z: 3.29}
   _lerpFactor: 4
+  _rotLerpFactor: 4
+  _orbitShiftPostionLerpFactor: 2
+  _orbitShiftRotationLerpFactor: 2
+  _orbitShiftDelayTime: 7
 --- !u!114 &1332817175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 6712438191241676575}
+  volumeTrigger: {fileID: 0}
   volumeLayer:
     serializedVersion: 2
     m_Bits: 7937

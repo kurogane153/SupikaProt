@@ -1564,29 +1564,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerAnimation: {fileID: 6295996902850967912}
+  _mainCameraController: {fileID: 0}
   _earthTransform: {fileID: 0}
-  _spicaTransform: {fileID: 0}
+  _colonyTransform: {fileID: 0}
   _orbitOriginPlanet: 0
   _rotateEarthAxis: {x: 0, y: 1, z: 0}
   _rotateSpicaAxis: {x: 0, y: -1, z: 0}
   _speedUpButtonName: SpeedUp
   _speedDownButtonName: SpeedDown
-  _maxDistance: 457
-  _period: 30
-  _speedUpRate: 5
-  _speedDownRate: 5
-  _maxPeriod: 30
-  _minPeriod: 5
-  _speedChangeDelay: 2
+  _maxDistances:
+  - 2010
+  - 990
+  _minDistances:
+  - 1010
+  - 990
+  _startPeriod: 25
+  _periods:
+  - 25
+  - 16
+  - 9.5
+  _speedChangeDelay: 1.7
   _isUpdateRotation: 1
   _orbitShiftTooltip: {fileID: 0}
   _orbitOriginChangeButtonName: OrbitOriginChange
   _orbitOriginChangeCanMinAngle:
-  - 220
-  - 269
+  - 180
+  - 268
   _orbitOriginChangeCanMaxAngle:
-  - 269
-  - 320
+  - 268
+  - 360
   _lagrangePointMinAngle:
   - 269
   - 269
@@ -1610,10 +1616,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _reloadFlags: 0
-  _autoReloadFlags: 0
-  _reloadTime: 0
-  _missileMaxNum: 0
-  _consumptionPerShot: 0
+  _autoReloadFlags: 1
+  _reloadTime: 3
+  _missileMaxNum: 6
+  _consumptionPerShot: 1
   _reloadButtonName: Reload
   _playerAnimation: {fileID: 6295996902850967912}
   _soundPlayer: {fileID: 8727766401157852106}
@@ -1625,7 +1631,7 @@ MonoBehaviour:
   _reticle: {fileID: 0}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 10240
   _launchPoint: {fileID: 492295706}
   _laserLength: 10000
   _aimXAxisName: Aim-Horizontal
@@ -1633,8 +1639,8 @@ MonoBehaviour:
   _missileFireButtonName: PlayerFire
   _missilePrefab: {fileID: 3643294739846692036, guid: 6bd3158bc74d06f47b5a320173da873b,
     type: 3}
-  _missileShotPower: 175
-  _missileShotDelay: 0.5
+  _missileShotPower: 220
+  _missileShotDelay: 2.5
   _multiTargetMissileDelay: 0.35
   _missileDamage: 18
   _halfwayPoints:
@@ -1645,12 +1651,12 @@ MonoBehaviour:
   - {fileID: 11474569}
   - {fileID: 635081676}
   _impactTimes:
-  - 2
-  - 2.01
-  - 2.02
-  - 2.03
-  - 2.04
-  - 2.05
+  - 1.4
+  - 1.41
+  - 1.42
+  - 1.43
+  - 1.44
+  - 1.45
   _instantiateTimes:
   - 0.1
   - 0.15
@@ -1659,6 +1665,7 @@ MonoBehaviour:
   - 0.3
   - 0.35
   _dbg_targetAsteroid: None
+  _dbg_tmptarget: None
 --- !u!114 &4099869561920642162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1666,7 +1673,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7809379644624649669}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59c570e6f762f794e919621f0856d894, type: 3}
   m_Name: 

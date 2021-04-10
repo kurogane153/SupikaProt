@@ -4,6 +4,29 @@ using UnityEngine;
 
 public class PlayerShot : MonoBehaviour
 {
+
+    [System.Serializable]
+    public class MissileShotSettings
+    {
+        [SerializeField, Tooltip("ミサイルの発射時初速")] 
+        public float[] _missileShotPower;
+
+        [SerializeField, Tooltip("次回発射までのクールタイム")]
+        public float _missileShotDelay;
+
+        [SerializeField, Tooltip("複数ターゲット発射時、次ターゲット発射までの待機時間")]
+        public float _multiTargetMissileDelay;
+
+        [SerializeField, Tooltip("ミサイルの発射方向")]
+        public Transform[] _halfwayPoints;
+
+        [SerializeField, Tooltip("着弾までの時間")]
+        public float[] _impactTimes;
+
+        [SerializeField, Tooltip("発射してから生成までの待機時間")]
+        public float[] _instantiateTimes;
+    }
+
     [Header("リロード")]
     [SerializeField] public bool _reloadFlags;
     [SerializeField] public bool _autoReloadFlags;
@@ -38,13 +61,18 @@ public class PlayerShot : MonoBehaviour
 
     [Header("ミサイルの設定"), Space(10)]
     [SerializeField] private GameObject _missilePrefab;
-    [SerializeField] private float _missileShotPower = 100f;
-    [SerializeField] private float _missileShotDelay = 0.5f;
-    [SerializeField] private float _multiTargetMissileDelay = 0.1f;
+    //[SerializeField] private float _missileShotPower = 100f;
+    //[SerializeField] private float _missileShotDelay = 0.5f;
+    //[SerializeField] private float _multiTargetMissileDelay = 0.1f;
     [SerializeField] private int _missileDamage = 1;
-    [SerializeField] private Transform[] _halfwayPoints;
-    [SerializeField] private float[] _impactTimes;
-    [SerializeField] private float[] _instantiateTimes;
+
+    [SerializeField, Tooltip("デフォルトのミサイル設定")] private int _defaultSettingsNumber;
+    [SerializeField, Tooltip("キルカメラ時ミサイル設定")] private int _killCamSettingsNumber;
+    [SerializeField] private MissileShotSettings[] _missileShotSettings;
+
+    //[SerializeField] private Transform[] _halfwayPoints;
+    //[SerializeField] private float[] _impactTimes;
+    //[SerializeField] private float[] _instantiateTimes;
 
     private PlayerMove playerMove;
     private Transform targetAsteroidCollider;
@@ -108,13 +136,6 @@ public class PlayerShot : MonoBehaviour
     {
         // ターゲットを捉えているときに発射ボタンを押すと、そのターゲットを「確定したターゲット」として
         // confirmTargetに格納します。
-        //if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f && targetAsteroid != null) {
-        //confirmTarget = targetAsteroid;
-        //MultiStageFire();
-        //MultiTargetFire();
-        //Debug.Log(gameObject.name + "がミサイルを発射した");
-        //}
-
         
         if (_reloadFlags) {
             // リロードありバージョン
@@ -126,20 +147,23 @@ public class PlayerShot : MonoBehaviour
 
             // リロード中でない、弾が残っていれば発射
             if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f && reloadTimeRemain <= 0f && 0 < missileNum) {
+                int arynum = Random.Range(0, _missileShotSettings.Length - 1);
                 confirmTarget = targetAsteroidCollider;
-                //MultiStageFire();
-                MultiTargetFire();
+                MultiTargetFire(arynum);
             }
+
         } else {
             // リロード無しバージョン
             if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f) {
+                
+                int arynum = Random.Range(0, _missileShotSettings.Length - 1);
                 confirmTarget = targetAsteroidCollider;
-                //MultiStageFire();
-                MultiTargetFire();
+                MultiTargetFire(arynum);
             }
         }
 
-        // リロード用　あとで消すこと
+        // リロード用　あとで消すこと リロードシステムのオンオフをゲーム中に変更できる
+        /*
         if (Input.GetAxis("D_Pad_V") > 0.5f) {
             _reloadFlags = true;
             _reticle._missileGuage.gameObject.SetActive(true);
@@ -150,14 +174,13 @@ public class PlayerShot : MonoBehaviour
             _reticle._missileGuage.gameObject.SetActive(false);
             reloadTimeRemain = 0f;
             missileNum = 6;
-        }
+        } */
 
     }
 
     private void FixedUpdate()
     {
         TimeRemainManege();
-        //GetTargetAsteroid();
         GetTargetAsteroid_InRectVersion();
         Dbg();
 
@@ -206,131 +229,40 @@ public class PlayerShot : MonoBehaviour
     }
 
     /// <summary>
-    /// 多段発射ミサイル。
-    /// </summary>
-    private void MultiStageFire()
-    {
-        if(_halfwayPoints.Length != _impactTimes.Length) {
-            Debug.LogError(nameof(_halfwayPoints) + "の要素数が、" + nameof(_impactTimes) + "の要素数と同じになっていません。");
-            return;
-        }
-
-        if (_halfwayPoints.Length != _instantiateTimes.Length) {
-            Debug.LogError(nameof(_halfwayPoints) + "の要素数が、" + nameof(_instantiateTimes) + "の要素数と同じになっていません。");
-            return;
-        }
-
-        int i = 0;
-
-        foreach(var hp in _halfwayPoints) {
-            StartCoroutine(MissileInstantiate(i++));
-        }
-
-        missileShotTimeRemain += _missileShotDelay;
-    }
-
-    /// <summary>
     /// 複数ターゲット指定して多段発射
     /// </summary>
-    private void MultiTargetFire()
+    private void MultiTargetFire(int arynum)
     {
+        int num = arynum;
         LockedOnReticle[] reticles = FindObjectsOfType<LockedOnReticle>();
+
         if(reticles.Length == 0) {
             Debug.Log(nameof(LockedOnReticle) + "が一つも無かった");
             return;
         }
 
-        if (_halfwayPoints.Length != _impactTimes.Length) {
-            Debug.LogError(nameof(_halfwayPoints) + "の要素数が、" + nameof(_impactTimes) + "の要素数と同じになっていません。");
-            return;
-        }
+        // キルカメラ発動可能数なら、キルカメラ用の番号を起動する
+        if (reticles.Length >= _killCameraActiveCount) {
+            num = _killCamSettingsNumber;
+        } else {
+            // そうでない場合にキルカメラ用の番号になっていたら、
+            // 0番にする
+            if(num == _killCamSettingsNumber) {
+                num = _defaultSettingsNumber;
+            }
+        }        
 
-        if (_halfwayPoints.Length != _instantiateTimes.Length) {
-            Debug.LogError(nameof(_halfwayPoints) + "の要素数が、" + nameof(_instantiateTimes) + "の要素数と同じになっていません。");
-            return;
-        }
+        StartCoroutine(MultiTargetMissileInstantiate(reticles, num));
 
-        StartCoroutine(MultiTargetMissileInstantiate(reticles));
-
-        missileShotTimeRemain += _missileShotDelay;
+        missileShotTimeRemain += _missileShotSettings[num]._missileShotDelay;
 
         Debug.Log(gameObject.name + "がミサイルを発射した");
     }
 
-    /// <summary>
-    /// 一度に複数回呼び出すとき用
-    /// </summary>
-    /// <param name="halfwaypoint">ミサイルが一度通過する中間地点</param>
-    /// <param name="impacttime">着弾するまでの時間</param>
-    private void MissileShot(Transform halfwaypoint, float impacttime)
-    {
-        GameObject missile = Instantiate(_missilePrefab, _launchPoint.position, Quaternion.identity);
-        HomingMissileScript homingMissileScript = missile.GetComponent<HomingMissileScript>();
-
-        homingMissileScript.LaunchMissile(confirmTarget, halfwaypoint, impacttime, halfwaypoint.position - _launchPoint.position, _missileShotPower, _missileDamage);
-
-        _soundPlayer.PlaySE(_se_MissileLaunch);
-    }
-
-    /// <summary>
-    /// 一回だけ呼び出すとき用
-    /// </summary>
-    /// <param name="halfwaypoint">ミサイルが一度通過する中間地点</param>
-    /// <param name="impacttime">着弾するまでの時間</param>
-    /// <param name="delaytime">発射ディレイ</param>
-    private void MissileShot(Transform halfwaypoint, float impacttime, float delaytime)
-    {
-        GameObject missile = Instantiate(_missilePrefab, _launchPoint.position, Quaternion.identity);
-        HomingMissileScript homingMissileScript = missile.GetComponent<HomingMissileScript>();
-
-        homingMissileScript.LaunchMissile(confirmTarget, halfwaypoint, impacttime, halfwaypoint.position - _launchPoint.position, _missileShotPower, _missileDamage);
-
-        missileShotTimeRemain += _missileShotDelay;
-
-        _soundPlayer.PlaySE(_se_MissileLaunch);
-    }
-
-    /// <summary>
-    /// 複数呼び出すときのターゲット指定版
-    /// </summary>
-    /// <param name="target">ターゲットのTransform</param>
-    /// <param name="halfwaypoint">ミサイルが一度通過する中間地点</param>
-    /// <param name="impacttime">着弾するまでの時間</param>
-    private GameObject MissileShot(Transform target, Transform halfwaypoint, float impacttime)
-    {
-        GameObject missile = Instantiate(_missilePrefab, _launchPoint.position, Quaternion.identity);
-        HomingMissileScript homingMissileScript = missile.GetComponent<HomingMissileScript>();
-
-        homingMissileScript.LaunchMissile(target, halfwaypoint, impacttime, _launchPoint.position - halfwaypoint.position, _missileShotPower, _missileDamage);
-
-        _soundPlayer.PlaySE(_se_MissileLaunch);
-
-        return missile;
-    }
-
-    private IEnumerator MissileInstantiate(int index)
-    {
-        yield return new WaitForSeconds(_instantiateTimes[index]);
-        MissileShot(_halfwayPoints[index], _impactTimes[index]);
-
-    }
-
-    private IEnumerator MissileInstantiate(Transform target, int index, int count, bool islastinstantiate)
-    {
-        yield return new WaitForSeconds(_instantiateTimes[index]);
-        GameObject missile = MissileShot(target, _halfwayPoints[index], _impactTimes[index]);
-
-        if(islastinstantiate && index == _halfwayPoints.Length - 1) {
-            
-            _killCamera.SetFollowMissile(missile);
-            
-        }
-    }
-
-    private IEnumerator MultiTargetMissileInstantiate(LockedOnReticle[] reticles)
+    private IEnumerator MultiTargetMissileInstantiate(LockedOnReticle[] reticles, int arynum)
     {
 
-        if(reticles.Length >= _killCameraActiveCount) {
+        if (reticles.Length >= _killCameraActiveCount) {
             KillCameraActiveProcess();
         }
 
@@ -344,7 +276,7 @@ public class PlayerShot : MonoBehaviour
             if (_reloadFlags) {
                 missileNum -= _consumptionPerShot;
                 _reticle._missileGuage.fillAmount = (float)missileNum / _missileMaxNum;
-                
+
             }
 
             count++;
@@ -355,12 +287,12 @@ public class PlayerShot : MonoBehaviour
             } else {
                 isLastInstantiate = (count == reticles.Length);
             }
-            
 
-            foreach (var hp in _halfwayPoints) {
-                StartCoroutine(MissileInstantiate(tgt.Target, i++, count, isLastInstantiate));
+
+            foreach (var hp in _missileShotSettings[arynum]._halfwayPoints) {
+                StartCoroutine(MissileInstantiate(tgt.Target, i++, count, isLastInstantiate, arynum));
             }
-            yield return new WaitForSeconds(_multiTargetMissileDelay);
+            yield return new WaitForSeconds(_missileShotSettings[arynum]._multiTargetMissileDelay);
             i = 0;
 
             // リロード用
@@ -368,7 +300,37 @@ public class PlayerShot : MonoBehaviour
                 yield break;
             }
         }
-        
+
+    }
+
+    private IEnumerator MissileInstantiate(Transform target, int index, int count, bool islastinstantiate, int arynum)
+    {
+        yield return new WaitForSeconds(_missileShotSettings[arynum]._instantiateTimes[index]);
+        GameObject missile = MissileShot(target, _missileShotSettings[arynum]._halfwayPoints[index], _missileShotSettings[arynum]._impactTimes[index], index, arynum);
+
+        if (islastinstantiate && index == _missileShotSettings[arynum]._halfwayPoints.Length - 1) {
+
+            _killCamera.SetFollowMissile(missile);
+
+        }
+    }
+
+    /// <summary>
+    /// 複数呼び出すときのターゲット指定版
+    /// </summary>
+    /// <param name="target">ターゲットのTransform</param>
+    /// <param name="halfwaypoint">ミサイルが一度通過する中間地点</param>
+    /// <param name="impacttime">着弾するまでの時間</param>
+    private GameObject MissileShot(Transform target, Transform halfwaypoint, float impacttime, int index, int arynum)
+    {
+        GameObject missile = Instantiate(_missilePrefab, _launchPoint.position, Quaternion.identity);
+        HomingMissileScript homingMissileScript = missile.GetComponent<HomingMissileScript>();
+
+        homingMissileScript.LaunchMissile(target, halfwaypoint, impacttime, _launchPoint.position - halfwaypoint.position, _missileShotSettings[arynum]._missileShotPower[index], _missileDamage);
+
+        _soundPlayer.PlaySE(_se_MissileLaunch);
+
+        return missile;
     }
 
     public void KillCameraActiveProcess()
@@ -376,21 +338,6 @@ public class PlayerShot : MonoBehaviour
         _killCamera.KillCameraActive();
         enabled = false;
 
-    }
-
-    private void GetTargetAsteroid()
-    {
-        Ray ray = _mainCamera.ScreenPointToRay(_reticle.GetReticlePos());
-
-        if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
-            targetAsteroidCollider = hit.transform;
-            
-        } else {
-            targetAsteroidCollider = null;
-            
-        }
-
-        //Debug.DrawRay(ray.origin, ray.direction * _laserLength, Color.green);
     }
 
     private void GetTargetAsteroid_InRectVersion()
@@ -404,6 +351,7 @@ public class PlayerShot : MonoBehaviour
 
         targetAsteroidCollider = null;
         //Rect rect = _reticle.GetReticleRect();
+
         // 隕石コライダーがボタンレクト持ってなかったら飛ばす
         // ボタンレクトを取得して、レティクルの座標がその範囲内に入っているか確認する
         // 入っていたらエイムアシストオンにする
@@ -454,14 +402,6 @@ public class PlayerShot : MonoBehaviour
 
     private void Dbg()
     {
-        //Ray ray = _mainCamera.ScreenPointToRay(_reticle.GetReticlePos());
-
-        // if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, _laserLength, _layerMask) && hit.transform.CompareTag("Asteroid")) {
-        //_dbg_targetAsteroid = targetAsteroid.name;
-        //} else {
-        // _dbg_targetAsteroid = "None";
-        //}
-
         if (targetAsteroidCollider) {
             _dbg_targetAsteroid = targetAsteroidCollider.root.name;
         } else {

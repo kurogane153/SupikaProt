@@ -7,10 +7,11 @@ public class PlayerMove : MonoBehaviour
 {
     public enum OrbitOriginPlanet
     {
-        Earth, Spica
+        Earth, Colony
     }
 
     [SerializeField] private PlayerAnimation _playerAnimation;
+    [SerializeField] private CameraController _mainCameraController;
 
     [Space(10)]
     [SerializeField, Tooltip("地球")] private Transform _earthTransform;
@@ -82,21 +83,29 @@ public class PlayerMove : MonoBehaviour
             Debug.Log(gameObject.name + "がSpicaをFindで取得した");
         }
 
-        OrbitVarChange();
+        if (_mainCameraController == null) {
+            _mainCameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+            Debug.Log(gameObject.name + "が_mainCameraControllerをFindで取得した");
+        }
 
+        OrbitVarChange();
         
     }
 
     void Update()
     {
-        SpeedControllInput();
-        AcceptOrbitOriginChange();
-        TimeRemainManege();
-        MoveMent();
-        UpdateNowAngle();
-        FixDistance();
-        OrbitShift();
-        Dbg();
+        SpeedControllInput();       // 速度変更操作を受け付けます
+        AcceptOrbitOriginChange();  // 軌道変更操作を受け付けます
+
+        TimeRemainManege();         // クールタイムなどが0より上の数値なら減らします
+
+        MoveMent();                 // プレイヤーの移動処理
+        UpdateNowAngle();           // プレイヤーの回転処理
+
+        FixDistance();              // 惑星の原点との距離が設定した値以上、また以下のとき、設定した値まで戻します
+        OrbitShift();               // 軌道を変更します
+
+        Dbg();                      // デバッグ用変数表示を更新します
     }
 
     private void FixedUpdate()
@@ -191,7 +200,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     /// <summary>
-    /// 現在の軌道原点が地球ならスピカに、スピカなら地球に変更する。
+    /// 現在の軌道原点が地球ならスピカに、コロニーなら地球に変更する。
     /// ここでは変更したいという操作だけ受け付けておき、実際に変更するのは
     /// ラグランジュポイントに到達してから。
     /// </summary>
@@ -199,9 +208,9 @@ public class PlayerMove : MonoBehaviour
     {
         switch (_orbitOriginPlanet) {
             case OrbitOriginPlanet.Earth:
-                _orbitOriginPlanet = OrbitOriginPlanet.Spica;
+                _orbitOriginPlanet = OrbitOriginPlanet.Colony;
                 break;
-            case OrbitOriginPlanet.Spica:
+            case OrbitOriginPlanet.Colony:
                 _orbitOriginPlanet = OrbitOriginPlanet.Earth;
                 break;
             default:
@@ -234,14 +243,19 @@ public class PlayerMove : MonoBehaviour
             case OrbitOriginPlanet.Earth:
                 orbitOrigin = _earthTransform;
                 rotateAxis = _rotateEarthAxis;
+                _mainCameraController.SetOrbitShiftRotWaitTime();
                 break;
-            case OrbitOriginPlanet.Spica:
+
+            case OrbitOriginPlanet.Colony:
                 orbitOrigin = _colonyTransform;
                 rotateAxis = _rotateSpicaAxis;
+                _mainCameraController.SetOrbitShiftRotWaitTime();
                 break;
+
             default:
                 orbitOrigin = _earthTransform;
                 rotateAxis = _rotateEarthAxis;
+                _mainCameraController.SetOrbitShiftRotWaitTime();
                 break;
         }
     }

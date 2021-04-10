@@ -20,8 +20,8 @@ public class DebugSc : MonoBehaviour
             DebugCamera.Instance.IsEnable = !DebugCamera.Instance.IsEnable;
         }
 
-        // Lトリガー押しながらビューボタンでデバッグ用ポーズ
-        if ((Input.GetAxis("L_R_Trigger") <= -0.5f && Input.GetButtonDown("DebugPause")) || Input.GetButtonDown("DebugPause_TAB")) {
+        // Menuーボタンでデバッグ用ポーズ
+        if (Input.GetButtonDown("Pause") || Input.GetButtonDown("DebugPause_TAB")) {
             if (Pauser.isPaused) {
                 Pauser.Resume();
             } else {
