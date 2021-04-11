@@ -61,24 +61,18 @@ public class PlayerShot : MonoBehaviour
 
     [Header("ミサイルの設定"), Space(10)]
     [SerializeField] private GameObject _missilePrefab;
-    //[SerializeField] private float _missileShotPower = 100f;
-    //[SerializeField] private float _missileShotDelay = 0.5f;
-    //[SerializeField] private float _multiTargetMissileDelay = 0.1f;
     [SerializeField] private int _missileDamage = 1;
-
+    [SerializeField, Tooltip("初回発射時の設定番号")] private int _firstShotNumber = 0;
     [SerializeField, Tooltip("デフォルトのミサイル設定")] private int _defaultSettingsNumber;
     [SerializeField, Tooltip("キルカメラ時ミサイル設定")] private int _killCamSettingsNumber;
     [SerializeField] private MissileShotSettings[] _missileShotSettings;
-
-    //[SerializeField] private Transform[] _halfwayPoints;
-    //[SerializeField] private float[] _impactTimes;
-    //[SerializeField] private float[] _instantiateTimes;
 
     private PlayerMove playerMove;
     private Transform targetAsteroidCollider;
     private Transform confirmTarget;
     private Transform tmpTarget;
     private float missileShotTimeRemain;
+    private bool isFirstShot;
 
     #region デバッグ用変数
     [Watch, HideInInspector] public string _dbg_targetAsteroid = "None";
@@ -157,6 +151,10 @@ public class PlayerShot : MonoBehaviour
             if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f) {
                 
                 int arynum = Random.Range(0, _missileShotSettings.Length - 1);
+                if(isFirstShot) {
+                    arynum = _firstShotNumber;
+                    isFirstShot = true;
+                }
                 confirmTarget = targetAsteroidCollider;
                 MultiTargetFire(arynum);
             }
