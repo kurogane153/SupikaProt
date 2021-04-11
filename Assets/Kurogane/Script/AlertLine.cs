@@ -24,6 +24,8 @@ public class AlertLine : MonoBehaviour
     public GameObject ArertText = null; // Textオブジェクト
     public static bool _alertflg;
 
+    private GameObject _asteroid;
+
     private Text ArertMessage;
 
     void Start()
@@ -48,6 +50,7 @@ public class AlertLine : MonoBehaviour
         {
             DelayMethod();
             ArertText.SetActive(true);
+            _asteroid = collision.gameObject;
         }
     }
 
@@ -71,4 +74,13 @@ public class AlertLine : MonoBehaviour
         ArertText.SetActive(false);
     }
 
+    public Vector3 GetAsteroid()
+    {
+        return _asteroid.transform.position;
+    }
+
+    public bool GetArertFlg()
+    {
+        return _alertflg;
+    }
 }
