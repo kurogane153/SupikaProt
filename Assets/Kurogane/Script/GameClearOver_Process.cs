@@ -9,6 +9,7 @@ public class GameClearOver_Process : MonoBehaviour
 
     private int GameOverCount = 0;
     public static int GameClearCount = 0;
+    public static bool isclear = false;
 
     public GameObject GameOverCountText = null; // Textオブジェクト
     public GameObject GameOverText = null; // Textオブジェクト
@@ -59,14 +60,17 @@ public class GameClearOver_Process : MonoBehaviour
     {
         if(GameOverCount >= GameOverAsteroid)
         {
-            GameOverText.SetActive(true);
-            Invoke("DelayMethod", GameOverReloadTime);
+            SceneManager.LoadScene("Result");
+            //GameOverText.SetActive(true);
+            ///Invoke("DelayMethod", GameOverReloadTime);
         }
 
         if(GameClearCount >= GameClearAsteroid)
         {
-            GameClearText.SetActive(true);
-            Invoke("DelayMethod", GameOverReloadTime);
+            isclear = true;
+            SceneManager.LoadScene("Result");
+            //GameClearText.SetActive(true);
+            //Invoke("DelayMethod", GameOverReloadTime);
         }
 
         //Debug.Log(GameClearCount);
