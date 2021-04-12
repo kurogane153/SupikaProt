@@ -5,10 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Funakoshi/Title.unity
     guid: e8f18d4e0e18bba469db4e52285d2204
   - enabled: 1
     path: Assets/Nagahama/Nagahama_Scenes/S0_ProtoScene_Nagahama.unity
     guid: 0829a95ebc0cb7340b509ae1a871d028
+  - enabled: 1
+    path: Assets/Funakoshi/Result.unity
+    guid: 74439468d40f4b442ab501d4e5ab405f
   m_configObjects: {}
