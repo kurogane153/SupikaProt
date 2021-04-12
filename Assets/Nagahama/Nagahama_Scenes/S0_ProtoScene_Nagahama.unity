@@ -263,6 +263,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 474060}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &14345738 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5805898576826070347, guid: f6de751e9dcc43646b9cbbaa467344ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7810902951316145010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &20271542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1157,6 +1163,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6839bfc4f2aad8479f80cb121781e9b, type: 3}
+--- !u!4 &192779337 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6020830563285086905, guid: f6de751e9dcc43646b9cbbaa467344ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7810902951316145010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &226417542
 GameObject:
   m_ObjectHideFlags: 0
@@ -2092,6 +2104,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7133d005bba5bfb4ab29c729d8f33769, type: 3}
+--- !u!4 &607758485 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1882815346740872123, guid: f6de751e9dcc43646b9cbbaa467344ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7810902951316145010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &619668830
 GameObject:
   m_ObjectHideFlags: 0
@@ -2498,6 +2516,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00,
     type: 3}
   m_PrefabInstance: {fileID: 6582865642158403310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &908822390 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1989233753077198271, guid: f6de751e9dcc43646b9cbbaa467344ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7810902951316145010}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &950959775 stripped
 GameObject:
@@ -4884,6 +4908,12 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!4 &1497027483 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6986393336351031686, guid: f6de751e9dcc43646b9cbbaa467344ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7810902951316145010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1498046869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
@@ -7182,6 +7212,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2115219952}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &2137848228 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4260591576279911603, guid: f6de751e9dcc43646b9cbbaa467344ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7810902951316145010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &585389089260820440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9333,12 +9369,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2071430909}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _firstShotNumber
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _defaultSettingsNumber
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _killCamSettingsNumber
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[0]._missileShotDelay
@@ -9346,6 +9390,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._missileShotDelay
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._missileShotDelay
       value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
@@ -9357,6 +9405,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._impactTimes.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[0]._multiTargetMissileDelay
       value: 0.35
       objectReference: {fileID: 0}
@@ -9365,11 +9417,19 @@ PrefabInstance:
       value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._multiTargetMissileDelay
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[0]._halfwayPoints.Array.size
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._halfwayPoints.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._halfwayPoints.Array.size
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
@@ -9421,6 +9481,30 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._impactTimes.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._impactTimes.Array.data[1]
+      value: 3.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._impactTimes.Array.data[2]
+      value: 3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._impactTimes.Array.data[3]
+      value: 3.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._impactTimes.Array.data[4]
+      value: 3.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._impactTimes.Array.data[5]
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[0]._halfwayPoints.Array.data[0]
       value: 
       objectReference: {fileID: 660254527}
@@ -9455,33 +9539,65 @@ PrefabInstance:
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._halfwayPoints.Array.data[0]
       value: 
-      objectReference: {fileID: 1875213914}
+      objectReference: {fileID: 7810902951316145016}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._halfwayPoints.Array.data[1]
       value: 
-      objectReference: {fileID: 660254527}
+      objectReference: {fileID: 7810902951316145015}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._halfwayPoints.Array.data[2]
       value: 
-      objectReference: {fileID: 992747916}
+      objectReference: {fileID: 7810902951316145014}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._halfwayPoints.Array.data[3]
       value: 
-      objectReference: {fileID: 801814576}
+      objectReference: {fileID: 7810902951316145013}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._halfwayPoints.Array.data[4]
       value: 
-      objectReference: {fileID: 505690324}
+      objectReference: {fileID: 7810902951316145012}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._halfwayPoints.Array.data[5]
       value: 
-      objectReference: {fileID: 2008326237}
+      objectReference: {fileID: 7810902951316145011}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._instantiateTimes.Array.size
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._missileShotPower.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._halfwayPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1497027483}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._halfwayPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 192779337}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._halfwayPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 908822390}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._halfwayPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 607758485}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._halfwayPoints.Array.data[4]
+      value: 
+      objectReference: {fileID: 2137848228}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._halfwayPoints.Array.data[5]
+      value: 
+      objectReference: {fileID: 14345738}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._instantiateTimes.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._missileShotPower.Array.size
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
@@ -9558,27 +9674,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._missileShotPower.Array.data[0]
-      value: 125
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._missileShotPower.Array.data[1]
-      value: 130
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._missileShotPower.Array.data[2]
-      value: 135
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._missileShotPower.Array.data[3]
-      value: 140
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._missileShotPower.Array.data[4]
-      value: 145
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _missileShotSettings.Array.data[1]._missileShotPower.Array.data[5]
-      value: 150
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._instantiateTimes.Array.data[0]
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._instantiateTimes.Array.data[1]
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._instantiateTimes.Array.data[2]
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._instantiateTimes.Array.data[3]
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._instantiateTimes.Array.data[4]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._instantiateTimes.Array.data[5]
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._missileShotPower.Array.data[0]
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._missileShotPower.Array.data[1]
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._missileShotPower.Array.data[2]
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._missileShotPower.Array.data[3]
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._missileShotPower.Array.data[4]
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[2]._missileShotPower.Array.data[5]
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4718281315527212042, guid: f6de751e9dcc43646b9cbbaa467344ab,
         type: 3}
@@ -9667,6 +9831,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+--- !u!4 &7810902951316145011 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 594725440455536633, guid: f6de751e9dcc43646b9cbbaa467344ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7810902951316145010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7810902951316145012 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3406441730703452451, guid: f6de751e9dcc43646b9cbbaa467344ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7810902951316145010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7810902951316145013 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7407883176535777001, guid: f6de751e9dcc43646b9cbbaa467344ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7810902951316145010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7810902951316145014 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5074817431482947158, guid: f6de751e9dcc43646b9cbbaa467344ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7810902951316145010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7810902951316145015 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7307882558849201614, guid: f6de751e9dcc43646b9cbbaa467344ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7810902951316145010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7810902951316145016 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7610046324080820340, guid: f6de751e9dcc43646b9cbbaa467344ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7810902951316145010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8115497476465677565
 PrefabInstance:
   m_ObjectHideFlags: 0
