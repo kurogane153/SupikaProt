@@ -9731,6 +9731,11 @@ PrefabInstance:
       propertyPath: _missileShotSettings.Array.data[2]._missileShotPower.Array.data[5]
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: 4099869561920642162, guid: f6de751e9dcc43646b9cbbaa467344ab,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4121862785469520100, guid: f6de751e9dcc43646b9cbbaa467344ab,
         type: 3}
       propertyPath: _boostParticles.Array.size
@@ -9771,6 +9776,36 @@ PrefabInstance:
       propertyPath: _mainCameraRadialBlur
       value: 
       objectReference: {fileID: 244839680}
+    - target: {fileID: 4718281315527212042, guid: f6de751e9dcc43646b9cbbaa467344ab,
+        type: 3}
+      propertyPath: _lagrangePointMaxAngle.Array.data[0]
+      value: 271
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718281315527212042, guid: f6de751e9dcc43646b9cbbaa467344ab,
+        type: 3}
+      propertyPath: _lagrangePointMaxAngle.Array.data[1]
+      value: 271
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718281315527212042, guid: f6de751e9dcc43646b9cbbaa467344ab,
+        type: 3}
+      propertyPath: _lagrangePointMinAngle.Array.data[0]
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718281315527212042, guid: f6de751e9dcc43646b9cbbaa467344ab,
+        type: 3}
+      propertyPath: _lagrangePointMinAngle.Array.data[1]
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718281315527212042, guid: f6de751e9dcc43646b9cbbaa467344ab,
+        type: 3}
+      propertyPath: _orbitOriginChangeCanMinAngle.Array.data[1]
+      value: 272
+      objectReference: {fileID: 0}
+    - target: {fileID: 4957643180856465690, guid: f6de751e9dcc43646b9cbbaa467344ab,
+        type: 3}
+      propertyPath: _killCameraPause
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7809379644624649669, guid: f6de751e9dcc43646b9cbbaa467344ab,
         type: 3}
       propertyPath: m_Name

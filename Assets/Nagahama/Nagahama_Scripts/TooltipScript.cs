@@ -11,6 +11,11 @@ public class TooltipScript : MonoBehaviour
     [SerializeField, Tooltip("指定の時間が経過したときに削除します")] private bool _destroyOnTimeOver;
     [SerializeField, Tooltip("削除するまでの時間")] private float _destroyTime;
 
+    [Space(10)]
+    [SerializeField, Tooltip("非表示時に別のUIと切り替えるか")] private bool _uiSwapFlag;
+    [SerializeField, Tooltip("初期表示オブジェクト")] private GameObject _startUIObject;
+    [SerializeField, Tooltip("切り替え先UIオブジェクト")] private GameObject _uiObjectToSwap;
+
     private Canvas canvas;
     private RectTransform canvasRectTransform;
     private RectTransform rectTransform;
@@ -76,15 +81,34 @@ public class TooltipScript : MonoBehaviour
 
     // このツールチップのアクティブ状況を変更します
     // canvasの参照が取れていない場合はStartを呼び出し初期化を済ませます
-    public void SetTooltipActive(bool flag)
+    // swapにtrueのときは切り替えをします
+    public void SetTooltipActive(bool flag, bool swap = false)
     {
-        gameObject.SetActive(flag);
-        if (flag) {
-            if(canvas == null) {
+        if (_uiSwapFlag) {
+            if (swap) {
+                _startUIObject.SetActive(flag);
+                _uiObjectToSwap.SetActive(!flag);
+            } else {
+                _startUIObject.SetActive(_startUIObject.activeSelf && flag);
+                _uiObjectToSwap.SetActive(_uiObjectToSwap.activeSelf && flag);
+            }
+
+            
+            if (canvas == null) {
                 Start();
             }
             TargetLockOnMove();
+
+        } else {
+            gameObject.SetActive(flag);
+            if (flag) {
+                if (canvas == null) {
+                    Start();
+                }
+                TargetLockOnMove();
+            }
         }
+        
     }
 
     #region Coroutine

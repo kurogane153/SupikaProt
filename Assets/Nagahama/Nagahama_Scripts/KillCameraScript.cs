@@ -232,11 +232,11 @@ public class KillCameraScript : MonoBehaviour
 
     private IEnumerator ConflictSwitchStagingPhase_ShowExplosion()
     {
-        _orbitShiftTooltip.SetTooltipActive(false);
+        _orbitShiftTooltip.SetTooltipActive(false , false);
         conflictStagingPhase = ConflictStagingPhase.ShowExplosion;
         yield return new WaitForSeconds(0.2f);
 
-        _conflictTooltip.SetTooltipActive(true);
+        _conflictTooltip.SetTooltipActive(true , false);
 
         yield return new WaitForSeconds(_resetDelay);
         CFCameraReset();

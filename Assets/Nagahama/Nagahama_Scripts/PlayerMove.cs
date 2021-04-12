@@ -198,7 +198,10 @@ public class PlayerMove : MonoBehaviour
         if((_orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
             !isAcceptedOrbitChange) {
 
-            _orbitShiftTooltip.SetTooltipActive(true);
+            _orbitShiftTooltip.SetTooltipActive(true , true);
+        } else if((_orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
+            isAcceptedOrbitChange) {
+            _orbitShiftTooltip.SetTooltipActive(false, true);
         } else {
             _orbitShiftTooltip.SetTooltipActive(false);
         }
@@ -208,6 +211,12 @@ public class PlayerMove : MonoBehaviour
             !isAcceptedOrbitChange) {
 
             isAcceptedOrbitChange = true;
+
+        } else if (Input.GetButtonDown(_orbitOriginChangeButtonName) &&
+            (_orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
+            isAcceptedOrbitChange) {
+
+            isAcceptedOrbitChange = false;
         }
     }
 
@@ -314,5 +323,13 @@ public class PlayerMove : MonoBehaviour
         _dbg_orbitOriginPlanet = _orbitOriginPlanet.ToString();
         _dbg_distance_player_to_planet = (transform.position - orbitOrigin.position).magnitude;
     }
-    
+
+    private IEnumerator DelayChange_isAcceptedOrbitChange()
+    {
+        yield return new WaitForSeconds(1f);
+
+        isAcceptedOrbitChange = false;
+    }
+
+
 }
