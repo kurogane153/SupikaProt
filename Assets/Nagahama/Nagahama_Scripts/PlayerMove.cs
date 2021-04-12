@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private PlayerAnimation _playerAnimation;
     [SerializeField] private CameraController _mainCameraController;
     [SerializeField] private RadialBlur _mainCameraRadialBlur;
+    [SerializeField] private BoostEffect _boostEffect;
 
     [Space(10)]
     [SerializeField, Tooltip("地球")] private Transform _earthTransform;
@@ -92,6 +93,11 @@ public class PlayerMove : MonoBehaviour
         if (_mainCameraRadialBlur == null) {
             _mainCameraRadialBlur = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RadialBlur>();
             Debug.Log(gameObject.name + "が_mainCameraRadialBlurをFindで取得した");
+        }
+
+        if (_boostEffect == null) {
+            _boostEffect = GetComponentInChildren<BoostEffect>();
+            Debug.Log(gameObject.name + "がBoostEffectをGetComponentInChildrenで取得した");
         }
 
         OrbitVarChange();
@@ -275,6 +281,7 @@ public class PlayerMove : MonoBehaviour
 
         if(beforennum != periodNum && periodNum == _periods.Length - 1) {
             _mainCameraRadialBlur.EnableRadialBlur();
+            _boostEffect.PlayBoostParticles();
         }
 
         period = _periods[periodNum];
@@ -292,6 +299,7 @@ public class PlayerMove : MonoBehaviour
 
         if (beforennum != periodNum && beforennum == _periods.Length - 1) {
             _mainCameraRadialBlur.DisableRadialBlur();
+            _boostEffect.StopBoostParticles();
         }
 
         period = _periods[periodNum];
