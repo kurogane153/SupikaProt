@@ -11,6 +11,7 @@ public class HomingMissileScript : MonoBehaviour
 
     [Header("爆発エフェクト"), Space(10)]
     [SerializeField, Tooltip("爆発エフェクト")] private GameObject _explosionEffect;   // 消滅時爆発エフェクト
+    [SerializeField] private ParticleSystem _smoke;
 
     [Space(10)]
     [SerializeField, Tooltip("自動消滅までの時間")] private float _destroyTime = 10f;      // 自動消滅までの時間
@@ -142,6 +143,7 @@ public class HomingMissileScript : MonoBehaviour
     // 消滅時処理まとめ
     private void SelfDestroy()
     {
+        _smoke.Stop();
         _soundPlayer.gameObject.transform.parent = null;
         _soundPlayer.PlaySE(_se_Explosion);
         _soundPlayer.DestroyCall(3f);
@@ -169,5 +171,18 @@ public class HomingMissileScript : MonoBehaviour
             //Debug.Log(gameObject.name + "が隕石に当たって消滅した");
         }
     }
+    #endregion
+
+    #region OnTrigger
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Asteroid") && other.transform == targetTransform.root) {
+            impactTime = 0f;
+            other.GetComponent<Rigidbody>().isKinematic = false;
+            other.GetComponent<Rigidbody>().AddForce((targetTransform.root.position - transform.position).normalized * 50f, ForceMode.Impulse);
+            Debug.Log("しょうとつ！！！");
+        }
+    }
+
     #endregion
 }

@@ -104,13 +104,15 @@ MonoBehaviour:
   _positionOffset: {x: -5, y: 30, z: 5}
   _rotationOffset: {x: 9.19, y: 20, z: 3.29}
   _missileFollowOffset: {x: 0, y: 5, z: -10}
-  _asteroidNearPosOffset: {x: 482, y: 136.3171, z: 893.0586}
+  _asteroidNearPosOffset: {x: 0, y: 150, z: 200}
   _missileFollowXRotate: 15
-  _cameraPanSpeed: 20
-  _warpTimeofAsteroidNearPos: 0.75
-  _followModeSwitchDelay: 1
-  _resetDelay: 3
+  _cameraPanSpeed: 40
+  _warpTimeofAsteroidNearPos: 1
+  _followModeSwitchDelay: 2.25
+  _resetDelay: 5
   _lerpFactor: 6
+  _followMissileLerpFactor: 0.3
+  _showExplosionModeSwitchDelay: 0.5
   _playerMove: {fileID: 0}
   _playerShot: {fileID: 0}
   _mainCamera: {fileID: 0}

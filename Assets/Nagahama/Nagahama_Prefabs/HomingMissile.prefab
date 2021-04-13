@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3643294739846692040
 Transform:
   m_ObjectHideFlags: 0
@@ -45,8 +45,8 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3643294739846692036}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   m_Radius: 1
   m_Height: 9.62
   m_Direction: 2
@@ -83,6 +83,7 @@ MonoBehaviour:
   _se_Explosion: {fileID: 8300000, guid: 8873a6a935a25ea49872939743001e68, type: 3}
   _explosionEffect: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4,
     type: 3}
+  _smoke: {fileID: 6789452682849038403}
   _destroyTime: 5
   _lockAtSpeed: 20
   _selfDestroyOnTargetDestroy: 0
@@ -153,13 +154,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6789452682867617335}
   serializedVersion: 6
-  lengthInSec: 2.5
-  simulationSpeed: 1
+  lengthInSec: 4.8
+  simulationSpeed: 3
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -228,7 +229,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.6
+      scalar: 5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
