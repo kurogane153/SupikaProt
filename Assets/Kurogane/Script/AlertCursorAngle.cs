@@ -5,49 +5,56 @@ using UnityEngine;
 public class AlertCursorAngle : MonoBehaviour
 {
 
-    [Header("Set Alert Prefab")]
-    //アラートの場所
-    public GameObject _alert;
-
-    [Header("Set Player Prefab")]
-    //プレイヤー
-    public GameObject _player;
-
-    // 中心点
-    [SerializeField] private Vector3 _center = Vector3.zero;
-
-    // 回転軸
-    [SerializeField] private Vector3 _axis = Vector3.up;
-
-    // 円運動周期
-    [SerializeField] private float _period = 2;
+    //// 中心点
+    //[SerializeField] private Vector3 _center = Vector3.zero;
+    //// 回転軸
+    //[SerializeField] private Vector3 _axis = Vector3.up;
+    //// 円運動周期
+    //[SerializeField] private float _period = 2;
+    //private Quaternion pos = new Quaternion(0, 0, 0, 0);
+    //private GameObject _player;
 
     private Vector3 _asteroidposition = new Vector3();
-
-    private Quaternion pos = new Quaternion(0, 0, 0, 0);
-
     private Vector3 diff = Vector3.zero;
+    private GameObject _alert;
+    private GameObject _alertSpika;
+
+    void Start()
+    {
+        _alert = GameObject.Find("AlertLine");
+        _alertSpika = GameObject.Find("AlertLineSpika");
+        SetAlertCursor();
+    }
 
     void Update()
     {
-        _center = _player.transform.position;
+        //_center = _player.transform.position;
         if (_alert.GetComponent<AlertLine>().GetArertFlg())
         {
-            _asteroidposition = _alert.GetComponent<AlertLine>().GetAsteroid();
             RotationCursor();
+            
         }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        
+    }
 
+    public void SetAlertCursor()
+    {
+        _asteroidposition = _alert.GetComponent<AlertLine>().GetAsteroid();
     }
 
     void RotationCursor()
     {
         Vector3 vec = new Vector3(1,0,1);
-        pos = this.transform.rotation;
         diff = _asteroidposition - transform.position;
         diff.y = 0;
         diff.Normalize();
         transform.rotation = Quaternion.FromToRotation(diff, vec);
 
+        //pos = this.transform.rotation;
         //if (transform.rotation.y > 0f)
         //{
         //    transform.RotateAround(_center, Vector3.up, (pos.y - transform.rotation.y) * 50);
@@ -56,7 +63,7 @@ public class AlertCursorAngle : MonoBehaviour
         //{
         //    transform.RotateAround(_center, Vector3.up, (pos.y - transform.rotation.y) * -50);
         //}
-        
+
 
         //Vector3 posA = transform.eulerAngles;
         //Vector3 posB = _asteroidposition;

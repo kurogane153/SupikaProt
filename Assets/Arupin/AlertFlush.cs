@@ -3,6 +3,15 @@ using UnityEngine.UI;
 
 public class AlertFlush : MonoBehaviour
 {
+
+    [Header("Set Alert Prefab")]
+    //アラートの場所
+    public GameObject _alert;
+
+    [Header("Set Alert Prefab")]
+    //アラートの場所
+    public GameObject _alertspika;
+
     Image img;
     Animator anim;
 
@@ -16,7 +25,7 @@ public class AlertFlush : MonoBehaviour
 
     void Update()
     {
-        if (AlertLine._alertflg)
+        if (_alert.GetComponent<AlertLine>().GetArertFlg() || _alertspika.GetComponent<AlertLine>().GetArertFlg())
         {
             OnAlert();
         }

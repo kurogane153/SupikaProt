@@ -14,15 +14,23 @@ public class AlertLine : MonoBehaviour
     //アラートの場所
     public GameObject Earth;
 
+    [Header("Set Cursor Prefab")]
+    //カーソル
+    public GameObject Cursor;
+
+    [Header("Set Player Prefab")]
+    //プレイヤー
+    public GameObject Player;
+
     [Header("スピカのアラートエリアならON")]
     public bool Spikaflg;
 
-    [Header("ゲームオーバーまでの隕石の個数")]
+    [Header("アラートの秒数")]
     public int drawingTime = 3;
 
     [Header("ArertTextObject")]
     public GameObject ArertText = null; // Textオブジェクト
-    public static bool _alertflg;
+    public bool _alertflg;
 
     private GameObject _asteroid;
 
@@ -30,8 +38,8 @@ public class AlertLine : MonoBehaviour
 
     void Start()
     {
-
         _alertflg = false;
+
         if (Spikaflg)
         {
             this.transform.position = Spika.transform.position;
@@ -57,6 +65,11 @@ public class AlertLine : MonoBehaviour
     void DelayMethod()
     {
         _alertflg = true;
+
+        //GameObject _cusor = Instantiate(Cursor);
+        //_cusor.transform.parent = Player.transform;
+        //_cusor.transform.position = Player.transform.position;
+
         if (Spikaflg)
         {
             ArertMessage.text = "コロニーに隕石接近";
