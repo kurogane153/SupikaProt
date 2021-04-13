@@ -1912,7 +1912,7 @@ MonoBehaviour:
   _playerAnimation: {fileID: 6295996902850967912}
   _mainCameraController: {fileID: 0}
   _mainCameraRadialBlur: {fileID: 0}
-  _boostEffect: {fileID: 0}
+  _boostEffect: {fileID: 4121862785469520100}
   _earthTransform: {fileID: 0}
   _colonyTransform: {fileID: 0}
   _orbitOriginPlanet: 0
@@ -1937,13 +1937,13 @@ MonoBehaviour:
   _orbitOriginChangeButtonName: OrbitOriginChange
   _orbitOriginChangeCanMinAngle:
   - 180
-  - 268
+  - 272
   _orbitOriginChangeCanMaxAngle:
   - 268
   - 360
   _lagrangePointMinAngle:
-  - 269
-  - 269
+  - 270
+  - 270
   _lagrangePointMaxAngle:
   - 271
   - 271
@@ -1990,8 +1990,98 @@ MonoBehaviour:
   _missileDamage: 18
   _firstShotNumber: 0
   _defaultSettingsNumber: 0
-  _killCamSettingsNumber: 0
-  _missileShotSettings: []
+  _killCamSettingsNumber: 2
+  _missileShotSettings:
+  - _missileShotPower:
+    - 175
+    - 175
+    - 175
+    - 175
+    - 175
+    - 175
+    _missileShotDelay: 2.5
+    _multiTargetMissileDelay: 0.35
+    _halfwayPoints:
+    - {fileID: 1253699403}
+    - {fileID: 677082303}
+    - {fileID: 1976954286}
+    - {fileID: 1869632839}
+    - {fileID: 11474569}
+    - {fileID: 635081676}
+    _impactTimes:
+    - 0.9
+    - 0.91
+    - 0.92
+    - 0.93
+    - 0.94
+    - 0.95
+    _instantiateTimes:
+    - 0.1
+    - 0.15
+    - 0.2
+    - 0.25
+    - 0.3
+    - 0.35
+  - _missileShotPower:
+    - 300
+    - 300
+    - 300
+    - 300
+    - 300
+    - 300
+    _missileShotDelay: 2.5
+    _multiTargetMissileDelay: 0.35
+    _halfwayPoints:
+    - {fileID: 2432383032990341211}
+    - {fileID: 8432524486311725036}
+    - {fileID: 4154658906436778813}
+    - {fileID: 5445713636156608431}
+    - {fileID: 5041143151230100250}
+    - {fileID: 748445053732425450}
+    _impactTimes:
+    - 1.2
+    - 1.3
+    - 1.4
+    - 1.5
+    - 1.6
+    - 1.7
+    _instantiateTimes:
+    - 0.2
+    - 0.25
+    - 0.3
+    - 0.35
+    - 0.4
+    - 0.45
+  - _missileShotPower:
+    - 300
+    - 300
+    - 300
+    - 300
+    - 300
+    - 300
+    _missileShotDelay: 2.5
+    _multiTargetMissileDelay: 0.35
+    _halfwayPoints:
+    - {fileID: 8192576381972623461}
+    - {fileID: 8786285398188394436}
+    - {fileID: 5873396779111072787}
+    - {fileID: 1165679304016587628}
+    - {fileID: 7915462708546141241}
+    - {fileID: 1968177573842364404}
+    _impactTimes:
+    - 3
+    - 3.1
+    - 3.2
+    - 3.3
+    - 3.4
+    - 3.5
+    _instantiateTimes:
+    - 0.3
+    - 0.35
+    - 0.4
+    - 0.45
+    - 0.5
+    - 0.55
   _dbg_targetAsteroid: None
   _dbg_tmptarget: None
 --- !u!114 &4099869561920642162
@@ -8868,6 +8958,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4461926752389913568, guid: df59f57cbb25b784ba3778d72bb44578,
+        type: 3}
+      propertyPath: _boostParticles.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6563858180642682619, guid: df59f57cbb25b784ba3778d72bb44578,
         type: 3}
       propertyPath: m_Name
@@ -8881,6 +8976,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 349098106518979332}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4121862785469520100 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4461926752389913568, guid: df59f57cbb25b784ba3778d72bb44578,
+    type: 3}
+  m_PrefabInstance: {fileID: 349098106518979332}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abdb6cb17ac74b241abd07464ed0fd4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &433195977823783637
 PrefabInstance:
   m_ObjectHideFlags: 0

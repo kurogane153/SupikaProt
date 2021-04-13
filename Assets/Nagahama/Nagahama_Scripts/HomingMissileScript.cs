@@ -43,7 +43,7 @@ public class HomingMissileScript : MonoBehaviour
         Debug.Log(gameObject.name + "の自動消滅まで：" + _destroyTime + "秒");
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         TargetDestroyedCheck();
         if (targetTransform != null) {
@@ -51,6 +51,11 @@ public class HomingMissileScript : MonoBehaviour
         } else {
             NonTargetMove();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
     /// <summary>

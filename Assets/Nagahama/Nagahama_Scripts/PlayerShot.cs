@@ -261,7 +261,7 @@ public class PlayerShot : MonoBehaviour
     {
 
         if (reticles.Length >= _killCameraActiveCount) {
-            KillCameraActiveProcess();
+            KillCameraActiveProcess(transform);
         }
 
         int i = 0;
@@ -283,7 +283,7 @@ public class PlayerShot : MonoBehaviour
             if (_reloadFlags) {
                 isLastInstantiate = count == reticles.Length || missileNum <= 0;
             } else {
-                isLastInstantiate = (count == reticles.Length);
+                isLastInstantiate = count == 1 && reticles.Length >= _killCameraActiveCount;
             }
 
 
@@ -331,9 +331,9 @@ public class PlayerShot : MonoBehaviour
         return missile;
     }
 
-    public void KillCameraActiveProcess()
+    public void KillCameraActiveProcess(Transform targetAsteroid)
     {
-        _killCamera.KillCameraActive();
+        _killCamera.KillCameraActive(targetAsteroid);
         enabled = false;
 
     }
