@@ -98,8 +98,18 @@ public class GameClearOver_Process : MonoBehaviour
         }
     }
 
-    void DelayMethod()
+    //void DelayMethod()
+    //{
+    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    //}
+
+    public int GetGameClearCount()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        return GameClearCount;
+    }
+
+    public void SetGameClearCount(int count)
+    {
+        GameClearCount = count;
     }
 }
