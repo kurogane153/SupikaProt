@@ -24,7 +24,7 @@ public class Result : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameClearOver_Process.isclear == false && GameClearOverSpika_Process.isclears == false)
+        if (GameClearOver_Process.isclear == false)
         {
             GameOvertext.SetActive(true);
         }

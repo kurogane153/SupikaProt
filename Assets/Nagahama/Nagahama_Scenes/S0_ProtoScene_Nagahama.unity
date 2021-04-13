@@ -1611,6 +1611,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 357493545}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &364138603 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5514321782783056631, guid: d93b3bdea398b344b8780824a0695eff,
+    type: 3}
+  m_PrefabInstance: {fileID: 2026933534194550649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9a653763c496549a0277713b3db87c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &373037774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3290,7 +3302,7 @@ PrefabInstance:
     - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
         type: 3}
       propertyPath: m_RootOrder
-      value: 28
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
         type: 3}
@@ -6502,11 +6514,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1799453316}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ad3bae368eb6904fa374a084bace875, type: 3}
+  m_Script: {fileID: 11500000, guid: 6015f8cebcc9e71418f2e1f1bb84a00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOverCountText: {fileID: 1946261730}
-  GameOverText: {fileID: 1114204702}
+  GameOverCountText: {fileID: 438071598}
+  GameOverCountTextSpika: {fileID: 1946261730}
+  GameClearCountText: {fileID: 853597969}
+  ConflictEventCamera: {fileID: 5054093583828618424}
+  EventCameraDistance: 750
+  _soundPlayer: {fileID: 364138603}
+  _se_Explosion: {fileID: 8300000, guid: 6796b76f7cd9c174c8b45664a7e929e7, type: 3}
   GameOverAsteroid: 3
   GameClearAsteroid: 20
   GameOverReloadTime: 3.5
@@ -8772,6 +8789,11 @@ PrefabInstance:
       propertyPath: EventCameraDistance
       value: 2250
       objectReference: {fileID: 0}
+    - target: {fileID: 6582865642158403314, guid: 50d9282d5cb6e1549bb142219f1b7c00,
+        type: 3}
+      propertyPath: GameOverCountTextSpika
+      value: 
+      objectReference: {fileID: 1114204702}
     - target: {fileID: 6582865643300284313, guid: 50d9282d5cb6e1549bb142219f1b7c00,
         type: 3}
       propertyPath: m_RootOrder
