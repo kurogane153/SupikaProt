@@ -57,6 +57,10 @@ public class EnemyGenerator : MonoBehaviour
     [Range(0f, 500f)]
     public float zMaxPosition = 0f;
 
+    public AsteroidWaveManager _asteroidwavemanager;
+
+    private int _asteroidInstansCount;
+
     //敵生成時間間隔
     private float interval;
     //経過時間
@@ -85,31 +89,46 @@ public class EnemyGenerator : MonoBehaviour
         //時間計測
         time += Time.deltaTime;
 
+        AsteroidInstens();
+    }
+
+    void AsteroidInstens()
+    {
         //経過時間が生成時間になったとき(生成時間より大きくなったとき)
         if (time > interval)
         {
-            if (isRendered) { 
-                //enemyをインスタンス化する(生成する)
-                GameObject asteroid = Instantiate(enemyPrefab);
-                //生成した敵の位置をランダムに設定する
-                asteroid.transform.position = GetRandomPosition();
-
-                if (Spikaflg) 
+            if (isRendered)
+            {
+                if (!_asteroidwavemanager.GetAsteroidInstansFlg())
                 {
-                    asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, SpikaPos);
+                    //enemyをインスタンス化する(生成する)
+                    GameObject asteroid = Instantiate(enemyPrefab);
+                    //生成した敵の位置をランダムに設定する
+                    asteroid.transform.position = GetRandomPosition();
+
+                    if (Spikaflg)
+                    {
+                        asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, SpikaPos);
+                    }
+                    else
+                    {
+                        asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, EarthPos);
+                    }
+                    //経過時間を初期化して再度時間計測を始める
+                    time = 0f;
+                    //次に発生する時間間隔を決定する
+                    interval = GetRandomTime();
+                    isRendered = false;
+                    _asteroidwavemanager.SetWaveAsteroidCount(1);
                 }
                 else
                 {
-                    asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, EarthPos);
+                    interval = GetRandomTime();
+                    isRendered = false;
+                    time = 0f;
                 }
-                //経過時間を初期化して再度時間計測を始める
-                time = 0f;
-                //次に発生する時間間隔を決定する
-                interval = GetRandomTime();
-                isRendered = false;
             }
         }
-
     }
 
     //ランダムな時間を生成する関数
@@ -137,5 +156,7 @@ public class EnemyGenerator : MonoBehaviour
             isRendered = true;
         }
     }
+
+
 
 }
