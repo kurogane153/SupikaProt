@@ -8,15 +8,13 @@ public class GameClearOver_Process : MonoBehaviour
 {
 
     private int GameOverCount = 0;
+    private int GameOverCountSpika = 0;
     public static int GameClearCount = 0;
     public static bool isclear = false;
 
     public GameObject GameOverCountText = null; // Textオブジェクト
-    public GameObject GameOverText = null; // Textオブジェクト
-    public GameObject GameClearText = null; // Textオブジェクト
+    public GameObject GameOverCountTextSpika = null; // Textオブジェクト
     public GameObject GameClearCountText = null; // Textオブジェクト
-    private Text GameOverCcunt_text;
-    private Text GameClearCcunt_text;
 
     #region 長浜追加フィールド
     private Vector3 impactPos;  // 隕石が衝突した位置
@@ -43,9 +41,6 @@ public class GameClearOver_Process : MonoBehaviour
 
     void Start()
     {
-        GameOverCcunt_text = GameOverCountText.GetComponent<Text>();
-        GameClearCcunt_text = GameClearCountText.GetComponent<Text>();
-        GameClearText.SetActive(false);
         GameClearCount = 0;
 
         if (_soundPlayer == null) {
@@ -58,32 +53,30 @@ public class GameClearOver_Process : MonoBehaviour
 
     void Update()
     {
-        if(GameOverCount >= GameOverAsteroid)
-        {
-            SceneManager.LoadScene("Result");
-            //GameOverText.SetActive(true);
-            ///Invoke("DelayMethod", GameOverReloadTime);
+
+        if (GameOverCount >= GameOverAsteroid || GameOverCountSpika >= GameOverAsteroid)
+        { 
+            Invoke("DelayMethod", 3.0f);
         }
 
-        if(GameClearCount >= GameClearAsteroid)
+        if (GameClearCount >= GameClearAsteroid)
         {
             isclear = true;
-            SceneManager.LoadScene("Result");
-            //GameClearText.SetActive(true);
-            //Invoke("DelayMethod", GameOverReloadTime);
+            Invoke("DelayMethod", 3.0f);
         }
 
-        //Debug.Log(GameClearCount);
-        GameOverCcunt_text.text = "地球滅亡まで残り:" + (GameOverAsteroid - GameOverCount);
-        GameClearCcunt_text.text = "防衛成功まで残り:" + (GameClearAsteroid - GameClearCount);
+        GameOverCountText.GetComponent<Text>().text = "地球滅亡まで残り:" + (GameOverAsteroid - GameOverCount);
+        GameOverCountTextSpika.GetComponent<Text>().text = "コロニー滅亡まで残り:" + (GameOverAsteroid - GameOverCountSpika);
+        GameClearCountText.GetComponent<Text>().text = "防衛成功まで残り:" + (GameClearAsteroid - GameClearCount);
+                
+        Debug.Log(GameOverCountSpika);
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Asteroid")
         {
-            GameOverCount++;
-
+            HitGameOverCount();
             // 長浜変更点↓
             // 衝突した隕石の座標を取得、地球から隕石へのベクトルを作り
             // そのベクトルを長くして衝突イベントカメラが来てほしい座標を作る
@@ -98,10 +91,23 @@ public class GameClearOver_Process : MonoBehaviour
         }
     }
 
-    //void DelayMethod()
-    //{
-    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    //}
+    void HitGameOverCount()
+    {
+        if (this.gameObject.tag == "Earth")
+        {
+            GameOverCountSpika++;
+        }
+        else
+        {
+            GameOverCountTextSpika.GetComponent<Text>().gameObject.SetActive(false);
+            GameOverCount++;
+        }
+    }
+
+    void DelayMethod()
+    {
+        SceneManager.LoadScene("Result");
+    }
 
     public int GetGameClearCount()
     {

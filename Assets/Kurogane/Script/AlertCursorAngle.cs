@@ -27,7 +27,6 @@ public class AlertCursorAngle : MonoBehaviour
     private Quaternion pos = new Quaternion(0, 0, 0, 0);
 
     private Vector3 diff = Vector3.zero;
-    private bool flg = false;
 
     void Update()
     {
@@ -35,10 +34,6 @@ public class AlertCursorAngle : MonoBehaviour
         if (_alert.GetComponent<AlertLine>().GetArertFlg())
         {
             _asteroidposition = _alert.GetComponent<AlertLine>().GetAsteroid();
-            flg = true;
-        }
-        if (flg)
-        {
             RotationCursor();
         }
 

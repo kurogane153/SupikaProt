@@ -149,7 +149,6 @@ public class AsteroidWaveManager : MonoBehaviour
 
                 if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
                 {
-                    //_waveAsteroid = _waveAsteroidcount[4];
                     _waveAsteroidInstansCount = 0;
                     _asteroidinstansflg = false;
                 }
