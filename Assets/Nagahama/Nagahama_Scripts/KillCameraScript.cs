@@ -23,7 +23,7 @@ public class KillCameraScript : MonoBehaviour
     [SerializeField] private float _lerpFactor = 6;
     [SerializeField, Range(0.0f, 1.0f)] private float _followMissileLerpFactor = 0.3f;
     [SerializeField] private float _showExplosionModeSwitchDelay = 1f;
-    [SerializeField] private float _showExplosionZoomOutLerpFactor = 0.3f;
+    [SerializeField, Range(0.0f, 1.0f)] private float _showExplosionZoomOutLerpFactor = 0.3f;
 
     [SerializeField] private PlayerMove _playerMove;
     [SerializeField] private PlayerShot _playerShot;
@@ -268,6 +268,7 @@ public class KillCameraScript : MonoBehaviour
             points[i++] = point.Target.position;
         }
 
+        transform.position = _mainCamera.transform.position;
         transform.position = Focus(points);
 
     }

@@ -8385,18 +8385,13 @@ PrefabInstance:
       objectReference: {fileID: 8297952111884073229}
     - target: {fileID: 5054093584554773743, guid: c09031e83fe7b6e4ba22ad22782021b9,
         type: 3}
-      propertyPath: _followModeSwitchDelay
-      value: 1.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5054093584554773743, guid: c09031e83fe7b6e4ba22ad22782021b9,
-        type: 3}
       propertyPath: _followMissileLerpFactor
-      value: 0.227
+      value: 0.319
       objectReference: {fileID: 0}
     - target: {fileID: 5054093584554773743, guid: c09031e83fe7b6e4ba22ad22782021b9,
         type: 3}
-      propertyPath: _showExplosionModeSwitchDelay
-      value: 1
+      propertyPath: _showExplosionZoomOutLerpFactor
+      value: 0.17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c09031e83fe7b6e4ba22ad22782021b9, type: 3}

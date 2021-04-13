@@ -108,11 +108,12 @@ MonoBehaviour:
   _missileFollowXRotate: 15
   _cameraPanSpeed: 40
   _warpTimeofAsteroidNearPos: 1
-  _followModeSwitchDelay: 2.25
+  _followModeSwitchDelay: 1.7
   _resetDelay: 5
   _lerpFactor: 6
-  _followMissileLerpFactor: 0.3
-  _showExplosionModeSwitchDelay: 0.5
+  _followMissileLerpFactor: 0.227
+  _showExplosionModeSwitchDelay: 1
+  _showExplosionZoomOutLerpFactor: 0.3
   _playerMove: {fileID: 0}
   _playerShot: {fileID: 0}
   _mainCamera: {fileID: 0}
