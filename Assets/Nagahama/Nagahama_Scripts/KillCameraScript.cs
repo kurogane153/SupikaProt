@@ -21,6 +21,9 @@ public class KillCameraScript : MonoBehaviour
     [SerializeField] private float _followModeSwitchDelay = 0.75f;
     [SerializeField] private float _resetDelay = 2.2f;
     [SerializeField] private float _lerpFactor = 6;
+    [SerializeField, Range(0.0f, 1.0f)] private float _followMissileLerpFactor = 0.3f;
+    [SerializeField] private float _showExplosionModeSwitchDelay = 1f;
+    [SerializeField] private float _showExplosionZoomOutLerpFactor = 0.3f;
 
     [SerializeField] private PlayerMove _playerMove;
     [SerializeField] private PlayerShot _playerShot;
@@ -113,7 +116,7 @@ public class KillCameraScript : MonoBehaviour
             return;
         }
         Vector3 desiredPosition = _followTarget.position + _missileFollowOffset;
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, 0.3f);
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, _followMissileLerpFactor);
     }
 
     private void WarpTargetBehind()
@@ -125,6 +128,50 @@ public class KillCameraScript : MonoBehaviour
         Vector3 desiredPosition = _followTarget.position + _missileFollowOffset;
         transform.position = desiredPosition;
 
+    }
+
+    public Vector3 Focus(Vector3[] points)
+    {
+        // 全点をビュー空間に移動
+        var toView = transform.worldToLocalMatrix;
+        for (int i = 0; i < points.Length; i++) {
+            points[i] = toView.MultiplyPoint3x4(points[i]);
+        }
+
+        // 各種傾き
+        var ay1 = Mathf.Tan(camera.fieldOfView * _showExplosionZoomOutLerpFactor * Mathf.Deg2Rad);
+        var ay0 = -ay1;
+        var ax1 = ay1 * camera.aspect;
+        var ax0 = -ax1;
+
+        // XY軸で最小最大を取って不要データを捨てる
+        var y0Min = float.MaxValue;
+        var y1Max = -float.MaxValue;
+        var x0Min = float.MaxValue;
+        var x1Max = -float.MaxValue;
+
+        for (int i = 0; i<points.Length; i++)
+        {
+            var p = points[i];
+            var by0 = p.y - (ay0 * p.z);
+            var by1 = p.y - (ay1 * p.z);
+            var bx0 = p.x - (ax0 * p.z);
+            var bx1 = p.x - (ax1 * p.z);
+            y0Min = Mathf.Min(y0Min, by0);
+            y1Max = Mathf.Max(y1Max, by1);
+            x0Min = Mathf.Min(x0Min, bx0);
+            x1Max = Mathf.Max(x1Max, bx1);
+        }
+
+        // zを2つ求め、小さい方を採用する。x,yはそのまま使う
+        var zy = (y1Max - y0Min) / (ay0 - ay1);
+        var y = y0Min + (ay0 * zy);
+        var zx = (x1Max - x0Min) / (ax0 - ax1);
+        var x = x0Min + (ax0 * zx);
+        var posInView = new Vector3(x, y, Mathf.Min(zy, zx));
+
+        // ワールドに戻す
+        return transform.localToWorldMatrix.MultiplyPoint3x4(posInView);
     }
 
     private void LookAtTarget()
@@ -208,6 +255,21 @@ public class KillCameraScript : MonoBehaviour
         yield return new WaitForSeconds(_followModeSwitchDelay);
         stagingPhase = StagingPhase.FollowMissile;
         WarpTargetBehind();
+
+        yield return new WaitForSeconds(_showExplosionModeSwitchDelay);
+        StartCoroutine(nameof(SwitchStagingPhase_ShowExplosion));
+
+        LockedOnReticle[] reticles = FindObjectsOfType<LockedOnReticle>();
+        Vector3[] points = new Vector3[reticles.Length];
+        Debug.Log(reticles.Length);
+        int i = 0;
+
+        foreach(var point in reticles) {
+            points[i++] = point.Target.position;
+        }
+
+        transform.position = Focus(points);
+
     }
 
     private IEnumerator SwitchStagingPhase_ShowExplosion()

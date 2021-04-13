@@ -1838,6 +1838,100 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _killCameraPause: 0
+--- !u!1001 &451171871
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 891867632790670601, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: _killCameraPause
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412486874701841780, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3520247187089437556, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: _killCameraPause
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717883754056, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717885757576, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_Name
+      value: Asteroid_01_S (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1345
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -97
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.4205497
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.59028584
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.56113684
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.39978245
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -109.063995
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 87.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627017100309450463, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: _killCameraPause
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c64002a477e84b047aded9c5b8441285, type: 3}
 --- !u!4 &517458854 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2403890478678665667, guid: ce7474ebc217dfa4a90d350ce43d621f,
@@ -3290,7 +3384,7 @@ PrefabInstance:
     - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
         type: 3}
       propertyPath: m_RootOrder
-      value: 28
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
         type: 3}
@@ -8275,26 +8369,16 @@ PrefabInstance:
     - target: {fileID: 5054093584554773743, guid: c09031e83fe7b6e4ba22ad22782021b9,
         type: 3}
       propertyPath: _followModeSwitchDelay
-      value: 2.25
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 5054093584554773743, guid: c09031e83fe7b6e4ba22ad22782021b9,
         type: 3}
-      propertyPath: _asteroidNearPosOffset.x
-      value: 0
+      propertyPath: _followMissileLerpFactor
+      value: 0.227
       objectReference: {fileID: 0}
     - target: {fileID: 5054093584554773743, guid: c09031e83fe7b6e4ba22ad22782021b9,
         type: 3}
-      propertyPath: _asteroidNearPosOffset.y
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 5054093584554773743, guid: c09031e83fe7b6e4ba22ad22782021b9,
-        type: 3}
-      propertyPath: _asteroidNearPosOffset.z
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 5054093584554773743, guid: c09031e83fe7b6e4ba22ad22782021b9,
-        type: 3}
-      propertyPath: _warpTimeofAsteroidNearPos
+      propertyPath: _showExplosionModeSwitchDelay
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
