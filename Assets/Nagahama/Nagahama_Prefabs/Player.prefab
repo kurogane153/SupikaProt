@@ -1913,6 +1913,10 @@ MonoBehaviour:
   _mainCameraController: {fileID: 0}
   _mainCameraRadialBlur: {fileID: 0}
   _boostEffect: {fileID: 4121862785469520100}
+  _soundPlayer: {fileID: 0}
+  _se_SpeedUp: {fileID: 0}
+  _se_SpeedUpNormal: {fileID: 0}
+  _se_SpeedDown: {fileID: 0}
   _earthTransform: {fileID: 0}
   _colonyTransform: {fileID: 0}
   _orbitOriginPlanet: 0
@@ -8905,6 +8909,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1569096299827169309}
     m_Modifications:
+    - target: {fileID: 1690052522671384575, guid: df59f57cbb25b784ba3778d72bb44578,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2641926478075679444, guid: df59f57cbb25b784ba3778d72bb44578,
         type: 3}
       propertyPath: m_RootOrder
@@ -8960,15 +8969,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3156447297141336328, guid: df59f57cbb25b784ba3778d72bb44578,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4461926752389913568, guid: df59f57cbb25b784ba3778d72bb44578,
         type: 3}
       propertyPath: _boostParticles.Array.size
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6470454818440055410, guid: df59f57cbb25b784ba3778d72bb44578,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6563858180642682619, guid: df59f57cbb25b784ba3778d72bb44578,
         type: 3}
       propertyPath: m_Name
       value: BoostEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279519378246200257, guid: df59f57cbb25b784ba3778d72bb44578,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452648244503885946, guid: df59f57cbb25b784ba3778d72bb44578,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df59f57cbb25b784ba3778d72bb44578, type: 3}
