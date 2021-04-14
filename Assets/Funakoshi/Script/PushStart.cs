@@ -23,4 +23,14 @@ public class PushStart : MonoBehaviour
         //スタートボタンを押したときメインゲームが始まる
         SceneManager.LoadScene("S0_ProtoScene_Nagahama");
     }
+
+    public void PushEnd()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+
+#elif UNITY_STANDALONE
+        UnityEngine.Application.Quit();
+#endif
+    }
 }
