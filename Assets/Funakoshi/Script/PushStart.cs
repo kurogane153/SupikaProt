@@ -26,11 +26,11 @@ public class PushStart : MonoBehaviour
 
     public void PushEnd()
     {
-        Quit();
-    }
-
-    private void Quit()
-    {
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+
+#elif UNITY_STANDALONE
+        UnityEngine.Application.Quit();
+#endif
     }
 }
