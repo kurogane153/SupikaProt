@@ -128,6 +128,8 @@ public class ReticleController : MonoBehaviour
             _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
             Debug.Log(gameObject.name + "が_mainCameraをFindで取得した");
         }
+
+        BGMManagerScript.Instance.PlayBGM(0);
     }
 
     void Update()

@@ -35,4 +35,9 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator.SetTrigger("Spiral");
     }
+
+    public void ChangeOrbit()
+    {
+        animator.SetTrigger("ChangeOrbit");
+    }
 }

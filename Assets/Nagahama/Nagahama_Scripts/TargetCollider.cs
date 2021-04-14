@@ -6,6 +6,7 @@ public class TargetCollider : MonoBehaviour
 {
     [SerializeField] private GameObject _targetButtonPrefab;
     [SerializeField] private float _reticleRectSizeScaling = 1.2f;  // 2D矩形の大きさ
+    [SerializeField] private float _hp;
 
     private RectTransform _rectTransform;
 
@@ -28,6 +29,11 @@ public class TargetCollider : MonoBehaviour
     public void ReceiveDamage(int damage)
     {
         parentAsteroidSc.ReceiveDamage(damage);
+        _hp -= damage;
+        if(_hp <= 0) {
+            RectInAsteroidContainer.Instance.targetColliders.Remove(this);
+            gameObject.SetActive(false);
+        }
     }
 
 
@@ -43,6 +49,7 @@ public class TargetCollider : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_hp <= 0) return;
         bool isNowInScreen = IsScreenPositionScreenInsite();
 
         if (isNowInScreen != beforeInScreenFlags) {

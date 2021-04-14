@@ -14,13 +14,14 @@ public class KillCameraScript : MonoBehaviour
     [SerializeField] private Vector3 _positionOffset = new Vector3(0, 1, 0);
     [SerializeField] private Vector3 _rotationOffset = new Vector3(0, 0, 0);
     [SerializeField] private Vector3 _missileFollowOffset = new Vector3(0, 5, -10);
-    [SerializeField, Tooltip("隕石の近くから自機を映すときのオフセット")] private Vector3 _asteroidNearPosOffset;
+    [SerializeField, Tooltip("隕石の近くから自機を映すときのオフセット")] private Vector3 _playerNearPosOffset;
     [SerializeField] private float _missileFollowXRotate = 15f;
     [SerializeField] private float _cameraPanSpeed = 20f;
-    [SerializeField, Tooltip("隕石の近くに位置を変えるまでの時間")] private float _warpTimeofAsteroidNearPos = 0.5f;
+    [SerializeField, Tooltip("プレイヤーの近くに位置を変えるまでの時間")] private float _warpTimeofMovetoPlayerNearPos = 0.5f;
     [SerializeField] private float _followModeSwitchDelay = 0.75f;
-    [SerializeField] private float _resetDelay = 2.2f;
-    [SerializeField] private float _lerpFactor = 6;
+    [SerializeField, Tooltip("キルカメラ時ミサイルが消えてからキルカメラ終了までの待機時間")] private float _killCamResetDelay;
+    [SerializeField, Tooltip("衝突イベントカメラ終了までの待機時間")] private float _conflictEventCamResetDelay;
+    [SerializeField] private float _normalMoveLerpFactor = 6;
     [SerializeField, Range(0.0f, 1.0f)] private float _followMissileLerpFactor = 0.3f;
     [SerializeField] private float _showExplosionModeSwitchDelay = 1f;
     [SerializeField, Range(0.0f, 1.0f)] private float _showExplosionZoomOutLerpFactor = 0.3f;
@@ -93,15 +94,16 @@ public class KillCameraScript : MonoBehaviour
         Vector3 offset = _followTarget.right * _positionOffset.x + _followTarget.up * _positionOffset.y + _followTarget.forward * _positionOffset.z;
 
         Vector3 desiredPosition = _followTarget.position + offset;
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * _lerpFactor);
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * _normalMoveLerpFactor);
 
         Vector3 desiredRotation = _followTarget.rotation.eulerAngles + _rotationOffset;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(desiredRotation), Time.deltaTime * _lerpFactor);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(desiredRotation), Time.deltaTime * _normalMoveLerpFactor);
     }
 
     private void StopPhase_CameraPanMove()
     {
         transform.Translate(-Vector3.forward * Time.deltaTime * _cameraPanSpeed);
+        
     }
 
     private void StopPhase_CameraZoomMove()
@@ -176,7 +178,7 @@ public class KillCameraScript : MonoBehaviour
 
     private void LookAtTarget()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((_followTarget.position - transform.position).normalized), Time.deltaTime * _lerpFactor);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((_followTarget.position - transform.position).normalized), Time.deltaTime * _normalMoveLerpFactor);
     }
 
     private void LateUpdate()
@@ -184,6 +186,10 @@ public class KillCameraScript : MonoBehaviour
 
         if (_cameraType == CameraType.KillCamera) {
             KillCameraProcess();
+            if (Input.GetKeyDown(KeyCode.B)) {
+                Debug.Log(ReticleController.Instance.GeneratedReticleCount);
+            }
+           
         } else if (_cameraType == CameraType.ConflictEventCamera) {
             ConflictEventCameraProcess();
         }
@@ -240,13 +246,13 @@ public class KillCameraScript : MonoBehaviour
         stagingPhase = StagingPhase.Pan;
     }
 
-    private IEnumerator WarpToAsteroidNearPosition(Transform target)
+    private IEnumerator WarpToPlayerNearPosition(Transform target)
     {
-        yield return new WaitForSeconds(_warpTimeofAsteroidNearPos);
+        yield return new WaitForSeconds(_warpTimeofMovetoPlayerNearPos);
 
         transform.position = target.position;
         transform.LookAt(_playerMove.transform);
-        transform.localPosition = transform.localPosition + _asteroidNearPosOffset;
+        transform.localPosition = transform.localPosition + _playerNearPosOffset;
         transform.LookAt(_playerMove.transform);
     }
 
@@ -277,7 +283,11 @@ public class KillCameraScript : MonoBehaviour
     {
         stagingPhase = StagingPhase.ShowExplosion;
 
-        yield return new WaitForSeconds(_resetDelay);
+        while(ReticleController.Instance.GeneratedReticleCount > 0) {
+            yield return new WaitForSeconds(0);
+        }
+
+        yield return new WaitForSeconds(_killCamResetDelay);
         Reset();
     }
 
@@ -285,7 +295,7 @@ public class KillCameraScript : MonoBehaviour
     {
         GetCamera().enabled = true;
         SwitchStagingPhase_Pan();
-        StartCoroutine(WarpToAsteroidNearPosition(targetAsteroid));
+        StartCoroutine(WarpToPlayerNearPosition(targetAsteroid));
         _playerMove.enabled = false;
         ReticleController.Instance.GetCanvas().enabled = false;
         Pauser.SoftPause();
@@ -319,7 +329,7 @@ public class KillCameraScript : MonoBehaviour
 
         _conflictTooltip.SetTooltipActive(true , false);
 
-        yield return new WaitForSeconds(_resetDelay);
+        yield return new WaitForSeconds(_conflictEventCamResetDelay);
         CFCameraReset();
     }
 

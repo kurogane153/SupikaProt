@@ -15,6 +15,12 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private RadialBlur _mainCameraRadialBlur;
     [SerializeField] private BoostEffect _boostEffect;
 
+    [Header("サウンド系")]
+    [SerializeField] private SoundPlayer _soundPlayer;
+    [SerializeField] private AudioClip _se_SpeedUp;
+    [SerializeField] private AudioClip _se_SpeedUpNormal;
+    [SerializeField] private AudioClip _se_SpeedDown;
+
     [Space(10)]
     [SerializeField, Tooltip("地球")] private Transform _earthTransform;
     [SerializeField, Tooltip("コロニー")] private Transform _colonyTransform;
@@ -98,6 +104,13 @@ public class PlayerMove : MonoBehaviour
         if (_boostEffect == null) {
             _boostEffect = GetComponentInChildren<BoostEffect>();
             Debug.Log(gameObject.name + "がBoostEffectをGetComponentInChildrenで取得した");
+        }
+
+        if (_soundPlayer == null) {
+            if ((_soundPlayer = GetComponentInChildren<SoundPlayer>()) == null) {
+                Debug.LogError(gameObject.name + "の" + nameof(_soundPlayer) + "が空です");
+            }
+            Debug.Log(gameObject.name + "は、子要素にアタッチされているAudioSourceを自動的に" + nameof(_soundPlayer) + "にアタッチしました");
         }
 
         OrbitVarChange();
@@ -252,6 +265,11 @@ public class PlayerMove : MonoBehaviour
         OrbitOriginSwitch();
         OrbitVarChange();
 
+        if (speedChangeTimeRemain <= 0f) {
+            _playerAnimation.ChangeOrbit();
+            speedChangeTimeRemain = _speedChangeDelay;
+        }
+
         isAcceptedOrbitChange = false;
     }
 
@@ -291,11 +309,16 @@ public class PlayerMove : MonoBehaviour
         if(beforennum != periodNum && periodNum == _periods.Length - 1) {
             _mainCameraRadialBlur.EnableRadialBlur();
             _boostEffect.PlayBoostParticles();
+            _soundPlayer.PlaySE(_se_SpeedUp);
+        } else {
+            _soundPlayer.PlaySE(_se_SpeedUpNormal);
         }
 
         period = _periods[periodNum];
         _playerAnimation.Spiral();
         speedChangeTimeRemain = _speedChangeDelay;
+
+        
     }
 
     private void SpeedDown()
@@ -314,6 +337,8 @@ public class PlayerMove : MonoBehaviour
         period = _periods[periodNum];
         _playerAnimation.AcrobatLoop();
         speedChangeTimeRemain = _speedChangeDelay;
+
+        _soundPlayer.PlaySE(_se_SpeedDown);
     }    
 
     private void Dbg()

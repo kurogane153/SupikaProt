@@ -1991,6 +1991,8 @@ MonoBehaviour:
   _firstShotNumber: 0
   _defaultSettingsNumber: 0
   _killCamSettingsNumber: 2
+  _followKillCamMultiTargetMissilesCount: 0
+  _followKillCamMissileNum: 0
   _missileShotSettings:
   - _missileShotPower:
     - 175

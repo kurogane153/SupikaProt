@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4131981175250095918}
   - component: {fileID: 4131981175250095917}
   - component: {fileID: 5569911789903729136}
-  - component: {fileID: -3535628464323787941}
   - component: {fileID: 3070310804370802117}
   m_Layer: 13
   m_Name: AsteroidCollider2
@@ -64,19 +63,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &-3535628464323787941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4131981175250095919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe42b7f859a03674b8f5ac772538b081, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _killCameraPause: 1
 --- !u!114 &3070310804370802117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,3 +78,4 @@ MonoBehaviour:
   _targetButtonPrefab: {fileID: 52382856474990220, guid: 6726b52a99ff5dc46b98bfcfb07842a5,
     type: 3}
   _reticleRectSizeScaling: 1
+  _hp: 100

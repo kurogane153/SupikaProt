@@ -63,9 +63,15 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private GameObject _missilePrefab;
     [SerializeField] private int _missileDamage = 1;
     [SerializeField, Tooltip("初回発射時の設定番号")] private int _firstShotNumber = 0;
-    [SerializeField, Tooltip("デフォルトのミサイル設定")] private int _defaultSettingsNumber;
+    [SerializeField, Tooltip("例外時デフォルトのミサイル設定")] private int _defaultSettingsNumber;
     [SerializeField, Tooltip("キルカメラ時ミサイル設定")] private int _killCamSettingsNumber;
-    [SerializeField] private MissileShotSettings[] _missileShotSettings;
+    
+    [Header("下段にそのグループ内の何発目のミサイルに追従するか指定できる")]
+    [Header("上段に何回目に発射されたミサイルのグループにキルカメラが追従するか")]
+    [SerializeField, Tooltip("何回目に生成されたミサイルのグループにカメラが追従するか")] private int _followKillCamMultiTargetMissilesCount;
+    [SerializeField, Tooltip("キルカメラ時何番目に生成されたミサイルをカメラが追従するか")] private int _followKillCamMissileNum;
+
+    [SerializeField, Space(10)] private MissileShotSettings[] _missileShotSettings;
 
     private PlayerMove playerMove;
     private Transform targetAsteroidCollider;
@@ -266,7 +272,7 @@ public class PlayerShot : MonoBehaviour
 
         int i = 0;
         int count = 0;
-        bool isLastInstantiate;
+        bool isKillCamFollow;
 
         foreach (var tgt in reticles) {
 
@@ -281,14 +287,15 @@ public class PlayerShot : MonoBehaviour
 
             // リロード用
             if (_reloadFlags) {
-                isLastInstantiate = count == reticles.Length || missileNum <= 0;
+                isKillCamFollow = count == reticles.Length || missileNum <= 0;
             } else {
-                isLastInstantiate = count == 1 && reticles.Length >= _killCameraActiveCount;
+                // 何回目に生成されたミサイル群にカメラが追従するか
+                isKillCamFollow = count == _followKillCamMultiTargetMissilesCount - 1 && reticles.Length >= _killCameraActiveCount;
             }
 
 
             foreach (var hp in _missileShotSettings[arynum]._halfwayPoints) {
-                StartCoroutine(MissileInstantiate(tgt.Target, i++, count, isLastInstantiate, arynum));
+                StartCoroutine(MissileInstantiate(tgt.Target, i++, count, isKillCamFollow, arynum));
             }
             yield return new WaitForSeconds(_missileShotSettings[arynum]._multiTargetMissileDelay);
             i = 0;
@@ -301,16 +308,17 @@ public class PlayerShot : MonoBehaviour
 
     }
 
-    private IEnumerator MissileInstantiate(Transform target, int index, int count, bool islastinstantiate, int arynum)
+    private IEnumerator MissileInstantiate(Transform target, int index, int count, bool isKillCamFollow, int arynum)
     {
         yield return new WaitForSeconds(_missileShotSettings[arynum]._instantiateTimes[index]);
         GameObject missile = MissileShot(target, _missileShotSettings[arynum]._halfwayPoints[index], _missileShotSettings[arynum]._impactTimes[index], index, arynum);
 
-        if (islastinstantiate && index == _missileShotSettings[arynum]._halfwayPoints.Length - 1) {
+        if (isKillCamFollow && index == _followKillCamMissileNum - 1) {
 
             _killCamera.SetFollowMissile(missile);
 
         }
+        
     }
 
     /// <summary>

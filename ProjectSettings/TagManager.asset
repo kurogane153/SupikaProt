@@ -11,6 +11,7 @@ TagManager:
   - SabCamera
   - AsteroidTargetCollider
   - SubCamera
+  - BGMManager
   layers:
   - Default
   - TransparentFX

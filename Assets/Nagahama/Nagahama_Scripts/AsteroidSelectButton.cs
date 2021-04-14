@@ -38,7 +38,7 @@ public class AsteroidSelectButton : MonoBehaviour
 
     void Update()
     {
-        if (_target != null) {
+        if (_target != null && _target.gameObject.activeSelf) {
             TargetLockOnMove();
         } else {
             if (_destroyOnScreenOut) {

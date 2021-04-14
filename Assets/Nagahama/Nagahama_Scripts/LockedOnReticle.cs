@@ -9,6 +9,7 @@ public class LockedOnReticle : MonoBehaviour
     private RectTransform rectTransform;
     private Transform target;
     private Camera mainCamera;
+    private TargetCollider targetCollider;
 
     public Transform Target
     {
@@ -30,7 +31,7 @@ public class LockedOnReticle : MonoBehaviour
 
     void Update()
     {
-        if(target != null) {
+        if(target != null && targetCollider.gameObject.activeSelf) {
             TargetLockOnMove();
         } else {
             ReticleController.Instance.GeneratedReticleCount -= 1;
@@ -44,6 +45,7 @@ public class LockedOnReticle : MonoBehaviour
         this.canvas = canvas;
         Target = target;
         mainCamera = maincamera;
+        targetCollider = target.GetComponent<TargetCollider>();
 
         transform.SetParent(canvas.transform);
     }
