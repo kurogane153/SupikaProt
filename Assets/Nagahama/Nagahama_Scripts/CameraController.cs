@@ -47,11 +47,16 @@ public class CameraController : MonoBehaviour
             var diff = Time.timeSinceLevelLoad - startTime;
             var lerpRate = diff / _orbitShiftDelayTime;
             orbitShiftRotWaitTime -= Time.deltaTime;
-            posLerpFactor = Mathf.Lerp(posLerpFactor, _lerpFactor, lerpRate);
-            rotLerpFactor = Mathf.Lerp(rotLerpFactor, _rotLerpFactor, lerpRate);
+            posLerpFactor = Mathf.Lerp(_orbitShiftPostionLerpFactor, _lerpFactor, lerpRate);
+            rotLerpFactor = Mathf.Lerp(_orbitShiftRotationLerpFactor, _rotLerpFactor, lerpRate);
+
+            if(orbitShiftRotWaitTime <= 0) {
+                posLerpFactor = _lerpFactor;
+                rotLerpFactor = _rotLerpFactor;
+                orbitShiftRotWaitTime = 0;
+            }
         } else {
-            posLerpFactor = _lerpFactor;
-            rotLerpFactor = _rotLerpFactor;
+            
         }
         
     }
