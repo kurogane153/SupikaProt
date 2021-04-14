@@ -30,7 +30,7 @@ public class AlertLine : MonoBehaviour
 
     [Header("ArertTextObject")]
     public GameObject ArertText = null; // Textオブジェクト
-    public bool _alertflg;
+    private bool _alertflg;
 
     private GameObject _asteroid;
 
@@ -56,9 +56,12 @@ public class AlertLine : MonoBehaviour
     {
         if (collision.gameObject.tag == "Asteroid")
         {
-            DelayMethod();
-            ArertText.SetActive(true);
-            _asteroid = collision.gameObject;
+            if (!_alertflg)
+            {
+                DelayMethod();
+                ArertText.SetActive(true);
+                _asteroid = collision.gameObject;
+            }
         }
     }
 
@@ -66,9 +69,10 @@ public class AlertLine : MonoBehaviour
     {
         _alertflg = true;
 
-        //GameObject _cusor = Instantiate(Cursor);
-        //_cusor.transform.parent = Player.transform;
-        //_cusor.transform.position = Player.transform.position;
+        GameObject _cusor = Instantiate(Cursor);
+        _cusor.transform.parent = Player.transform;
+        _cusor.transform.position = Player.transform.position;
+        _cusor.GetComponent<AlertCursorAngle>().SetAlertPos(this.gameObject);
 
         if (Spikaflg)
         {

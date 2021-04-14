@@ -46,6 +46,11 @@ public class AsteroidScript : MonoBehaviour
         _speed = speed;
     }
 
+    public int GetAsteroidNumber()
+    {
+        return _asteroidnumber;
+    }
+
     // 隕石にダメージを与える
     public void ReceiveDamage(int damage)
     {

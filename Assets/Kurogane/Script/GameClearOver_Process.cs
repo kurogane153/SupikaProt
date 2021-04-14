@@ -11,6 +11,7 @@ public class GameClearOver_Process : MonoBehaviour
     private int GameOverCountSpika = 0;
     public static int GameClearCount = 0;
     public static bool isclear = false;
+    public bool Spikafig = false;
 
     public GameObject GameOverCountText = null; // Textオブジェクト
     public GameObject GameOverCountTextSpika = null; // Textオブジェクト
@@ -54,8 +55,13 @@ public class GameClearOver_Process : MonoBehaviour
     void Update()
     {
 
-        if (GameOverCount >= GameOverAsteroid || GameOverCountSpika >= GameOverAsteroid)
+        if (GameOverCount >= GameOverAsteroid)
         { 
+            Invoke("DelayMethod", 3.0f);
+        }
+
+        if (GameOverCountSpika >= GameOverAsteroid)
+        {
             Invoke("DelayMethod", 3.0f);
         }
 
@@ -68,15 +74,13 @@ public class GameClearOver_Process : MonoBehaviour
         GameOverCountText.GetComponent<Text>().text = "地球滅亡まで残り:" + (GameOverAsteroid - GameOverCount);
         GameOverCountTextSpika.GetComponent<Text>().text = "コロニー滅亡まで残り:" + (GameOverAsteroid - GameOverCountSpika);
         GameClearCountText.GetComponent<Text>().text = "防衛成功まで残り:" + (GameClearAsteroid - GameClearCount);
-                
-        Debug.Log(GameOverCountSpika);
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Asteroid")
         {
-            HitGameOverCount();
+            HitGameOverCount(other);
             // 長浜変更点↓
             // 衝突した隕石の座標を取得、地球から隕石へのベクトルを作り
             // そのベクトルを長くして衝突イベントカメラが来てほしい座標を作る
@@ -91,15 +95,20 @@ public class GameClearOver_Process : MonoBehaviour
         }
     }
 
-    void HitGameOverCount()
+    void HitGameOverCount(Collider asteroid)
     {
-        if (this.gameObject.tag == "Earth")
+        if (Spikafig)
         {
-            GameOverCountSpika++;
+            if(asteroid.GetComponent<AsteroidScript>().GetAsteroidNumber() == AsteroidWaveManager._asteroidnum)
+            {
+            }
+            else
+            {
+                GameOverCountSpika++;
+            }  
         }
         else
         {
-            GameOverCountTextSpika.GetComponent<Text>().gameObject.SetActive(false);
             GameOverCount++;
         }
     }
