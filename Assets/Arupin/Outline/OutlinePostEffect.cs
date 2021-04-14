@@ -31,7 +31,7 @@ public class OutlinePostEffect : MonoBehaviour
         _maskCamera.backgroundColor = Color.black;
         _maskCamera.clearFlags = CameraClearFlags.Nothing;
 
-        _maskCamera.cullingMask = 1 << LayerMask.NameToLayer("Outline");
+        _maskCamera.cullingMask = 1 << LayerMask.NameToLayer("Asteroid");
 
         RenderTexture activeRT = RenderTexture.active;
         RenderTexture.active = _maskRT;
