@@ -6636,8 +6636,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6015f8cebcc9e71418f2e1f1bb84a00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spikafig: 0
-  GameOverCountText: {fileID: 438071598}
+  Spikafig: 1
+  GameOverCountText: {fileID: 1114204702}
   GameOverCountTextSpika: {fileID: 1946261730}
   GameClearCountText: {fileID: 853597969}
   ConflictEventCamera: {fileID: 5054093583828618424}
@@ -9055,7 +9055,7 @@ PrefabInstance:
         type: 3}
       propertyPath: GameOverCountTextSpika
       value: 
-      objectReference: {fileID: 1114204702}
+      objectReference: {fileID: 226417542}
     - target: {fileID: 6582865643300284313, guid: 50d9282d5cb6e1549bb142219f1b7c00,
         type: 3}
       propertyPath: m_RootOrder

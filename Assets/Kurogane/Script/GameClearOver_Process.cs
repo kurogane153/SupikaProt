@@ -93,6 +93,7 @@ public class GameClearOver_Process : MonoBehaviour
 
             ConflictEventCamera.ConflictEventCameraActive(gameObject, desiredPos);
         }
+        Debug.Log(GameOverCountSpika);
     }
 
     void HitGameOverCount(Collider asteroid)
