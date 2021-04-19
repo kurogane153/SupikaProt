@@ -92,6 +92,21 @@ public class EnemyGenerator : MonoBehaviour
         time += Time.deltaTime;
 
         AsteroidInstens();
+        dbg();
+    }
+
+    void dbg()
+    {
+        if (isRendered)
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                //enemyをインスタンス化する(生成する)
+                GameObject asteroid = Instantiate(enemyPrefab);
+                //生成した敵の位置をランダムに設定する
+                asteroid.transform.position = GetRandomPosition();
+            }
+        }
     }
 
     void AsteroidInstens()
@@ -122,14 +137,14 @@ public class EnemyGenerator : MonoBehaviour
                         time = 0f;
                         //次に発生する時間間隔を決定する
                         interval = GetRandomTime();
-                        isRendered = false;
+                        //isRendered = false;
                         _asteroidwavemanager.SetWaveAsteroidCount(1);
                         _asteroidWaveCount++;
                     }
                     else
                     {
                         interval = GetRandomTime();
-                        isRendered = false;
+                        //isRendered = false;
                         time = 0f;
                     }
                 }

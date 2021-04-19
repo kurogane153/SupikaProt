@@ -115,7 +115,6 @@ public class AsteroidWaveManager : MonoBehaviour
                     _asteroidwavecount++;
                     _wave = _wavecount.SECOND;
                     _waveAsteroid = _waveAsteroidcount[1];
-                    _gameCOProcess.SetGameClearCount(0);
                     Invoke("DelayChangeWave", drawingTime);
                 }
                 
@@ -128,7 +127,6 @@ public class AsteroidWaveManager : MonoBehaviour
                     _asteroidwavecount++;
                     _wave = _wavecount.THIRD;
                     _waveAsteroid = _waveAsteroidcount[2];
-                    _gameCOProcess.SetGameClearCount(0);
                     Invoke("DelayChangeWave", drawingTime);
 
                 }
@@ -142,7 +140,6 @@ public class AsteroidWaveManager : MonoBehaviour
                     _asteroidwavecount++;
                     _wave = _wavecount.FORTH;
                     _waveAsteroid = _waveAsteroidcount[3];
-                    _gameCOProcess.SetGameClearCount(0);
                     Invoke("DelayChangeWave", drawingTime);
                 }
                 
@@ -152,8 +149,8 @@ public class AsteroidWaveManager : MonoBehaviour
 
                 if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
                 {
-                    _waveAsteroidInstansCount = 0;
-                    _asteroidinstansflg = false;
+                    //_waveAsteroidInstansCount = 0;
+                    //_asteroidinstansflg = false;
                 }
 
                 break;
@@ -164,6 +161,7 @@ public class AsteroidWaveManager : MonoBehaviour
     {
         _asteroidinstansflg = false;
         _waveAsteroidInstansCount = 0;
+        _gameCOProcess.SetGameClearCount(0);
     }
 
     public int GetAsteroidWaveCount()
