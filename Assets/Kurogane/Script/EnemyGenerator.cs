@@ -23,10 +23,10 @@ public class EnemyGenerator : MonoBehaviour
 
     [Header("Set Interval Min and Max")]
     //時間間隔の最小値
-    [Range(1f, 10f)]
+    [Range(0f, 1f)]
     public float minTime = 2f;
     //時間間隔の最大値
-    [Range(10f, 30f)]
+    [Range(0f, 30f)]
     public float maxTime = 5f;
     
     [Header("隕石の速さ")]
@@ -66,6 +66,8 @@ public class EnemyGenerator : MonoBehaviour
     //経過時間
     private float time = 0f;
 
+    private int _asteroidWaveCount = 0;
+
     //カメラに表示されているか
     private bool isRendered = false;
 
@@ -99,38 +101,44 @@ public class EnemyGenerator : MonoBehaviour
         {
             if (_asteroidspawntrigger.GetAreaTrigger())
             {
-                if (!_asteroidwavemanager.GetAsteroidInstansFlg())
+                if (_asteroidWaveCount < _asteroidwavemanager.GetAsteroidWaveCount())
                 {
-                    //enemyをインスタンス化する(生成する)
-                    GameObject asteroid = Instantiate(enemyPrefab);
-                    //生成した敵の位置をランダムに設定する
-                    asteroid.transform.position = GetRandomPosition();
-
-                    if (Spikaflg)
+                    if (!_asteroidwavemanager.GetAsteroidInstansFlg())
                     {
-                        asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, SpikaPos);
+                        //enemyをインスタンス化する(生成する)
+                        GameObject asteroid = Instantiate(enemyPrefab);
+                        //生成した敵の位置をランダムに設定する
+                        asteroid.transform.position = GetRandomPosition();
+
+                        if (Spikaflg)
+                        {
+                            asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, SpikaPos);
+                        }
+                        else
+                        {
+                            asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, EarthPos);
+                        }
+                        //経過時間を初期化して再度時間計測を始める
+                        time = 0f;
+                        //次に発生する時間間隔を決定する
+                        interval = GetRandomTime();
+                        isRendered = false;
+                        _asteroidwavemanager.SetWaveAsteroidCount(1);
+                        _asteroidWaveCount++;
                     }
                     else
                     {
-                        asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, EarthPos);
+                        interval = GetRandomTime();
+                        isRendered = false;
+                        time = 0f;
                     }
-                    //経過時間を初期化して再度時間計測を始める
-                    time = 0f;
-                    //次に発生する時間間隔を決定する
-                    interval = GetRandomTime();
-                    isRendered = false;
-                    _asteroidwavemanager.SetWaveAsteroidCount(1);
-                }
-                else
-                {
-                    interval = GetRandomTime();
-                    isRendered = false;
-                    time = 0f;
                 }
             }
+            else
+            {
+                _asteroidWaveCount = 0;
+            }
         }
-
-        Debug.Log(_asteroidspawntrigger.GetAreaTrigger());
     }
 
     //ランダムな時間を生成する関数

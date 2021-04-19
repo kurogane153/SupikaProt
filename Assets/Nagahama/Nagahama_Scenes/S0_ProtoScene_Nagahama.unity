@@ -888,12 +888,12 @@ PrefabInstance:
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: maxTime
-      value: 20
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: minTime
-      value: 7
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -1483,8 +1483,8 @@ MonoBehaviour:
   Spika: {fileID: 329334729}
   Earth: {fileID: 897722549}
   Spikaflg: 0
-  minTime: 7
-  maxTime: 20
+  minTime: 0.5
+  maxTime: 0.8
   _spawnedAsteroidSpeed: 40
   xMinPosition: -500
   xMaxPosition: 500
@@ -2269,12 +2269,12 @@ PrefabInstance:
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: maxTime
-      value: 20
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: minTime
-      value: 7
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -3275,12 +3275,12 @@ PrefabInstance:
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: maxTime
-      value: 20
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: minTime
-      value: 7
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9219880407686493097, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -3660,6 +3660,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Asteroid_01_S (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910420717885757576, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
         type: 3}

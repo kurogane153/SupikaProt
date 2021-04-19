@@ -12,14 +12,13 @@ public class AsterdSpawnTrigger : MonoBehaviour
         _areaflg = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             _areaflg = true;
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")

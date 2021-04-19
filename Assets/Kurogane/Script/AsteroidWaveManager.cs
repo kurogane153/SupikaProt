@@ -29,6 +29,9 @@ public class AsteroidWaveManager : MonoBehaviour
     //隕石の速さ
     public float _spawnedAsteroidSpeed = 50f;
 
+    [Header("アラートの秒数")]
+    public int drawingTime = 3;
+
     private int[] _waveAsteroidcount = new int[4] { 7, 10, 10, 20};
 
     private Vector3 _spikaPos;
@@ -38,6 +41,8 @@ public class AsteroidWaveManager : MonoBehaviour
 
     public static bool _instansflg = false;
     public static int _asteroidnum = 5;
+
+    private int _asteroidwavecount;
 
     private int _waveAsteroid;
     private int _waveAsteroidInstansCount;
@@ -63,7 +68,8 @@ public class AsteroidWaveManager : MonoBehaviour
         _spikaPos = new Vector3(_spika.transform.position.x, 0, 0);
         _earthPos = new Vector3(_earth.transform.position.x, 0, 0);
         _wave = _wavecount.FAST;
-
+        _asteroidwavecount = 2;
+        _waveAsteroid = _waveAsteroidcount[0];
     }
 
     void Update()
@@ -91,6 +97,7 @@ public class AsteroidWaveManager : MonoBehaviour
                 asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, _earthPos);
                 asteroid2.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, _earthPos);
             }
+            SetWaveAsteroidCount(2);
         }
         _instansflg = false;
         _instantiatePosition = new Vector3(0, 0, 0);
@@ -101,50 +108,46 @@ public class AsteroidWaveManager : MonoBehaviour
         switch (_wave)
         {
             case _wavecount.FAST:
-                _waveAsteroid = _waveAsteroidcount[0];
-                if(_waveAsteroidInstansCount >= _waveAsteroid)  _asteroidinstansflg = true;
+                if (_waveAsteroidInstansCount >= _waveAsteroid)  _asteroidinstansflg = true;
                 
                 if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
                 {
-                    _waveAsteroid = _waveAsteroidcount[1];
-                    _waveAsteroidInstansCount = 0;
+                    _asteroidwavecount++;
                     _wave = _wavecount.SECOND;
-                    _asteroidinstansflg = false;
+                    _waveAsteroid = _waveAsteroidcount[1];
                     _gameCOProcess.SetGameClearCount(0);
+                    Invoke("DelayChangeWave", drawingTime);
                 }
                 
                 break;
             case _wavecount.SECOND:
-                _waveAsteroid = _waveAsteroidcount[1];
                 if (_waveAsteroidInstansCount >= _waveAsteroid) _asteroidinstansflg = true;
 
                 if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
                 {
-                    _waveAsteroid = _waveAsteroidcount[2];
-                    _waveAsteroidInstansCount = 0;
+                    _asteroidwavecount++;
                     _wave = _wavecount.THIRD;
-                    _asteroidinstansflg = false;
+                    _waveAsteroid = _waveAsteroidcount[2];
                     _gameCOProcess.SetGameClearCount(0);
+                    Invoke("DelayChangeWave", drawingTime);
 
                 }
                 
                 break;
             case _wavecount.THIRD:
-                _waveAsteroid = _waveAsteroidcount[2];
                 if (_waveAsteroidInstansCount >= _waveAsteroid) _asteroidinstansflg = true;
 
                 if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
                 {
-                    _waveAsteroid = _waveAsteroidcount[3];
-                    _waveAsteroidInstansCount = 0;
+                    _asteroidwavecount++;
                     _wave = _wavecount.FORTH;
-                    _asteroidinstansflg = false;
+                    _waveAsteroid = _waveAsteroidcount[3];
                     _gameCOProcess.SetGameClearCount(0);
+                    Invoke("DelayChangeWave", drawingTime);
                 }
                 
                 break;
             case _wavecount.FORTH:
-                _waveAsteroid = _waveAsteroidcount[3];
                 if (_waveAsteroidInstansCount >= _waveAsteroid) _asteroidinstansflg = true;
 
                 if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
@@ -155,6 +158,17 @@ public class AsteroidWaveManager : MonoBehaviour
 
                 break;
         }
+    }
+
+    private void DelayChangeWave()
+    {
+        _asteroidinstansflg = false;
+        _waveAsteroidInstansCount = 0;
+    }
+
+    public int GetAsteroidWaveCount()
+    {
+        return _asteroidwavecount;
     }
 
     public int GetWaveCount()
@@ -181,7 +195,8 @@ public class AsteroidWaveManager : MonoBehaviour
     {
         _waveText.GetComponent<Text>().text = "ウエーブ：" + (int)_wave + "\n" 
             + "ウエーブの隕石：" +_waveAsteroid + "\n" +"隕石破壊数：" + _gameCOProcess.GetGameClearCount() + "\n"
-            + "生成した隕石の数：" + _waveAsteroidInstansCount + "\n" + "隕石生成のフラグ：" + _asteroidinstansflg;
+            + "生成した隕石の数：" + _waveAsteroidInstansCount + "\n" + "隕石生成のフラグ：" + _asteroidinstansflg +
+            "\n" + "１スポナー事の生成数：" + _asteroidwavecount;
         //Debug.Log("ウエーブ：" + _wave);
         //Debug.Log("ウエーブの隕石：" + _waveAsteroid);
         //Debug.Log("隕石破壊数：" + _gameCOProcess.GetGameClearCount());
