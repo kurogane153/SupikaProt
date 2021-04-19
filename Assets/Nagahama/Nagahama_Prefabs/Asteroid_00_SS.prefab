@@ -313,10 +313,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2897645482437094442, guid: c876aeb83812c674698728586e90f314,
+        type: 3}
+      propertyPath: simulationSpeed
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3735336275023714322, guid: c876aeb83812c674698728586e90f314,
         type: 3}
       propertyPath: m_Name
       value: MeteorEffects
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812029116244905673, guid: c876aeb83812c674698728586e90f314,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c876aeb83812c674698728586e90f314, type: 3}

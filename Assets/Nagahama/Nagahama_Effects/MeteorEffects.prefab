@@ -117,6 +117,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5002562471144793428, guid: 5786469967b39314b9ebe4d9407dde5b,
         type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002562471144793428, guid: 5786469967b39314b9ebe4d9407dde5b,
+        type: 3}
       propertyPath: stopAction
       value: 1
       objectReference: {fileID: 0}
@@ -250,6 +255,16 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.m_NumColorKeys
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5002562471144793428, guid: 5786469967b39314b9ebe4d9407dde5b,
+        type: 3}
+      propertyPath: startDelay.maxCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002562471144793428, guid: 5786469967b39314b9ebe4d9407dde5b,
+        type: 3}
+      propertyPath: startDelay.maxCurve.m_Curve.Array.data[1].value
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5786469967b39314b9ebe4d9407dde5b, type: 3}
 --- !u!4 &1036516572710523532 stripped
@@ -265,6 +280,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1320170520340854339}
     m_Modifications:
+    - target: {fileID: 1094517844719955621, guid: cf15314fbcec93249b6766aff950f54d,
+        type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1094517844719955621, guid: cf15314fbcec93249b6766aff950f54d,
         type: 3}
       propertyPath: stopAction
@@ -344,6 +364,16 @@ PrefabInstance:
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key2.r
       value: 0.764151
+      objectReference: {fileID: 0}
+    - target: {fileID: 1094517844719955621, guid: cf15314fbcec93249b6766aff950f54d,
+        type: 3}
+      propertyPath: startDelay.maxCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1094517844719955621, guid: cf15314fbcec93249b6766aff950f54d,
+        type: 3}
+      propertyPath: startDelay.maxCurve.m_Curve.Array.data[1].value
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5764278430822772652, guid: cf15314fbcec93249b6766aff950f54d,
         type: 3}
@@ -507,6 +537,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5272609455242490404, guid: fd5619a836c985f45a88f5b7b223d8c5,
         type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272609455242490404, guid: fd5619a836c985f45a88f5b7b223d8c5,
+        type: 3}
       propertyPath: stopAction
       value: 1
       objectReference: {fileID: 0}
@@ -639,6 +674,16 @@ PrefabInstance:
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key3.r
       value: 0.9811321
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272609455242490404, guid: fd5619a836c985f45a88f5b7b223d8c5,
+        type: 3}
+      propertyPath: startDelay.maxCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272609455242490404, guid: fd5619a836c985f45a88f5b7b223d8c5,
+        type: 3}
+      propertyPath: startDelay.maxCurve.m_Curve.Array.data[1].value
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6494704887957532587, guid: fd5619a836c985f45a88f5b7b223d8c5,
         type: 3}

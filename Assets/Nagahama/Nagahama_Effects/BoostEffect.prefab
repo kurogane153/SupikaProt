@@ -157,6 +157,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5002562471144793428, guid: 5786469967b39314b9ebe4d9407dde5b,
         type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002562471144793428, guid: 5786469967b39314b9ebe4d9407dde5b,
+        type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
       value: 0.11764706
       objectReference: {fileID: 0}
@@ -501,6 +506,11 @@ PrefabInstance:
         type: 3}
       propertyPath: SizeBySpeedModule.z.minMaxState
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272609455242490404, guid: fd5619a836c985f45a88f5b7b223d8c5,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5272609455242490404, guid: fd5619a836c985f45a88f5b7b223d8c5,
         type: 3}
