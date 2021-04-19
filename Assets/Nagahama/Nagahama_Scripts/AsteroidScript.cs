@@ -11,6 +11,7 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField] private int _hp = 6;
     [SerializeField] private float _speed = 5f;
     [SerializeField] private bool _isRotation = false;      // 浮遊中に隕石が自転するか
+    [SerializeField] private bool _startLookAtTarget;       // 生成時ターゲットに向くか
     [SerializeField] private Vector3 _rotationAxis;         // 自転の回転軸
     [SerializeField] private float _rotationSpeed = 5f;     // 回転速度
     
@@ -74,12 +75,19 @@ public class AsteroidScript : MonoBehaviour
     public void SetTargetPosition(Vector3 pos)
     {
         targetPosition = pos;
+
+        if (_startLookAtTarget) {
+            transform.LookAt(targetPosition);
+        }
+        
     }
 
     void Start()
     {
         StartCoroutine(nameof(AutoDestroy));
         Debug.Log(gameObject.name + "の自動消滅まで：" + _destroyTime + "秒");
+
+        
     }
 
     void Update()
