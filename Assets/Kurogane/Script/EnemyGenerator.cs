@@ -59,7 +59,7 @@ public class EnemyGenerator : MonoBehaviour
 
     public AsteroidWaveManager _asteroidwavemanager;
 
-    private int _asteroidInstansCount;
+    public AsterdSpawnTrigger _asteroidspawntrigger;
 
     //敵生成時間間隔
     private float interval;
@@ -97,7 +97,7 @@ public class EnemyGenerator : MonoBehaviour
         //経過時間が生成時間になったとき(生成時間より大きくなったとき)
         if (time > interval)
         {
-            if (isRendered)
+            if (_asteroidspawntrigger.GetAreaTrigger())
             {
                 if (!_asteroidwavemanager.GetAsteroidInstansFlg())
                 {
@@ -129,6 +129,8 @@ public class EnemyGenerator : MonoBehaviour
                 }
             }
         }
+
+        Debug.Log(_asteroidspawntrigger.GetAreaTrigger());
     }
 
     //ランダムな時間を生成する関数
