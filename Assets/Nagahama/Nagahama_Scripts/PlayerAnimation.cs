@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     private Animator animator;
+    private float animationWaitTime;
 
     private void Awake()
     {
@@ -21,23 +22,34 @@ public class PlayerAnimation : MonoBehaviour
         
     }
 
-    public void SetTrigger(string name)
+    private void FixedUpdate()
     {
-        animator.SetTrigger(name);
+        if (0f < animationWaitTime) {
+            animationWaitTime -= Time.deltaTime;
+        }
     }
 
-    public void AcrobatLoop()
+    public void SetTrigger(string name, float animTime)
     {
-        animator.SetTrigger("AcrobatLoop");
+        if (animationWaitTime <= 0) {
+            animator.SetTrigger(name);
+        }
+        
+        animationWaitTime = animTime;
     }
 
-    public void Spiral()
+    public void AcrobatLoop(float animTime)
     {
-        animator.SetTrigger("Spiral");
+        SetTrigger("AcrobatLoop", animTime);
     }
 
-    public void ChangeOrbit()
+    public void Spiral(float animTime)
     {
-        animator.SetTrigger("ChangeOrbit");
+        SetTrigger("Spiral", animTime);
+    }
+
+    public void ChangeOrbit(float animTime)
+    {
+        SetTrigger("ChangeOrbit", animTime);
     }
 }

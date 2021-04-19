@@ -122,8 +122,6 @@ public class PlayerMove : MonoBehaviour
         SpeedControllInput();       // 速度変更操作を受け付けます
         AcceptOrbitOriginChange();  // 軌道変更操作を受け付けます
 
-        TimeRemainManege();         // クールタイムなどが0より上の数値なら減らします
-
         MoveMent();                 // プレイヤーの移動処理
         UpdateNowAngle();           // プレイヤーの回転処理
 
@@ -135,7 +133,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        TimeRemainManege();         // クールタイムなどが0より上の数値なら減らします
     }
 
     private void TimeRemainManege()
@@ -266,7 +264,7 @@ public class PlayerMove : MonoBehaviour
         OrbitVarChange();
 
         if (speedChangeTimeRemain <= 0f) {
-            _playerAnimation.ChangeOrbit();
+            _playerAnimation.ChangeOrbit(_speedChangeDelay);
             speedChangeTimeRemain = _speedChangeDelay;
         }
 
@@ -315,7 +313,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         period = _periods[periodNum];
-        _playerAnimation.Spiral();
+        _playerAnimation.Spiral(_speedChangeDelay);
         speedChangeTimeRemain = _speedChangeDelay;
 
         
@@ -335,7 +333,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         period = _periods[periodNum];
-        _playerAnimation.AcrobatLoop();
+        _playerAnimation.AcrobatLoop(_speedChangeDelay);
         speedChangeTimeRemain = _speedChangeDelay;
 
         _soundPlayer.PlaySE(_se_SpeedDown);

@@ -8,6 +8,7 @@ public class PlayerShot : MonoBehaviour
     [System.Serializable]
     public class MissileShotSettings
     {
+
         [SerializeField, Tooltip("ミサイルの発射時初速")] 
         public float[] _missileShotPower;
 
@@ -16,6 +17,12 @@ public class PlayerShot : MonoBehaviour
 
         [SerializeField, Tooltip("複数ターゲット発射時、次ターゲット発射までの待機時間")]
         public float _multiTargetMissileDelay;
+
+        [SerializeField, Tooltip("アニメーショントリガーの名前")]
+        public string _animationTriggerName;
+
+        [SerializeField, Tooltip("アニメーションの長さ")]
+        public float _animWaitTime;
 
         [SerializeField, Tooltip("ミサイルの発射方向")]
         public Transform[] _halfwayPoints;
@@ -254,6 +261,10 @@ public class PlayerShot : MonoBehaviour
             if(num == _killCamSettingsNumber) {
                 num = _defaultSettingsNumber;
             }
+        }
+
+        if(_missileShotSettings[num]._animationTriggerName != null) {
+            _playerAnimation.SetTrigger(_missileShotSettings[num]._animationTriggerName, _missileShotSettings[num]._animWaitTime);
         }        
 
         StartCoroutine(MultiTargetMissileInstantiate(reticles, num));
