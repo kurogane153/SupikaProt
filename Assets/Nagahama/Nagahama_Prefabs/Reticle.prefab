@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b6dccb04ceed44e98682d923bca8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debug: 0
   _missileGuage: {fileID: 3904580153728244075}
   _soundPlayer: {fileID: 4063978718862799842}
   _se_LockOn: {fileID: 8300000, guid: ccc5cd169785fc34bb3cceedef0f2ffe, type: 3}
@@ -253,16 +254,19 @@ MonoBehaviour:
   _firstSelectButton: {fileID: 7015361749751168582}
   _mainCamera: {fileID: 0}
   _lockOnColor: {r: 1, g: 0, b: 0, a: 1}
-  _speedX: 40
-  _speedY: 40
-  _reticleRectSizeScaling: 1.03
-  _aimAssistDegreeX: 1
-  _aimAssistDegreeY: 1
+  _speedX: 25
+  _speedY: 25
+  _reticleRectSizeScaling: 0.7
+  _aimAssistDegreeX: 2
+  _aimAssistDegreeY: 2
+  _aimSpeedDecreaseTime: 0.28
+  _aimAssistIntensity: 14
   _aimDeadZoneX: 0.1
   _aimDeadZoneY: 0.1
   _generateReticleMax: 5
   _lockOnTargetOnLockOnButtonDown: 0
   _targetLockonmoveFlags: 1
+  _userSuperAimAssistSystemFlags: 0
 --- !u!114 &1856922241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,7 +615,7 @@ PrefabInstance:
     - target: {fileID: 8819265751437537516, guid: 2b599fe3dd41a0746806869b5c9b1276,
         type: 3}
       propertyPath: m_Volume
-      value: 0.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8819265751437537516, guid: 2b599fe3dd41a0746806869b5c9b1276,
         type: 3}
@@ -910,6 +914,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AsteroidSelectButton
       objectReference: {fileID: 0}
+    - target: {fileID: 52382856474990220, guid: 6726b52a99ff5dc46b98bfcfb07842a5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 52382856474990221, guid: 6726b52a99ff5dc46b98bfcfb07842a5,
         type: 3}
       propertyPath: m_Pivot.x
@@ -948,12 +957,22 @@ PrefabInstance:
     - target: {fileID: 52382856474990221, guid: 6726b52a99ff5dc46b98bfcfb07842a5,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 80
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 52382856474990221, guid: 6726b52a99ff5dc46b98bfcfb07842a5,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 80
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 52382856474990221, guid: 6726b52a99ff5dc46b98bfcfb07842a5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 52382856474990221, guid: 6726b52a99ff5dc46b98bfcfb07842a5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 52382856474990221, guid: 6726b52a99ff5dc46b98bfcfb07842a5,
         type: 3}
@@ -1043,7 +1062,7 @@ PrefabInstance:
     - target: {fileID: 52382856474990226, guid: 6726b52a99ff5dc46b98bfcfb07842a5,
         type: 3}
       propertyPath: _destroyOnScreenOut
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6726b52a99ff5dc46b98bfcfb07842a5, type: 3}
@@ -1060,7 +1079,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 7053072120678770889}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 

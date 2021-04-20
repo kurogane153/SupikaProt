@@ -59,6 +59,9 @@ public class ReticleController : MonoBehaviour
     [Header("Unityのボタン選択の挙動を利用したロックオンシステム"), Space(10)]
     [SerializeField] public bool _userSuperAimAssistSystemFlags;
 
+    [Header("隕石の周辺に照準が来たときプレイヤー入力を減らし、隕石の方向へ移動させる")]
+    [SerializeField] public bool _useSoftAimAssistFlags;
+
     private Canvas canvas;
     private RectTransform canvasRectTransform;
     private RectTransform rectTransform;
@@ -69,6 +72,14 @@ public class ReticleController : MonoBehaviour
     private bool isBeforeTargeting;
     private int generatedReticleCount;
 
+    private float startSpeedX;
+    private float startSpeedY;
+    private float startDegreeX;
+    private float startDegreeY;
+    private float startAssistIntensity;
+    
+
+    #region GetterandSetter
     public int GeneratedReticleCount
     {
         get { return generatedReticleCount; }
@@ -96,6 +107,8 @@ public class ReticleController : MonoBehaviour
         return canvas;
     }
 
+    #endregion
+
     public void SelectFirstButton()
     {
         _firstSelectButton.Select();
@@ -107,6 +120,11 @@ public class ReticleController : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
+        startSpeedX = _speedX;
+        startSpeedY = _speedY;
+        startDegreeX = _aimAssistDegreeX;
+        startDegreeY = _aimAssistDegreeY;
+        startAssistIntensity = _aimAssistIntensity;
     }
 
     void Start()
@@ -129,22 +147,39 @@ public class ReticleController : MonoBehaviour
             Debug.Log(gameObject.name + "が_mainCameraをFindで取得した");
         }
 
+        OptionDataManagerScript.Instance.optionValueChanges.AddListener(ChangeReticleControllerValues);
+        ChangeReticleControllerValues();
+
         BGMManagerScript.Instance.PlayBGM(0);
+    }
+
+    private void ChangeReticleControllerValues()
+    {
+        _speedX = startSpeedX * OptionDataManagerScript.Instance.optionData._aimSensivity_X;
+        _speedY = startSpeedY * OptionDataManagerScript.Instance.optionData._aimSensivity_Y;
+        _aimAssistDegreeX = startDegreeX * OptionDataManagerScript.Instance.optionData._aimAssistIntensity;
+        _aimAssistDegreeY = startDegreeY * OptionDataManagerScript.Instance.optionData._aimAssistIntensity;
+        _aimAssistIntensity = startAssistIntensity * OptionDataManagerScript.Instance.optionData._aimAssistIntensity;
+        _useSoftAimAssistFlags = OptionDataManagerScript.Instance.optionData._useAimAssistFlag;
+        Debug.Log("レティクル処理完了");
+    }
+
+    private void OnDestroy()
+    {
+        if (OptionDataManagerScript.Instance != null) {
+            OptionDataManagerScript.Instance.optionValueChanges.RemoveListener(ChangeReticleControllerValues);
+        }
+            
     }
 
     void Update()
     {
+        #region デバッグ用
         Rect rect = GetReticleRect();
         if (Input.GetKeyDown(KeyCode.P)) {
-            /* Debug.Log("<color=yellow>ReticleRect.X : " + rect.x + "</color>");
-            Debug.Log("<color=yellow>ReticleRect.Y : " + rect.y + "</color>");
-            Debug.Log("<color=yellow>ReticleRect.Width : " + rect.width + "</color>");
-            Debug.Log("<color=yellow>ReticleRect.Height : " + rect.height + "</color>"); */
-
-            Debug.Log("<color=yellow>GetReticlePos : " + _mainCamera.ScreenToViewportPoint(GetReticlePos()) + "</color>");
+            // Debug.Log("<color=yellow>GetReticlePos : " + _mainCamera.ScreenToViewportPoint(GetReticlePos()) + "</color>");
         }
 
-        #region デバッグ用
         // Lトリガー押しながら
         if (_debug && Input.GetAxis("L_R_Trigger") >= 0.5f && Input.GetButtonDown("LockOn")) {
             _lockOnTargetOnLockOnButtonDown = !_lockOnTargetOnLockOnButtonDown;
@@ -194,7 +229,7 @@ public class ReticleController : MonoBehaviour
         
         Vector3 newvec = Vector3.zero;
 
-        if (aimassisttarget && (Mathf.Abs(x) > _aimDeadZoneX || Mathf.Abs(y) > _aimDeadZoneY)) {
+        if (_useSoftAimAssistFlags && aimassisttarget && (Mathf.Abs(x) > _aimDeadZoneX || Mathf.Abs(y) > _aimDeadZoneY)) {
             newvec = _mainCamera.WorldToScreenPoint(aimassisttarget.position) - rectTransform.position;
             newvec.z = 0;
             newvec = newvec.normalized;
@@ -205,7 +240,7 @@ public class ReticleController : MonoBehaviour
         float newY = y * _speedY;
         bool isNowTargeting = false;
 
-        if (aimassisttarget) {
+        if (_useSoftAimAssistFlags && aimassisttarget) {
             newX /= _aimAssistDegreeX;
             newY /= _aimAssistDegreeY;
         }
@@ -248,10 +283,6 @@ public class ReticleController : MonoBehaviour
         } else {
             image.color = defaultColor;
             isNowTargeting = false;
-        }
-
-        if(0 < canNotReticleMoveTime && tmpTarget) {
-            //TargetLockOnMove(tmpTarget);
         }
 
         isBeforeTargeting = isNowTargeting;

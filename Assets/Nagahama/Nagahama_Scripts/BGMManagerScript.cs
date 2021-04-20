@@ -24,6 +24,7 @@ public class BGMManagerScript : MonoBehaviour
 
     // 音量
     public SoundVolume volume = new SoundVolume();
+    private float startVolume;
 
     // === AudioSource ===
     // BGM
@@ -51,11 +52,22 @@ public class BGMManagerScript : MonoBehaviour
         // BGMはループを有効にする
         BGMsource.loop = true;
 
+        // 開始時の音量を保存
+        startVolume = BGMsource.volume;
+
     }
 
     private void Start()
     {
+        OptionDataManagerScript.Instance.optionValueChanges.AddListener(ChangeBGMVolume);
         
+        ChangeBGMVolume();
+    }
+
+    private void ChangeBGMVolume()
+    {
+        BGMsource.volume = startVolume * OptionDataManagerScript.Instance.optionData._bgmVolume;
+        Debug.Log("BGMマネージャー処理完了");
     }
 
     void Update()
@@ -64,7 +76,7 @@ public class BGMManagerScript : MonoBehaviour
         BGMsource.mute = volume.Mute;
 
         // ボリューム設定
-        BGMsource.volume = volume.BGM;
+        //BGMsource.volume = volume.BGM;
         
     }
 
@@ -92,7 +104,15 @@ public class BGMManagerScript : MonoBehaviour
         BGMsource.Stop();
         BGMsource.clip = null;
     }
-    
+
+    private void OnDestroy()
+    {
+        if(OptionDataManagerScript.Instance != null) {
+            OptionDataManagerScript.Instance.optionValueChanges.RemoveListener(ChangeBGMVolume);
+        }
+        
+    }
+
 }
 
 // 音量クラス

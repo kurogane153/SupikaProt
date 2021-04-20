@@ -20,14 +20,7 @@ public class DebugSc : MonoBehaviour
             DebugCamera.Instance.IsEnable = !DebugCamera.Instance.IsEnable;
         }
 
-        // Menuーボタンでデバッグ用ポーズ
-        if (Input.GetButtonDown("Pause") || Input.GetButtonDown("DebugPause_TAB")) {
-            if (Pauser.isPaused) {
-                Pauser.Resume();
-            } else {
-                Pauser.Pause();
-            }
-        }
+        
 
         // Lトリガー押しながらビューボタンで操作説明非表示切り替え
         if ((Input.GetAxis("L_R_Trigger") <= -0.5f && Input.GetButtonDown("Reload")) || Input.GetKeyDown(KeyCode.U)) {
