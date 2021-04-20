@@ -107,7 +107,7 @@ MonoBehaviour:
   _rotationAxis: {x: 1, y: 0, z: 0}
   _rotationSpeed: 1
   targetPosition: {x: 0, y: 0, z: 0}
-  _asteroidnumber: 2
+  _asteroidnumber: 6
   _dgb_hp: 0
 --- !u!54 &159384516130581461
 Rigidbody:

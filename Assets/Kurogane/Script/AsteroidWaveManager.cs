@@ -29,7 +29,7 @@ public class AsteroidWaveManager : MonoBehaviour
     //隕石の速さ
     public float _spawnedAsteroidSpeed = 50f;
 
-    [Header("アラートの秒数")]
+    [Header("ウェーブ事の遅延秒数")]
     public int drawingTime = 3;
 
     private int[] _waveAsteroidcount = new int[4] { 7, 10, 10, 20};
@@ -42,10 +42,16 @@ public class AsteroidWaveManager : MonoBehaviour
     public static bool _instansflg = false;
     public static int _asteroidnum = 5;
 
+    //一つのスポーンに対してのスポーン数
     private int _asteroidwavecount;
 
+    //ウェーブ事の隕石
     private int _waveAsteroid;
+
+    //生成した隕石の数
     private int _waveAsteroidInstansCount;
+
+    //生成するかどうかのフラグ
     private bool _asteroidinstansflg = false;
 
     public GameClearOver_Process _gameCOProcess;
@@ -162,6 +168,11 @@ public class AsteroidWaveManager : MonoBehaviour
         _asteroidinstansflg = false;
         _waveAsteroidInstansCount = 0;
         _gameCOProcess.SetGameClearCount(0);
+    }
+
+    public int GetWaveAsteroidInstansCount()
+    {
+        return _waveAsteroidInstansCount;
     }
 
     public int GetAsteroidWaveCount()

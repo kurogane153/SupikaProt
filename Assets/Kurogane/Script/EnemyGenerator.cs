@@ -10,6 +10,10 @@ public class EnemyGenerator : MonoBehaviour
     //敵プレハブ
     public GameObject enemyPrefab;
 
+    [Header("Set Asteroid Prefab")]
+    //敵プレハブ
+    public GameObject[] AsteroidPrefab;
+
     [Header("Set Spika Prefab")]
     //隕石が向かう場所の指定
     public GameObject Spika;
@@ -121,7 +125,7 @@ public class EnemyGenerator : MonoBehaviour
                     if (!_asteroidwavemanager.GetAsteroidInstansFlg())
                     {
                         //enemyをインスタンス化する(生成する)
-                        GameObject asteroid = Instantiate(enemyPrefab);
+                        GameObject asteroid = Instantiate(AsteroidPrefab[SetAsteroidPrefab()]);
                         //生成した敵の位置をランダムに設定する
                         asteroid.transform.position = GetRandomPosition();
 
@@ -154,6 +158,21 @@ public class EnemyGenerator : MonoBehaviour
                 _asteroidWaveCount = 0;
             }
         }
+    }
+
+    private int SetAsteroidPrefab()
+    {
+        var range = Random.Range(0, AsteroidPrefab.Length);
+        //GetWaveAsteroidInstansCount()
+        //if (_asteroidwavemanager.GetWaveAsteroid() >= (_asteroidwavemanager.GetWaveAsteroidInstansCount() + 1))
+        //{
+        //    while (range == 4)
+        //    {
+        //        range = Random.Range(0, AsteroidPrefab.Length);
+        //    }
+        //}
+
+        return range;
     }
 
     //ランダムな時間を生成する関数
