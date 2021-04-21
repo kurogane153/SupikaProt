@@ -86,6 +86,7 @@ public class PlayerShot : MonoBehaviour
     private Transform tmpTarget;
     private float missileShotTimeRemain;
     private bool isFirstShot;
+    private int lastMissileSettingsArrayNum;
 
     #region デバッグ用変数
     [Watch, HideInInspector] public string _dbg_targetAsteroid = "None";
@@ -132,7 +133,7 @@ public class PlayerShot : MonoBehaviour
         }
 
         if (!_reloadFlags) {
-            _reticle._missileGuage.gameObject.SetActive(false);
+            //_reticle._missileGuage.gameObject.SetActive(false);
         }
 
         _onDrawGizmosFlags = true;
@@ -217,6 +218,11 @@ public class PlayerShot : MonoBehaviour
         // 次弾発射までのクールダウン
         if (0f < missileShotTimeRemain) {
             missileShotTimeRemain -= Time.deltaTime;
+            _reticle._missileGuage.fillAmount = (_missileShotSettings[lastMissileSettingsArrayNum]._missileShotDelay - missileShotTimeRemain) / _missileShotSettings[lastMissileSettingsArrayNum]._missileShotDelay;
+            
+            if (missileShotTimeRemain <= 0f) {
+                _reticle.ChangerReticleImageAlpha(false);
+            }
         }
 
         // リロードシステムがオフのときは以下の処理は行わない
@@ -263,11 +269,15 @@ public class PlayerShot : MonoBehaviour
             }
         }
 
+        lastMissileSettingsArrayNum = num;
+
         if(_missileShotSettings[num]._animationTriggerName != null) {
             _playerAnimation.SetTrigger(_missileShotSettings[num]._animationTriggerName, _missileShotSettings[num]._animWaitTime);
         }        
 
         StartCoroutine(MultiTargetMissileInstantiate(reticles, num));
+
+        _reticle.ChangerReticleImageAlpha(true);
 
         missileShotTimeRemain += _missileShotSettings[num]._missileShotDelay;
 

@@ -66,6 +66,7 @@ public class ReticleController : MonoBehaviour
     private RectTransform canvasRectTransform;
     private RectTransform rectTransform;
     private Image image;
+    private Image[] chiledImages;
     private Transform tmpTarget;
     private Color defaultColor;
     private float canNotReticleMoveTime;
@@ -114,6 +115,27 @@ public class ReticleController : MonoBehaviour
         _firstSelectButton.Select();
     }
 
+    /// <summary>
+    /// レティクル画像を半透明にするか不透明に戻すか指定します
+    /// </summary>
+    /// <param name="flag">レティクル画像を半透明にするか不透明に戻すか</param>
+    public void ChangerReticleImageAlpha(bool flag)
+    {
+        if (flag) {
+            image.color -= new Color(0, 0, 0, 0.5f);
+            
+            foreach(var im in chiledImages) {
+                im.color -= new Color(0, 0, 0, 0.5f);
+            }
+        } else {
+            image.color += new Color(0, 0, 0, 0.5f);
+
+            foreach (var im in chiledImages) {
+                im.color += new Color(0, 0, 0, 0.5f);
+            }
+        }
+    }
+
     private void Awake()
     {
         if (this != Instance) {
@@ -134,6 +156,7 @@ public class ReticleController : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
         image = GetComponent<Image>();
         defaultColor = image.color;
+        chiledImages = GetComponentsInChildren<Image>();
 
         if (_soundPlayer == null) {
             if ((_soundPlayer = GetComponentInChildren<SoundPlayer>()) == null) {
