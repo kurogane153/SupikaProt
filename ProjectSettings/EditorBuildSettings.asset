@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Funakoshi/Title.unity
-    guid: e8f18d4e0e18bba469db4e52285d2204
+    path: Assets/Funakoshi/Title_Supica.unity
+    guid: 83f11c1118797bd44a2d433fe2016884
   - enabled: 1
     path: Assets/Nagahama/Nagahama_Scenes/S0_ProtoScene_Nagahama.unity
     guid: 0829a95ebc0cb7340b509ae1a871d028
