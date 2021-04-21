@@ -38,6 +38,7 @@ public class OptionDataManagerScript : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
+        DontDestroyOnLoad(gameObject);
         optionValueChanges = new UnityEvent();
         filePath = Application.persistentDataPath + "/" + ".savedata.json";
         optionData = new OptionData();
