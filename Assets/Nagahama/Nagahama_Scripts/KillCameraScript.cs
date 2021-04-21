@@ -333,8 +333,11 @@ public class KillCameraScript : MonoBehaviour
         CFCameraReset();
     }
 
-    public void ConflictEventCameraActive(GameObject target, Vector3 pos)
+    public void ConflictEventCameraActive(GameObject target, Vector3 pos, float waittime = 0f)
     {
+        if(0f < waittime) {
+            _conflictEventCamResetDelay = waittime;
+        }
         transform.position = pos;
         _followTarget = target.transform;
         GetCamera().enabled = true;
