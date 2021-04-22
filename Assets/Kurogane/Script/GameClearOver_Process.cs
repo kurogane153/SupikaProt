@@ -90,7 +90,7 @@ public class GameClearOver_Process : MonoBehaviour
         else
         {
             impactPos = asteroid.transform.position;
-            Vector3 desiredPos = (impactPos - transform.position).normalized * EventCameraDistance;
+            Vector3 desiredPos = (impactPos - transform.position).normalized * EventCameraDistance + transform.position;
             GameOverCount++;
 
             if (GameOverCount >= GameOverAsteroid) {
@@ -104,7 +104,7 @@ public class GameClearOver_Process : MonoBehaviour
 
     void GameOverProcess()
     {
-        Vector3 explosionpos = (impactPos - transform.position);
+        Vector3 explosionpos = (impactPos - transform.position) + transform.position;
         Instantiate(_teraExplosion, explosionpos, Quaternion.identity);
         Invoke("ChangeMaterial", 2.0f);
         BGMManagerScript.Instance.StopBGM();

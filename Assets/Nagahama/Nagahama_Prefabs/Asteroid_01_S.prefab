@@ -288,7 +288,7 @@ PrefabInstance:
     - target: {fileID: 2897645482437094442, guid: c876aeb83812c674698728586e90f314,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2897645482437094442, guid: c876aeb83812c674698728586e90f314,
         type: 3}
@@ -328,7 +328,7 @@ PrefabInstance:
     - target: {fileID: 5812029116244905673, guid: c876aeb83812c674698728586e90f314,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5812029116244905673, guid: c876aeb83812c674698728586e90f314,
         type: 3}

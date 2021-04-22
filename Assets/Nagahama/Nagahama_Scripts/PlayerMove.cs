@@ -268,6 +268,8 @@ public class PlayerMove : MonoBehaviour
             speedChangeTimeRemain = _speedChangeDelay;
         }
 
+       
+
         isAcceptedOrbitChange = false;
     }
 
@@ -280,21 +282,20 @@ public class PlayerMove : MonoBehaviour
             case OrbitOriginPlanet.Earth:
                 orbitOrigin = _earthTransform;
                 rotateAxis = _rotateEarthAxis;
-                _mainCameraController.SetOrbitShiftRotWaitTime();
                 break;
 
             case OrbitOriginPlanet.Colony:
                 orbitOrigin = _colonyTransform;
                 rotateAxis = _rotateSpicaAxis;
-                _mainCameraController.SetOrbitShiftRotWaitTime();
                 break;
 
             default:
                 orbitOrigin = _earthTransform;
                 rotateAxis = _rotateEarthAxis;
-                _mainCameraController.SetOrbitShiftRotWaitTime();
                 break;
         }
+
+        _mainCameraController.SetOrbitShiftRotWaitTime();
     }
 
     private void SpeedUp()

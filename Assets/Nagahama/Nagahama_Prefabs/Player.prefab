@@ -2007,6 +2007,8 @@ MonoBehaviour:
     - 175
     _missileShotDelay: 2.5
     _multiTargetMissileDelay: 0.35
+    _animationTriggerName: 
+    _animWaitTime: 0
     _halfwayPoints:
     - {fileID: 1253699403}
     - {fileID: 677082303}
@@ -2037,6 +2039,8 @@ MonoBehaviour:
     - 300
     _missileShotDelay: 2.5
     _multiTargetMissileDelay: 0.35
+    _animationTriggerName: 
+    _animWaitTime: 0
     _halfwayPoints:
     - {fileID: 2432383032990341211}
     - {fileID: 8432524486311725036}
@@ -2067,6 +2071,8 @@ MonoBehaviour:
     - 300
     _missileShotDelay: 2.5
     _multiTargetMissileDelay: 0.35
+    _animationTriggerName: 
+    _animWaitTime: 0
     _halfwayPoints:
     - {fileID: 8192576381972623461}
     - {fileID: 8786285398188394436}
@@ -8914,6 +8920,16 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1690052522671384575, guid: df59f57cbb25b784ba3778d72bb44578,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690052522671384575, guid: df59f57cbb25b784ba3778d72bb44578,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2641926478075679444, guid: df59f57cbb25b784ba3778d72bb44578,
         type: 3}
       propertyPath: m_RootOrder
@@ -8974,6 +8990,11 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3156447297141336328, guid: df59f57cbb25b784ba3778d72bb44578,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4461926752389913568, guid: df59f57cbb25b784ba3778d72bb44578,
         type: 3}
       propertyPath: _boostParticles.Array.size
@@ -8983,6 +9004,11 @@ PrefabInstance:
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470454818440055410, guid: df59f57cbb25b784ba3778d72bb44578,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6563858180642682619, guid: df59f57cbb25b784ba3778d72bb44578,
         type: 3}
@@ -9174,12 +9200,12 @@ PrefabInstance:
     - target: {fileID: 3537855857704718148, guid: bd33d947b1db3634287d6c9b187c7f14,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 100
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3537855857704718148, guid: bd33d947b1db3634287d6c9b187c7f14,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 3.5
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 3537855857704718148, guid: bd33d947b1db3634287d6c9b187c7f14,
         type: 3}
@@ -9189,7 +9215,7 @@ PrefabInstance:
     - target: {fileID: 3537855857704718148, guid: bd33d947b1db3634287d6c9b187c7f14,
         type: 3}
       propertyPath: EmissionModule.rateOverDistance.scalar
-      value: 6.17
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 3537855857704718148, guid: bd33d947b1db3634287d6c9b187c7f14,
         type: 3}
@@ -9310,6 +9336,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537855857704718148, guid: bd33d947b1db3634287d6c9b187c7f14,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537855857704718148, guid: bd33d947b1db3634287d6c9b187c7f14,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537855857704718148, guid: bd33d947b1db3634287d6c9b187c7f14,
+        type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 6738033452152996129, guid: bd33d947b1db3634287d6c9b187c7f14,
         type: 3}
