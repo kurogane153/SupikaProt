@@ -1805,6 +1805,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b824c2648ce12f469b57f0fed2429ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &256281369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6582865643300553065, guid: 50d9282d5cb6e1549bb142219f1b7c00,
+    type: 3}
+  m_PrefabInstance: {fileID: 6582865642158403310}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &290852355
 GameObject:
   m_ObjectHideFlags: 0
@@ -5347,7 +5353,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6582865642158403310}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 256281369}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6015f8cebcc9e71418f2e1f1bb84a00b, type: 3}
@@ -8127,13 +8133,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spikafig: 1
-  GameOverCountText: {fileID: 1114204702}
-  GameOverCountTextSpika: {fileID: 1946261730}
-  GameClearCountText: {fileID: 853597969}
   ConflictEventCamera: {fileID: 5054093583828618424}
   EventCameraDistance: 750
   _soundPlayer: {fileID: 364138603}
   _se_Explosion: {fileID: 8300000, guid: 6796b76f7cd9c174c8b45664a7e929e7, type: 3}
+  _teraExplosion: {fileID: 670532402792323021, guid: 157a1eab67ecfb7498962bb89ad77a53,
+    type: 3}
+  _hellMaterial: {fileID: 2100000, guid: 5b9e533bb431aae4cad06c1796e56b34, type: 2}
   GameOverAsteroid: 3
   GameClearAsteroid: 20
   GameOverReloadTime: 3.5
@@ -9660,6 +9666,105 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b116976f4d3473a41b706e1716f6ec5b, type: 3}
+--- !u!1001 &1742407084829207186
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1742407085957939564, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742407085957939564, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742407085957939564, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742407085957939564, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742407085957939564, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742407085957939564, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742407085957939564, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742407085957939564, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742407085957939564, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742407085957939564, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742407085957939564, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742407085957939566, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: m_Name
+      value: GameClearOverManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742407085957939567, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: Earth
+      value: 
+      objectReference: {fileID: 256281369}
+    - target: {fileID: 1742407085957939567, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: Spika
+      value: 
+      objectReference: {fileID: 1799453316}
+    - target: {fileID: 1742407085957939567, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: _gameprocess
+      value: 
+      objectReference: {fileID: 1799453318}
+    - target: {fileID: 1742407085957939567, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: GameOverCountText
+      value: 
+      objectReference: {fileID: 438071598}
+    - target: {fileID: 1742407085957939567, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: GameClearCountText
+      value: 
+      objectReference: {fileID: 853597969}
+    - target: {fileID: 1742407085957939567, guid: 172776644ed3dfb48958625641d4653d,
+        type: 3}
+      propertyPath: GameOverCountTextSpika
+      value: 
+      objectReference: {fileID: 1946261730}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 172776644ed3dfb48958625641d4653d, type: 3}
 --- !u!224 &1841202281644878857 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5968763084374564182, guid: 07b4d8e64412fe34ea4b6995922f0c74,
@@ -10726,6 +10831,17 @@ PrefabInstance:
       propertyPath: GameClearText
       value: 
       objectReference: {fileID: 226417542}
+    - target: {fileID: 6582865642158403314, guid: 50d9282d5cb6e1549bb142219f1b7c00,
+        type: 3}
+      propertyPath: _hellMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 5b9e533bb431aae4cad06c1796e56b34, type: 2}
+    - target: {fileID: 6582865642158403314, guid: 50d9282d5cb6e1549bb142219f1b7c00,
+        type: 3}
+      propertyPath: _teraExplosion
+      value: 
+      objectReference: {fileID: 670532402792323021, guid: 157a1eab67ecfb7498962bb89ad77a53,
+        type: 3}
     - target: {fileID: 6582865642158403314, guid: 50d9282d5cb6e1549bb142219f1b7c00,
         type: 3}
       propertyPath: GameClearAsteroid

@@ -8,14 +8,8 @@ public class GameClearOver_Process : MonoBehaviour
 {
 
     private int GameOverCount = 0;
-    private int GameOverCountSpika = 0;
     public static int GameClearCount = 0;
     public static bool isclear = false;
-    public bool Spikafig = false;
-
-    public GameObject GameOverCountText = null; // Textオブジェクト
-    public GameObject GameOverCountTextSpika = null; // Textオブジェクト
-    public GameObject GameClearCountText = null; // Textオブジェクト
 
     #region 長浜追加フィールド
     private Vector3 impactPos;  // 隕石が衝突した位置
@@ -67,20 +61,11 @@ public class GameClearOver_Process : MonoBehaviour
             Invoke("DelayMethod", GameOverReloadTime);
         }
 
-        if (GameOverCountSpika >= GameOverAsteroid)
-        {
-            Invoke("DelayMethod", GameOverReloadTime);
-        }
-
         if (GameClearCount >= GameClearAsteroid)
         {
             isclear = true;
             Invoke("DelayMethod", 3.0f);
         }
-
-        GameOverCountText.GetComponent<Text>().text = "地球滅亡まで残り:" + (GameOverAsteroid - GameOverCount);
-        GameOverCountTextSpika.GetComponent<Text>().text = "コロニー滅亡まで残り:" + (GameOverAsteroid - GameOverCountSpika);
-        GameClearCountText.GetComponent<Text>().text = "防衛成功まで残り:" + (GameClearAsteroid - GameClearCount);
     }
 
     void OnTriggerEnter(Collider other)
@@ -92,38 +77,15 @@ public class GameClearOver_Process : MonoBehaviour
             // 衝突した隕石の座標を取得、地球から隕石へのベクトルを作り
             // そのベクトルを長くして衝突イベントカメラが来てほしい座標を作る
             // 作った座標と地球のgameObjectを引数で渡しながら衝突イベントカメラを起動している。
-            
-
             other.GetComponent<AsteroidScript>().ReceiveDamage(9999);
             _soundPlayer.PlaySE(_se_Explosion);
-
-            
         }
-        Debug.Log(GameOverCountSpika);
     }
 
     void HitGameOverCount(Collider asteroid)
     {
-        
-
-        if (Spikafig)
+        if(asteroid.GetComponent<AsteroidScript>().GetAsteroidNumber() == AsteroidWaveManager._asteroidnum)
         {
-            if(asteroid.GetComponent<AsteroidScript>().GetAsteroidNumber() == AsteroidWaveManager._asteroidnum)
-            {
-            }
-            else
-            {
-                impactPos = asteroid.transform.position;
-                Vector3 desiredPos = (impactPos - transform.position).normalized * EventCameraDistance;
-                GameOverCountSpika++;
-
-                if (GameOverCountSpika >= GameOverAsteroid) {
-                    GameOverProcess();
-                    ConflictEventCamera.ConflictEventCameraActive(gameObject, desiredPos, GameOverReloadTime);
-                } else {
-                    ConflictEventCamera.ConflictEventCameraActive(gameObject, desiredPos);
-                }
-            }  
         }
         else
         {
@@ -158,13 +120,18 @@ public class GameClearOver_Process : MonoBehaviour
         GetComponent<MeshRenderer>().material = _hellMaterial;
     }
 
+    public void SetGameClearCount(int count)
+    {
+        GameClearCount = count;
+    }
+
     public int GetGameClearCount()
     {
         return GameClearCount;
     }
 
-    public void SetGameClearCount(int count)
+    public int GetGameOverCount()
     {
-        GameClearCount = count;
+        return GameOverCount;
     }
 }
