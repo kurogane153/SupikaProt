@@ -46,6 +46,6 @@ public class Result : MonoBehaviour
     public void PushBackToTitle()
     {
         //BackToTitleのボタンを押すと、タイトルに戻る
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("Title_Supica");
     }
 }

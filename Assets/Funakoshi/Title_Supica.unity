@@ -607,7 +607,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.6627451, b: 0.78431374, a: 0.78431374}
     m_PressedColor: {r: 0.19344072, g: 0.60010976, b: 0.6509434, a: 1}
     m_SelectedColor: {r: 0.19023676, g: 0.8180349, b: 0.8962264, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -4293,7 +4293,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.6627451, b: 0.78431374, a: 0.78431374}
     m_PressedColor: {r: 0.19344072, g: 0.60010976, b: 0.6509434, a: 1}
     m_SelectedColor: {r: 0.19023676, g: 0.8180349, b: 0.8962264, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -6397,7 +6397,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.6627451, b: 0.78431374, a: 0.78431374}
     m_PressedColor: {r: 0.19344072, g: 0.60010976, b: 0.6509434, a: 1}
     m_SelectedColor: {r: 0.19023676, g: 0.8180349, b: 0.8962264, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -7668,10 +7668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6015f8cebcc9e71418f2e1f1bb84a00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spikafig: 1
-  GameOverCountText: {fileID: 1114204702}
-  GameOverCountTextSpika: {fileID: 1946261730}
-  GameClearCountText: {fileID: 853597969}
   ConflictEventCamera: {fileID: 5054093583828618424}
   EventCameraDistance: 750
   _soundPlayer: {fileID: 364138603}
@@ -9326,7 +9322,7 @@ PrefabInstance:
     - target: {fileID: 4877477514379145425, guid: e6732f87fa26aac4aba01e62b53f5e4b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6732f87fa26aac4aba01e62b53f5e4b, type: 3}
@@ -10812,7 +10808,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1476391018}
     - target: {fileID: 6712438191241676572, guid: 519d9e5f37953274ebde284e2026baf0,
         type: 3}
       propertyPath: m_Enabled
@@ -11447,8 +11443,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3060013020070365262, guid: f6de751e9dcc43646b9cbbaa467344ab,
         type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
+      propertyPath: EmissionModule.rateOverTime.scalar
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3060013020070365262, guid: f6de751e9dcc43646b9cbbaa467344ab,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3971040565534311825, guid: f6de751e9dcc43646b9cbbaa467344ab,
         type: 3}
@@ -11462,8 +11463,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3971040565534311825, guid: f6de751e9dcc43646b9cbbaa467344ab,
         type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
+      propertyPath: EmissionModule.rateOverTime.scalar
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3971040565534311825, guid: f6de751e9dcc43646b9cbbaa467344ab,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4121862785469520100, guid: f6de751e9dcc43646b9cbbaa467344ab,
         type: 3}
