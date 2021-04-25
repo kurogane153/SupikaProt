@@ -5,7 +5,9 @@ using UnityEngine;
 public class EndingCameraScript : MonoBehaviour
 {
     public bool rotflg = false;
+    public bool followflg = false;
     public Transform target;
+    public Transform explosionViwePos;
     public float speed = 2f;
     float step;
 
@@ -27,6 +29,11 @@ public class EndingCameraScript : MonoBehaviour
             Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 10.0F);
             transform.rotation = Quaternion.LookRotation(newDir);
         }
+
+        if(followflg) {
+            Vector3 desiredPosition = target.position + new Vector3(0, 10, -10);
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, 0.319f);
+        }
     }
 
     private IEnumerator TimeScaleDown()
@@ -36,5 +43,17 @@ public class EndingCameraScript : MonoBehaviour
         rotflg = true;
         yield return new WaitForSeconds(2 * 0.2f);
         Time.timeScale = 1f;
+        rotflg = false;
+        transform.rotation = target.rotation;
+        transform.Rotate(15, 180, 0);
+
+        Vector3 desiredPosition = target.position + new Vector3(0, 10, -5);
+        transform.position = desiredPosition;
+        followflg = true;
+
+        yield return new WaitForSeconds(2f);
+        followflg = false;
+        transform.position = explosionViwePos.position;
+        transform.rotation = explosionViwePos.rotation;
     }
 }

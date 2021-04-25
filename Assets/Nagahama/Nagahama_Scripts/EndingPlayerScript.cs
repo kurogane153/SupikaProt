@@ -35,6 +35,11 @@ public class EndingPlayerScript : MonoBehaviour
 
     [SerializeField] private EndingCameraScript _endCam;
 
+    public bool moveflg = false;
+    public Quaternion angleAxis;
+    public Transform orbitOrigin;
+    public GameObject logo;
+
     [Header("サウンド系")]
     [SerializeField] private SoundPlayer _soundPlayer;
     [SerializeField] private AudioClip _se_MissileLaunch;
@@ -62,7 +67,18 @@ public class EndingPlayerScript : MonoBehaviour
 
     void Update()
     {
-        
+        if (moveflg) {
+            angleAxis = Quaternion.AngleAxis(360 / 25 * Time.deltaTime, new Vector3(0,1,0));
+            Vector3 newPos = transform.position;
+
+            newPos -= orbitOrigin.position;
+            newPos = angleAxis * newPos;
+            newPos += orbitOrigin.position;
+
+            transform.position = newPos;
+
+            transform.rotation = transform.rotation * angleAxis;
+        }
     }
 
     private IEnumerator MultiTargetMissileInstantiate()
@@ -73,6 +89,11 @@ public class EndingPlayerScript : MonoBehaviour
             
             StartCoroutine(MissileInstantiate(i++));
         }
+
+        yield return new WaitForSeconds(5f);
+        moveflg = true;
+        yield return new WaitForSeconds(2.5f);
+        logo.SetActive(true);
 
     }
 
