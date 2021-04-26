@@ -39,12 +39,14 @@ public class TargetCollider : MonoBehaviour
         parentAsteroidSc.ReceiveDamage(damage);
         _hp -= damage;
         if(_hp <= 0) {
-            RectInAsteroidContainer.Instance.targetColliders.Remove(this);
+            
             isExcution = true;
+            IsLockedOn = false;
 
             if (0 < _extraLife) {
                 StartCoroutine(nameof(DelaySetActiveTrue));
             } else {
+                RectInAsteroidContainer.Instance.targetColliders.Remove(this);
                 gameObject.SetActive(false);
             }
             
@@ -57,7 +59,6 @@ public class TargetCollider : MonoBehaviour
         isExcution = false;
         _extraLife--;
         _hp = startHP;
-        InstantiateTargetButton();
     }
 
 
