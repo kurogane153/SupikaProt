@@ -38,13 +38,10 @@ public class TargetCollider : MonoBehaviour
             if (0 < _extraLife) {
                 _extraLife--;
                 _hp = startHP;
-                
+                InstantiateTargetButton();
             } else {
                 gameObject.SetActive(false);
             }
-
-
-            
             
         }
     }
