@@ -214,11 +214,13 @@ public class PlayerMove : MonoBehaviour
             _orbitGuideLight.enabled = true;
 
             _orbitShiftTooltip.SetTooltipActive(true , true);
-        } else if((_orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
-            isAcceptedOrbitChange) {
-            _orbitGuideLight.enabled = true;
 
-            _orbitShiftTooltip.SetTooltipActive(false, true);
+        } else if((_orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
+                isAcceptedOrbitChange) {
+                _orbitGuideLight.enabled = true;
+
+                 _orbitShiftTooltip.SetTooltipActive(false, true);
+
         } else {
             _orbitGuideLight.enabled = false;
             _orbitShiftTooltip.SetTooltipActive(false);
