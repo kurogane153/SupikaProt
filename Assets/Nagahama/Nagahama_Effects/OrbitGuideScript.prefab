@@ -42,7 +42,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1322809736324917134}
   serializedVersion: 6
   lengthInSec: 5
-  simulationSpeed: 1
+  simulationSpeed: 3
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.09109115, g: 0.8396226, b: 0.12103238, a: 1}
+      maxColor: {r: 0.4764151, g: 1, b: 0.4983454, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -285,7 +285,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 18
+      scalar: 16
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -919,7 +919,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.05
+      scalar: 0.01
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -984,21 +984,21 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 1.6834936
-          outSlope: 1.6834936
-          tangentMode: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.08376963
+          inWeight: 0
+          outWeight: 0
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 0.059243005
-          outSlope: 0.059243005
-          tangentMode: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0.16230375
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -1304,7 +1304,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.09019608, g: 0.83921576, b: 0.121568635, a: 1}
+        key0: {r: 0.47450984, g: 1, b: 0.49803925, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0.034090936}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -4710,7 +4710,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 20e729147a4dad247abfc2305c3dd963, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4768,7 +4768,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 0}
-  _period: 3
-  _resetSec: 1
+  _earthTransform: {fileID: 0}
+  _colonyTransform: {fileID: 0}
+  _rotateEarthAxis: {x: 0, y: 1, z: 0}
+  _rotateSpicaAxis: {x: 0, y: -1, z: 0}
+  _period: 2
+  _resetSec: 0.7
+  _lagrangePointMinAngle:
+  - 270
+  - 270
+  _lagrangePointMaxAngle:
+  - 271
+  - 271
   rotateAxis: {x: 0, y: 1, z: 0}
   orbitOrigin: {fileID: 0}

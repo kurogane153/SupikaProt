@@ -24,7 +24,9 @@ public class OrbitGuideLightScript : MonoBehaviour
     private float resetTime;
     private bool changeFlg;
     private int orbitNum = 0;
+    private int nownum;
     private float nowAngle;
+    private float beforeAngle;
 
     private void Awake()
     {
@@ -39,16 +41,22 @@ public class OrbitGuideLightScript : MonoBehaviour
     void Update()
     {
 
-        if (changeFlg && _lagrangePointMinAngle[orbitNum] < nowAngle && nowAngle < _lagrangePointMaxAngle[orbitNum]) {
-            if(orbitNum == 0) {
+        if (changeFlg) {
+
+            if(orbitNum == 1 && beforeAngle <= _lagrangePointMinAngle[nownum] && _lagrangePointMinAngle[nownum] <= nowAngle) {
                 rotateAxis = _rotateSpicaAxis;
                 orbitOrigin = _colonyTransform;
 
-            } else {
+            }
+            
+            if(orbitNum == 0 && nowAngle <= _lagrangePointMinAngle[nownum] && _lagrangePointMinAngle[nownum] <= beforeAngle) {
                 rotateAxis = _rotateEarthAxis;
                 orbitOrigin = _earthTransform;
             }
+            Debug.Log("ラグランジュ点入った");
         }
+
+        beforeAngle = nowAngle;
 
         Vector3 vec = transform.position - orbitOrigin.position;
         float rad = Mathf.Atan2(vec.x, vec.z);
@@ -72,18 +80,20 @@ public class OrbitGuideLightScript : MonoBehaviour
         transform.position = newPos;
 
         transform.rotation = transform.rotation * angleAxis;
+
+        
     }
 
     private void FixedUpdate()
     {
-        if(0 < resetTime) {
+        if(0 <= resetTime) {
             resetTime -= Time.deltaTime;
-            if(resetTime <= 0) {
+            if(resetTime < 0) {
                 resetTime = _resetSec;
                 transform.position = _playerTransform.position;
                 transform.rotation = _playerTransform.rotation;
                 particleSystem.Play();
-                if (orbitNum == 0) {
+                if (nownum == 0) {
                     rotateAxis = _rotateEarthAxis;
                     orbitOrigin = _earthTransform;
 
@@ -98,7 +108,8 @@ public class OrbitGuideLightScript : MonoBehaviour
     public void OrbitGuideStatusChange(bool flg)
     {
         particleSystem.Clear();
-        resetTime = 0.1f;
+        particleSystem.Stop();
+        resetTime = _resetSec;
         changeFlg = flg;
         if(orbitNum == 0) {
             orbitNum = 1;
@@ -114,13 +125,15 @@ public class OrbitGuideLightScript : MonoBehaviour
         transform.position = _playerTransform.position;
         transform.rotation = _playerTransform.rotation;
         particleSystem.Play();
-        resetTime = _resetSec;
+        nownum = orbitNum;
+        
     }
 
     private void OnDisable()
     {
         particleSystem.Stop();
         changeFlg = false;
+        nownum = orbitNum;
     }
 
 
