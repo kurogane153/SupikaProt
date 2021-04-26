@@ -63,6 +63,8 @@ public class AlertLine : MonoBehaviour
                 _asteroid = collision.gameObject;
             }
             collision.gameObject.layer = 15;
+            //GameObject _cusor = Instantiate(Cursor);
+            //_cusor.transform.position = collision.transform.position;
         }
     }
 
@@ -70,10 +72,10 @@ public class AlertLine : MonoBehaviour
     {
         _alertflg = true;
 
-        GameObject _cusor = Instantiate(Cursor);
-        _cusor.transform.parent = Player.transform;
-        _cusor.transform.position = Player.transform.position;
-        _cusor.GetComponent<AlertCursorAngle>().SetAlertPos(this.gameObject);
+        //GameObject _cusor = Instantiate(Cursor);
+        //_cusor.transform.parent = Player.transform;
+        //_cusor.transform.position = Player.transform.position;
+        //_cusor.GetComponent<AlertCursorAngle>().SetAlertPos(this.gameObject);
 
         if (Spikaflg)
         {
