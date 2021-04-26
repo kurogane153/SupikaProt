@@ -297,7 +297,7 @@ public class KillCameraScript : MonoBehaviour
         SwitchStagingPhase_Pan();
         StartCoroutine(WarpToPlayerNearPosition(targetAsteroid));
         _playerMove.enabled = false;
-        //ReticleController.Instance.GetCanvas().enabled = false;
+        ReticleController.Instance.GetCanvas().enabled = false;
         Pauser.SoftPause();
         Time.timeScale = 1f;
         transform.position = _mainCamera.transform.position;
