@@ -9915,6 +9915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2646d0396c50e480c8d5f544528d08c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask: 
   Post_Outline: {fileID: 4800000, guid: 3a46ca1a6c0a24a5089173f22b6bac4f, type: 3}
   DrawSimple: {fileID: 4800000, guid: 72cf56135f9ff430681384af31083ee2, type: 3}
   outlineColor: {r: 0, g: 0.10980392, b: 1, a: 1}
