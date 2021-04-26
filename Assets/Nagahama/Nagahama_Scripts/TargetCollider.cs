@@ -42,6 +42,7 @@ public class TargetCollider : MonoBehaviour
             
             isExcution = true;
             IsLockedOn = false;
+            RoberiaAsteroidSpawn._taegethpflg = true;
 
             if (0 < _extraLife) {
                 StartCoroutine(nameof(DelaySetActiveTrue));
