@@ -32,7 +32,7 @@ public class AsteroidWaveManager : MonoBehaviour
     [Header("ウェーブ事の遅延秒数")]
     public int drawingTime = 3;
 
-    private int[] _waveAsteroidcount = new int[4] { 7, 10, 10, 20};
+    private int[] _waveAsteroidcount = new int[4] { 7, 10, 15, 25};
 
     private Vector3 _spikaPos;
     private Vector3 _earthPos;
