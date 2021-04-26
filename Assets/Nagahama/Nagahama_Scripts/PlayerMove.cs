@@ -14,12 +14,14 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private CameraController _mainCameraController;
     [SerializeField] private RadialBlur _mainCameraRadialBlur;
     [SerializeField] private BoostEffect _boostEffect;
+    [SerializeField] private OrbitGuideLightScript _orbitGuideLight;
 
     [Header("サウンド系")]
     [SerializeField] private SoundPlayer _soundPlayer;
     [SerializeField] private AudioClip _se_SpeedUp;
     [SerializeField] private AudioClip _se_SpeedUpNormal;
     [SerializeField] private AudioClip _se_SpeedDown;
+    [SerializeField] private AudioClip _se_OrbitChangeAccept;
 
     [Space(10)]
     [SerializeField, Tooltip("地球")] private Transform _earthTransform;
@@ -206,14 +208,21 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void AcceptOrbitOriginChange()
     {
+        // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作がまだの
         if((_orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
             !isAcceptedOrbitChange) {
+            _orbitGuideLight.enabled = true;
 
             _orbitShiftTooltip.SetTooltipActive(true , true);
+
         } else if((_orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
-            isAcceptedOrbitChange) {
-            _orbitShiftTooltip.SetTooltipActive(false, true);
+                isAcceptedOrbitChange) {
+                _orbitGuideLight.enabled = true;
+
+                 _orbitShiftTooltip.SetTooltipActive(false, true);
+
         } else {
+            _orbitGuideLight.enabled = false;
             _orbitShiftTooltip.SetTooltipActive(false);
         }
 
@@ -221,11 +230,17 @@ public class PlayerMove : MonoBehaviour
             ( _orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
             !isAcceptedOrbitChange) {
 
+            _soundPlayer.PlaySE(_se_OrbitChangeAccept);
+
+            _orbitGuideLight.OrbitGuideStatusChange(true);
+
             isAcceptedOrbitChange = true;
 
         } else if (Input.GetButtonDown(_orbitOriginChangeButtonName) &&
             (_orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
             isAcceptedOrbitChange) {
+
+            _orbitGuideLight.OrbitGuideStatusChange(false);
 
             isAcceptedOrbitChange = false;
         }

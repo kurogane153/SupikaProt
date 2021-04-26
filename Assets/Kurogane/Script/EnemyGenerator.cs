@@ -163,14 +163,34 @@ public class EnemyGenerator : MonoBehaviour
     private int SetAsteroidPrefab()
     {
         var range = Random.Range(0, AsteroidPrefab.Length);
-        //GetWaveAsteroidInstansCount()
-        //if (_asteroidwavemanager.GetWaveAsteroid() >= (_asteroidwavemanager.GetWaveAsteroidInstansCount() + 1))
-        //{
-        //    while (range == 4)
-        //    {
-        //        range = Random.Range(0, AsteroidPrefab.Length);
-        //    }
-        //}
+        
+        //ウェーブ事の隕石の生成制御
+        switch (_asteroidwavemanager.GetWaveCount())
+        {
+            case 1:
+                while (range == 0 || range == 4 || range == 5)
+                {
+                    range = Random.Range(0, AsteroidPrefab.Length);
+                }
+                break;
+            case 2:
+                while (range == 4)
+                {
+                    range = Random.Range(0, AsteroidPrefab.Length);
+                }
+                break;
+            default:
+                break;
+        }
+
+        //分裂する隕石を生成するかどうか
+        if (_asteroidwavemanager.GetWaveAsteroid() <= (_asteroidwavemanager.GetWaveAsteroidInstansCount() + 2))
+        {
+            while (range == 4)
+            {
+                range = Random.Range(0, AsteroidPrefab.Length);
+            }
+        }
 
         return range;
     }
