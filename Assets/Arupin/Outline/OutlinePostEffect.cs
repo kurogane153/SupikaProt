@@ -8,6 +8,7 @@ public class OutlinePostEffect : MonoBehaviour
     RenderTexture _maskRT;
     RenderTexture _blurRT;
 
+    public string layerMask;
     public Shader Post_Outline;
     public Shader DrawSimple;
     public Color outlineColor = Color.green;
@@ -25,13 +26,14 @@ public class OutlinePostEffect : MonoBehaviour
 
         _postMaterial = new Material(Post_Outline);
     }
+
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         _maskCamera.CopyFrom(_mainCamera);
         _maskCamera.backgroundColor = Color.black;
         _maskCamera.clearFlags = CameraClearFlags.Nothing;
 
-        _maskCamera.cullingMask = 1 << LayerMask.NameToLayer("Asteroid");
+        _maskCamera.cullingMask = 1 << LayerMask.NameToLayer(layerMask);
 
         RenderTexture activeRT = RenderTexture.active;
         RenderTexture.active = _maskRT;
