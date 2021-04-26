@@ -34,7 +34,7 @@ public class GameClearOver_Process : MonoBehaviour
     public int GameOverAsteroid = 3;
 
     [Header("ゲームクリアまでの隕石の個数")]
-    public int GameClearAsteroid = 20;
+    public int GameClearAsteroid = 25;
 
     [Header("ゲームオーバーのリロード時間")]
     public float GameOverReloadTime = 3.5f;
