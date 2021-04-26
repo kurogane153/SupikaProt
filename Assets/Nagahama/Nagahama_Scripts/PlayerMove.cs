@@ -232,23 +232,15 @@ public class PlayerMove : MonoBehaviour
 
             _soundPlayer.PlaySE(_se_OrbitChangeAccept);
 
-            switch (_orbitOriginPlanet) {
-                case OrbitOriginPlanet.Earth:
-                    _orbitGuideLight.OrbitGuideStatusChange(_rotateSpicaAxis, _colonyTransform);
-                    break;
-                case OrbitOriginPlanet.Colony:
-                    _orbitGuideLight.OrbitGuideStatusChange(_rotateEarthAxis, _earthTransform);
-                    break;
-                default:
-                    _orbitGuideLight.OrbitGuideStatusChange(_rotateEarthAxis, _earthTransform);
-                    break;
-            }
+            _orbitGuideLight.OrbitGuideStatusChange(true);
 
             isAcceptedOrbitChange = true;
 
         } else if (Input.GetButtonDown(_orbitOriginChangeButtonName) &&
             (_orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
             isAcceptedOrbitChange) {
+
+            _orbitGuideLight.OrbitGuideStatusChange(false);
 
             isAcceptedOrbitChange = false;
         }
