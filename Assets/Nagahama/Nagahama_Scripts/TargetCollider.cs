@@ -7,6 +7,7 @@ public class TargetCollider : MonoBehaviour
     [SerializeField] private GameObject _targetButtonPrefab;
     [SerializeField] private float _reticleRectSizeScaling = 1.2f;  // 2D矩形の大きさ
     [SerializeField] private float _hp;
+    [SerializeField] private int _extraLife;
 
     private RectTransform _rectTransform;
 
@@ -14,6 +15,7 @@ public class TargetCollider : MonoBehaviour
     private bool isLockedOn;
     private bool beforeInScreenFlags;
     private Camera mainCamera;
+    private float startHP;
 
     public bool IsLockedOn
     {
@@ -32,7 +34,18 @@ public class TargetCollider : MonoBehaviour
         _hp -= damage;
         if(_hp <= 0) {
             RectInAsteroidContainer.Instance.targetColliders.Remove(this);
-            gameObject.SetActive(false);
+
+            if (0 < _extraLife) {
+                _extraLife--;
+                _hp = startHP;
+                
+            } else {
+                gameObject.SetActive(false);
+            }
+
+
+            
+            
         }
     }
 
@@ -40,6 +53,7 @@ public class TargetCollider : MonoBehaviour
     void Start()
     {
         parentAsteroidSc = transform.root.GetComponent<AsteroidScript>();
+        startHP = _hp;
 
         if (mainCamera == null) {
             mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -56,23 +70,7 @@ public class TargetCollider : MonoBehaviour
             
             if (isNowInScreen) {
                 // 画面内に収まった1回目だけ処理します
-                RectInAsteroidContainer.Instance.targetColliders.Add(this);
-
-                // エイムアシスト用のボタンプレハブを隕石の子要素に登録させる。
-                // canvasを親要素にさせる
-
-                GameObject buttonObj = Instantiate(_targetButtonPrefab, transform.position, Quaternion.identity);
-                buttonObj.transform.SetParent(ReticleController.Instance.GetCanvas().transform, false);
-                buttonObj.GetComponent<AsteroidSelectButton>().SetTooltipActive(true, transform);
-                _rectTransform = buttonObj.GetComponent<RectTransform>();
-
-                Rect rect = GetReticleRect();
-                Debug.Log("<color=yellow>ReticleRect.X : " + rect.x + "</color>");
-                Debug.Log("<color=yellow>ReticleRect.Y : " + rect.y + "</color>");
-                Debug.Log("<color=yellow>ReticleRect.Width : " + rect.width + "</color>");
-                Debug.Log("<color=yellow>ReticleRect.Height : " + rect.height + "</color>");
-
-                Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListに追加された！" + mainCamera.WorldToViewportPoint(transform.position));
+                InstantiateTargetButton();
 
             } else {
                 // 画面外に出たとき1回目だけ処理ます
@@ -83,6 +81,27 @@ public class TargetCollider : MonoBehaviour
         }
 
         beforeInScreenFlags = isNowInScreen;
+    }
+
+    private void InstantiateTargetButton()
+    {
+        RectInAsteroidContainer.Instance.targetColliders.Add(this);
+
+        // エイムアシスト用のボタンプレハブを隕石の子要素に登録させる。
+        // canvasを親要素にさせる
+
+        GameObject buttonObj = Instantiate(_targetButtonPrefab, transform.position, Quaternion.identity);
+        buttonObj.transform.SetParent(ReticleController.Instance.GetCanvas().transform, false);
+        buttonObj.GetComponent<AsteroidSelectButton>().SetTooltipActive(true, transform);
+        _rectTransform = buttonObj.GetComponent<RectTransform>();
+
+        Rect rect = GetReticleRect();
+        Debug.Log("<color=yellow>ReticleRect.X : " + rect.x + "</color>");
+        Debug.Log("<color=yellow>ReticleRect.Y : " + rect.y + "</color>");
+        Debug.Log("<color=yellow>ReticleRect.Width : " + rect.width + "</color>");
+        Debug.Log("<color=yellow>ReticleRect.Height : " + rect.height + "</color>");
+
+        Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListに追加された！" + mainCamera.WorldToViewportPoint(transform.position));
     }
 
     // 画面内に収まっているか返します
