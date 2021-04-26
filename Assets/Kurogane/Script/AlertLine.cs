@@ -62,6 +62,7 @@ public class AlertLine : MonoBehaviour
                 ArertText.SetActive(true);
                 _asteroid = collision.gameObject;
             }
+            collision.gameObject.layer = 15;
         }
     }
 
