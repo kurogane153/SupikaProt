@@ -10,7 +10,11 @@ public class RoberiaAsteroidSpawn : MonoBehaviour
 
     [Header("Set Asteroid Prefab")]
     //敵プレハブ
-    public GameObject childPredab;
+    public GameObject _spawnchildPredab;
+
+    [Header("Set Asteroid Prefab")]
+    //敵プレハブ
+    public GameObject _pointchildPredab;
 
     [Header("隕石の速さ")]
     //隕石の速さ
@@ -20,25 +24,18 @@ public class RoberiaAsteroidSpawn : MonoBehaviour
     //隕石が向かう場所の指定
     public GameObject Earth;
 
-    private Vector3 EarthPos;
-
     public static bool _taegethpflg = false;
-
-    void Start()
-    {
-        EarthPos = new Vector3(Earth.transform.position.x, 0, 0);
-    }
 
     void Update()
     {
-        if (_taegethpflg)
+        if (this.gameObject.GetComponent<TargetCollider>().IsHp)
         {
             //enemyをインスタンス化する(生成する)
             GameObject asteroid = Instantiate(enemyPrefab);
-            //生成した敵の位置をランダムに設定する
-            asteroid.transform.position = childPredab.transform.position;
-            _taegethpflg = false;
-            asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, EarthPos);
+            asteroid.transform.position = _spawnchildPredab.transform.position;
+            asteroid.GetComponent<AsteroidScript>().ChangeParam(400, _pointchildPredab.transform.position);
+            asteroid.GetComponent<AsteroidScript>().ChangeRotation(true);
+            this.gameObject.GetComponent<TargetCollider>().IsHp = false;
         }
     }
 }

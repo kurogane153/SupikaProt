@@ -47,6 +47,11 @@ public class AsteroidScript : MonoBehaviour
         _speed = speed;
     }
 
+    public void ChangeRotation(bool flg)
+    {
+        _isRotation = flg;
+    }
+
     public int GetAsteroidNumber()
     {
         return _asteroidnumber;

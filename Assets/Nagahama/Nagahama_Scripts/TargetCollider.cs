@@ -17,6 +17,7 @@ public class TargetCollider : MonoBehaviour
     private bool beforeInScreenFlags;
     private Camera mainCamera;
     private float startHP;
+    private bool _taegethpflg;
 
     public bool IsExcution
     {
@@ -27,6 +28,12 @@ public class TargetCollider : MonoBehaviour
     {
         get { return isLockedOn; }
         set { isLockedOn = value; }
+    }
+
+    public bool IsHp
+    {
+        get { return _taegethpflg; }
+        set { _taegethpflg = value; }
     }
 
     public AsteroidScript GetAsteroidScript
@@ -42,8 +49,6 @@ public class TargetCollider : MonoBehaviour
             
             isExcution = true;
             IsLockedOn = false;
-            RoberiaAsteroidSpawn._taegethpflg = true;
-
             if (0 < _extraLife) {
                 StartCoroutine(nameof(DelaySetActiveTrue));
             } else {
@@ -57,6 +62,7 @@ public class TargetCollider : MonoBehaviour
     private IEnumerator DelaySetActiveTrue()
     {
         yield return new WaitForSeconds(0.1f);
+        _taegethpflg = true;
         isExcution = false;
         _extraLife--;
         _hp = startHP;
