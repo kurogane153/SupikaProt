@@ -31,7 +31,7 @@ public class LockedOnReticle : MonoBehaviour
 
     void Update()
     {
-        if(target != null && targetCollider.gameObject.activeSelf) {
+        if(target != null && targetCollider.gameObject.activeSelf && !targetCollider.IsExcution) {
             TargetLockOnMove();
         } else {
             ReticleController.Instance.GeneratedReticleCount -= 1;

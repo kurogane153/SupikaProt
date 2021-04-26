@@ -13,9 +13,15 @@ public class TargetCollider : MonoBehaviour
 
     private AsteroidScript parentAsteroidSc;
     private bool isLockedOn;
+    private bool isExcution;
     private bool beforeInScreenFlags;
     private Camera mainCamera;
     private float startHP;
+
+    public bool IsExcution
+    {
+        get { return isExcution; }
+    }
 
     public bool IsLockedOn
     {
@@ -34,16 +40,24 @@ public class TargetCollider : MonoBehaviour
         _hp -= damage;
         if(_hp <= 0) {
             RectInAsteroidContainer.Instance.targetColliders.Remove(this);
+            isExcution = true;
 
             if (0 < _extraLife) {
-                _extraLife--;
-                _hp = startHP;
-                InstantiateTargetButton();
+                StartCoroutine(nameof(DelaySetActiveTrue));
             } else {
                 gameObject.SetActive(false);
             }
             
         }
+    }
+
+    private IEnumerator DelaySetActiveTrue()
+    {
+        yield return new WaitForSeconds(0.1f);
+        isExcution = false;
+        _extraLife--;
+        _hp = startHP;
+        InstantiateTargetButton();
     }
 
 
