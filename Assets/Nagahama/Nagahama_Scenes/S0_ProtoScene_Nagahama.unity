@@ -1157,7 +1157,7 @@ PrefabInstance:
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -2728,7 +2728,7 @@ PrefabInstance:
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -4002,7 +4002,7 @@ PrefabInstance:
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -4915,6 +4915,44 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1165474119}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1180026663 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1610853497983339092, guid: 4772895ffa7645548a6007da63834761,
+    type: 3}
+  m_PrefabInstance: {fileID: 5798764878010353363}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1180026670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180026663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2646d0396c50e480c8d5f544528d08c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask: DangerousAsteroid
+  Post_Outline: {fileID: 4800000, guid: 3a46ca1a6c0a24a5089173f22b6bac4f, type: 3}
+  DrawSimple: {fileID: 4800000, guid: 72cf56135f9ff430681384af31083ee2, type: 3}
+  outlineColor: {r: 1, g: 0, b: 0.09163618, a: 1}
+--- !u!114 &1180026671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180026663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2646d0396c50e480c8d5f544528d08c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask: Asteroid
+  Post_Outline: {fileID: 4800000, guid: 3a46ca1a6c0a24a5089173f22b6bac4f, type: 3}
+  DrawSimple: {fileID: 4800000, guid: 72cf56135f9ff430681384af31083ee2, type: 3}
+  outlineColor: {r: 0, g: 0.108670235, b: 1, a: 1}
 --- !u!1001 &1238106408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7660,7 +7698,7 @@ PrefabInstance:
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -9773,7 +9811,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 5798764878010353363}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1180026663}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8455e19d47960647be45d91ee1dc611, type: 3}
@@ -9911,6 +9949,11 @@ PrefabInstance:
       propertyPath: _showExplosionModeSwitchDelay
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5054093584554773743, guid: c09031e83fe7b6e4ba22ad22782021b9,
+        type: 3}
+      propertyPath: _showExplosionZoomOutLerpFactor
+      value: 0.079
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c09031e83fe7b6e4ba22ad22782021b9, type: 3}
 --- !u!1 &5054093584884806480 stripped
@@ -9931,10 +9974,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2646d0396c50e480c8d5f544528d08c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask: 
+  layerMask: Asteroid
   Post_Outline: {fileID: 4800000, guid: 3a46ca1a6c0a24a5089173f22b6bac4f, type: 3}
   DrawSimple: {fileID: 4800000, guid: 72cf56135f9ff430681384af31083ee2, type: 3}
-  outlineColor: {r: 0, g: 0.10980392, b: 1, a: 1}
+  outlineColor: {r: 0, g: 0.108670235, b: 1, a: 1}
+--- !u!114 &5054093584884806488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5054093584884806480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2646d0396c50e480c8d5f544528d08c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask: DangerousAsteroid
+  Post_Outline: {fileID: 4800000, guid: 3a46ca1a6c0a24a5089173f22b6bac4f, type: 3}
+  DrawSimple: {fileID: 4800000, guid: 72cf56135f9ff430681384af31083ee2, type: 3}
+  outlineColor: {r: 1, g: 0, b: 0.09163618, a: 1}
 --- !u!1001 &5118849827901562410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10588,6 +10647,26 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 1476391018}
+    - target: {fileID: 6712438191241676572, guid: 519d9e5f37953274ebde284e2026baf0,
+        type: 3}
+      propertyPath: _orbitShiftPostionLerpFactor
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712438191241676572, guid: 519d9e5f37953274ebde284e2026baf0,
+        type: 3}
+      propertyPath: _orbitShiftRotationLerpFactor
+      value: 3.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712438191241676572, guid: 519d9e5f37953274ebde284e2026baf0,
+        type: 3}
+      propertyPath: _positionOffset.Array.data[0].z
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712438191241676572, guid: 519d9e5f37953274ebde284e2026baf0,
+        type: 3}
+      propertyPath: _positionOffset.Array.data[1].z
+      value: -15
+      objectReference: {fileID: 0}
     - target: {fileID: 6712438191241676574, guid: 519d9e5f37953274ebde284e2026baf0,
         type: 3}
       propertyPath: m_Name
@@ -11159,7 +11238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _layerMask.m_Bits
-      value: 43008
+      value: 10240
       objectReference: {fileID: 0}
     - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
       propertyPath: _followKillCamMissileNum
