@@ -57,6 +57,11 @@ public class AsteroidScript : MonoBehaviour
         return _asteroidnumber;
     }
 
+    public int GetAsteroidHp()
+    {
+        return _hp;
+    }
+
     // 隕石にダメージを与える
     public void ReceiveDamage(int damage)
     {

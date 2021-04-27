@@ -36,7 +36,7 @@ public class GameClearOver_Process : MonoBehaviour
     [Header("ゲームクリアまでの隕石の個数")]
     public int GameClearAsteroid = 25;
 
-    [Header("ゲームオーバーのリロード時間")]
+    [Header("ゲームオーバー・ゲームクリアのリロード時間")]
     public float GameOverReloadTime = 3.5f;
 
    
@@ -64,7 +64,7 @@ public class GameClearOver_Process : MonoBehaviour
         if (GameClearCount >= GameClearAsteroid)
         {
             isclear = true;
-            Invoke("DelayMethod", 3.0f);
+            Invoke("DelayLastScene", GameOverReloadTime);
         }
     }
 
@@ -113,6 +113,11 @@ public class GameClearOver_Process : MonoBehaviour
     void DelayMethod()
     {
         SceneManager.LoadScene("Result");
+    }
+
+    void DelayLastScene()
+    {
+        SceneManager.LoadScene("KuroganeScene");
     }
 
     void ChangeMaterial()
