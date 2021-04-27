@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class RoberiaHpSlider : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class RoberiaHpSlider : MonoBehaviour
     [Header("Set RoberiaAsteroid Prefab")]
     //隕石プレハブ
     public GameObject _roberiaPrefab;
+
+    //TextMesh Proのテキスト、Inspectorで設定
+    [SerializeField]
+    private TextMeshProUGUI _text;
+
 
     Slider _slider;
     private float _hp = 0;
@@ -19,6 +25,7 @@ public class RoberiaHpSlider : MonoBehaviour
         // スライダーを取得する
         _slider = this.gameObject.GetComponent<Slider>();
         _slider.maxValue = _roberiaPrefab.GetComponent<AsteroidScript>().GetAsteroidHp();
+        _text.text = (_slider.value + "/" + _slider.maxValue);
     }
 
     
@@ -37,6 +44,7 @@ public class RoberiaHpSlider : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        _text.text = (_slider.value + "/" + _slider.maxValue);
     }
 
     void Hpset()

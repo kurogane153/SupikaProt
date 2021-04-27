@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class AsteroidWaveManager : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class AsteroidWaveManager : MonoBehaviour
     [Header("Set Earth Prefab")]
     //隕石が向かう場所の指定
     public GameObject _earth;
+
+    //TextMesh Proのテキスト、Inspectorで設定
+    [Header("テキストウィンドウ")]
+    [SerializeField]
+    private GameObject _textwindow;
 
     [Header("隕石をスピカに向かわせるならONに")]
     public bool _spikaflg;
@@ -54,6 +60,8 @@ public class AsteroidWaveManager : MonoBehaviour
     //生成するかどうかのフラグ
     private bool _asteroidinstansflg = false;
 
+    private GameObject _textmessage;
+
     public GameClearOver_Process _gameCOProcess;
 
     //デバッグ用
@@ -76,6 +84,8 @@ public class AsteroidWaveManager : MonoBehaviour
         _wave = _wavecount.FAST;
         _asteroidwavecount = 2;
         _waveAsteroid = _waveAsteroidcount[0];
+        _textmessage = _textwindow.transform.GetChild(0).gameObject;
+        _textwindow.SetActive(false);
     }
 
     void Update()
@@ -83,6 +93,7 @@ public class AsteroidWaveManager : MonoBehaviour
         WaveCount();
         DoubleAsteroid();
         Dbg();
+        
     }
 
     void DoubleAsteroid()
@@ -121,9 +132,12 @@ public class AsteroidWaveManager : MonoBehaviour
                     _asteroidwavecount++;
                     _wave = _wavecount.SECOND;
                     _waveAsteroid = _waveAsteroidcount[1];
+                    _textwindow.SetActive(true);
+                    _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
+                    _textmessage.GetComponent<TextMeshProUGUI>().text = ("ウェーブ１終了");
                     Invoke("DelayChangeWave", drawingTime);
                 }
-                
+
                 break;
             case _wavecount.SECOND:
                 if (_waveAsteroidInstansCount >= _waveAsteroid) _asteroidinstansflg = true;
@@ -133,8 +147,10 @@ public class AsteroidWaveManager : MonoBehaviour
                     _asteroidwavecount++;
                     _wave = _wavecount.THIRD;
                     _waveAsteroid = _waveAsteroidcount[2];
+                    _textwindow.SetActive(true);
+                    _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
+                    _textmessage.GetComponent<TextMeshProUGUI>().text = ("ウェーブ２終了");
                     Invoke("DelayChangeWave", drawingTime);
-
                 }
                 
                 break;
@@ -146,6 +162,9 @@ public class AsteroidWaveManager : MonoBehaviour
                     _asteroidwavecount++;
                     _wave = _wavecount.FORTH;
                     _waveAsteroid = _waveAsteroidcount[3];
+                    _textwindow.SetActive(true);
+                    _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
+                    _textmessage.GetComponent<TextMeshProUGUI>().text = ("ウェーブ３終了");
                     Invoke("DelayChangeWave", drawingTime);
                 }
                 
@@ -155,12 +174,16 @@ public class AsteroidWaveManager : MonoBehaviour
 
                 if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
                 {
+                    _textwindow.SetActive(true);
+                    _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
+                    _textmessage.GetComponent<TextMeshProUGUI>().text = ("ウェーブ４終了");
                     //_waveAsteroidInstansCount = 0;
                     //_asteroidinstansflg = false;
                 }
 
                 break;
         }
+
     }
 
     private void DelayChangeWave()
@@ -168,6 +191,14 @@ public class AsteroidWaveManager : MonoBehaviour
         _asteroidinstansflg = false;
         _waveAsteroidInstansCount = 0;
         _gameCOProcess.SetGameClearCount(0);
+        _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", false);
+        Invoke("DelayAnimation", 0.5f);
+        //_textwindow.SetActive(false);
+    }
+
+    private void DelayAnimation()
+    {
+        _textwindow.SetActive(false);
     }
 
     public int GetWaveAsteroidInstansCount()

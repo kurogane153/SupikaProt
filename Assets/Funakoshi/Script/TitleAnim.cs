@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class TitleAnim : MonoBehaviour
 {
-    public GameObject LogoOnOff;
-    public GameObject PanelOnOff;
-    public GameObject ButtonOnOff;
+    [SerializeField] GameObject LogoOnOff;
+    [SerializeField] GameObject StartOnOff;
+    [SerializeField] GameObject OptionOnOff;
+    [SerializeField] GameObject EndOnOff;
+    [SerializeField] GameObject ButtonOnOff;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         LogoOnOff.SetActive(false);
-        PanelOnOff.SetActive(false);
+        StartOnOff.SetActive(false);
+        OptionOnOff.SetActive(false);
+        EndOnOff.SetActive(false);
         ButtonOnOff.SetActive(false);
 
         Invoke("TitleOn", 3.0f);
-        Invoke("PanelOn", 4.0f);
-        Invoke("ButtonOn", 4.5f);
+        Invoke("PanelOn", 4.8f);
+        Invoke("ButtonOn", 5.7f);
     }
 
     // Update is called once per frame
@@ -33,7 +38,9 @@ public class TitleAnim : MonoBehaviour
 
     private void PanelOn()
     {
-        PanelOnOff.SetActive(true);
+        StartOnOff.SetActive(true);
+        OptionOnOff.SetActive(true);
+        EndOnOff.SetActive(true);
 
     }
 
