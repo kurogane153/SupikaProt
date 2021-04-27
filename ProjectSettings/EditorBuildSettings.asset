@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Funakoshi/Result.unity
     guid: 74439468d40f4b442ab501d4e5ab405f
+  - enabled: 1
+    path: Assets/Kurogane/KuroganeScene.unity
+    guid: 9d07f6f4a587faa4a80dfac704ca1cd4
   m_configObjects: {}

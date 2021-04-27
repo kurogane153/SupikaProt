@@ -17,7 +17,7 @@ MonoBehaviour:
   _spawnchildPredab: {fileID: 4013880077986229832}
   _pointchildPredab: {fileID: 6386516808307077351}
   _spawnedAsteroidSpeed: 50
-  Earth: {fileID: 0}
+  Earth: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00, type: 3}
 --- !u!114 &3402314554726312867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
   _spawnchildPredab: {fileID: 754843297964418923}
   _pointchildPredab: {fileID: 3479622690911864772}
   _spawnedAsteroidSpeed: 50
-  Earth: {fileID: 0}
+  Earth: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00, type: 3}
 --- !u!65 &1228918416127416450
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -61,9 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b408f7bc57de3c54ea2d15824ddb6608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8072556475575391548, guid: 5ebd8dc719c0ca14283108719203924f,
-    type: 3}
-  Earth: {fileID: 0}
+  Earth: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00, type: 3}
   _spawnedAsteroidSpeed: 50
 --- !u!65 &9111888625809735692
 BoxCollider:
@@ -90,8 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b408f7bc57de3c54ea2d15824ddb6608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
-  Earth: {fileID: 0}
+  Earth: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00, type: 3}
   _spawnedAsteroidSpeed: 50
 --- !u!65 &6700826995266475491
 BoxCollider:
@@ -118,8 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b408f7bc57de3c54ea2d15824ddb6608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
-  Earth: {fileID: 0}
+  Earth: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00, type: 3}
   _spawnedAsteroidSpeed: 50
 --- !u!114 &242713385118688071
 MonoBehaviour:
@@ -138,7 +134,7 @@ MonoBehaviour:
   _spawnchildPredab: {fileID: 2622732518253914198}
   _pointchildPredab: {fileID: 1554807379229525438}
   _spawnedAsteroidSpeed: 50
-  Earth: {fileID: 0}
+  Earth: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00, type: 3}
 --- !u!65 &521432023449360406
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -164,8 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b408f7bc57de3c54ea2d15824ddb6608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
-  Earth: {fileID: 0}
+  Earth: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00, type: 3}
   _spawnedAsteroidSpeed: 50
 --- !u!114 &2788527028798815798
 MonoBehaviour:
@@ -184,7 +179,7 @@ MonoBehaviour:
   _spawnchildPredab: {fileID: 8683751610503092567}
   _pointchildPredab: {fileID: 1060497490915771896}
   _spawnedAsteroidSpeed: 50
-  Earth: {fileID: 0}
+  Earth: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00, type: 3}
 --- !u!65 &103789209561586065
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -210,8 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b408f7bc57de3c54ea2d15824ddb6608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
-  Earth: {fileID: 0}
+  Earth: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00, type: 3}
   _spawnedAsteroidSpeed: 50
 --- !u!114 &3101047120980897660
 MonoBehaviour:
@@ -230,7 +224,7 @@ MonoBehaviour:
   _spawnchildPredab: {fileID: 2352469076911349108}
   _pointchildPredab: {fileID: 7711918798438182579}
   _spawnedAsteroidSpeed: 50
-  Earth: {fileID: 0}
+  Earth: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00, type: 3}
 --- !u!1 &8932848997244980696
 GameObject:
   m_ObjectHideFlags: 0

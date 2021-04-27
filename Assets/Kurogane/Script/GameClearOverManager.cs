@@ -24,11 +24,6 @@ public class GameClearOverManager : MonoBehaviour
     [Header("Set Earth Prefab")]
     public GameObject Earth;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         GameOverCountText.GetComponent<Text>().text = "地球滅亡まで残り:" + (GameOverAsteroid - Earth.GetComponent<GameClearOver_Process>().GetGameOverCount());
