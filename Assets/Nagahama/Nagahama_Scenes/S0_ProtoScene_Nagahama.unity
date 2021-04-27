@@ -10649,13 +10649,18 @@ PrefabInstance:
       objectReference: {fileID: 1476391018}
     - target: {fileID: 6712438191241676572, guid: 519d9e5f37953274ebde284e2026baf0,
         type: 3}
+      propertyPath: _waitTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712438191241676572, guid: 519d9e5f37953274ebde284e2026baf0,
+        type: 3}
       propertyPath: _orbitShiftPostionLerpFactor
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6712438191241676572, guid: 519d9e5f37953274ebde284e2026baf0,
         type: 3}
       propertyPath: _orbitShiftRotationLerpFactor
-      value: 3.9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6712438191241676572, guid: 519d9e5f37953274ebde284e2026baf0,
         type: 3}

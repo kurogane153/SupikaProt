@@ -9,11 +9,14 @@ public class EndingCameraScript : MonoBehaviour
     public Transform target;
     public Transform explosionViwePos;
     public float speed = 2f;
+    public LastBossDisolveEffectScript lastBossDisolve;
     float step;
+    RadialBlur radialBlur;
 
     void Start()
     {
         StartCoroutine(nameof(TimeScaleDown));
+        radialBlur = GetComponent<RadialBlur>();
     }
 
     void Update()
@@ -38,22 +41,36 @@ public class EndingCameraScript : MonoBehaviour
 
     private IEnumerator TimeScaleDown()
     {
+        // ミサイル1発目が発射されるタイミングに合わせて回転フラグオン
+        // スローモーションにするためにtimeScaleを下げる
         yield return new WaitForSeconds(1.75f);
         Time.timeScale = 0.2f;
         rotflg = true;
+
+        // 2秒間ミサイルに向き続け、スローモーション解除
+        // ミサイルの進行方向にカメラを向け、ミサイルの背後にカメラを移動する
         yield return new WaitForSeconds(2 * 0.2f);
         Time.timeScale = 1f;
         rotflg = false;
         transform.rotation = target.rotation;
-        transform.Rotate(15, 180, 0);
-
+        transform.Rotate(15, 180, 20);
         Vector3 desiredPosition = target.position + new Vector3(0, 10, -5);
         transform.position = desiredPosition;
         followflg = true;
 
+        // 2秒後、爆発を鑑賞する位置に移動する
         yield return new WaitForSeconds(2f);
         followflg = false;
         transform.position = explosionViwePos.position;
         transform.rotation = explosionViwePos.rotation;
+
+        // ラスボスのHPが0になるタイミングで放射ブラー起動
+        yield return new WaitForSeconds(1.3f);
+        radialBlur.EnableRadialBlur();
+        lastBossDisolve.StartDisovle();
+
+        // 爆発エフェクトが終了するタイミングで放射ブラーオフ
+        yield return new WaitForSeconds(2.5f);
+        radialBlur.DisableRadialBlur();
     }
 }

@@ -94,7 +94,7 @@ public class CameraController : MonoBehaviour
     {
         Vector3 localOffset = _player.right * 0 + _player.up * prePosOffset.y + _player.forward * 0;
 
-        beforePlayerPos = Vector3.Lerp(transform.position, _player.position + localOffset, 0.5f);
+        beforePlayerPos = Vector3.Lerp(transform.position, _player.position + localOffset, 0.7f);
 
         Vector3 desiredPosition = beforePlayerPos;
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * posLerpFactor);
@@ -108,7 +108,7 @@ public class CameraController : MonoBehaviour
 
     private void OrbitShiftingRotUpdate()
     {
-        Vector3 desiredRotation = _player.rotation.eulerAngles + preRotOffset;
+        Vector3 desiredRotation = _player.rotation.eulerAngles + _rotationOffset[(int)pm.OriginPlanet];
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(desiredRotation), Time.deltaTime * rotLerpFactor);
     }
 
