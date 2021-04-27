@@ -26,7 +26,7 @@ public class PlayerMove : MonoBehaviour
     [Space(10)]
     [SerializeField, Tooltip("地球")] private Transform _earthTransform;
     [SerializeField, Tooltip("コロニー")] private Transform _colonyTransform;
-    [SerializeField, Tooltip("軌道の中心の惑星")] private OrbitOriginPlanet _orbitOriginPlanet;
+    [SerializeField, Tooltip("軌道の中心の惑星")] private OrbitOriginPlanet _enum_orbitOriginPlanet;
     [SerializeField, Tooltip("地球の外周を移動するときの回転軸")] private Vector3 _rotateEarthAxis;
     [SerializeField, Tooltip("コロニーの外周を移動するときの回転軸")] private Vector3 _rotateSpicaAxis;
 
@@ -47,13 +47,13 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private string _orbitOriginChangeButtonName = "OrbitOriginChange";
     [SerializeField] private float[] _orbitOriginChangeCanMinAngle;
     [SerializeField] private float[] _orbitOriginChangeCanMaxAngle;
-    [SerializeField] private float[] _lagrangePointMinAngle;
-    [SerializeField] private float[] _lagrangePointMaxAngle;
+    [SerializeField] private float _lagrangePointAngle;
 
     private Transform orbitOrigin;
     private Vector3 rotateAxis;
     private Quaternion angleAxis;
     private float nowAngle;
+    private float beforeAngle;
     private bool isAcceptedOrbitChange;
     private float speedChangeTimeRemain;
     private float period;
@@ -61,7 +61,7 @@ public class PlayerMove : MonoBehaviour
 
     public OrbitOriginPlanet OriginPlanet
     {
-        get { return _orbitOriginPlanet; }
+        get { return _enum_orbitOriginPlanet; }
     }
 
     #region デバッグ用変数
@@ -160,6 +160,8 @@ public class PlayerMove : MonoBehaviour
 
     private void MoveMent()
     {
+        beforeAngle = nowAngle;
+
         angleAxis = Quaternion.AngleAxis(360 / period * Time.deltaTime, rotateAxis);
         Vector3 newPos = transform.position;
 
@@ -179,10 +181,10 @@ public class PlayerMove : MonoBehaviour
     {
         float distance_player_from_planet = (transform.position - orbitOrigin.position).magnitude;
 
-        if(_maxDistances[(int)_orbitOriginPlanet] < distance_player_from_planet) {
-            transform.position = Vector3.MoveTowards(transform.position, (transform.position - orbitOrigin.position).normalized * _maxDistances[(int)_orbitOriginPlanet], Time.deltaTime * 5f);
-        } else if (distance_player_from_planet < _minDistances[(int)_orbitOriginPlanet]) {
-            transform.position = Vector3.MoveTowards(transform.position, (transform.position - orbitOrigin.position).normalized * _minDistances[(int)_orbitOriginPlanet], Time.deltaTime * 5f);
+        if(_maxDistances[(int)_enum_orbitOriginPlanet] < distance_player_from_planet) {
+            transform.position = Vector3.MoveTowards(transform.position, (transform.position - orbitOrigin.position).normalized * _maxDistances[(int)_enum_orbitOriginPlanet], Time.deltaTime * 5f);
+        } else if (distance_player_from_planet < _minDistances[(int)_enum_orbitOriginPlanet]) {
+            transform.position = Vector3.MoveTowards(transform.position, (transform.position - orbitOrigin.position).normalized * _minDistances[(int)_enum_orbitOriginPlanet], Time.deltaTime * 5f);
         }
     }
 
@@ -208,40 +210,55 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void AcceptOrbitOriginChange()
     {
-        // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作がまだの
-        if((_orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
+        // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作がまだのとき
+        // 軌道変更操作ヘルプを表示し、軌道変更ガイドライトエフェクトをアクティブにします
+        if(_orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
             !isAcceptedOrbitChange) {
-            _orbitGuideLight.enabled = true;
 
+
+            _orbitGuideLight.enabled = true;
             _orbitShiftTooltip.SetTooltipActive(true , true);
 
-        } else if((_orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
-                isAcceptedOrbitChange) {
-                _orbitGuideLight.enabled = true;
 
-                 _orbitShiftTooltip.SetTooltipActive(false, true);
+        // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作を受け付けた状態のとき
+        // 軌道変更をキャンセルするヘルプを表示します
+        } else if(_orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
+            isAcceptedOrbitChange) {
 
+
+             _orbitGuideLight.enabled = true;
+            _orbitShiftTooltip.SetTooltipActive(false, true);
+
+
+        // 上のどれにも当てはまらないとき
+        // 軌道変更ヘルプを非表示にし、軌道変更ガイドライトエフェクトを非アクティブにします
         } else {
             _orbitGuideLight.enabled = false;
             _orbitShiftTooltip.SetTooltipActive(false);
         }
 
+        // 軌道変更ボタンを押したとき、
+        // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作がまだなら
+        // 軌道変更を受け付けて、軌道変更ガイドライトエフェクトにもそれを知らせます
         if (Input.GetButtonDown(_orbitOriginChangeButtonName) && 
-            ( _orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
+            _orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
             !isAcceptedOrbitChange) {
 
+
             _soundPlayer.PlaySE(_se_OrbitChangeAccept);
-
             _orbitGuideLight.OrbitGuideStatusChange(true);
-
             isAcceptedOrbitChange = true;
 
+
+        // 軌道変更ボタンを押したとき、
+        // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作を受け付けた状態なら
+        // 軌道変更をキャンセルします。
         } else if (Input.GetButtonDown(_orbitOriginChangeButtonName) &&
-            (_orbitOriginChangeCanMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_orbitOriginPlanet]) &&
+            _orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
             isAcceptedOrbitChange) {
 
-            _orbitGuideLight.OrbitGuideStatusChange(false);
 
+            _orbitGuideLight.OrbitGuideStatusChange(false);
             isAcceptedOrbitChange = false;
         }
     }
@@ -253,15 +270,15 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void OrbitOriginSwitch()
     {
-        switch (_orbitOriginPlanet) {
+        switch (_enum_orbitOriginPlanet) {
             case OrbitOriginPlanet.Earth:
-                _orbitOriginPlanet = OrbitOriginPlanet.Colony;
+                _enum_orbitOriginPlanet = OrbitOriginPlanet.Colony;
                 break;
             case OrbitOriginPlanet.Colony:
-                _orbitOriginPlanet = OrbitOriginPlanet.Earth;
+                _enum_orbitOriginPlanet = OrbitOriginPlanet.Earth;
                 break;
             default:
-                _orbitOriginPlanet = OrbitOriginPlanet.Earth;
+                _enum_orbitOriginPlanet = OrbitOriginPlanet.Earth;
                 break;
         }
         
@@ -273,8 +290,25 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void OrbitShift()
     {
-        if (!isAcceptedOrbitChange || !(_lagrangePointMinAngle[(int)_orbitOriginPlanet] < nowAngle && nowAngle < _lagrangePointMaxAngle[(int)_orbitOriginPlanet])) return;
+        
+        // どちらの惑星が軌道の原点かで処理を分けています
+        // 軌道変更操作を受けてつけていない、受け付けているがラグランジュポイントに到達していないときは
+        // returnで抜けています
+        switch (_enum_orbitOriginPlanet) {
+            case OrbitOriginPlanet.Earth:
+                if (!isAcceptedOrbitChange || !(beforeAngle <= _lagrangePointAngle && _lagrangePointAngle <= nowAngle)) return;
+                break;
 
+            case OrbitOriginPlanet.Colony:
+                if (!isAcceptedOrbitChange || !(nowAngle <= _lagrangePointAngle && _lagrangePointAngle <= beforeAngle)) return;
+                break;
+
+            default:
+                if (!isAcceptedOrbitChange || !(beforeAngle <= _lagrangePointAngle && _lagrangePointAngle <= nowAngle)) return;
+                break;
+        }
+
+        // 軌道変更操作を受け付けており、ラグランジュポイントを通過したしたとき、以下の処理をします
         OrbitOriginSwitch();
         OrbitVarChange();
 
@@ -282,8 +316,6 @@ public class PlayerMove : MonoBehaviour
             _playerAnimation.ChangeOrbit(_speedChangeDelay);
             speedChangeTimeRemain = _speedChangeDelay;
         }
-
-       
 
         isAcceptedOrbitChange = false;
     }
@@ -293,7 +325,7 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void OrbitVarChange()
     {
-        switch (_orbitOriginPlanet) {
+        switch (_enum_orbitOriginPlanet) {
             case OrbitOriginPlanet.Earth:
                 orbitOrigin = _earthTransform;
                 rotateAxis = _rotateEarthAxis;
@@ -359,7 +391,7 @@ public class PlayerMove : MonoBehaviour
     {
         _dbg_playerNowAngle = nowAngle;
         _dbg_isAcceptedOrbitChange = isAcceptedOrbitChange;
-        _dbg_orbitOriginPlanet = _orbitOriginPlanet.ToString();
+        _dbg_orbitOriginPlanet = _enum_orbitOriginPlanet.ToString();
         _dbg_distance_player_to_planet = (transform.position - orbitOrigin.position).magnitude;
     }
 

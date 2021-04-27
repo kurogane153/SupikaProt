@@ -1157,7 +1157,7 @@ PrefabInstance:
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -1730,7 +1730,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6712438191408480886}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414166475}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b824c2648ce12f469b57f0fed2429ca, type: 3}
@@ -2373,28 +2373,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 373037774}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &414166475 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6712438191241676574, guid: 519d9e5f37953274ebde284e2026baf0,
-    type: 3}
-  m_PrefabInstance: {fileID: 6712438191408480886}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &414166476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414166475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2646d0396c50e480c8d5f544528d08c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask: DangerousAsteroid
-  Post_Outline: {fileID: 4800000, guid: 3a46ca1a6c0a24a5089173f22b6bac4f, type: 3}
-  DrawSimple: {fileID: 4800000, guid: 72cf56135f9ff430681384af31083ee2, type: 3}
-  outlineColor: {r: 1, g: 0, b: 0.09163618, a: 1}
 --- !u!1001 &433113413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2750,7 +2728,7 @@ PrefabInstance:
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -4024,7 +4002,7 @@ PrefabInstance:
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -7682,7 +7660,7 @@ PrefabInstance:
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6322633188534613769, guid: 7133d005bba5bfb4ab29c729d8f33769,
         type: 3}
@@ -10670,11 +10648,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 3.29
       objectReference: {fileID: 0}
-    - target: {fileID: 6712438191408480889, guid: 519d9e5f37953274ebde284e2026baf0,
-        type: 3}
-      propertyPath: layerMask
-      value: Asteroid
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 519d9e5f37953274ebde284e2026baf0, type: 3}
 --- !u!114 &6712438191408480887 stripped
@@ -10683,7 +10656,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6712438191408480886}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414166475}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53eaa3fb34a1a0b47a8cc7e2cf1741d4, type: 3}
@@ -11158,16 +11131,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7873198531222326568, guid: ac80e91cdaa7c2d439da73a1b94254ab,
-        type: 3}
-      propertyPath: simulationSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7873198531222326568, guid: ac80e91cdaa7c2d439da73a1b94254ab,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac80e91cdaa7c2d439da73a1b94254ab, type: 3}

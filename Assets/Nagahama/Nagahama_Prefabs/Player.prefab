@@ -1913,10 +1913,12 @@ MonoBehaviour:
   _mainCameraController: {fileID: 0}
   _mainCameraRadialBlur: {fileID: 0}
   _boostEffect: {fileID: 4121862785469520100}
+  _orbitGuideLight: {fileID: 0}
   _soundPlayer: {fileID: 0}
   _se_SpeedUp: {fileID: 0}
   _se_SpeedUpNormal: {fileID: 0}
   _se_SpeedDown: {fileID: 0}
+  _se_OrbitChangeAccept: {fileID: 0}
   _earthTransform: {fileID: 0}
   _colonyTransform: {fileID: 0}
   _orbitOriginPlanet: 0
@@ -1945,12 +1947,7 @@ MonoBehaviour:
   _orbitOriginChangeCanMaxAngle:
   - 268
   - 360
-  _lagrangePointMinAngle:
-  - 270
-  - 270
-  _lagrangePointMaxAngle:
-  - 271
-  - 271
+  _lagrangePointAngle: 270
   _dbg_playerNowAngle: 0
   _dbg_isAcceptedOrbitChange: 0
   _dbg_orbitOriginPlanet: 

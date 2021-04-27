@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
 
     private Vector3 prePosOffset;
     private Vector3 preRotOffset;
+    private Vector3 beforePlayerPos;
 
     private float orbitShiftRotWaitTime;
     private float posLerpFactor;
@@ -52,12 +53,13 @@ public class CameraController : MonoBehaviour
         }
 
         pm = _player.GetComponent<PlayerMove>();
+        beforePlayerPos = _player.position;
     }
 
     private void LateUpdate()
     {
-        MainCameraPositionUpdate();
-        MainCameraRotationUpdate();
+        
+
         if (0 < orbitShiftRotWaitTime) {
             var diff = Time.timeSinceLevelLoad - startTime;
             var lerpRate = diff / _orbitShiftDelayTime;
@@ -65,7 +67,8 @@ public class CameraController : MonoBehaviour
             posLerpFactor = Mathf.Lerp(_orbitShiftPostionLerpFactor, _lerpFactor, lerpRate);
             rotLerpFactor = Mathf.Lerp(_orbitShiftRotationLerpFactor, _rotLerpFactor, lerpRate);
 
-            
+            OrbitShiftingPosUpdate();
+            OrbitShiftingRotUpdate();
 
             if (orbitShiftRotWaitTime <= 0) {
                 posLerpFactor = _lerpFactor;
@@ -73,6 +76,8 @@ public class CameraController : MonoBehaviour
                 orbitShiftRotWaitTime = 0;
             }
         } else {
+            MainCameraPositionUpdate();
+            MainCameraRotationUpdate();
         }
         
     }
@@ -87,9 +92,11 @@ public class CameraController : MonoBehaviour
 
     private void OrbitShiftingPosUpdate()
     {
-        Vector3 localOffset = _player.right * prePosOffset.x + _player.up * prePosOffset.y + _player.forward * prePosOffset.z;
+        Vector3 localOffset = _player.right * 0 + _player.up * prePosOffset.y + _player.forward * 0;
 
-        Vector3 desiredPosition = _player.position + localOffset;
+        beforePlayerPos = Vector3.Lerp(transform.position, _player.position + localOffset, 0.5f);
+
+        Vector3 desiredPosition = beforePlayerPos;
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * posLerpFactor);
     }
 

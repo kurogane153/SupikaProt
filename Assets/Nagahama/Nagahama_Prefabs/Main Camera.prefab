@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1332817175}
   - component: {fileID: 609716114416226856}
   - component: {fileID: 6712438191408480889}
+  - component: {fileID: 414166476}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -103,15 +104,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _positionOffset:
-  - {x: -5, y: 30, z: 65}
-  - {x: 5, y: 30, z: 5}
+  - {x: 0, y: 30, z: 45}
+  - {x: 0, y: 30, z: -5}
   _rotationOffset:
   - {x: 9.19, y: 20, z: 3.29}
   - {x: 9.19, y: -20, z: 3.29}
   _lerpFactor: 4
   _rotLerpFactor: 4
-  _orbitShiftPostionLerpFactor: 2
-  _orbitShiftRotationLerpFactor: 2
+  _orbitShiftPostionLerpFactor: 4
+  _orbitShiftRotationLerpFactor: 3
   _orbitShiftDelayTime: 1.5
 --- !u!114 &5653100032212224630
 MonoBehaviour:
@@ -217,9 +218,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2646d0396c50e480c8d5f544528d08c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask: Asteroid
   Post_Outline: {fileID: 4800000, guid: 3a46ca1a6c0a24a5089173f22b6bac4f, type: 3}
   DrawSimple: {fileID: 4800000, guid: 72cf56135f9ff430681384af31083ee2, type: 3}
   outlineColor: {r: 0, g: 0.108670235, b: 1, a: 1}
+--- !u!114 &414166476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6712438191241676574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2646d0396c50e480c8d5f544528d08c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask: DangerousAsteroid
+  Post_Outline: {fileID: 4800000, guid: 3a46ca1a6c0a24a5089173f22b6bac4f, type: 3}
+  DrawSimple: {fileID: 4800000, guid: 72cf56135f9ff430681384af31083ee2, type: 3}
+  outlineColor: {r: 1, g: 0, b: 0.09163618, a: 1}
 --- !u!1001 &6712438191157328645
 PrefabInstance:
   m_ObjectHideFlags: 0
