@@ -39,13 +39,14 @@ public class EndingPlayerScript : MonoBehaviour
     public Quaternion angleAxis;
     public Transform orbitOrigin;
     public GameObject logo;
+    public float _moveStartWaitTime; 
 
     [Header("サウンド系")]
     [SerializeField] private SoundPlayer _soundPlayer;
     [SerializeField] private AudioClip _se_MissileLaunch;
 
     [Header("ロベリア")]
-    [SerializeField] private Transform _target;
+    [SerializeField] private Transform[] _target;
 
     [Header("ミサイルの設定"), Space(10)]
     [SerializeField] private Transform _launchPoint;
@@ -90,7 +91,7 @@ public class EndingPlayerScript : MonoBehaviour
             StartCoroutine(MissileInstantiate(i++));
         }
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(_moveStartWaitTime);
         moveflg = true;
         yield return new WaitForSeconds(2.5f);
         logo.SetActive(true);
@@ -115,7 +116,7 @@ public class EndingPlayerScript : MonoBehaviour
         GameObject missile = Instantiate(_missilePrefab, _launchPoint.position, Quaternion.identity);
         HomingMissileScript homingMissileScript = missile.GetComponent<HomingMissileScript>();
 
-        homingMissileScript.LaunchMissile(_target, halfwaypoint, impacttime, _launchPoint.position - halfwaypoint.position, _missileShotSettings._missileShotPower[index], _missileDamage);
+        homingMissileScript.LaunchMissile(_target[index], halfwaypoint, impacttime, _launchPoint.position - halfwaypoint.position, _missileShotSettings._missileShotPower[index], _missileDamage);
 
         _soundPlayer.PlaySE(_se_MissileLaunch);
 

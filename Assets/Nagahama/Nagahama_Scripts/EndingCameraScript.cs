@@ -34,8 +34,8 @@ public class EndingCameraScript : MonoBehaviour
         }
 
         if(followflg) {
-            Vector3 desiredPosition = target.position + new Vector3(0, 10, -10);
-            transform.position = Vector3.Lerp(transform.position, desiredPosition, 0.319f);
+            Vector3 desiredPosition = target.position + new Vector3(0, 10, -90);
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, 0.059f);
         }
     }
 
@@ -53,8 +53,8 @@ public class EndingCameraScript : MonoBehaviour
         Time.timeScale = 1f;
         rotflg = false;
         transform.rotation = target.rotation;
-        transform.Rotate(15, 180, 20);
-        Vector3 desiredPosition = target.position + new Vector3(0, 10, -5);
+        transform.Rotate(9, 180, 8);
+        Vector3 desiredPosition = target.position + new Vector3(0, 10, -15);
         transform.position = desiredPosition;
         followflg = true;
 
@@ -66,8 +66,10 @@ public class EndingCameraScript : MonoBehaviour
 
         // ラスボスのHPが0になるタイミングで放射ブラー起動
         yield return new WaitForSeconds(1.3f);
-        radialBlur.EnableRadialBlur();
         lastBossDisolve.StartDisovle();
+
+        yield return new WaitForSeconds(3f);
+        radialBlur.EnableRadialBlur();
 
         // 爆発エフェクトが終了するタイミングで放射ブラーオフ
         yield return new WaitForSeconds(2.5f);

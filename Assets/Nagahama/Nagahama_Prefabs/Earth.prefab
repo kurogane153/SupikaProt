@@ -49,13 +49,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Radius: 20
-  Detail: 4
+  Detail: 3
   IcoSphere: 1
   lastRadius: 20
-  lastDetail: 4
+  lastDetail: 3
   lastIcoSphere: 1
   dirty: 0
-  RotationSpeed: 1
+  RotationSpeed: -1
   Axis: {x: 0.20475286, y: 0.9781476, z: -0.036103465}
   Sun: {fileID: 0}
 --- !u!33 &6582865643303646979
@@ -114,7 +114,7 @@ MeshCollider:
   m_GameObject: {fileID: 6582865643300553065}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -145,17 +145,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6015f8cebcc9e71418f2e1f1bb84a00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOverCountText: {fileID: 0}
-  GameOverText: {fileID: 0}
-  GameClearText: {fileID: 0}
-  GameClearCountText: {fileID: 0}
   ConflictEventCamera: {fileID: 0}
-  EventCameraDistance: 750
+  EventCameraDistance: 2250
   _soundPlayer: {fileID: 5811846110160915816}
   _se_Explosion: {fileID: 8300000, guid: 6796b76f7cd9c174c8b45664a7e929e7, type: 3}
+  _teraExplosion: {fileID: 670532402792323021, guid: 157a1eab67ecfb7498962bb89ad77a53,
+    type: 3}
+  _hellMaterial: {fileID: 2100000, guid: f1e414df15385d64cb021b6cbdc8056b, type: 2}
   GameOverAsteroid: 3
-  GameClearAsteroid: 20
-  GameOverReloadTime: 3.5
+  GameClearAsteroid: 25
+  GameOverReloadTime: 6
 --- !u!1 &6582865643300559827
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +181,7 @@ Transform:
   m_GameObject: {fileID: 6582865643300559827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 18, y: 18, z: 18}
+  m_LocalScale: {x: 54, y: 54, z: 54}
   m_Children:
   - {fileID: 6582865643300295165}
   - {fileID: 6582865643300284889}
@@ -257,7 +256,7 @@ Halo:
   m_Color:
     serializedVersion: 2
     rgba: 4294914610
-  m_Size: 21
+  m_Size: 1400
 --- !u!1001 &3285545483876408309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -328,7 +327,7 @@ PrefabInstance:
     - target: {fileID: 8819265751437537516, guid: 2b599fe3dd41a0746806869b5c9b1276,
         type: 3}
       propertyPath: m_Volume
-      value: 0.3
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8819265751437537516, guid: 2b599fe3dd41a0746806869b5c9b1276,
         type: 3}

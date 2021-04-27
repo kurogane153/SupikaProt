@@ -1,53 +1,172 @@
-﻿// Upgrade NOTE: upgraded instancing buffer 'Props' to new syntax.
+﻿Shader "Custom/Disolve" {
+    Properties{
+        _Color("Main Color", Color) = (.5,.5,.5,1)
+        _MainTex("Base (RGB)", 2D) = "white" {}
+        _DissolveTex("Desolve (RGB)", 2D) = "white" {}
+        _CutOff("Cut off", Range(0.0, 1.0)) = 0.0
+        _Width("Width", Float) = 0.01
+    }
 
-Shader "Custom/Disolve" {
-	Properties{
-		_Color("Color", Color) = (1,1,1,1)
-		_MainTex("Albedo (RGB)", 2D) = "white" {}
-		_DisolveTex("DisolveTex (RGB)", 2D) = "white" {}
-		_Glossiness("Smoothness", Range(0,1)) = 0.5
-		_Metallic("Metallic", Range(0,1)) = 0.0
-		_Threshold("Threshold", Range(0,1)) = 0.0
-	}
-		SubShader{
-			Tags { "RenderType" = "Opaque" }
-			LOD 200
+        SubShader{
+            Tags { "RenderType" = "Opaque" "Queue" = "Transparent" }
+            Pass {
+                Name "BASE"
+                Cull Off
 
-			CGPROGRAM
-			#pragma surface surf Standard fullforwardshadows
-			#pragma target 3.0
+                CGPROGRAM
+                #pragma vertex vert
+                #pragma fragment frag
 
-			sampler2D _MainTex;
-			sampler2D _DisolveTex;
+                #include "UnityCG.cginc"
 
-			struct Input {
-				float2 uv_MainTex;
-			};
+                sampler2D _MainTex;
+                float4 _MainTex_ST;
 
-			half _Glossiness;
-			half _Metallic;
-			half _Threshold;
-			fixed4 _Color;
+                sampler2D _DissolveTex;
+                float4 _DissolveTex_ST;
 
-			UNITY_INSTANCING_BUFFER_START(Props)
-			UNITY_INSTANCING_BUFFER_END(Props)
+                float4 _Color;
+                float _CutOff;
+                float _Width;
 
-			void surf(Input IN, inout SurfaceOutputStandard o) {
-				// Albedo comes from a texture tinted by color
-				fixed4 m = tex2D(_DisolveTex, IN.uv_MainTex);
-				half g = m.r * 0.2 + m.g * 0.7 + m.b * 0.1;
-				if (g < _Threshold) {
-					discard;
-				}
+                struct appdata {
+                    float4 vertex : POSITION;
+                    float2 texcoord : TEXCOORD0;
+                    float3 normal : NORMAL;
+                };
 
-				fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-				o.Albedo = c.rgb;
-				// Metallic and smoothness come from slider variables
-				o.Metallic = _Metallic;
-				o.Smoothness = _Glossiness;
-				o.Alpha = c.a;
-			}
-			ENDCG
-		}
-			FallBack "Diffuse"
+                struct v2f {
+                    float4 pos : SV_POSITION;
+                    float2 texcoord : TEXCOORD0;
+                    float2 dissolvecoord : TEXCOORD1;
+                };
+
+                v2f vert(appdata v)
+                {
+                    v2f o;
+                    o.pos = UnityObjectToClipPos(v.vertex);
+                    o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
+                    o.dissolvecoord = TRANSFORM_TEX(v.texcoord, _DissolveTex);
+                    UNITY_TRANSFER_FOG(o,o.pos);
+                    return o;
+                }
+
+                fixed4 frag(v2f i) : SV_Target
+                {
+                    fixed4 col = _Color * tex2D(_MainTex, i.texcoord);
+                    fixed a = Luminance(tex2D(_DissolveTex, i.dissolvecoord).xyz);
+                    if (_CutOff > a) {
+                        discard;
+                    }
+
+                    return col;
+                }
+                ENDCG
+            }
+
+            Pass {
+                Tags { "LightMode" = "ForwardBase" }
+
+                Name "Add"
+                Cull Off
+                Blend One One
+
+                CGPROGRAM
+                #pragma vertex vert
+                #pragma fragment frag
+
+                #include "UnityCG.cginc"
+
+                sampler2D _MainTex;
+                float4 _MainTex_ST;
+
+                sampler2D _DissolveTex;
+                float4 _DissolveTex_ST;
+
+                float4 _Color;
+                float _CutOff;
+                float _Width;
+
+                struct appdata {
+                    float4 vertex : POSITION;
+                    float2 texcoord : TEXCOORD0;
+                    float3 normal : NORMAL;
+                };
+
+                struct v2f {
+                    float4 pos : SV_POSITION;
+                    float2 dissolvecoord : TEXCOORD0;
+                };
+
+                v2f vert(appdata v)
+                {
+                    v2f o;
+                    o.pos = UnityObjectToClipPos(v.vertex);
+                    o.dissolvecoord = TRANSFORM_TEX(v.texcoord, _DissolveTex);
+                    return o;
+                }
+
+                fixed4 frag(v2f i) : SV_Target
+                {
+                    fixed a = Luminance(tex2D(_DissolveTex, i.dissolvecoord).xyz);
+                    fixed b = smoothstep(_CutOff - _Width, _CutOff, a) - smoothstep(_CutOff, _CutOff + _Width, a);
+                    return fixed4(b * 0.5, 0.0, 0.0, 1.0);
+                }
+                ENDCG
+            }
+
+            Pass {
+                Tags { "LightMode" = "ForwardBase" }
+
+                Name "Add"
+                Cull Off
+                Blend One One
+
+                CGPROGRAM
+                #pragma vertex vert
+                #pragma fragment frag
+
+                #include "UnityCG.cginc"
+
+                sampler2D _MainTex;
+                float4 _MainTex_ST;
+
+                sampler2D _DissolveTex;
+                float4 _DissolveTex_ST;
+
+                float4 _Color;
+                float _CutOff;
+                float _Width;
+
+                struct appdata {
+                    float4 vertex : POSITION;
+                    float2 texcoord : TEXCOORD0;
+                    float3 normal : NORMAL;
+                };
+
+                struct v2f {
+                    float4 pos : SV_POSITION;
+                    float2 dissolvecoord : TEXCOORD0;
+                };
+
+                v2f vert(appdata v)
+                {
+                    v2f o;
+                    o.pos = UnityObjectToClipPos(v.vertex);
+                    o.dissolvecoord = TRANSFORM_TEX(v.texcoord, _DissolveTex);
+                    return o;
+                }
+
+                fixed4 frag(v2f i) : SV_Target
+                {
+                    fixed a = Luminance(tex2D(_DissolveTex, i.dissolvecoord).xyz);
+                    fixed w = _Width * 1.5;
+                    fixed b = smoothstep(_CutOff - w, _CutOff, a) - smoothstep(_CutOff, _CutOff + w, a);
+                    return fixed4(b * 0.3, b * 0.3, b * 0.3, 1.0);
+                }
+                ENDCG
+            }
+        }
+
+            Fallback "VertexLit"
 }

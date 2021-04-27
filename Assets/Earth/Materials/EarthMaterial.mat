@@ -126,8 +126,8 @@ Material:
     - _RimPower: 12
     - _Shininess: 0.03
     - _Smoothness: 0.4
-    - _SpecularIntensity: 2
-    - _SpecularPower: 64
+    - _SpecularIntensity: 0.75
+    - _SpecularPower: 100
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1

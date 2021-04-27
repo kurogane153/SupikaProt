@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class AsteroidScript : MonoBehaviour
 {
+    [Header("サウンド系")]
+    [SerializeField] private SoundPlayer _soundPlayer;
+    [SerializeField] private AudioClip _se_Explosion;
+    [SerializeField] private AudioClip _se_ExplosionStart1;
+    [SerializeField] private AudioClip _se_ExplosionStart2;
+
     [SerializeField] private GameObject _explosionEffect;   // 隕石消滅時爆発エフェクト
 
     [Space(10)]
@@ -14,11 +20,10 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField] private bool _startLookAtTarget;       // 生成時ターゲットに向くか
     [SerializeField] private Vector3 _rotationAxis;         // 自転の回転軸
     [SerializeField] private float _rotationSpeed = 5f;     // 回転速度
-    
+    [SerializeField] private float _explosionEffectDelaySec;   // 爆発エフェクトのディレイ
 
     [SerializeField] private Vector3 targetPosition = Vector3.zero;
     [SerializeField] private int _asteroidnumber = 0;
-
     
     private bool isMovePause;   // 惑星への接近を停止するか
 
@@ -68,8 +73,12 @@ public class AsteroidScript : MonoBehaviour
         _hp -= damage;
 
         if (_hp <= 0) {
-            SelfDestroy();
-            Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+            if(0 <= _explosionEffectDelaySec) {
+                StartCoroutine(nameof(DelaySelfDestroy));
+            } else {
+                SelfDestroy();
+                Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+            }
 
             GameClearOver_Process.GameClearCount++;
 
@@ -148,6 +157,20 @@ public class AsteroidScript : MonoBehaviour
         if (ReticleController.Instance._userSuperAimAssistSystemFlags) {
             ReticleController.Instance.SelectFirstButton();
         }
+    }
+
+    private IEnumerator DelaySelfDestroy()
+    {
+        
+        _soundPlayer.PlaySE(_se_ExplosionStart1);
+        _soundPlayer.PlaySE(_se_ExplosionStart2);
+
+        yield return new WaitForSeconds(_explosionEffectDelaySec);
+        _soundPlayer.PlaySE(_se_Explosion);
+        Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+        SelfDestroy();
+        
+        
     }
 
     private void OnCollisionEnter(Collision collision)

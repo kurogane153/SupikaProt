@@ -14,6 +14,11 @@ public class LastBossDisolveEffectScript : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
+    private void OnDestroy()
+    {
+        m_Material.SetFloat("_CutOff", 0);
+    }
+
     public void StartDisovle()
     {
         StartCoroutine("Animate");
@@ -24,7 +29,7 @@ public class LastBossDisolveEffectScript : MonoBehaviour
         meshRenderer.material = m_Material;
         _particle.SetActive(true);
         float time = 0;
-        float duration = 5f;
+        float duration = 5.5f;
         int dir = 1;
 
         while (true) {
@@ -39,7 +44,8 @@ public class LastBossDisolveEffectScript : MonoBehaviour
                 dir = 1;
             }
 
-            m_Material.SetFloat("_Threshold", t);
+
+            m_Material.SetFloat("_CutOff", t);
         }
     }
 }
