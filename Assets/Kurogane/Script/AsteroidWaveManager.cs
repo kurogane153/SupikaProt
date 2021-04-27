@@ -134,7 +134,7 @@ public class AsteroidWaveManager : MonoBehaviour
                     _waveAsteroid = _waveAsteroidcount[1];
                     _textwindow.SetActive(true);
                     _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
-                    _textmessage.GetComponent<TextMeshProUGUI>().text = ("ウェーブ１終了");
+                    _textmessage.GetComponent<TextMeshProUGUI>().text = ("ウェーブ１終了......\n次が　来るぜ！");
                     Invoke("DelayChangeWave", drawingTime);
                 }
 

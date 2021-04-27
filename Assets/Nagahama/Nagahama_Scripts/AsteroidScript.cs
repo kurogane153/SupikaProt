@@ -73,7 +73,7 @@ public class AsteroidScript : MonoBehaviour
         _hp -= damage;
 
         if (_hp <= 0) {
-            if(0 <= _explosionEffectDelaySec) {
+            if(0 < _explosionEffectDelaySec) {
                 StartCoroutine(nameof(DelaySelfDestroy));
             } else {
                 SelfDestroy();
