@@ -65,7 +65,7 @@ public class EndingCameraScript : MonoBehaviour
         transform.rotation = explosionViwePos.rotation;
 
         // ラスボスのHPが0になるタイミングで放射ブラー起動
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.3f + (0.32f * 5));
         lastBossDisolve.StartDisovle();
 
         yield return new WaitForSeconds(3f);

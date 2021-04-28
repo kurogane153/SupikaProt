@@ -39,7 +39,8 @@ public class EndingPlayerScript : MonoBehaviour
     public Quaternion angleAxis;
     public Transform orbitOrigin;
     public GameObject logo;
-    public float _moveStartWaitTime; 
+    public float _moveStartWaitTime;
+    private int startRoopTimes;
 
     [Header("サウンド系")]
     [SerializeField] private SoundPlayer _soundPlayer;
@@ -52,6 +53,7 @@ public class EndingPlayerScript : MonoBehaviour
     [SerializeField] private Transform _launchPoint;
     [SerializeField] private GameObject _missilePrefab;
     [SerializeField] private int _missileDamage = 1;
+    [SerializeField] private int _roopTimes;
 
     [Header("下段にそのグループ内の何発目のミサイルに追従するか指定できる")]
     [Header("上段に何回目に発射されたミサイルのグループにキルカメラが追従するか")]
@@ -63,7 +65,9 @@ public class EndingPlayerScript : MonoBehaviour
 
     void Start()
     {
+        startRoopTimes = _roopTimes;
         StartCoroutine(nameof(MultiTargetMissileInstantiate));
+
     }
 
     void Update()
@@ -84,17 +88,23 @@ public class EndingPlayerScript : MonoBehaviour
 
     private IEnumerator MultiTargetMissileInstantiate()
     {
-        yield return new WaitForSeconds(1.5f);
+        if(_roopTimes == startRoopTimes) {
+            yield return new WaitForSeconds(1.5f);
+        }
+        
         int i = 0;
         foreach (var hp in _missileShotSettings._halfwayPoints) {
             
             StartCoroutine(MissileInstantiate(i++));
         }
 
-        yield return new WaitForSeconds(_moveStartWaitTime);
-        moveflg = true;
-        yield return new WaitForSeconds(2.5f);
-        logo.SetActive(true);
+        if(_roopTimes == 0) {
+            yield return new WaitForSeconds(_moveStartWaitTime);
+            moveflg = true;
+            yield return new WaitForSeconds(2.5f);
+            logo.SetActive(true);
+        }
+       
 
     }
 
@@ -102,6 +112,10 @@ public class EndingPlayerScript : MonoBehaviour
     {
         yield return new WaitForSeconds(_missileShotSettings._instantiateTimes[index]);
         GameObject missile = MissileShot(_missileShotSettings._halfwayPoints[index], _missileShotSettings._impactTimes[index], index);
+        if (index == _target.Length - 1 && 0 < _roopTimes--) {
+            yield return new WaitForSeconds(0.15f);
+            StartCoroutine(nameof(MultiTargetMissileInstantiate));
+        }
 
     }
 
@@ -120,7 +134,7 @@ public class EndingPlayerScript : MonoBehaviour
 
         _soundPlayer.PlaySE(_se_MissileLaunch);
 
-        if(index == 0) {
+        if(index == 0 && _roopTimes == startRoopTimes) {
             _endCam.target = missile.transform;
             _endCam.rotflg = true;
         }
