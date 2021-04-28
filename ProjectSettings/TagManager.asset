@@ -12,6 +12,7 @@ TagManager:
   - AsteroidTargetCollider
   - SubCamera
   - BGMManager
+  - Cursor
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - AsteroidTargetCollider
   - Outline
   - DangerousAsteroid
-  - 
+  - Minimap
   - 
   - 
   - 
