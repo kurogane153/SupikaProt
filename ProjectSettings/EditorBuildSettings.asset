@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Kurogane/KuroganeScene.unity
     guid: 9d07f6f4a587faa4a80dfac704ca1cd4
+  - enabled: 1
+    path: Assets/Nagahama/Nagahama_Scenes/S3_EndingScene_Nagahama.unity
+    guid: 35ebfb77ddd58b245a069d6a442a68ef
   m_configObjects: {}

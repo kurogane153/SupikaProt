@@ -18,13 +18,22 @@ public class RoberiaAsteroidLasCollider : MonoBehaviour
     }
     void Update()
     {
-        if(this.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= 50)
-        {
-            _roberiacolliderPrefab.SetActive(true);
-        }
+        HpColliderOn();
+        
         if (_roberiacolliderPrefab != null && _lastshotflg)
         {
             Debug.Log("ラストやで");
+        }
+    }
+    void HpColliderOn()
+    {
+        if (this.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= 120)
+        {
+            _roberiacolliderPrefab.SetActive(true);
+        }
+        if (this.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= 20)
+        {
+            _lastshotflg = true;
         }
     }
 }

@@ -15,7 +15,6 @@ public class RoberiaHpSlider : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _text;
 
-
     Slider _slider;
     private float _hp = 0;
     private bool _hpsetflg = true;
@@ -25,7 +24,7 @@ public class RoberiaHpSlider : MonoBehaviour
         // スライダーを取得する
         _slider = this.gameObject.GetComponent<Slider>();
         _slider.maxValue = _roberiaPrefab.GetComponent<AsteroidScript>().GetAsteroidHp();
-        _text.text = (_slider.value + "/" + _slider.maxValue);
+        //_text.text = (_slider.value + "/" + _slider.maxValue);
     }
 
     
@@ -40,11 +39,12 @@ public class RoberiaHpSlider : MonoBehaviour
             _slider.value = _roberiaPrefab.GetComponent<AsteroidScript>().GetAsteroidHp();
             
         }
-        if (_roberiaPrefab.GetComponent<AsteroidScript>().GetAsteroidHp() <= 10)
+        if (_roberiaPrefab.GetComponent<AsteroidScript>().GetAsteroidHp() <= 20)
         {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            _slider.value = 0;
         }
-        _text.text = (_slider.value + "/" + _slider.maxValue);
+        _text.text = "小惑星　ロベリア";
     }
 
     void Hpset()

@@ -38,6 +38,10 @@ public class AsteroidWaveManager : MonoBehaviour
     [Header("ウェーブ事の遅延秒数")]
     public int drawingTime = 3;
 
+    [SerializeField]
+    [TextArea(1, 3)]
+    public string[] _lasttext;
+
     private int[] _waveAsteroidcount = new int[4] { 7, 10, 15, 25};
 
     private Vector3 _spikaPos;
@@ -93,7 +97,6 @@ public class AsteroidWaveManager : MonoBehaviour
         WaveCount();
         DoubleAsteroid();
         Dbg();
-        
     }
 
     void DoubleAsteroid()
@@ -134,7 +137,7 @@ public class AsteroidWaveManager : MonoBehaviour
                     _waveAsteroid = _waveAsteroidcount[1];
                     _textwindow.SetActive(true);
                     _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
-                    _textmessage.GetComponent<TextMeshProUGUI>().text = ("ウェーブ１終了......\n次が　来るぜ！");
+                    _textmessage.GetComponent<TextMeshProUGUI>().text = _lasttext[0];
                     Invoke("DelayChangeWave", drawingTime);
                 }
 
@@ -149,7 +152,7 @@ public class AsteroidWaveManager : MonoBehaviour
                     _waveAsteroid = _waveAsteroidcount[2];
                     _textwindow.SetActive(true);
                     _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
-                    _textmessage.GetComponent<TextMeshProUGUI>().text = ("ウェーブ２終了");
+                    _textmessage.GetComponent<TextMeshProUGUI>().text = _lasttext[(int)_wavecount.FAST];
                     Invoke("DelayChangeWave", drawingTime);
                 }
                 
@@ -164,7 +167,7 @@ public class AsteroidWaveManager : MonoBehaviour
                     _waveAsteroid = _waveAsteroidcount[3];
                     _textwindow.SetActive(true);
                     _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
-                    _textmessage.GetComponent<TextMeshProUGUI>().text = ("ウェーブ３終了");
+                    _textmessage.GetComponent<TextMeshProUGUI>().text = _lasttext[(int)_wavecount.SECOND];
                     Invoke("DelayChangeWave", drawingTime);
                 }
                 
@@ -176,7 +179,7 @@ public class AsteroidWaveManager : MonoBehaviour
                 {
                     _textwindow.SetActive(true);
                     _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
-                    _textmessage.GetComponent<TextMeshProUGUI>().text = ("ウェーブ４終了");
+                    _textmessage.GetComponent<TextMeshProUGUI>().text = _lasttext[(int)_wavecount.THIRD];
                     //_waveAsteroidInstansCount = 0;
                     //_asteroidinstansflg = false;
                 }
@@ -193,7 +196,6 @@ public class AsteroidWaveManager : MonoBehaviour
         _gameCOProcess.SetGameClearCount(0);
         _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", false);
         Invoke("DelayAnimation", 0.5f);
-        //_textwindow.SetActive(false);
     }
 
     private void DelayAnimation()
