@@ -39,7 +39,10 @@ public class GameClearOver_Process : MonoBehaviour
     [Header("ゲームオーバー・ゲームクリアのリロード時間")]
     public float GameOverReloadTime = 3.5f;
 
-   
+    [Header("MinimapObject")]
+    public GameObject _minimapobj;
+
+
 
     void Start()
     {
@@ -66,6 +69,7 @@ public class GameClearOver_Process : MonoBehaviour
             isclear = true;
             Invoke("DelayLastScene", GameOverReloadTime);
         }
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -92,6 +96,7 @@ public class GameClearOver_Process : MonoBehaviour
             impactPos = asteroid.transform.position;
             Vector3 desiredPos = (impactPos - transform.position).normalized * EventCameraDistance + transform.position;
             GameOverCount++;
+            _minimapobj.GetComponent<MinimapObjectScript>().ChangeColor(GameOverCount - 1);
 
             if (GameOverCount >= GameOverAsteroid) {
                 GameOverProcess();

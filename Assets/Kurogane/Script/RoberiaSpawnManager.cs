@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoberiaSpawnManager : MonoBehaviour
 {
@@ -19,8 +20,16 @@ public class RoberiaSpawnManager : MonoBehaviour
     void Start()
     {
         //隕石をインスタンス化する(生成する)
-        GameObject asteroid = Instantiate(_roberiaPrefab);
-        asteroid.transform.position = this.transform.position;
-        asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, Earth.transform.position);
+        //GameObject asteroid = Instantiate(_roberiaPrefab);
+        //asteroid.transform.position = this.transform.position;
+        //asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, Earth.transform.position);
+    }
+
+    void Update()
+    {
+        //if (_roberiaPrefab == null)
+        //{
+        //    SceneManager.LoadScene("Result");
+        //}
     }
 }

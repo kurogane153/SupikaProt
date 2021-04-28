@@ -62,6 +62,9 @@ public class AlertLine : MonoBehaviour
                 ArertText.SetActive(true);
                 _asteroid = collision.gameObject;
             }
+            GameObject childObject = collision.gameObject.transform.FindChild("MinimapRenderObject_Asteroid").gameObject;
+            childObject.GetComponent<MinimapObjectScript>().ChangeColor(0);
+            childObject = null;
             collision.gameObject.layer = 15;
             //GameObject _cusor = Instantiate(Cursor);
             //_cusor.transform.position = collision.transform.position;

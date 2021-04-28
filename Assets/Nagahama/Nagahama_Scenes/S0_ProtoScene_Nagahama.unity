@@ -2780,7 +2780,7 @@ PrefabInstance:
     - target: {fileID: 5910420717885757576, guid: c64002a477e84b047aded9c5b8441285,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5910420717886178472, guid: c64002a477e84b047aded9c5b8441285,
         type: 3}
@@ -7594,6 +7594,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dbebce2271a99c4f89a3ebd76baf566, type: 3}
+--- !u!1 &1706721957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2210185925473850675, guid: 20a9f86e06d0f8848af35767dd3d20c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2107609679666577372}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1724046098
 GameObject:
   m_ObjectHideFlags: 0
@@ -7660,6 +7666,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1747989151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2210185925473850675, guid: 20a9f86e06d0f8848af35767dd3d20c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1423072221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1754315518 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6757728691016835464, guid: 49b09d3352260e14e8719f1260fc328e,
@@ -8094,6 +8106,7 @@ MonoBehaviour:
   GameOverAsteroid: 3
   GameClearAsteroid: 25
   GameOverReloadTime: 6
+  _minimapobj: {fileID: 1747989151}
 --- !u!1001 &1819215592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10997,6 +11010,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2097303575473778414, guid: c64002a477e84b047aded9c5b8441285,
+        type: 3}
+      propertyPath: m_Name
+      value: derObject_Asteroidt_Asteroid
+      objectReference: {fileID: 0}
     - target: {fileID: 3520247187089437556, guid: c64002a477e84b047aded9c5b8441285,
         type: 3}
       propertyPath: _killCameraPause
@@ -11106,6 +11124,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6582865642158403314, guid: 50d9282d5cb6e1549bb142219f1b7c00,
+        type: 3}
+      propertyPath: _minimapobj
+      value: 
+      objectReference: {fileID: 1706721957}
     - target: {fileID: 6582865642158403314, guid: 50d9282d5cb6e1549bb142219f1b7c00,
         type: 3}
       propertyPath: ConflictEventCamera
