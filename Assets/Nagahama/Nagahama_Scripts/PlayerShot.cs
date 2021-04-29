@@ -138,6 +138,8 @@ public class PlayerShot : MonoBehaviour
 
         _onDrawGizmosFlags = true;
 
+        BGMManagerScript.Instance.PlayBGM(0);
+
     }
 
     void Update()
