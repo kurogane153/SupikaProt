@@ -2916,7 +2916,7 @@ MonoBehaviour:
   _missilePrefab: {fileID: 3643294739846692036, guid: 6bd3158bc74d06f47b5a320173da873b,
     type: 3}
   _missileDamage: 18
-  _roopTimes: 5
+  _roopTimes: 3
   _followKillCamMultiTargetMissilesCount: 0
   _followKillCamMissileNum: 0
   _missileShotSettings:
@@ -7233,7 +7233,7 @@ PrefabInstance:
     - target: {fileID: 925291099398320179, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: _hp
-      value: 540
+      value: 324
       objectReference: {fileID: 0}
     - target: {fileID: 925291099398320179, guid: d212804091069094a894dba5fec9a743,
         type: 3}
@@ -7243,7 +7243,7 @@ PrefabInstance:
     - target: {fileID: 2655890424269471239, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: _extraLife
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4459765244359644389, guid: d212804091069094a894dba5fec9a743,
         type: 3}
@@ -7308,27 +7308,27 @@ PrefabInstance:
     - target: {fileID: 8660414584519177023, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: _extraLife
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8660414585138867732, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: _extraLife
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8660414585448178748, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: _extraLife
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8660414585957943944, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: _extraLife
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8660414586324314811, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: _extraLife
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d212804091069094a894dba5fec9a743, type: 3}

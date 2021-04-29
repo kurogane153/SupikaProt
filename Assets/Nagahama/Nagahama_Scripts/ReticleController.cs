@@ -173,7 +173,7 @@ public class ReticleController : MonoBehaviour
         OptionDataManagerScript.Instance.optionValueChanges.AddListener(ChangeReticleControllerValues);
         ChangeReticleControllerValues();
 
-        BGMManagerScript.Instance.PlayBGM(0);
+        
     }
 
     private void ChangeReticleControllerValues()

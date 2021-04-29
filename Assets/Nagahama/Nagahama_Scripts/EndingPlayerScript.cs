@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndingPlayerScript : MonoBehaviour
 {
@@ -67,6 +68,8 @@ public class EndingPlayerScript : MonoBehaviour
     {
         startRoopTimes = _roopTimes;
         StartCoroutine(nameof(MultiTargetMissileInstantiate));
+        GameClearOver_Process.isclear = true;
+        BGMManagerScript.Instance.StopBGM();
 
     }
 
@@ -103,6 +106,9 @@ public class EndingPlayerScript : MonoBehaviour
             moveflg = true;
             yield return new WaitForSeconds(2.5f);
             logo.SetActive(true);
+
+            yield return new WaitForSeconds(5f);
+            SceneManager.LoadScene("Result");
         }
        
 

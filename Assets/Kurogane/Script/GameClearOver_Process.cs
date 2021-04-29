@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class GameClearOver_Process : MonoBehaviour
 {
-
     private int GameOverCount = 0;
     public static int GameClearCount = 0;
     public static bool isclear = false;

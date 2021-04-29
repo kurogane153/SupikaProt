@@ -116,7 +116,9 @@ public class PlayerMove : MonoBehaviour
         }
 
         OrbitVarChange();
-        
+
+        BGMManagerScript.Instance.PlayBGM(0);
+
     }
 
     void Update()
