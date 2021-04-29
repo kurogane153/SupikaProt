@@ -11864,6 +11864,22 @@ PrefabInstance:
       propertyPath: _followKillCamMultiTargetMissilesCount
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[0]._animWaitTime
+      value: 1.333
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[1]._animWaitTime
+      value: 1.333
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[0]._animationTriggerName
+      value: MissileShot01
+      objectReference: {fileID: 0}
+    - target: {fileID: 135166656, guid: f6de751e9dcc43646b9cbbaa467344ab, type: 3}
+      propertyPath: _missileShotSettings.Array.data[1]._animationTriggerName
+      value: MissileShot02
+      objectReference: {fileID: 0}
     - target: {fileID: 4121862785469520100, guid: f6de751e9dcc43646b9cbbaa467344ab,
         type: 3}
       propertyPath: _boostParticles.Array.data[5]
