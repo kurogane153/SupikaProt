@@ -11,46 +11,59 @@ public class RoberiaClearManager : MonoBehaviour
     //隕石プレハブ
     public GameObject _roberiaPrefab;
 
-    //TextMesh Proのテキスト、Inspectorで設定
-    [Header("テキストウィンドウ")]
-    [SerializeField]
-    public GameObject _textwindow;
+    [Header("Set RoberiaCollider Prefab")]
+    //隕石プレハブ
+    public GameObject _roberiacolliderPrefab;
 
-    [Header("最後に表示するテキスト")]
+    [Header("TextWindowManager")]
     [SerializeField]
-    [TextArea(1, 3)]
-    public string _lasttext;
+    public TextWindowManager _textmanager;
 
-    public GameObject _blackout;
-    
-    private GameObject _textmessage;
+    [Header("最後に表示するテキストナンバー")]
+    [SerializeField]
+    private int _textNo = 4;
+
+    private bool _lastshotflg;
+
+    //public GameObject _blackout;
 
     void Start()
     {
-        _textmessage = _textwindow.transform.GetChild(0).gameObject;
+        _lastshotflg = false;
+        _roberiacolliderPrefab.SetActive(false);
     }
 
     void Update()
     {
-        if (RoberiaAsteroidLasCollider._lastshotflg)
+        if (_lastshotflg)
         {
-            _textwindow.SetActive(true);
-            _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
-            _textmessage.GetComponent<TextMeshProUGUI>().text = _lasttext;
+            _textmanager.TextWindowOn(_textNo);
             Invoke("DelayChangeTextWindow", 3f);
         }
+        HpColliderOn();
 
     }
 
     void DelayChangeTextWindow()
     {
-        _textwindow.GetComponent<Animator>().SetBool("_textwindowflg",false);
-        Invoke("DelayChangeWave", 0.5f);
+        _textmanager.TextWindowOff();
+        Invoke("DelayChangeWave", 1f);
     }
     void DelayChangeWave()
     {
-        _textwindow.SetActive(false);
         SceneManager.LoadScene("S3_EndingScene_Nagahama");
-        //_blackout.SetActive(true);
+    }
+
+    void HpColliderOn()
+    {
+        if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= 120)
+        {
+            _roberiacolliderPrefab.SetActive(true);
+        }
+
+        if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= 20)
+        {
+            _lastshotflg = true;
+        }
     }
 }

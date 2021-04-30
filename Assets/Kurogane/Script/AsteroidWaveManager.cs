@@ -23,11 +23,6 @@ public class AsteroidWaveManager : MonoBehaviour
     //隕石が向かう場所の指定
     public GameObject _earth;
 
-    //TextMesh Proのテキスト、Inspectorで設定
-    [Header("テキストウィンドウ")]
-    [SerializeField]
-    private GameObject _textwindow;
-
     [Header("隕石をスピカに向かわせるならONに")]
     public bool _spikaflg;
 
@@ -38,11 +33,17 @@ public class AsteroidWaveManager : MonoBehaviour
     [Header("ウェーブ事の遅延秒数")]
     public int drawingTime = 3;
 
+    [Header("ウェーブ事の隕石の個数")]
     [SerializeField]
-    [TextArea(1, 3)]
-    public string[] _lasttext;
+    private int[] _waveAsteroidcount = new int[4] { 7, 10, 15, 25 };
 
-    private int[] _waveAsteroidcount = new int[4] { 7, 10, 15, 25};
+    [Header("表示するテキストナンバー")]
+    [SerializeField]
+    public int[] _textNo;
+
+    [Header("TextWindowManager")]
+    [SerializeField]
+    public TextWindowManager _textmanager;
 
     private Vector3 _spikaPos;
     private Vector3 _earthPos;
@@ -64,7 +65,7 @@ public class AsteroidWaveManager : MonoBehaviour
     //生成するかどうかのフラグ
     private bool _asteroidinstansflg = false;
 
-    private GameObject _textmessage;
+    //private GameObject _textmessage;
 
     public GameClearOver_Process _gameCOProcess;
 
@@ -88,8 +89,6 @@ public class AsteroidWaveManager : MonoBehaviour
         _wave = _wavecount.FAST;
         _asteroidwavecount = 2;
         _waveAsteroid = _waveAsteroidcount[0];
-        _textmessage = _textwindow.transform.GetChild(0).gameObject;
-        _textwindow.SetActive(false);
     }
 
     void Update()
@@ -135,9 +134,7 @@ public class AsteroidWaveManager : MonoBehaviour
                     _asteroidwavecount++;
                     _wave = _wavecount.SECOND;
                     _waveAsteroid = _waveAsteroidcount[1];
-                    _textwindow.SetActive(true);
-                    _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
-                    _textmessage.GetComponent<TextMeshProUGUI>().text = _lasttext[0];
+                    _textmanager.TextWindowOn((int)_wavecount.FAST);
                     Invoke("DelayChangeWave", drawingTime);
                 }
 
@@ -150,9 +147,7 @@ public class AsteroidWaveManager : MonoBehaviour
                     _asteroidwavecount++;
                     _wave = _wavecount.THIRD;
                     _waveAsteroid = _waveAsteroidcount[2];
-                    _textwindow.SetActive(true);
-                    _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
-                    _textmessage.GetComponent<TextMeshProUGUI>().text = _lasttext[(int)_wavecount.FAST];
+                    _textmanager.TextWindowOn(_textNo[(int)_wavecount.SECOND]);
                     Invoke("DelayChangeWave", drawingTime);
                 }
                 
@@ -165,9 +160,7 @@ public class AsteroidWaveManager : MonoBehaviour
                     _asteroidwavecount++;
                     _wave = _wavecount.FORTH;
                     _waveAsteroid = _waveAsteroidcount[3];
-                    _textwindow.SetActive(true);
-                    _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
-                    _textmessage.GetComponent<TextMeshProUGUI>().text = _lasttext[(int)_wavecount.SECOND];
+                    _textmanager.TextWindowOn(_textNo[(int)_wavecount.THIRD]);
                     Invoke("DelayChangeWave", drawingTime);
                 }
                 
@@ -177,11 +170,7 @@ public class AsteroidWaveManager : MonoBehaviour
 
                 if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
                 {
-                    _textwindow.SetActive(true);
-                    _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
-                    _textmessage.GetComponent<TextMeshProUGUI>().text = _lasttext[(int)_wavecount.THIRD];
-                    //_waveAsteroidInstansCount = 0;
-                    //_asteroidinstansflg = false;
+                    _textmanager.TextWindowOn(_textNo[(int)_wavecount.FORTH]);
                 }
 
                 break;
@@ -194,13 +183,7 @@ public class AsteroidWaveManager : MonoBehaviour
         _asteroidinstansflg = false;
         _waveAsteroidInstansCount = 0;
         _gameCOProcess.SetGameClearCount(0);
-        _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", false);
-        Invoke("DelayAnimation", 0.5f);
-    }
-
-    private void DelayAnimation()
-    {
-        _textwindow.SetActive(false);
+        _textmanager.TextWindowOff();
     }
 
     public int GetWaveAsteroidInstansCount()
