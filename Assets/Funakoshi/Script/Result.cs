@@ -24,12 +24,12 @@ public class Result : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameClearOver_Process.isclear == false)
+        if (GameClearOverManager.isclear == false)
         {
             GameOvertext.SetActive(true);
         }
 
-        if(GameClearOver_Process.isclear == true)
+        if(GameClearOverManager.isclear == true)
         {
             GameCleartext.SetActive(true);
         }

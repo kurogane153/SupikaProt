@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-public class RoberiaClearManager : MonoBehaviour
+public class RoberiaManager : MonoBehaviour
 {
     [Header("Set RoberiaAsteroid Prefab")]
     //隕石プレハブ
@@ -14,6 +14,14 @@ public class RoberiaClearManager : MonoBehaviour
     [Header("Set RoberiaCollider Prefab")]
     //隕石プレハブ
     public GameObject _roberiacolliderPrefab;
+
+    [Header("Set Earth Prefab")]
+    //隕石が向かう場所の指定
+    public GameObject _earth;
+
+    [Header("ロベリアの速さ")]
+    //隕石の速さ
+    public float _spawnedAsteroidSpeed = 20f;
 
     [Header("TextWindowManager")]
     [SerializeField]
@@ -24,12 +32,15 @@ public class RoberiaClearManager : MonoBehaviour
     private int _textNo = 4;
 
     private bool _lastshotflg;
+    private Vector3 _earthPos;
 
     //public GameObject _blackout;
 
     void Start()
     {
         _lastshotflg = false;
+        _earthPos = new Vector3(_earth.transform.position.x, 0, 0);
+        _roberiaPrefab.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, _earthPos);
         _roberiacolliderPrefab.SetActive(false);
     }
 
@@ -59,6 +70,7 @@ public class RoberiaClearManager : MonoBehaviour
         if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= 120)
         {
             _roberiacolliderPrefab.SetActive(true);
+            _roberiaPrefab.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed * 2, _earthPos);
         }
 
         if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= 20)
