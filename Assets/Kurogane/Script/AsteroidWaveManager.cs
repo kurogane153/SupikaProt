@@ -222,6 +222,31 @@ public class AsteroidWaveManager : MonoBehaviour
             + "ウエーブの隕石：" +_waveAsteroid + "\n" +"隕石破壊数：" + _gameCOProcess.GetGameClearCount() + "\n"
             + "生成した隕石の数：" + _waveAsteroidInstansCount + "\n" + "隕石生成のフラグ：" + _asteroidinstansflg +
             "\n" + "１スポナー事の生成数：" + _asteroidwavecount;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _wave = _wavecount.FAST;
+            _asteroidwavecount = 2;
+            _waveAsteroid = _waveAsteroidcount[0];
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _asteroidwavecount++;
+            _wave = _wavecount.SECOND;
+            _waveAsteroid = _waveAsteroidcount[1];
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _asteroidwavecount++;
+            _wave = _wavecount.THIRD;
+            _waveAsteroid = _waveAsteroidcount[2];
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            _asteroidwavecount++;
+            _wave = _wavecount.FORTH;
+            _waveAsteroid = _waveAsteroidcount[3];
+        }
         //Debug.Log("ウエーブ：" + _wave);
         //Debug.Log("ウエーブの隕石：" + _waveAsteroid);
         //Debug.Log("隕石破壊数：" + _gameCOProcess.GetGameClearCount());

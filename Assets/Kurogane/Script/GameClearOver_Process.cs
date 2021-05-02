@@ -6,9 +6,8 @@ using UnityEngine.UI;
 
 public class GameClearOver_Process : MonoBehaviour
 {
-    private int GameOverCount = 0;
+    private int GameOverCount;
     public static int GameClearCount = 0;
-    public static bool isclear = false;
 
     #region 長浜追加フィールド
     private Vector3 impactPos;  // 隕石が衝突した位置
@@ -32,20 +31,14 @@ public class GameClearOver_Process : MonoBehaviour
     [Header("ゲームオーバーまでの隕石の個数")]
     public int GameOverAsteroid = 3;
 
-    [Header("ゲームクリアまでの隕石の個数")]
-    public int GameClearAsteroid = 25;
-
     [Header("ゲームオーバー・ゲームクリアのリロード時間")]
     public float GameOverReloadTime = 3.5f;
 
     [Header("MinimapObject")]
     public GameObject _minimapobj;
 
-
-
     void Start()
     {
-        GameClearCount = 0;
 
         if (_soundPlayer == null) {
             if ((_soundPlayer = GetComponentInChildren<SoundPlayer>()) == null) {
@@ -53,22 +46,6 @@ public class GameClearOver_Process : MonoBehaviour
             }
             Debug.Log(gameObject.name + "は、子要素にアタッチされているAudioSourceを自動的に" + nameof(_soundPlayer) + "にアタッチしました");
         }
-    }
-
-    void Update()
-    {
-
-        if (GameOverCount >= GameOverAsteroid)
-        { 
-            Invoke("DelayMethod", GameOverReloadTime);
-        }
-
-        if (GameClearCount >= GameClearAsteroid)
-        {
-            isclear = true;
-            Invoke("DelayLastScene", GameOverReloadTime);
-        }
-
     }
 
     void OnTriggerEnter(Collider other)
@@ -114,16 +91,6 @@ public class GameClearOver_Process : MonoBehaviour
         BGMManagerScript.Instance.StopBGM();
     }
 
-    void DelayMethod()
-    {
-        SceneManager.LoadScene("Result");
-    }
-
-    void DelayLastScene()
-    {
-        SceneManager.LoadScene("KuroganeScene");
-    }
-
     void ChangeMaterial()
     {
         GetComponent<MeshRenderer>().material = _hellMaterial;
@@ -142,5 +109,10 @@ public class GameClearOver_Process : MonoBehaviour
     public int GetGameOverCount()
     {
         return GameOverCount;
+    }
+
+    public void SetGameOverCount(int count)
+    {
+        GameOverCount = count;
     }
 }
