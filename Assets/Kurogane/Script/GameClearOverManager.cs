@@ -17,7 +17,7 @@ public class GameClearOverManager : MonoBehaviour
     public int GameClearAsteroid = 17;
 
     [Header("ゲームオーバー・ゲームクリアのリロード時間")]
-    public float GameOverReloadTime = 3.5f;
+    public float GameOverReloadTime = 6f;
 
     [Header("Set Spika Prefab")]
     public GameObject Spika;

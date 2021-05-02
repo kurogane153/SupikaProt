@@ -14,7 +14,7 @@ public class TextWindowManager : MonoBehaviour
 
     //表示するテキスト
     [SerializeField]
-    [TextArea(1, 3)]
+    [TextArea(1, 6)]
     public string[] _text;
 
     private GameObject _textmessage;

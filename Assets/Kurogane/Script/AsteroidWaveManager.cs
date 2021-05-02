@@ -69,6 +69,9 @@ public class AsteroidWaveManager : MonoBehaviour
 
     public GameClearOver_Process _gameCOProcess;
 
+    private int _textno;
+    private bool _textflg = false;
+
     //デバッグ用
     public GameObject _waveText = null; // Textオブジェクト
 
@@ -84,11 +87,14 @@ public class AsteroidWaveManager : MonoBehaviour
 
     void Start()
     {
+        _textno = 1;
         _spikaPos = new Vector3(_spika.transform.position.x, 0, 0);
         _earthPos = new Vector3(_earth.transform.position.x, 0, 0);
         _wave = _wavecount.FAST;
         _asteroidwavecount = 2;
         _waveAsteroid = _waveAsteroidcount[0];
+        _asteroidinstansflg = true;
+        FastText(0);
     }
 
     void Update()
@@ -134,7 +140,8 @@ public class AsteroidWaveManager : MonoBehaviour
                     _asteroidwavecount++;
                     _wave = _wavecount.SECOND;
                     _waveAsteroid = _waveAsteroidcount[1];
-                    _textmanager.TextWindowOn((int)_wavecount.FAST);
+                    _textmanager.TextWindowOn((int)_wavecount.FAST + 1);
+                    _textflg = false;
                     Invoke("DelayChangeWave", drawingTime);
                 }
 
@@ -147,7 +154,8 @@ public class AsteroidWaveManager : MonoBehaviour
                     _asteroidwavecount++;
                     _wave = _wavecount.THIRD;
                     _waveAsteroid = _waveAsteroidcount[2];
-                    _textmanager.TextWindowOn(_textNo[(int)_wavecount.SECOND]);
+                    _textmanager.TextWindowOn((int)_wavecount.SECOND + 1);
+                    _textflg = false;
                     Invoke("DelayChangeWave", drawingTime);
                 }
                 
@@ -160,7 +168,8 @@ public class AsteroidWaveManager : MonoBehaviour
                     _asteroidwavecount++;
                     _wave = _wavecount.FORTH;
                     _waveAsteroid = _waveAsteroidcount[3];
-                    _textmanager.TextWindowOn(_textNo[(int)_wavecount.THIRD]);
+                    _textmanager.TextWindowOn((int)_wavecount.THIRD + 1);
+                    _textflg = false;
                     Invoke("DelayChangeWave", drawingTime);
                 }
                 
@@ -170,12 +179,29 @@ public class AsteroidWaveManager : MonoBehaviour
 
                 if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
                 {
-                    _textmanager.TextWindowOn(_textNo[(int)_wavecount.FORTH]);
+                    //_textmanager.TextWindowOn(5);
+                    _textno = 6;
+                    if (!_textflg) {
+                        FastText((int)_wavecount.FORTH + 1);
+                    }
                 }
 
                 break;
         }
 
+    }
+
+    void FastText(int textno)
+    {
+        _textmanager.TextWindowOn(textno);
+        _textflg = true;
+        Invoke("TextClose", drawingTime);
+    }
+
+    void TextClose()
+    {
+        _textmanager.TextWindowOn(_textno);
+        Invoke("DelayChangeWave", drawingTime);
     }
 
     private void DelayChangeWave()
@@ -245,6 +271,7 @@ public class AsteroidWaveManager : MonoBehaviour
         {
             _asteroidwavecount++;
             _wave = _wavecount.FORTH;
+            _textflg = false;
             _waveAsteroid = _waveAsteroidcount[3];
         }
         //Debug.Log("ウエーブ：" + _wave);
