@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private RadialBlur _mainCameraRadialBlur;
     [SerializeField] private BoostEffect _boostEffect;
     [SerializeField] private OrbitGuideLightScript _orbitGuideLight;
+    [SerializeField] private SpeedBarScript _speedBar;
 
     [Header("サウンド系")]
     [SerializeField] private SoundPlayer _soundPlayer;
@@ -62,6 +63,16 @@ public class PlayerMove : MonoBehaviour
     public OrbitOriginPlanet OriginPlanet
     {
         get { return _enum_orbitOriginPlanet; }
+    }
+
+    public float GetSpeedChangeDelay
+    {
+        get { return _speedChangeDelay; }
+    }
+
+    public int GetPeriodNum
+    {
+        get { return periodNum; }
     }
 
     #region デバッグ用変数
@@ -117,7 +128,9 @@ public class PlayerMove : MonoBehaviour
 
         OrbitVarChange();
 
-        
+        if(_speedBar != null) {
+            _speedBar.Init(_speedChangeDelay);
+        }
 
     }
 
@@ -366,7 +379,9 @@ public class PlayerMove : MonoBehaviour
         _playerAnimation.Spiral(_speedChangeDelay);
         speedChangeTimeRemain = _speedChangeDelay;
 
-        
+        if (_speedBar != null) {
+            _speedBar.SetPeriodNum(periodNum);
+        }
     }
 
     private void SpeedDown()
@@ -387,6 +402,10 @@ public class PlayerMove : MonoBehaviour
         speedChangeTimeRemain = _speedChangeDelay;
 
         _soundPlayer.PlaySE(_se_SpeedDown);
+
+        if (_speedBar != null) {
+            _speedBar.SetPeriodNum(periodNum);
+        }
     }    
 
     private void Dbg()
