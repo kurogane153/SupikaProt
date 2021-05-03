@@ -119,7 +119,7 @@ public class EndingPlayerScript : MonoBehaviour
         yield return new WaitForSeconds(_missileShotSettings._instantiateTimes[index]);
         GameObject missile = MissileShot(_missileShotSettings._halfwayPoints[index], _missileShotSettings._impactTimes[index], index);
         if (index == _target.Length - 1 && 0 < _roopTimes--) {
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.05f);
             StartCoroutine(nameof(MultiTargetMissileInstantiate));
         }
 

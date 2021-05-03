@@ -235,6 +235,7 @@ MonoBehaviour:
   _destroyOnTimeOver: 0
   _destroyTime: 0
   _mainCamera: {fileID: 0}
+  _lockOnMark: {fileID: 7163959718107610164}
 --- !u!1 &4161691904829401496
 GameObject:
   m_ObjectHideFlags: 0

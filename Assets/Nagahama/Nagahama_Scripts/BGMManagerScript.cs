@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BGMManagerScript : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class BGMManagerScript : MonoBehaviour
             return instance;
         }
     }
+
+    [SerializeField] private int[] _sceneBGMs_BuildIndex;
 
     // 音量
     public SoundVolume volume = new SoundVolume();
@@ -62,6 +65,8 @@ public class BGMManagerScript : MonoBehaviour
         OptionDataManagerScript.Instance.optionValueChanges.AddListener(ChangeBGMVolume);
         
         ChangeBGMVolume();
+
+        SceneManager.sceneLoaded += SceneLoaded;
     }
 
     private void ChangeBGMVolume()
@@ -78,6 +83,15 @@ public class BGMManagerScript : MonoBehaviour
         // ボリューム設定
         //BGMsource.volume = volume.BGM;
         
+    }
+
+    private void SceneLoaded(Scene nextScene, LoadSceneMode mode)
+    {
+        if (_sceneBGMs_BuildIndex[nextScene.buildIndex] == -1) {
+            StopBGM();
+            return;
+        }
+        PlayBGM(_sceneBGMs_BuildIndex[nextScene.buildIndex]);
     }
 
 

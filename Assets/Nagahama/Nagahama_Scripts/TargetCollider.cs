@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TargetCollider : MonoBehaviour
 {
+    [SerializeField] private bool _isDisablelockOnMark;
+
     [SerializeField] private GameObject _targetButtonPrefab;
     [SerializeField] private float _reticleRectSizeScaling = 1.2f;  // 2D矩形の大きさ
     [SerializeField] private float _hp;
@@ -113,6 +115,10 @@ public class TargetCollider : MonoBehaviour
         buttonObj.transform.SetParent(ReticleController.Instance.GetCanvas().transform, false);
         buttonObj.GetComponent<AsteroidSelectButton>().SetTooltipActive(true, transform);
         _rectTransform = buttonObj.GetComponent<RectTransform>();
+
+        if (_isDisablelockOnMark) {
+            buttonObj.GetComponent<AsteroidSelectButton>().DisableLockOnMark();
+        }
 
         Rect rect = GetReticleRect();
         Debug.Log("<color=yellow>ReticleRect.X : " + rect.x + "</color>");

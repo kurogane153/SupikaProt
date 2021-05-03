@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AsteroidSelectButton : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class AsteroidSelectButton : MonoBehaviour
     [SerializeField] private bool _destroyOnTimeOver;
     [SerializeField] private float _destroyTime;
     [SerializeField] private Camera _mainCamera;
+    [SerializeField] private Image _lockOnMark;
 
     private Canvas canvas;
     private RectTransform canvasRectTransform;
@@ -61,6 +63,11 @@ public class AsteroidSelectButton : MonoBehaviour
             }
         }
 
+    }
+
+    public void DisableLockOnMark()
+    {
+        _lockOnMark.enabled = false;
     }
 
     private void DestroyProcess()

@@ -871,7 +871,9 @@ MonoBehaviour:
     or F3\n\u5F37\u5236\u7D42\u4E86 :    or F12\n\n\u30C7\u30D0\u30C3\u30B0\u30AB\u30E1\u30E9\u8D77\u52D5\u5207\u66FF
     :     +    or C\n\n\u30C7\u30D0\u30C3\u30B0\u30AB\u30E1\u30E9\u6C34\u5E73\u79FB\u52D5
     : \n\u30C7\u30D0\u30C3\u30B0\u30AB\u30E1\u30E9\u56DE\u8EE2\u3000\u3000 : \n\u30C7\u30D0\u30C3\u30B0\u30AB\u30E1\u30E9\u4E0A\u6607\u4E0B\u964D
-    : "
+    : \n\n\n\n\u30BF\u30A4\u30C8\u30EB\u753B\u9762 : Alt + 1\n\u901A\u5E38\u6226\u95D8
+    : Alt + 2\n\u30EA\u30B6\u30EB\u30C8 : Alt + 3\n\u30E9\u30B9\u30DC\u30B9 : Alt
+    + 4\n\u30A8\u30F3\u30C7\u30A3\u30F3\u30B0 : Alt + 5"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 59a943d4639e12b4f933a29066efe9ac, type: 2}
   m_sharedMaterial: {fileID: 8930557871332708532, guid: 59a943d4639e12b4f933a29066efe9ac,
@@ -5720,7 +5722,6 @@ MonoBehaviour:
   _teraExplosion: {fileID: 0}
   _hellMaterial: {fileID: 0}
   GameOverAsteroid: 3
-  GameClearAsteroid: 20
   GameOverReloadTime: 3.5
   _minimapobj: {fileID: 0}
 --- !u!1001 &1819215592
@@ -6896,6 +6897,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2890628573876591924, guid: d8e7fec9843625f4eaed45166d90760a,
         type: 3}
+      propertyPath: _looptimes
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890628573876591924, guid: d8e7fec9843625f4eaed45166d90760a,
+        type: 3}
       propertyPath: lastBossDisolve
       value: 
       objectReference: {fileID: 1702849439}
@@ -6930,7 +6936,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1070784834, guid: cfdcd431ff0b12a42916b76097373625, type: 3}
       propertyPath: _canvasRenderers.Array.size
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1070784834, guid: cfdcd431ff0b12a42916b76097373625, type: 3}
       propertyPath: _canvasRenderers.Array.data[0]
@@ -7016,7 +7022,7 @@ PrefabInstance:
     - target: {fileID: 6418522095211057123, guid: cfdcd431ff0b12a42916b76097373625,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfdcd431ff0b12a42916b76097373625, type: 3}
@@ -7240,10 +7246,20 @@ PrefabInstance:
       propertyPath: _soundPlayer
       value: 
       objectReference: {fileID: 348149233}
+    - target: {fileID: 1899931971487482821, guid: d212804091069094a894dba5fec9a743,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2655890424269471239, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: _extraLife
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2655890424269471239, guid: d212804091069094a894dba5fec9a743,
+        type: 3}
+      propertyPath: _isDisablelockOnMark
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4459765244359644389, guid: d212804091069094a894dba5fec9a743,
         type: 3}
@@ -7310,25 +7326,50 @@ PrefabInstance:
       propertyPath: _extraLife
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8660414584519177023, guid: d212804091069094a894dba5fec9a743,
+        type: 3}
+      propertyPath: _isDisablelockOnMark
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8660414585138867732, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: _extraLife
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660414585138867732, guid: d212804091069094a894dba5fec9a743,
+        type: 3}
+      propertyPath: _isDisablelockOnMark
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8660414585448178748, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: _extraLife
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8660414585448178748, guid: d212804091069094a894dba5fec9a743,
+        type: 3}
+      propertyPath: _isDisablelockOnMark
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8660414585957943944, guid: d212804091069094a894dba5fec9a743,
+        type: 3}
+      propertyPath: _extraLife
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660414585957943944, guid: d212804091069094a894dba5fec9a743,
+        type: 3}
+      propertyPath: _isDisablelockOnMark
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8660414586324314811, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: _extraLife
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8660414586324314811, guid: d212804091069094a894dba5fec9a743,
         type: 3}
-      propertyPath: _extraLife
-      value: 2
+      propertyPath: _isDisablelockOnMark
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d212804091069094a894dba5fec9a743, type: 3}

@@ -36,6 +36,16 @@ public class SoundPlayer : MonoBehaviour
         audioSource.PlayOneShot(audioClip);
     }
 
+    public void PlaySE()
+    {
+        audioSource.Play();
+    }
+
+    public void ChangePitchLevel(float pitchLevel)
+    {
+        audioSource.pitch = pitchLevel;
+    }
+
     public void DestroyCall(float time)
     {
         StartCoroutine(SelfDestroy(time));

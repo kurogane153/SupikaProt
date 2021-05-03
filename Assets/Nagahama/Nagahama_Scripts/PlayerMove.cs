@@ -10,7 +10,10 @@ public class PlayerMove : MonoBehaviour
         Earth, Colony
     }
 
-    [SerializeField] private PlayerAnimation _playerAnimation;
+    [Header("操作を有効にするか")]
+    [SerializeField] private bool _isControl;
+
+    [SerializeField, Space(10)] private PlayerAnimation _playerAnimation;
     [SerializeField] private CameraController _mainCameraController;
     [SerializeField] private RadialBlur _mainCameraRadialBlur;
     [SerializeField] private BoostEffect _boostEffect;
@@ -19,10 +22,12 @@ public class PlayerMove : MonoBehaviour
 
     [Header("サウンド系")]
     [SerializeField] private SoundPlayer _soundPlayer;
+    [SerializeField] private SoundPlayer _loopSoundPlayer;
     [SerializeField] private AudioClip _se_SpeedUp;
     [SerializeField] private AudioClip _se_SpeedUpNormal;
     [SerializeField] private AudioClip _se_SpeedDown;
     [SerializeField] private AudioClip _se_OrbitChangeAccept;
+    [SerializeField] private float[] _inFlightSoundPitchLevels;
 
     [Space(10)]
     [SerializeField, Tooltip("地球")] private Transform _earthTransform;
@@ -132,6 +137,10 @@ public class PlayerMove : MonoBehaviour
             _speedBar.Init(_speedChangeDelay);
         }
 
+        if (_isControl) {
+            _loopSoundPlayer.PlaySE();
+        }
+
     }
 
     void Update()
@@ -162,12 +171,12 @@ public class PlayerMove : MonoBehaviour
 
     private void SpeedControllInput()
     {
-        if (speedChangeTimeRemain <= 0f && Input.GetButtonDown(_speedUpButtonName)) {
+        if (_isControl && speedChangeTimeRemain <= 0f && Input.GetButtonDown(_speedUpButtonName)) {
             SpeedUp();
             Debug.Log(gameObject.name + "が速度を上げた。現在" + period);
         }
 
-        if (speedChangeTimeRemain <= 0f && Input.GetButtonDown(_speedDownButtonName)) {
+        if (_isControl && speedChangeTimeRemain <= 0f && Input.GetButtonDown(_speedDownButtonName)) {
             SpeedDown();
             Debug.Log(gameObject.name + "が速度を下げた。現在" + period);
         }
@@ -227,7 +236,7 @@ public class PlayerMove : MonoBehaviour
     {
         // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作がまだのとき
         // 軌道変更操作ヘルプを表示し、軌道変更ガイドライトエフェクトをアクティブにします
-        if(_orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
+        if(_isControl && _orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
             !isAcceptedOrbitChange) {
 
 
@@ -237,7 +246,7 @@ public class PlayerMove : MonoBehaviour
 
         // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作を受け付けた状態のとき
         // 軌道変更をキャンセルするヘルプを表示します
-        } else if(_orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
+        } else if(_isControl && _orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
             isAcceptedOrbitChange) {
 
 
@@ -255,7 +264,7 @@ public class PlayerMove : MonoBehaviour
         // 軌道変更ボタンを押したとき、
         // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作がまだなら
         // 軌道変更を受け付けて、軌道変更ガイドライトエフェクトにもそれを知らせます
-        if (Input.GetButtonDown(_orbitOriginChangeButtonName) && 
+        if (_isControl && Input.GetButtonDown(_orbitOriginChangeButtonName) && 
             _orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
             !isAcceptedOrbitChange) {
 
@@ -268,7 +277,7 @@ public class PlayerMove : MonoBehaviour
         // 軌道変更ボタンを押したとき、
         // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作を受け付けた状態なら
         // 軌道変更をキャンセルします。
-        } else if (Input.GetButtonDown(_orbitOriginChangeButtonName) &&
+        } else if (_isControl && Input.GetButtonDown(_orbitOriginChangeButtonName) &&
             _orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
             isAcceptedOrbitChange) {
 
@@ -378,6 +387,7 @@ public class PlayerMove : MonoBehaviour
         period = _periods[periodNum];
         _playerAnimation.Spiral(_speedChangeDelay);
         speedChangeTimeRemain = _speedChangeDelay;
+        _loopSoundPlayer.ChangePitchLevel(_inFlightSoundPitchLevels[periodNum]);
 
         if (_speedBar != null) {
             _speedBar.SetPeriodNum(periodNum);
@@ -402,6 +412,7 @@ public class PlayerMove : MonoBehaviour
         speedChangeTimeRemain = _speedChangeDelay;
 
         _soundPlayer.PlaySE(_se_SpeedDown);
+        _loopSoundPlayer.ChangePitchLevel(_inFlightSoundPitchLevels[periodNum]);
 
         if (_speedBar != null) {
             _speedBar.SetPeriodNum(periodNum);

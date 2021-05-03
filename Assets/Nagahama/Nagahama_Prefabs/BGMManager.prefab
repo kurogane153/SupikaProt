@@ -44,13 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adeeac2c51d9a404e8b2ea4fdf32b2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneBGMs_BuildIndex: ffffffff00000000ffffffff0100000000000000
   volume:
-    BGM: 1
+    BGM: 0.5
     Voice: 1
     SE: 1
     Mute: 0
   BGM:
   - {fileID: 8300000, guid: 964bea737044c134e841412a566af4ef, type: 3}
+  - {fileID: 8300000, guid: f8dcf63372fa50f4eba87b2d6923ccd6, type: 3}
 --- !u!82 &3943620440503761482
 AudioSource:
   m_ObjectHideFlags: 0
@@ -64,7 +66,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
