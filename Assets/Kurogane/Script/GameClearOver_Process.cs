@@ -37,6 +37,10 @@ public class GameClearOver_Process : MonoBehaviour
     [Header("MinimapObject")]
     public GameObject _minimapobj;
 
+    [Header("Set RoberiaAsteroid Prefab")]
+    //隕石プレハブ
+    public GameObject _roberiaPrefab;
+
     void Start()
     {
 
@@ -72,6 +76,10 @@ public class GameClearOver_Process : MonoBehaviour
             impactPos = asteroid.transform.position;
             Vector3 desiredPos = (impactPos - transform.position).normalized * EventCameraDistance + transform.position;
             GameOverCount++;
+            if (asteroid.name == _roberiaPrefab.name)
+            {
+                GameOverCount = 3;
+            }
             _minimapobj.GetComponent<MinimapObjectScript>().ChangeColor(GameOverCount - 1);
 
             if (GameOverCount >= GameOverAsteroid) {

@@ -7223,7 +7223,7 @@ PrefabInstance:
     - target: {fileID: 2152552239906961953, guid: 39766a9e9d6e2d445bdf491bd1419cd2,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2152552239906961965, guid: 39766a9e9d6e2d445bdf491bd1419cd2,
         type: 3}
@@ -8180,6 +8180,7 @@ MonoBehaviour:
   GameOverAsteroid: 3
   GameOverReloadTime: 6
   _minimapobj: {fileID: 1747989151}
+  _roberiaPrefab: {fileID: 0}
 --- !u!1001 &1819215592
 PrefabInstance:
   m_ObjectHideFlags: 0

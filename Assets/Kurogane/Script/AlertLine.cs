@@ -66,19 +66,12 @@ public class AlertLine : MonoBehaviour
             childObject.GetComponent<MinimapObjectScript>().ChangeColor(0);
             childObject = null;
             collision.gameObject.layer = 15;
-            //GameObject _cusor = Instantiate(Cursor);
-            //_cusor.transform.position = collision.transform.position;
         }
     }
 
     void DelayMethod()
     {
         _alertflg = true;
-
-        //GameObject _cusor = Instantiate(Cursor);
-        //_cusor.transform.parent = Player.transform;
-        //_cusor.transform.position = Player.transform.position;
-        //_cusor.GetComponent<AlertCursorAngle>().SetAlertPos(this.gameObject);
 
         if (Spikaflg)
         {
