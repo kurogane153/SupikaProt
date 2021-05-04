@@ -23,6 +23,15 @@ public class RoberiaManager : MonoBehaviour
     //隕石の速さ
     public float _spawnedAsteroidSpeed = 20f;
 
+    [Header("LetterBox")]
+    public GameObject _letterbox;
+
+    [Header("RoberiaHpba")]
+    public GameObject _hpbar;
+
+    [Header("Sppedbar")]
+    public GameObject _speedbar;
+
     [Header("TextWindowManager")]
     [SerializeField]
     public TextWindowManager _textmanager;
@@ -49,7 +58,10 @@ public class RoberiaManager : MonoBehaviour
         if (_lastshotflg)
         {
             _textmanager.TextWindowOn(_textNo);
-            Invoke("DelayChangeTextWindow", 3f);
+            _letterbox.GetComponent<Animator>().SetBool("LetterKey", true);
+            _hpbar.SetActive(false);
+            _speedbar.SetActive(false);
+            Invoke("DelayChangeTextWindow", 4f);
         }
         HpColliderOn();
 
@@ -58,10 +70,12 @@ public class RoberiaManager : MonoBehaviour
     void DelayChangeTextWindow()
     {
         _textmanager.TextWindowOff();
+        _letterbox.GetComponent<Animator>().SetBool("LetterKey", false);
         Invoke("DelayChangeWave", 1f);
     }
     void DelayChangeWave()
     {
+        _letterbox.GetComponent<Animator>().SetTrigger("LetterTriger");
         SceneManager.LoadScene("S3_EndingScene_Nagahama");
     }
 
