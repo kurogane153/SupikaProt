@@ -45,6 +45,10 @@ public class AsteroidWaveManager : MonoBehaviour
     [SerializeField]
     public TextWindowManager _textmanager;
 
+    [Header("LetterBox")]
+    //隕石が向かう場所の指定
+    public GameObject _letterbox;
+
     private Vector3 _spikaPos;
     private Vector3 _earthPos;
 
@@ -141,7 +145,6 @@ public class AsteroidWaveManager : MonoBehaviour
                     _wave = _wavecount.SECOND;
                     _waveAsteroid = _waveAsteroidcount[1];
                     _textmanager.TextWindowOn((int)_wavecount.FAST + 1);
-                    _textflg = false;
                     Invoke("DelayChangeWave", drawingTime);
                 }
 
@@ -155,7 +158,6 @@ public class AsteroidWaveManager : MonoBehaviour
                     _wave = _wavecount.THIRD;
                     _waveAsteroid = _waveAsteroidcount[2];
                     _textmanager.TextWindowOn((int)_wavecount.SECOND + 1);
-                    _textflg = false;
                     Invoke("DelayChangeWave", drawingTime);
                 }
                 
@@ -169,21 +171,18 @@ public class AsteroidWaveManager : MonoBehaviour
                     _wave = _wavecount.FORTH;
                     _waveAsteroid = _waveAsteroidcount[3];
                     _textmanager.TextWindowOn((int)_wavecount.THIRD + 1);
-                    _textflg = false;
                     Invoke("DelayChangeWave", drawingTime);
                 }
                 
                 break;
             case _wavecount.FORTH:
-                if (_waveAsteroidInstansCount >= _waveAsteroid) _asteroidinstansflg = true;
-
+                if (_waveAsteroidInstansCount >= _waveAsteroid) _asteroidinstansflg = true;  
                 if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
                 {
-                    //_textmanager.TextWindowOn(5);
-                    _textno = 6;
                     if (!_textflg) {
-                        FastText((int)_wavecount.FORTH + 1);
+                        LastText();
                     }
+                    _asteroidinstansflg = true;
                 }
 
                 break;
@@ -194,7 +193,7 @@ public class AsteroidWaveManager : MonoBehaviour
     void FastText(int textno)
     {
         _textmanager.TextWindowOn(textno);
-        _textflg = true;
+        _letterbox.GetComponent<Animator>().SetBool("LetterKey", true);
         Invoke("TextClose", drawingTime);
     }
 
@@ -204,8 +203,32 @@ public class AsteroidWaveManager : MonoBehaviour
         Invoke("DelayChangeWave", drawingTime);
     }
 
+    void LastText()
+    {
+        _letterbox.GetComponent<Animator>().SetTrigger("LetterTriger");
+        _textflg = true;
+        _textmanager.TextWindowOn((int)_wavecount.FORTH + 1);
+        _letterbox.GetComponent<Animator>().SetBool("LetterKey", true);
+        Invoke("LastTextMes", drawingTime);
+    }
+
+    void LastTextMes()
+    {
+        _textmanager.TextWindowOn((int)_wavecount.FORTH + 2);
+        Invoke("LastTextClose", drawingTime);
+    }
+
+    void LastTextClose()
+    {
+        _letterbox.GetComponent<Animator>().SetBool("LetterKey", false);
+        _waveAsteroidInstansCount = 0;
+        _gameCOProcess.SetGameClearCount(0);
+        _textmanager.TextWindowOff();
+    }
+
     private void DelayChangeWave()
     {
+        _letterbox.GetComponent<Animator>().SetBool("LetterKey", false);
         _asteroidinstansflg = false;
         _waveAsteroidInstansCount = 0;
         _gameCOProcess.SetGameClearCount(0);
