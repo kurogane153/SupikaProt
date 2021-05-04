@@ -5,13 +5,16 @@ using UnityEngine.Events;
 
 public class SoundPlayer : MonoBehaviour
 {
+    [SerializeField, Tooltip("ポーズ解除時に効果音を再生し直すか")] private bool _isLoopSource;
     private AudioSource audioSource;
     private float startVolume;
+    private bool isStoped;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         startVolume = audioSource.volume;
+        isStoped = false;
     }
 
     void Start()
@@ -23,6 +26,18 @@ public class SoundPlayer : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnEnable()
+    {
+        if (isStoped && _isLoopSource) {
+            PlaySE();
+        }
+    }
+
+    private void OnDisable()
+    {
+        isStoped = true;
     }
 
     private void ChangeSEVolume()

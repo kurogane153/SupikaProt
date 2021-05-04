@@ -3246,6 +3246,11 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: Menu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 2201181460823385349, guid: 30722ab09a7888a4aa22d370c970045f,
+        type: 3}
+      propertyPath: _soundPlayer
+      value: 
+      objectReference: {fileID: 371147177}
     - target: {fileID: 3081298263373910461, guid: 30722ab09a7888a4aa22d370c970045f,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -8756,6 +8761,7 @@ MonoBehaviour:
   GameOverAsteroid: 3
   GameOverReloadTime: 3.5
   _minimapobj: {fileID: 0}
+  _roberiaPrefab: {fileID: 0}
 --- !u!1 &1818908100
 GameObject:
   m_ObjectHideFlags: 0
