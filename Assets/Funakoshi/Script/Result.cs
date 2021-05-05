@@ -6,7 +6,10 @@ using UnityEngine.UI;
 
 public class Result : MonoBehaviour
 {
+    [SerializeField] GameObject _earth;
+    [SerializeField] GameObject _hellearth;
 
+    //カメラ取得
     GameObject ClearCameraObj;
     GameObject OverCameraObj;
     Camera cam;
@@ -22,6 +25,8 @@ public class Result : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        //ゲームクリアとゲームオーバーのカメラ
         ClearCameraObj = GameObject.Find("Main Camera");
         OverCameraObj = GameObject.Find("GameOverCamera");
         cam = ClearCameraObj.GetComponent<Camera>();
@@ -34,6 +39,8 @@ public class Result : MonoBehaviour
 
         ClearCameraObj.SetActive(false);
         OverCameraObj.SetActive(false);
+
+        //GameClearOverManager.isclear = true;
     }
 
     // Update is called once per frame
@@ -41,6 +48,7 @@ public class Result : MonoBehaviour
     {
         if (GameClearOverManager.isclear == false)
         {
+            _earth.SetActive(false);
             PlayerOff.SetActive(false);
             OverCameraObj.SetActive(true);
             GameOvertext.SetActive(true);
@@ -48,6 +56,7 @@ public class Result : MonoBehaviour
 
         if(GameClearOverManager.isclear == true)
         {
+            _hellearth.SetActive(false);
             ClearCameraObj.SetActive(true);
             GameCleartext.SetActive(true);
         }
