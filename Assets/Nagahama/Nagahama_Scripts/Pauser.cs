@@ -2,11 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Pauser : MonoBehaviour
 {
     public static List<Pauser> targets = new List<Pauser>();   // ポーズ対象のスクリプト
     public static bool isPaused;
+    public static bool isCanNotPausing;
 
     [SerializeField] private bool _killCameraPause; // キルカメラ中に止ってほしいときやつだけオンにする
 
@@ -32,7 +34,7 @@ public class Pauser : MonoBehaviour
     {
         // ポーズ対象から除外する
         targets.Remove(this);
-    }
+    }    
 
     // ポーズされたとき
     void OnPause()
@@ -109,6 +111,8 @@ public class Pauser : MonoBehaviour
     // キルカメラ用ポーズ
     public static void SoftPause()
     {
+        isCanNotPausing = true;
+
         foreach (var obj in targets) {
             if (!obj._killCameraPause) continue;
             if (obj.CompareTag("AsteroidTargetCollider")) {
@@ -145,11 +149,15 @@ public class Pauser : MonoBehaviour
                 obj.OnResume();
             }
         }
+
+        isCanNotPausing = false;
     }
 
     // 強制ポーズ
     public static void Pause()
     {
+        if (isCanNotPausing) return;
+
         foreach (var obj in targets) {
             obj.OnPause();
         }

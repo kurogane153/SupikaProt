@@ -67,6 +67,12 @@ public class BGMManagerScript : MonoBehaviour
         ChangeBGMVolume();
 
         SceneManager.sceneLoaded += SceneLoaded;
+
+        if (_sceneBGMs_BuildIndex[SceneManager.GetActiveScene().buildIndex] == -1) {
+            StopBGM();
+            return;
+        }
+        PlayBGM(_sceneBGMs_BuildIndex[SceneManager.GetActiveScene().buildIndex]);
     }
 
     private void ChangeBGMVolume()

@@ -161,12 +161,14 @@ public class AsteroidScript : MonoBehaviour
 
     private IEnumerator DelaySelfDestroy()
     {
-        
+        _soundPlayer.gameObject.transform.parent = null;
+
         _soundPlayer.PlaySE(_se_ExplosionStart1);
         _soundPlayer.PlaySE(_se_ExplosionStart2);
-
+       
         yield return new WaitForSeconds(_explosionEffectDelaySec);
         _soundPlayer.PlaySE(_se_Explosion);
+        _soundPlayer.DestroyCall(3f);
         Instantiate(_explosionEffect, transform.position, Quaternion.identity);
         SelfDestroy();
         

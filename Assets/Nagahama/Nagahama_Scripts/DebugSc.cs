@@ -33,22 +33,27 @@ public class DebugSc : MonoBehaviour
         }
 
         if (Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.Alpha1)) {
+            Time.timeScale = 1;
             SceneManager.LoadScene(0);
         }
 
         if (Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.Alpha2)) {
+            Time.timeScale = 1;
             SceneManager.LoadScene(1);
         }
 
         if (Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.Alpha3)) {
+            Time.timeScale = 1;
             SceneManager.LoadScene(2);
         }
 
         if (Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.Alpha4)) {
+            Time.timeScale = 1;
             SceneManager.LoadScene(3);
         }
 
         if (Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.Alpha5)) {
+            Time.timeScale = 1;
             SceneManager.LoadScene(4);
         }
 

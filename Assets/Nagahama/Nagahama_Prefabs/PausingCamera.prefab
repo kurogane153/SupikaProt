@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2471368941909752107}
   - component: {fileID: 3709665408947389075}
   - component: {fileID: 1070784834}
+  - component: {fileID: 1118515124}
   m_Layer: 0
   m_Name: PausingCamera
   m_TagString: SubCamera
@@ -89,5 +90,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvasRenderers:
   - {fileID: 0}
-  - {fileID: 0}
   isUIEnabled: 1
+--- !u!81 &1118515124
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6418522095211057123}
+  m_Enabled: 1

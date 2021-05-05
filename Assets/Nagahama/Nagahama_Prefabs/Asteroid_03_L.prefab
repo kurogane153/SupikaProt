@@ -435,6 +435,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeteorEffects
       objectReference: {fileID: 0}
+    - target: {fileID: 4268076284921655717, guid: c876aeb83812c674698728586e90f314,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5599858962651029153, guid: c876aeb83812c674698728586e90f314,
         type: 3}
       propertyPath: m_IsActive

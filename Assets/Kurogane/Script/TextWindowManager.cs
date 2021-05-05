@@ -7,36 +7,42 @@ using TMPro;
 public class TextWindowManager : MonoBehaviour
 {
 
+    [SerializeField] private SoundPlayer _audioSource;
+    [SerializeField] private AudioClip _se_WindowOpen;
+
     //TextMesh Proのテキスト、Inspectorで設定
     [Header("テキストウィンドウ")]
     [SerializeField]
     private GameObject _textwindow;
+
+    [SerializeField] private TextMeshProUGUI _messageText;
 
     //表示するテキスト
     [SerializeField]
     [TextArea(1, 6)]
     public string[] _text;
 
-    private GameObject _textmessage;
+    private Animator textWindowAnimator;
 
     void Start()
     {
-        _textmessage = _textwindow.transform.GetChild(0).gameObject;
         _textwindow.SetActive(false);
+        textWindowAnimator = _textwindow.GetComponent<Animator>();
     }
 
     //テキストウィンドウの文字表示・アニメーションのON
     public void TextWindowOn(int textNo)
     {
-        _textmessage.GetComponent<TextMeshProUGUI>().text = _text[textNo];
+        _messageText.text = _text[textNo];
         _textwindow.SetActive(true);
-        _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", true);
+        textWindowAnimator.SetBool("_textwindowflg", true);
+        _audioSource.PlaySE(_se_WindowOpen);
     }
 
     //テキストウィンドウのアニメーションOFF
     public void TextWindowOff()
     {
-        _textwindow.GetComponent<Animator>().SetBool("_textwindowflg", false);
+        textWindowAnimator.SetBool("_textwindowflg", false);
         Invoke("DelayAnimation", 0.5f);
     }
 
