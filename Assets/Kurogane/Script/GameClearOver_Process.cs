@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameClearOver_Process : MonoBehaviour
 {
-    private int GameOverCount;
+    
     public static int GameClearCount = 0;
 
     #region 長浜追加フィールド
@@ -41,8 +41,26 @@ public class GameClearOver_Process : MonoBehaviour
     //隕石プレハブ
     public GameObject _roberiaPrefab;
 
+    private int GameOverCount;
+
     void Start()
     {
+        GameObject parentObject = gameObject.transform.parent.gameObject;
+        if(parentObject.name == "Earth")
+        {
+            GameOverCount = GameClearOverManager._gameoverCount;
+        }
+        else
+        {
+            GameOverCount = GameClearOverManager._gameoverCountColony;
+        }
+
+        if(GameOverCount > 0)
+        {
+            _minimapobj.GetComponent<MinimapObjectScript>().ChangeColor(GameOverCount - 1);
+        }
+
+        parentObject = null;
 
         if (_soundPlayer == null) {
             if ((_soundPlayer = GetComponentInChildren<SoundPlayer>()) == null) {
@@ -96,6 +114,8 @@ public class GameClearOver_Process : MonoBehaviour
         Vector3 explosionpos = (impactPos - transform.position) + transform.position;
         Instantiate(_teraExplosion, explosionpos, Quaternion.identity);
         Invoke("ChangeMaterial", 2.0f);
+        GameClearOverManager._gameoverCount = 0;
+        GameClearOverManager._gameoverCountColony = 0;
         BGMManagerScript.Instance.StopBGM();
     }
 
@@ -119,8 +139,8 @@ public class GameClearOver_Process : MonoBehaviour
         return GameOverCount;
     }
 
-    public void SetGameOverCount(int count)
+    public int GetGameOverAsteroidCount()
     {
-        GameOverCount = count;
+        return GameOverAsteroid;
     }
 }

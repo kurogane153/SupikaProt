@@ -19,9 +19,18 @@ public class RoberiaManager : MonoBehaviour
     //隕石が向かう場所の指定
     public GameObject _earth;
 
+    [Header("Set SpikaRendering Prefab")]
+    public GameObject _spikarendering;
+
+    [Header("Set EarthRendering Prefab")]
+    public GameObject _earthrendering;
+
     [Header("ロベリアの速さ")]
     //隕石の速さ
     public float _spawnedAsteroidSpeed = 20f;
+
+    [Header("ゲームオーバー・ゲームクリアのリロード時間")]
+    public float GameOverReloadTime = 3f;
 
     [Header("LetterBox")]
     public GameObject _letterbox;
@@ -63,8 +72,19 @@ public class RoberiaManager : MonoBehaviour
             _speedbar.SetActive(false);
             Invoke("DelayChangeTextWindow", 4f);
         }
-        HpColliderOn();
 
+        GameOverSceneChange();
+        if (_roberiaPrefab) 
+        {
+            HpColliderOn();
+        }
+        
+
+    }
+
+    void DelayMethod()
+    {
+        SceneManager.LoadScene("Result");
     }
 
     void DelayChangeTextWindow()
@@ -77,6 +97,20 @@ public class RoberiaManager : MonoBehaviour
     {
         _letterbox.GetComponent<Animator>().SetTrigger("LetterTriger");
         SceneManager.LoadScene("S3_EndingScene_Nagahama");
+    }
+
+    void GameOverSceneChange()
+    {
+        if (_earthrendering.GetComponent<GameClearOver_Process>().GetGameOverCount()
+            >= _earthrendering.GetComponent<GameClearOver_Process>().GetGameOverAsteroidCount())
+        {
+            Invoke("DelayMethod", GameOverReloadTime);
+        }
+        if (_spikarendering.GetComponent<GameClearOver_Process>().GetGameOverCount()
+            >= _spikarendering.GetComponent<GameClearOver_Process>().GetGameOverAsteroidCount())
+        {
+            Invoke("DelayMethod", GameOverReloadTime);
+        }
     }
 
     void HpColliderOn()

@@ -8588,7 +8588,10 @@ MonoBehaviour:
   _roberiaPrefab: {fileID: 449227937}
   _roberiacolliderPrefab: {fileID: 905879283}
   _earth: {fileID: 897722549}
+  _spikarendering: {fileID: 1799453316}
+  _earthrendering: {fileID: 256281369}
   _spawnedAsteroidSpeed: 20
+  GameOverReloadTime: 3
   _letterbox: {fileID: 1029551235}
   _hpbar: {fileID: 2129714739}
   _speedbar: {fileID: 323747042}
@@ -11912,7 +11915,7 @@ PrefabInstance:
     - target: {fileID: 1742407085957939566, guid: 172776644ed3dfb48958625641d4653d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1742407085957939567, guid: 172776644ed3dfb48958625641d4653d,
         type: 3}

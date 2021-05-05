@@ -7,11 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameClearOverManager : MonoBehaviour
 {
     public static bool isclear = false;
-    private int _gameoverCount = 0;
-    private int _gameoverCountColony = 0;
-
-    [Header("ゲームオーバーまでの隕石の個数")]
-    public int GameOverAsteroid = 3;
+    public static int _gameoverCount = 0;
+    public static int _gameoverCountColony = 0;
 
     [Header("ゲームクリアまでの隕石の個数")]
     public int GameClearAsteroid = 17;
@@ -25,31 +22,28 @@ public class GameClearOverManager : MonoBehaviour
     [Header("Set Earth Prefab")]
     public GameObject Earth;
 
-    void Start()
-    {
-        Earth.GetComponent<GameClearOver_Process>().SetGameOverCount(_gameoverCount);
-        Spika.GetComponent<GameClearOver_Process>().SetGameOverCount(_gameoverCountColony);
-    }
-
     void Update()
     {
 
-        if (Earth.GetComponent<GameClearOver_Process>().GetGameOverCount() >= GameOverAsteroid)
+        if (Earth.GetComponent<GameClearOver_Process>().GetGameOverCount() >= Earth.GetComponent<GameClearOver_Process>().GetGameOverAsteroidCount())
         {
             Invoke("DelayMethod", GameOverReloadTime);
         }
 
-        if (Spika.GetComponent<GameClearOver_Process>().GetGameOverCount() >= GameOverAsteroid)
+        if (Spika.GetComponent<GameClearOver_Process>().GetGameOverCount() >= Spika.GetComponent<GameClearOver_Process>().GetGameOverAsteroidCount())
         {
             Invoke("DelayMethod", GameOverReloadTime);
         }
 
         if (Earth.GetComponent<GameClearOver_Process>().GetGameClearCount() >= GameClearAsteroid)
         {
-            isclear = true;
+            //isclear = true;
+            _gameoverCount = Earth.GetComponent<GameClearOver_Process>().GetGameOverCount();
+            _gameoverCountColony = Spika.GetComponent<GameClearOver_Process>().GetGameOverCount();
             Invoke("DelayLastScene", GameOverReloadTime);
         }
     }
+
     void DelayMethod()
     {
         _gameoverCount = 0;
@@ -59,8 +53,6 @@ public class GameClearOverManager : MonoBehaviour
 
     void DelayLastScene()
     {
-        _gameoverCount = Earth.GetComponent<GameClearOver_Process>().GetGameOverCount();
-        _gameoverCountColony = Spika.GetComponent<GameClearOver_Process>().GetGameOverCount();
         SceneManager.LoadScene("KuroganeScene");
     }
 }

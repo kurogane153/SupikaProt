@@ -8371,7 +8371,8 @@ MonoBehaviour:
   GameOverAsteroid: 3
   GameOverReloadTime: 6
   _minimapobj: {fileID: 1747989151}
-  _roberiaPrefab: {fileID: 0}
+  _roberiaPrefab: {fileID: 8932848997244980696, guid: 09f57f74ffbd4304d919540a15440c0a,
+    type: 3}
 --- !u!1001 &1819215592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11404,6 +11405,12 @@ PrefabInstance:
       propertyPath: _minimapobj
       value: 
       objectReference: {fileID: 1706721957}
+    - target: {fileID: 6582865642158403314, guid: 50d9282d5cb6e1549bb142219f1b7c00,
+        type: 3}
+      propertyPath: _roberiaPrefab
+      value: 
+      objectReference: {fileID: 8932848997244980696, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
     - target: {fileID: 6582865642158403314, guid: 50d9282d5cb6e1549bb142219f1b7c00,
         type: 3}
       propertyPath: GameClearAsteroid
