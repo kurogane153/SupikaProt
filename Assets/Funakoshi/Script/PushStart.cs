@@ -5,23 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PushStart : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    [SerializeField] private int _nextLoadSceneBuildIndex;
 
     public void StartGame()
     {
         //スタートボタンを押したときメインゲームが始まる
-        SceneManager.LoadScene("S0_ProtoScene_Nagahama");
+        SceneManager.LoadScene(_nextLoadSceneBuildIndex);
     }
 
     public void PushEnd()

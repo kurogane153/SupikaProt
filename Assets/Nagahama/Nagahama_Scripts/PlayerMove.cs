@@ -256,7 +256,7 @@ public class PlayerMove : MonoBehaviour
 
         // 上のどれにも当てはまらないとき
         // 軌道変更ヘルプを非表示にし、軌道変更ガイドライトエフェクトを非アクティブにします
-        } else {
+        } else if(_isControl) {
             _orbitGuideLight.enabled = false;
             _orbitShiftTooltip.SetTooltipActive(false);
         }

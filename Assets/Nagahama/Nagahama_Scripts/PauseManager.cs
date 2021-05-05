@@ -16,7 +16,7 @@ public class PauseManager : MonoBehaviour
     void Update()
     {
         // Menuーボタンでデバッグ用ポーズ
-        if (Input.GetButtonDown("Pause") || Input.GetButtonDown("DebugPause_TAB")) {
+        if ((!Pauser.isCanNotPausing && Input.GetButtonDown("Pause")) || Input.GetButtonDown("DebugPause_TAB")) {
             if (Pauser.isPaused) {
                 Resume();
             } else {

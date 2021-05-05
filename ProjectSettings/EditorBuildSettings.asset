@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MasterScenes/S3_EndingScene_Nagahama.unity
     guid: 35ebfb77ddd58b245a069d6a442a68ef
+  - enabled: 1
+    path: Assets/MasterScenes/OpeningScene.unity
+    guid: e1a4e1bc706f26e46bafa0552c700f36
   m_configObjects: {}
