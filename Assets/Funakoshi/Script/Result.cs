@@ -52,6 +52,7 @@ public class Result : MonoBehaviour
             PlayerOff.SetActive(false);
             OverCameraObj.SetActive(true);
             GameOvertext.SetActive(true);
+            BGMManagerScript.Instance.PlayBGM(4);
         }
 
         if(GameClearOverManager.isclear == true)
@@ -59,6 +60,7 @@ public class Result : MonoBehaviour
             _hellearth.SetActive(false);
             ClearCameraObj.SetActive(true);
             GameCleartext.SetActive(true);
+            BGMManagerScript.Instance.PlayBGM(3);
         }
 
         

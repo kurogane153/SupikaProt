@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adeeac2c51d9a404e8b2ea4fdf32b2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneBGMs_BuildIndex: 0200000000000000ffffffff01000000ffffffff00000000
+  _sceneBGMs_BuildIndex: 0200000000000000ffffffff010000000500000000000000
   volume:
     BGM: 0.5
     Voice: 1
@@ -54,6 +54,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 964bea737044c134e841412a566af4ef, type: 3}
   - {fileID: 8300000, guid: f8dcf63372fa50f4eba87b2d6923ccd6, type: 3}
   - {fileID: 8300000, guid: 81da619a65edd5747b29e97561f6bf87, type: 3}
+  - {fileID: 8300000, guid: 57afdc8cf0808bb4f871927dac5d311d, type: 3}
+  - {fileID: 8300000, guid: 86c3ddaeefd3fbf43af119f19db4bdc8, type: 3}
+  - {fileID: 8300000, guid: f10804c5e32890541ae7cbb040c981b4, type: 3}
 --- !u!82 &3943620440503761482
 AudioSource:
   m_ObjectHideFlags: 0
