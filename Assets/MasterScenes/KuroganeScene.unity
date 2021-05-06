@@ -4928,7 +4928,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Bulid Version :0.1.6
+  m_text: 'Bulid Version 0.8.0b
 
 '
   m_isRightToLeft: 0
