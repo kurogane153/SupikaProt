@@ -41,6 +41,17 @@ public class GameClearOver_Process : MonoBehaviour
     //隕石プレハブ
     public GameObject _roberiaPrefab;
 
+    [Header("表示するテキストナンバー")]
+    [SerializeField]
+    public int[] _textNo;
+
+    [Header("隕石衝突時のテキストの表示秒数")]
+    public int drawingTime = 5;
+
+    [Header("TextWindowManager")]
+    [SerializeField]
+    public TextWindowManager _textmanager;
+
     private int GameOverCount;
 
     void Start()
@@ -82,6 +93,17 @@ public class GameClearOver_Process : MonoBehaviour
             other.GetComponent<AsteroidScript>().ReceiveDamage(9999);
             _soundPlayer.PlaySE(_se_Explosion);
         }
+        if (GameOverCount == 2)
+        {
+            _textmanager.TextWindowOn(8);
+            Invoke("TextClose", drawingTime);
+        }
+        
+    }
+
+    void TextClose()
+    {
+        _textmanager.TextWindowOff();
     }
 
     void HitGameOverCount(Collider asteroid)

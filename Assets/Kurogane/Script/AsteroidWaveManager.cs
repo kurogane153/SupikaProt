@@ -30,7 +30,7 @@ public class AsteroidWaveManager : MonoBehaviour
     //隕石の速さ
     public float _spawnedAsteroidSpeed = 50f;
 
-    [Header("ウェーブ事の遅延秒数")]
+    [Header("テキストの表示秒数（ウェーブ事の遅延秒数）")]
     public int drawingTime = 3;
 
     [Header("ウェーブ事の隕石の個数")]
