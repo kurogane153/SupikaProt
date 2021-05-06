@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adeeac2c51d9a404e8b2ea4fdf32b2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneBGMs_BuildIndex: 0200000000000000ffffffff010000000500000000000000
+  _sceneBGMs_BuildIndex: 0200000000000000ffffffff01000000050000000000000001000000
   volume:
     BGM: 0.5
     Voice: 1

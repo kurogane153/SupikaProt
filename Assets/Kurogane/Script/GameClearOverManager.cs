@@ -53,6 +53,6 @@ public class GameClearOverManager : MonoBehaviour
 
     void DelayLastScene()
     {
-        SceneManager.LoadScene("KuroganeScene");
+        SceneManager.LoadScene("LastBossAppearrScene");
     }
 }

@@ -2301,8 +2301,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040179574}
-  m_LocalRotation: {x: -0.06519749, y: -0.23878516, z: -0.016035346, w: 0.9687486}
-  m_LocalPosition: {x: -1645.6388, y: 18.165592, z: 966.3375}
+  m_LocalRotation: {x: -0.12746486, y: -0.16372699, z: -0.02133625, w: 0.9780036}
+  m_LocalPosition: {x: -1831.1179, y: 9.193954, z: 710.2444}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3248,7 +3248,7 @@ MonoBehaviour:
   angleAxis: {x: 0, y: 1, z: 0, w: 0}
   orbitOrigin: {fileID: 1576061303}
   logo: {fileID: 632694442}
-  _moveStartWaitTime: 7
+  _moveStartWaitTime: 8
   _soundPlayer: {fileID: 1605517584}
   _se_MissileLaunch: {fileID: 8300000, guid: 233bbb0a8770f1c4f9e5784058b50872, type: 3}
   _target:
@@ -7584,7 +7584,7 @@ PrefabInstance:
     - target: {fileID: 925291099398320179, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: _hp
-      value: 324
+      value: 432
       objectReference: {fileID: 0}
     - target: {fileID: 925291099398320179, guid: d212804091069094a894dba5fec9a743,
         type: 3}
@@ -7640,17 +7640,17 @@ PrefabInstance:
     - target: {fileID: 4459765244360067269, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2509.3484
+      value: -2421
       objectReference: {fileID: 0}
     - target: {fileID: 4459765244360067269, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 138
+      value: 165
       objectReference: {fileID: 0}
     - target: {fileID: 4459765244360067269, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2401.2456
+      value: 2266
       objectReference: {fileID: 0}
     - target: {fileID: 4459765244360067269, guid: d212804091069094a894dba5fec9a743,
         type: 3}
