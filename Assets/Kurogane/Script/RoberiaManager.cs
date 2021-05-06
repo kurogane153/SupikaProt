@@ -29,6 +29,9 @@ public class RoberiaManager : MonoBehaviour
     //隕石の速さ
     public float _spawnedAsteroidSpeed = 20f;
 
+    [Header("最後のテキストの表示秒数")]
+    public int drawingTime = 3;
+
     [Header("ゲームオーバー・ゲームクリアのリロード時間")]
     public float GameOverReloadTime = 3f;
 
@@ -70,7 +73,7 @@ public class RoberiaManager : MonoBehaviour
             _letterbox.GetComponent<Animator>().SetBool("LetterKey", true);
             _hpbar.SetActive(false);
             _speedbar.SetActive(false);
-            Invoke("DelayChangeTextWindow", 4f);
+            Invoke("DelayChangeTextWindow", drawingTime);
         }
 
         GameOverSceneChange();
@@ -91,7 +94,7 @@ public class RoberiaManager : MonoBehaviour
     {
         _textmanager.TextWindowOff();
         _letterbox.GetComponent<Animator>().SetBool("LetterKey", false);
-        Invoke("DelayChangeWave", 1f);
+        Invoke("DelayChangeWave", drawingTime - (drawingTime - 1));
     }
     void DelayChangeWave()
     {

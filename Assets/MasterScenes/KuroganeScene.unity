@@ -8376,6 +8376,7 @@ MonoBehaviour:
   _spikarendering: {fileID: 1799453316}
   _earthrendering: {fileID: 256281369}
   _spawnedAsteroidSpeed: 20
+  drawingTime: 5
   GameOverReloadTime: 3
   _letterbox: {fileID: 1029551235}
   _hpbar: {fileID: 2129714739}
@@ -9854,6 +9855,9 @@ MonoBehaviour:
   GameOverReloadTime: 3.5
   _minimapobj: {fileID: 379775619}
   _roberiaPrefab: {fileID: 449227937}
+  _textNo: 
+  drawingTime: 5
+  _textmanager: {fileID: 801401688}
 --- !u!1001 &1819215592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11890,6 +11894,32 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 290852359}
     m_Modifications:
+    - target: {fileID: 408286118808838461, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 555.04736
+      objectReference: {fileID: 0}
+    - target: {fileID: 408286118808838461, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 808.14905
+      objectReference: {fileID: 0}
+    - target: {fileID: 408286118808838461, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -717.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 408286118808838461, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293524454469129641, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 945edd1ecd59723418a497282b13e32d,
+        type: 3}
     - target: {fileID: 3569977124298609038, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}
       propertyPath: m_Name
@@ -11999,6 +12029,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569977124865647117, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 586
+      objectReference: {fileID: 0}
+    - target: {fileID: 6883808566247259919, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_text
+      value: "\u30DE\u30FC\u30BA"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00cbe7a6cef33e9429a04d0ce7dd042b, type: 3}
@@ -12909,6 +12949,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6167548425037680014, guid: f22383784ce103441a81ec49b4abc197,
         type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6167548425037680014, guid: f22383784ce103441a81ec49b4abc197,
+        type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 9d5ef7436e55ffa4193c54d200a993f6,
@@ -13248,6 +13293,11 @@ PrefabInstance:
       propertyPath: GameOverText
       value: 
       objectReference: {fileID: 1114204702}
+    - target: {fileID: 6582865642158403314, guid: 50d9282d5cb6e1549bb142219f1b7c00,
+        type: 3}
+      propertyPath: _textmanager
+      value: 
+      objectReference: {fileID: 801401688}
     - target: {fileID: 6582865642158403314, guid: 50d9282d5cb6e1549bb142219f1b7c00,
         type: 3}
       propertyPath: GameClearText
