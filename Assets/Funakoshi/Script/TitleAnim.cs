@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TitleAnim : MonoBehaviour
 {
@@ -47,5 +48,6 @@ public class TitleAnim : MonoBehaviour
     private void ButtonOn()
     {
         ButtonOnOff.SetActive(true);
+        //StartOnOff.GetComponent<Selectable>().Select();
     }
 }

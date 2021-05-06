@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class Title_Color : MonoBehaviour
 {
-    private AudioSource audioSource;
+    [SerializeField] SoundPlayer _soundPlayer;
     public AudioClip ShineSE;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        
     }
 
     public void EndFadeInAnimation()
@@ -20,6 +20,6 @@ public class Title_Color : MonoBehaviour
 
     public void PlayEffectSound()
     {
-        audioSource.PlayOneShot(ShineSE);
+        _soundPlayer.PlaySE(ShineSE);
     }
 }

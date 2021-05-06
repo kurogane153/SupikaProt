@@ -118,6 +118,13 @@ public class BGMManagerScript : MonoBehaviour
         BGMsource.Play();
     }
 
+    public void PlayBGM(AudioClip audioClip)
+    {
+        BGMsource.Stop();
+        BGMsource.clip = audioClip;
+        BGMsource.Play();
+    }
+
     // BGM停止
     public void StopBGM()
     {
