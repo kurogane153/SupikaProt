@@ -32,6 +32,12 @@ public class RoberiaManager : MonoBehaviour
     [Header("最後のテキストの表示秒数")]
     public int drawingTime = 3;
 
+    [Header("ロベリアのラストコライダーを表示させるHP")]
+    public int _roberiahp = 180;
+
+    [Header("ロベリア破壊シーンに飛ばすHP最低値")]
+    public int _roberialasthp = 30;
+
     [Header("ゲームオーバー・ゲームクリアのリロード時間")]
     public float GameOverReloadTime = 3f;
 
@@ -54,8 +60,6 @@ public class RoberiaManager : MonoBehaviour
 
     private bool _lastshotflg;
     private Vector3 _earthPos;
-
-    //public GameObject _blackout;
 
     void Start()
     {
@@ -118,13 +122,13 @@ public class RoberiaManager : MonoBehaviour
 
     void HpColliderOn()
     {
-        if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= 120)
+        if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= _roberiahp)
         {
             _roberiacolliderPrefab.SetActive(true);
             _roberiaPrefab.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed * 2, _earthPos);
         }
 
-        if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= 20)
+        if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= _roberialasthp)
         {
             _lastshotflg = true;
         }

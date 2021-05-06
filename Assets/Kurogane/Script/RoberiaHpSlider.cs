@@ -45,6 +45,7 @@ public class RoberiaHpSlider : MonoBehaviour
             _slider.value = 0;
         }
         _text.text = "小惑星　ロベリア";
+        //_text.text = "HP" + _roberiaPrefab.GetComponent<AsteroidScript>().GetAsteroidHp();
     }
 
     void Hpset()

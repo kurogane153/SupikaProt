@@ -4445,11 +4445,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3835706426156979954, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _hp
+      value: 1750
+      objectReference: {fileID: 0}
+    - target: {fileID: 206422328253680251, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _extraLife
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 242713385118688071, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
       propertyPath: Earth
       value: 
       objectReference: {fileID: 897722549}
+    - target: {fileID: 655875735986903782, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _extraLife
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2788527028798815798, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
       propertyPath: Earth
@@ -4460,11 +4475,21 @@ PrefabInstance:
       propertyPath: Earth
       value: 
       objectReference: {fileID: 329334729}
+    - target: {fileID: 3044147751235770274, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _spawnedAsteroidSpeed
+      value: 110
+      objectReference: {fileID: 0}
     - target: {fileID: 3096476045573531002, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
       propertyPath: Earth
       value: 
       objectReference: {fileID: 329334729}
+    - target: {fileID: 3096476045573531002, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _spawnedAsteroidSpeed
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 3101047120980897660, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
       propertyPath: Earth
@@ -4485,16 +4510,46 @@ PrefabInstance:
       propertyPath: Earth
       value: 
       objectReference: {fileID: 897722549}
+    - target: {fileID: 3831119526307777615, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _spawnedAsteroidSpeed
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 5540303531250780210, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
       propertyPath: Earth
       value: 
       objectReference: {fileID: 329334729}
+    - target: {fileID: 5540303531250780210, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _spawnedAsteroidSpeed
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174795949705984019, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _extraLife
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117939542438192954, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _extraLife
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8113807901663465936, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
       propertyPath: Earth
       value: 
       objectReference: {fileID: 897722549}
+    - target: {fileID: 8113807901663465936, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _spawnedAsteroidSpeed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8120585514951057596, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _extraLife
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8932848997244752376, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
       propertyPath: m_RootOrder
@@ -8377,6 +8432,8 @@ MonoBehaviour:
   _earthrendering: {fileID: 256281369}
   _spawnedAsteroidSpeed: 20
   drawingTime: 5
+  _roberiahp: 180
+  _roberialasthp: 30
   GameOverReloadTime: 3
   _letterbox: {fileID: 1029551235}
   _hpbar: {fileID: 2129714739}
