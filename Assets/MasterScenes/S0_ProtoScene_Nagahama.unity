@@ -2095,7 +2095,7 @@ PrefabInstance:
     - target: {fileID: 1742407085957939567, guid: 172776644ed3dfb48958625641d4653d,
         type: 3}
       propertyPath: GameClearAsteroid
-      value: 3
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1742407085957939567, guid: 172776644ed3dfb48958625641d4653d,
         type: 3}
@@ -7884,17 +7884,22 @@ PrefabInstance:
     - target: {fileID: 3414999311682562004, guid: 8dbebce2271a99c4f89a3ebd76baf566,
         type: 3}
       propertyPath: _waveAsteroidcount.Array.data[0]
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3414999311682562004, guid: 8dbebce2271a99c4f89a3ebd76baf566,
         type: 3}
       propertyPath: _waveAsteroidcount.Array.data[1]
-      value: 12
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3414999311682562004, guid: 8dbebce2271a99c4f89a3ebd76baf566,
+        type: 3}
+      propertyPath: _waveAsteroidcount.Array.data[2]
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3414999311682562004, guid: 8dbebce2271a99c4f89a3ebd76baf566,
         type: 3}
       propertyPath: _waveAsteroidcount.Array.data[3]
-      value: 3
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3414999311682562005, guid: 8dbebce2271a99c4f89a3ebd76baf566,
         type: 3}
