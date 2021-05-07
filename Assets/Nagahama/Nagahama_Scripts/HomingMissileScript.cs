@@ -161,25 +161,11 @@ public class HomingMissileScript : MonoBehaviour
     }
     #endregion
 
-    #region OnCollision
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Asteroid")) {
-            //collision.gameObject.GetComponent<AsteroidScript>().ReceiveDamage(giveDamage);
-            //StopCoroutine(nameof(AutoDestroy));
-            //SelfDestroy();
-            //Debug.Log(gameObject.name + "が隕石に当たって消滅した");
-        }
-    }
-    #endregion
-
     #region OnTrigger
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Asteroid") && other.transform == targetTransform.root) {
             impactTime = 0f;
-            other.GetComponent<Rigidbody>().isKinematic = false;
-            other.GetComponent<Rigidbody>().AddForce((targetTransform.root.position - transform.position).normalized * 50f, ForceMode.Impulse);
             Debug.Log("しょうとつ！！！");
         }
     }

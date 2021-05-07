@@ -9010,6 +9010,9 @@ MonoBehaviour:
   GameOverReloadTime: 3.5
   _minimapobj: {fileID: 0}
   _roberiaPrefab: {fileID: 0}
+  _textNo: 
+  drawingTime: 5
+  _textmanager: {fileID: 0}
 --- !u!1 &1818908100
 GameObject:
   m_ObjectHideFlags: 0
