@@ -338,7 +338,7 @@ public class PlayerMove : MonoBehaviour
 
         if (speedChangeTimeRemain <= 0f) {
             _playerAnimation.ChangeOrbit(_speedChangeDelay);
-            speedChangeTimeRemain = _speedChangeDelay;
+            
         }
 
         isAcceptedOrbitChange = false;
