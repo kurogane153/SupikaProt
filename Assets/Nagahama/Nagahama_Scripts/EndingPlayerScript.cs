@@ -69,7 +69,6 @@ public class EndingPlayerScript : MonoBehaviour
         startRoopTimes = _roopTimes;
         StartCoroutine(nameof(MultiTargetMissileInstantiate));
         GameClearOverManager.isclear = true;
-        BGMManagerScript.Instance.StopBGM();
 
     }
 
