@@ -72,6 +72,7 @@ public class AsteroidWaveManager : MonoBehaviour
     //private GameObject _textmessage;
 
     public GameClearOver_Process _gameCOProcess;
+    public GameClearOver_Process _gameCOProcessspika;
 
     private int _textno;
     private bool _textflg = false;
@@ -113,22 +114,27 @@ public class AsteroidWaveManager : MonoBehaviour
     {
         if (_instansflg)
         {
-            GameObject asteroid = Instantiate(_enemyPrefab);
-            GameObject asteroid2 = Instantiate(_enemyPrefab);
-            asteroid.transform.position = _instantiatePosition;
-            asteroid2.transform.position = new Vector3(_instantiatePosition.x + 300, _instantiatePosition.y + 200, _instantiatePosition.z);
-            if (_spikaflg)
+            if (!_gameCOProcess.GetDoubleAsteroid() && !_gameCOProcessspika.GetDoubleAsteroid())
             {
-                asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, _spikaPos);
-                asteroid2.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, _spikaPos);
+                GameObject asteroid = Instantiate(_enemyPrefab);
+                GameObject asteroid2 = Instantiate(_enemyPrefab);
+                asteroid.transform.position = _instantiatePosition;
+                asteroid2.transform.position = new Vector3(_instantiatePosition.x + 300, _instantiatePosition.y + 200, _instantiatePosition.z);
+                if (_spikaflg)
+                {
+                    asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, _spikaPos);
+                    asteroid2.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, _spikaPos);
+                }
+                else
+                {
+                    asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, _earthPos);
+                    asteroid2.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, _earthPos);
+                }
             }
-            else
-            {
-                asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, _earthPos);
-                asteroid2.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, _earthPos);
-            }
-            SetWaveAsteroidCount(2);
+            
         }
+        _gameCOProcessspika.SetDoubleAsteroid(false);
+        _gameCOProcess.SetDoubleAsteroid(false);
         _instansflg = false;
         _instantiatePosition = new Vector3(0, 0, 0);
     }

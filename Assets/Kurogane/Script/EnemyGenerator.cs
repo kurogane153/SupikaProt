@@ -137,12 +137,21 @@ public class EnemyGenerator : MonoBehaviour
                         {
                             asteroid.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, EarthPos);
                         }
+
+                        if (asteroid.GetComponent<AsteroidScript>().GetAsteroidNumber() == 5)
+                        {
+                            _asteroidwavemanager.SetWaveAsteroidCount(3);
+                        }
+                        else
+                        {
+                            _asteroidwavemanager.SetWaveAsteroidCount(1);
+                        }
+
                         //経過時間を初期化して再度時間計測を始める
                         time = 0f;
                         //次に発生する時間間隔を決定する
                         interval = GetRandomTime();
                         //isRendered = false;
-                        _asteroidwavemanager.SetWaveAsteroidCount(1);
                         _asteroidWaveCount++;
                     }
                     else
@@ -184,7 +193,7 @@ public class EnemyGenerator : MonoBehaviour
         }
 
         //分裂する隕石を生成するかどうか
-        if (_asteroidwavemanager.GetWaveAsteroid() <= (_asteroidwavemanager.GetWaveAsteroidInstansCount() + 2))
+        if (_asteroidwavemanager.GetWaveAsteroid() <= (_asteroidwavemanager.GetWaveAsteroidInstansCount() + 4))
         {
             while (range == 4)
             {

@@ -54,6 +54,8 @@ public class GameClearOver_Process : MonoBehaviour
 
     private int GameOverCount;
 
+    private bool _doubleasteroidflg = false;
+
     void Start()
     {
         GameObject parentObject = gameObject.transform.parent.gameObject;
@@ -98,7 +100,6 @@ public class GameClearOver_Process : MonoBehaviour
             _textmanager.TextWindowOn(8);
             Invoke("TextClose", drawingTime);
         }
-        
     }
 
     void TextClose()
@@ -110,24 +111,24 @@ public class GameClearOver_Process : MonoBehaviour
     {
         if(asteroid.GetComponent<AsteroidScript>().GetAsteroidNumber() == AsteroidWaveManager._asteroidnum)
         {
+            _doubleasteroidflg = true;
+            GameClearCount += 2;
         }
-        else
-        {
-            impactPos = asteroid.transform.position;
-            Vector3 desiredPos = (impactPos - transform.position).normalized * EventCameraDistance + transform.position;
-            GameOverCount++;
-            if (asteroid.name == _roberiaPrefab.name)
-            {
-                GameOverCount = 3;
-            }
-            _minimapobj.GetComponent<MinimapObjectScript>().ChangeColor(GameOverCount - 1);
 
-            if (GameOverCount >= GameOverAsteroid) {
-                GameOverProcess();
-                ConflictEventCamera.ConflictEventCameraActive(gameObject, desiredPos, GameOverReloadTime);
-            } else {
-                ConflictEventCamera.ConflictEventCameraActive(gameObject, desiredPos);
-            }
+        impactPos = asteroid.transform.position;
+        Vector3 desiredPos = (impactPos - transform.position).normalized * EventCameraDistance + transform.position;
+        GameOverCount++;
+        if (asteroid.name == _roberiaPrefab.name)
+        {
+            GameOverCount = 3;
+        }
+        _minimapobj.GetComponent<MinimapObjectScript>().ChangeColor(GameOverCount - 1);
+
+        if (GameOverCount >= GameOverAsteroid) {
+            GameOverProcess();
+            ConflictEventCamera.ConflictEventCameraActive(gameObject, desiredPos, GameOverReloadTime);
+        } else {
+            ConflictEventCamera.ConflictEventCameraActive(gameObject, desiredPos);
         }
     }
 
@@ -164,5 +165,14 @@ public class GameClearOver_Process : MonoBehaviour
     public int GetGameOverAsteroidCount()
     {
         return GameOverAsteroid;
+    }
+
+    public bool GetDoubleAsteroid()
+    {
+        return _doubleasteroidflg;
+    }
+    public void SetDoubleAsteroid(bool flg)
+    {
+        _doubleasteroidflg = flg;
     }
 }

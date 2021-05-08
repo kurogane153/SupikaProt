@@ -7454,7 +7454,7 @@ PrefabInstance:
     - target: {fileID: 2152552239906961953, guid: 39766a9e9d6e2d445bdf491bd1419cd2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2152552239906961965, guid: 39766a9e9d6e2d445bdf491bd1419cd2,
         type: 3}
@@ -7817,6 +7817,11 @@ PrefabInstance:
       propertyPath: _textNo.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3414999311682562004, guid: 8dbebce2271a99c4f89a3ebd76baf566,
+        type: 3}
+      propertyPath: _gameCOProcessspika
+      value: 
+      objectReference: {fileID: 1799453318}
     - target: {fileID: 3414999311682562004, guid: 8dbebce2271a99c4f89a3ebd76baf566,
         type: 3}
       propertyPath: _lasttext.Array.size
