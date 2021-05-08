@@ -91,6 +91,8 @@ public class RoberiaManager : MonoBehaviour
 
     void DelayMethod()
     {
+        GameClearOverManager._gameoverCount = 0;
+        GameClearOverManager._gameoverCountColony = 0;
         SceneManager.LoadScene("Result");
     }
 
@@ -103,6 +105,8 @@ public class RoberiaManager : MonoBehaviour
     void DelayChangeWave()
     {
         _letterbox.GetComponent<Animator>().SetTrigger("LetterTriger");
+        GameClearOverManager._gameoverCount = 0;
+        GameClearOverManager._gameoverCountColony = 0;
         SceneManager.LoadScene("S3_EndingScene_Nagahama");
     }
 

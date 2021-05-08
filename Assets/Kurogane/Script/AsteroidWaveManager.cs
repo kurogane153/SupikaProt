@@ -98,6 +98,7 @@ public class AsteroidWaveManager : MonoBehaviour
         _asteroidwavecount = 2;
         _waveAsteroid = _waveAsteroidcount[0];
         _asteroidinstansflg = true;
+        _gameCOProcess.SetGameClearCount(0);
         FastText(0);
     }
 
