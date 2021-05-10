@@ -22,6 +22,11 @@ public class GameClearOverManager : MonoBehaviour
     [Header("Set Earth Prefab")]
     public GameObject Earth;
 
+    void Start()
+    {
+        isclear = false;
+    }
+
     void Update()
     {
 
@@ -37,7 +42,7 @@ public class GameClearOverManager : MonoBehaviour
 
         if (Earth.GetComponent<GameClearOver_Process>().GetGameClearCount() >= GameClearAsteroid)
         {
-            //isclear = true;
+            
             _gameoverCount = Earth.GetComponent<GameClearOver_Process>().GetGameOverCount();
             _gameoverCountColony = Spika.GetComponent<GameClearOver_Process>().GetGameOverCount();
             Invoke("DelayLastScene", GameOverReloadTime);
