@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class DebugSc : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _canvasRenderers;
     [SerializeField] private bool isUIEnabled = true;
 
     void Start()
@@ -62,17 +61,13 @@ public class DebugSc : MonoBehaviour
 
     void UIRendererDisable()
     {
-        foreach(var ui in _canvasRenderers) {
-            ui.SetActive(false);
-        }
+        GameObject.FindObjectOfType<Canvas>().enabled = false;
         isUIEnabled = false;
     }
 
     void UIRendererEnable()
     {
-        foreach (var ui in _canvasRenderers) {
-            ui.SetActive(true);
-        }
+        GameObject.FindObjectOfType<Canvas>().enabled = true;
         isUIEnabled = true;
     }
 }

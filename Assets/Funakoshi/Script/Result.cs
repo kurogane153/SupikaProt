@@ -6,8 +6,12 @@ using UnityEngine.UI;
 
 public class Result : MonoBehaviour
 {
+ 
     [SerializeField] GameObject _earth;
     [SerializeField] GameObject _hellearth;
+    [SerializeField] private int _restartSceneIndex;
+    [SerializeField] private int _titleSceneIndex;
+    [SerializeField] private float _fadeTimeLoadScene;
 
     //カメラ取得
     GameObject ClearCameraObj;
@@ -69,12 +73,12 @@ public class Result : MonoBehaviour
     public void PushRestart()
     {
         //Restartのボタンを押すと、メイン画面に戻る
-        SceneManager.LoadScene("S0_ProtoScene_Nagahama");
+        FadeManager.Instance.LoadScene(_restartSceneIndex, _fadeTimeLoadScene);
     }
 
     public void PushBackToTitle()
     {
         //BackToTitleのボタンを押すと、タイトルに戻る
-        SceneManager.LoadScene("Title_Supica");
+        FadeManager.Instance.LoadScene(_titleSceneIndex, _fadeTimeLoadScene);
     }
 }

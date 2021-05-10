@@ -6,11 +6,16 @@ using UnityEngine.SceneManagement;
 public class PushStart : MonoBehaviour
 {
     [SerializeField] private int _nextLoadSceneBuildIndex;
+    [SerializeField] private float _fadeTimeLoadScene;
+
+    [SerializeField] private SoundPlayer _soundPlayer;
+    [SerializeField] private AudioClip _se_GameStart;
 
     public void StartGame()
     {
         //スタートボタンを押したときメインゲームが始まる
-        SceneManager.LoadScene(_nextLoadSceneBuildIndex);
+        FadeManager.Instance.LoadScene(_nextLoadSceneBuildIndex, _fadeTimeLoadScene);
+        _soundPlayer.PlaySE(_se_GameStart);
     }
 
     public void PushEnd()
