@@ -30,6 +30,7 @@ public class AlertLine : MonoBehaviour
 
     [Header("ArertTextObject")]
     public GameObject ArertText = null; // Textオブジェクト
+
     private bool _alertflg;
 
     private GameObject _asteroid;

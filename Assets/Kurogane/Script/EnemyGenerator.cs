@@ -183,7 +183,7 @@ public class EnemyGenerator : MonoBehaviour
                 }
                 break;
             case 2:
-                while (range == 4)
+                while (range == 4 || range == 0)
                 {
                     range = Random.Range(0, AsteroidPrefab.Length);
                 }

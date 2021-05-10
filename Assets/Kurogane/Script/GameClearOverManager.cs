@@ -42,7 +42,6 @@ public class GameClearOverManager : MonoBehaviour
             _gameoverCountColony = Spika.GetComponent<GameClearOver_Process>().GetGameOverCount();
             Invoke("DelayLastScene", GameOverReloadTime);
         }
-        Debug.Log(Earth.GetComponent<GameClearOver_Process>().GetGameClearCount());
     }
 
     void DelayMethod()

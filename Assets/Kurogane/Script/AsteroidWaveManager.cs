@@ -49,6 +49,9 @@ public class AsteroidWaveManager : MonoBehaviour
     //隕石が向かう場所の指定
     public GameObject _letterbox;
 
+    public GameObject _orbitshift;
+    public GameObject _textwindow;
+
     private Vector3 _spikaPos;
     private Vector3 _earthPos;
 
@@ -74,8 +77,13 @@ public class AsteroidWaveManager : MonoBehaviour
     public GameClearOver_Process _gameCOProcess;
     public GameClearOver_Process _gameCOProcessspika;
 
+    public AlertLine _alertLine;
+    public AlertLine _alertLinespika;
+
     private int _textno;
     private bool _textflg = false;
+    private bool _fastarerttextflg = false;
+    private bool _fastorbitshifttextflg = false;
 
     //デバッグ用
     public GameObject _waveText = null; // Textオブジェクト
@@ -107,6 +115,8 @@ public class AsteroidWaveManager : MonoBehaviour
     {
         WaveCount();
         DoubleAsteroid();
+        AretText();
+        OrbitShiftText();
         Dbg();
     }
 
@@ -197,14 +207,48 @@ public class AsteroidWaveManager : MonoBehaviour
 
     }
 
+    void AretText()
+    {
+        if (_alertLine.GetArertFlg() || _alertLinespika.GetArertFlg())
+        {
+            if (!_fastarerttextflg)
+            {
+                _fastarerttextflg = true;
+                _textmanager.TextWindowOn(10);
+                Invoke("TextClose", drawingTime);
+            }
+        }
+    }
+
+    void OrbitShiftText()
+    {
+        if (_orbitshift.activeSelf)
+        {
+            if (!_fastorbitshifttextflg)
+            {
+                if (!_textwindow.activeSelf)
+                {
+                    _textmanager.TextWindowOn(9);
+                    _fastorbitshifttextflg = true;
+                    Invoke("TextClose", drawingTime);
+                }
+            }
+        }
+    }
+
+    void TextClose()
+    {
+        _textmanager.TextWindowOff();
+    }
+
     void FastText(int textno)
     {
         _textmanager.TextWindowOn(textno);
         _letterbox.GetComponent<Animator>().SetBool("LetterKey", true);
-        Invoke("TextClose", drawingTime);
+        Invoke("SecondText", drawingTime);
     }
 
-    void TextClose()
+    void SecondText()
     {
         _textmanager.TextWindowOn(_textno);
         Invoke("DelayChangeWave", drawingTime);
