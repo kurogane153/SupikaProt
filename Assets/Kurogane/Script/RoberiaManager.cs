@@ -3,10 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Linq;
 using TMPro;
 
 public class RoberiaManager : MonoBehaviour
 {
+
+    #region Singleton
+    private static RoberiaManager instance;
+
+    public static RoberiaManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = (RoberiaManager)FindObjectOfType(typeof(RoberiaManager));
+
+                if (instance == null)
+                {
+                    Debug.LogError(typeof(RoberiaManager) + "is nothing");
+                }
+            }
+
+            return instance;
+        }
+    }
+    #endregion
+
     [Header("Set RoberiaAsteroid Prefab")]
     //隕石プレハブ
     public GameObject _roberiaPrefab;
@@ -35,8 +59,8 @@ public class RoberiaManager : MonoBehaviour
     [Header("ロベリアのラストコライダーを表示させるHP")]
     public int _roberiahp = 180;
 
-    [Header("ロベリア破壊シーンに飛ばすHP最低値")]
-    public int _roberialasthp = 30;
+    [Header("ロベリアが生成する隕石の数（extralifeの数）")]
+    public int _roberiainstansasteroidcount = 10;
 
     [Header("ゲームオーバー・ゲームクリアのリロード時間")]
     public float GameOverReloadTime = 3f;
@@ -58,7 +82,11 @@ public class RoberiaManager : MonoBehaviour
     [SerializeField]
     private int _textNo = 4;
 
+    //デバッグ用
+    public GameObject _waveText = null; // Textオブジェクト
+
     private bool _lastshotflg;
+    private int _roberiaasteroidcount = 0;
     private Vector3 _earthPos;
 
     void Start()
@@ -76,7 +104,7 @@ public class RoberiaManager : MonoBehaviour
         {
             HpColliderOn();
         }
-        
+        Dbg();
 
     }
 
@@ -116,7 +144,8 @@ public class RoberiaManager : MonoBehaviour
 
     void HpColliderOn()
     {
-        if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= _roberiahp)
+        if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= _roberiahp
+            && _roberiainstansasteroidcount == _roberiaasteroidcount)
         {
             if (!_lastshotflg) {
                 _lastshotflg = true;
@@ -133,10 +162,16 @@ public class RoberiaManager : MonoBehaviour
             }
             
         }
+    }
 
-        if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= _roberialasthp)
-        {
-            //_lastshotflg = true;
-        }
+    public void RoberiaAsteroidDestroyCount(int count)
+    {
+        _roberiaasteroidcount += count;
+    }
+
+    void Dbg()
+    {
+        _waveText.GetComponent<Text>().text = "破壊数：" + _roberiaasteroidcount + "\n";
+
     }
 }

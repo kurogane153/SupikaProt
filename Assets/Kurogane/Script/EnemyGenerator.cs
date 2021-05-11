@@ -39,10 +39,10 @@ public class EnemyGenerator : MonoBehaviour
     
     [Header("X座標の最大値と最小値")]
     //X座標の最小値
-    [Range(-500f, 0f)]
+    [Range(-1500f, 0f)]
     public float xMinPosition = -10f;
     //X座標の最大値
-    [Range(0f, 500f)]
+    [Range(0f, 1500f)]
     public float xMaxPosition = 10f;
 
     [Header("Y座標の最大値と最小値")]
@@ -65,6 +65,8 @@ public class EnemyGenerator : MonoBehaviour
 
     public AsterdSpawnTrigger _asteroidspawntrigger;
 
+    public bool dbgLine = false;
+
     //敵生成時間間隔
     private float interval;
     //経過時間
@@ -77,7 +79,10 @@ public class EnemyGenerator : MonoBehaviour
 
     private Vector3 SpikaPos;
 
+    public Vector3 _rotate = new Vector3(500, 0, 0);
+
     private Vector3 EarthPos;
+
 
     //メインカメラに付いているタグ名
     private const string MAIN_CAMERA_TAG_NAME = "MainCamera";
@@ -88,6 +93,27 @@ public class EnemyGenerator : MonoBehaviour
         interval = GetRandomTime();
         SpikaPos = new Vector3(Spika.transform.position.x, 0, 0);
         EarthPos = new Vector3(Earth.transform.position.x, 0, 0);
+
+        #region デバッグ用スポーン範囲
+        if (dbgLine) 
+        {
+            //GameObject asteroid = Instantiate(enemyPrefab);
+            // LineRendererコンポーネントをゲームオブジェクトにアタッチする
+            var lineRendererX = gameObject.GetComponent<LineRenderer>();
+
+            var positionsX = new Vector3[]{
+            new Vector3(_rotate.x + xMinPosition + this.transform.position.x, this.transform.position.y, this.transform.position.z),
+            //new Vector3(xMinPosition + this.transform.position.x, this.transform.position.y,this.transform.position.z),// 開始点
+            new Vector3(xMaxPosition + this.transform.position.x, this.transform.position.y, this.transform.position.z + _rotate.x),               // 終了点
+        };
+            // 点の数を指定する
+            //lineRendererX.positionCount = positionsX.Length;
+            lineRendererX.startWidth = 10f;                   // 開始点の太さ
+            lineRendererX.endWidth = 10f;                     // 終了点の太さ
+            // 線を引く場所を指定する
+            lineRendererX.SetPositions(positionsX);
+        }
+        #endregion
     }
 
     void Update()
@@ -214,9 +240,9 @@ public class EnemyGenerator : MonoBehaviour
     private Vector3 GetRandomPosition()
     {
         //それぞれの座標をランダムに生成する
-        float x = Random.Range(xMinPosition + this.transform.position.x, xMaxPosition + this.transform.position.x);
+        float x = Random.Range(xMinPosition + this.transform.position.x, _rotate.x + xMaxPosition + this.transform.position.x);
         float y = Random.Range(yMinPosition + this.transform.position.y, yMaxPosition + this.transform.position.y);
-        float z = Random.Range(zMinPosition + this.transform.position.z, zMaxPosition + this.transform.position.z);
+        float z = Random.Range(_rotate.x + zMinPosition + this.transform.position.z, zMaxPosition + this.transform.position.z);
 
         //Vector3型のPositionを返す
         return new Vector3(x, y, z);
@@ -229,7 +255,4 @@ public class EnemyGenerator : MonoBehaviour
             isRendered = true;
         }
     }
-
-
-
 }

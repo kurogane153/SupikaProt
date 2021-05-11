@@ -2204,6 +2204,7 @@ MonoBehaviour:
   zMaxPosition: 500
   _asteroidwavemanager: {fileID: 1093809851}
   _asteroidspawntrigger: {fileID: 1950091426}
+  dbgLine: 0
 --- !u!23 &295829607
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4531,7 +4532,7 @@ PrefabInstance:
     - target: {fileID: -3835706426156979954, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
       propertyPath: _hp
-      value: 130
+      value: 1660
       objectReference: {fileID: 0}
     - target: {fileID: 206422328253680251, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
@@ -4543,6 +4544,11 @@ PrefabInstance:
       propertyPath: Earth
       value: 
       objectReference: {fileID: 897722549}
+    - target: {fileID: 242713385118688071, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _roberiamanager
+      value: 
+      objectReference: {fileID: 1589079551}
     - target: {fileID: 457659859206027745, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
       propertyPath: m_IsActive
@@ -4563,6 +4569,11 @@ PrefabInstance:
       propertyPath: Earth
       value: 
       objectReference: {fileID: 897722549}
+    - target: {fileID: 2788527028798815798, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _roberiamanager
+      value: 
+      objectReference: {fileID: 1589079551}
     - target: {fileID: 3044147751235770274, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
       propertyPath: Earth
@@ -4588,16 +4599,31 @@ PrefabInstance:
       propertyPath: Earth
       value: 
       objectReference: {fileID: 897722549}
+    - target: {fileID: 3101047120980897660, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _roberiamanager
+      value: 
+      objectReference: {fileID: 1589079551}
     - target: {fileID: 3231893565618970201, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: Earth
+      value: 
+      objectReference: {fileID: 897722549}
+    - target: {fileID: 3231893565618970201, guid: 09f57f74ffbd4304d919540a15440c0a,
+        type: 3}
+      propertyPath: _roberiamanager
+      value: 
+      objectReference: {fileID: 1589079551}
+    - target: {fileID: 3402314554726312867, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
       propertyPath: Earth
       value: 
       objectReference: {fileID: 897722549}
     - target: {fileID: 3402314554726312867, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
-      propertyPath: Earth
+      propertyPath: _roberiamanager
       value: 
-      objectReference: {fileID: 897722549}
+      objectReference: {fileID: 1589079551}
     - target: {fileID: 3831119526307777615, guid: 09f57f74ffbd4304d919540a15440c0a,
         type: 3}
       propertyPath: Earth
@@ -8715,14 +8741,15 @@ MonoBehaviour:
   _earthrendering: {fileID: 256281369}
   _spawnedAsteroidSpeed: 20
   drawingTime: 5
-  _roberiahp: 1750
-  _roberialasthp: 0
+  _roberiahp: 80
+  _roberiainstansasteroidcount: 10
   GameOverReloadTime: 3
   _letterbox: {fileID: 1029551235}
   _hpbar: {fileID: 2129714739}
   _speedbar: {fileID: 323747042}
   _textmanager: {fileID: 801401688}
   _textNo: 7
+  _waveText: {fileID: 877290611}
 --- !u!23 &1589079552
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12373,22 +12400,47 @@ PrefabInstance:
     - target: {fileID: 408286118808838461, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 555.04736
+      value: 503
       objectReference: {fileID: 0}
     - target: {fileID: 408286118808838461, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 808.14905
+      value: 1077
       objectReference: {fileID: 0}
     - target: {fileID: 408286118808838461, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -717.1
+      value: -721
       objectReference: {fileID: 0}
     - target: {fileID: 408286118808838461, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 4.8
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078464286683815772, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 423
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078464286683815772, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 115
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078464286683815772, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078464286683815772, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078464286683815772, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -337
       objectReference: {fileID: 0}
     - target: {fileID: 1293524454469129641, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}
@@ -12396,6 +12448,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 945edd1ecd59723418a497282b13e32d,
         type: 3}
+    - target: {fileID: 3244977922766226039, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -336
+      objectReference: {fileID: 0}
     - target: {fileID: 3569977124298609038, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}
       propertyPath: m_Name
@@ -12445,6 +12502,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569977124298609039, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: 3569977124298609039, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}
@@ -12508,8 +12570,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3569977124865647117, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569977124865647117, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 586
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569977124865647118, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569977124865647118, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_margin.w
+      value: -174.0411
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569977124865647118, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_margin.x
+      value: -862.6877
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569977124865647118, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_margin.y
+      value: -114.083374
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569977124865647118, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 6883808566247259919, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}

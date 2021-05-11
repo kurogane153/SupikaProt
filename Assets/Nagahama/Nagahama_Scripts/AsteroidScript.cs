@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AsteroidScript : MonoBehaviour
 {
@@ -79,7 +80,10 @@ public class AsteroidScript : MonoBehaviour
                 SelfDestroy();
                 Instantiate(_explosionEffect, transform.position, Quaternion.identity);
             }
-
+            if (SceneManager.GetActiveScene().name == "KuroganeScene")
+            {
+                RoberiaManager.Instance.RoberiaAsteroidDestroyCount(1);
+            }
             GameClearOver_Process.GameClearCount++;
 
             if (_asteroidnumber == AsteroidWaveManager._asteroidnum)

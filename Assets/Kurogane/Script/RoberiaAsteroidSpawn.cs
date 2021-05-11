@@ -24,6 +24,8 @@ public class RoberiaAsteroidSpawn : MonoBehaviour
     //隕石が向かう場所の指定
     public GameObject Earth;
 
+    public RoberiaManager _roberiamanager;
+
     public static bool _taegethpflg = false;
 
     void Update()

@@ -13,8 +13,11 @@ public class GameClearOverManager : MonoBehaviour
     [Header("ゲームクリアまでの隕石の個数")]
     public int GameClearAsteroid = 17;
 
-    [Header("ゲームオーバー・ゲームクリアのリロード時間")]
+    [Header("ゲームオーバーのリロード時間")]
     public float GameOverReloadTime = 6f;
+
+    [Header("ゲームクリアのリロード時間")]
+    public float GameClearReloadTime = 8f;
 
     [Header("Set Spika Prefab")]
     public GameObject Spika;
@@ -45,7 +48,7 @@ public class GameClearOverManager : MonoBehaviour
             
             _gameoverCount = Earth.GetComponent<GameClearOver_Process>().GetGameOverCount();
             _gameoverCountColony = Spika.GetComponent<GameClearOver_Process>().GetGameOverCount();
-            Invoke("DelayLastScene", GameOverReloadTime);
+            Invoke("DelayLastScene", GameClearReloadTime);
         }
     }
 
