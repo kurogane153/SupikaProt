@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +11,8 @@ public class TargetCollider : MonoBehaviour
     [SerializeField] private float _hp;
     [SerializeField] private int _extraLife;
 
+    private bool isFinalExcutionTgt;    // ラスボス撃破演出シーンに遷移する用のターゲットか
+
     private RectTransform _rectTransform;
 
     private AsteroidScript parentAsteroidSc;
@@ -20,6 +22,12 @@ public class TargetCollider : MonoBehaviour
     private Camera mainCamera;
     private float startHP;
     private bool _taegethpflg;
+
+    public bool IsFinalExcutionTgt
+    {
+        get { return isFinalExcutionTgt; }
+        set { isFinalExcutionTgt = value; }
+    }
 
     public bool IsExcution
     {

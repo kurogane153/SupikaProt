@@ -72,6 +72,7 @@ public class ReticleController : MonoBehaviour
     private float canNotReticleMoveTime;
     private bool isBeforeTargeting;
     private int generatedReticleCount;
+    private bool isFinalLockOn;
 
     private float startSpeedX;
     private float startSpeedY;
@@ -106,6 +107,12 @@ public class ReticleController : MonoBehaviour
     public Canvas GetCanvas()
     {
         return canvas;
+    }
+
+    public bool IsFinalLockOn
+    {
+        get { return isFinalLockOn; }
+        set { isFinalLockOn = value; }
     }
 
     #endregion
@@ -246,7 +253,7 @@ public class ReticleController : MonoBehaviour
             y = 0;
         }
 
-        if (0 < canNotReticleMoveTime &&_targetLockonmoveFlags && target && Mathf.Abs(x) < _aimDeadZoneX && Mathf.Abs(y) < _aimDeadZoneY) {
+        if ((0 < canNotReticleMoveTime &&_targetLockonmoveFlags && target && Mathf.Abs(x) < _aimDeadZoneX && Mathf.Abs(y) < _aimDeadZoneY) || isFinalLockOn) {
             TargetLockOnMove(target);
         }
         
@@ -272,7 +279,6 @@ public class ReticleController : MonoBehaviour
 
         if (!IsNewScreenPositionScreenOutsite(rectTransform.position + movePos + newvec * _aimAssistIntensity)) {
             rectTransform.position += movePos + newvec * _aimAssistIntensity;
-            Debug.Log("<color=yellow>^p^newvec : " + newvec + "</color>");
         }
 
         if (target) {

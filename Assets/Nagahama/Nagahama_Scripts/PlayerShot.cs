@@ -34,7 +34,11 @@ public class PlayerShot : MonoBehaviour
         public float[] _instantiateTimes;
     }
 
-    [Header("リロード")]
+    [Header("操作有効無効切り替え")]
+    [SerializeField] public bool _isStickControllFlag;
+    [SerializeField] public bool _isMissileFireControllFlag;
+
+    [Header("リロード"), Space(10)]
     [SerializeField] public bool _reloadFlags;
     [SerializeField] public bool _autoReloadFlags;
     [SerializeField] private float _reloadTime;
@@ -57,6 +61,7 @@ public class PlayerShot : MonoBehaviour
 
     [Header("発射設定全般"), Space(10)]
     [SerializeField] private Camera _mainCamera;
+    [SerializeField] private FinalTargetRockOnEffectScript _finalRockOnEffectSc;
     [SerializeField] private bool _onDrawGizmosFlags;
     [SerializeField] private ReticleController _reticle;
     [SerializeField] private LayerMask _layerMask;
@@ -145,7 +150,7 @@ public class PlayerShot : MonoBehaviour
         // ターゲットを捉えているときに発射ボタンを押すと、そのターゲットを「確定したターゲット」として
         // confirmTargetに格納します。
         
-        if (_reloadFlags) {
+        if (_isMissileFireControllFlag && _reloadFlags) {
             // リロードありバージョン
             // 手動リロード
             // リロード中でない、ミサイルが最大じゃないときできる
@@ -160,9 +165,14 @@ public class PlayerShot : MonoBehaviour
                 MultiTargetFire(arynum);
             }
 
-        } else {
+        } else if(_isMissileFireControllFlag) {
             // リロード無しバージョン
             if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f) {
+
+                if (_reticle.IsFinalLockOn) {
+                    FadeManager.Instance.LoadScene(4, 0);
+                    return;
+                }
                 
                 int arynum = Random.Range(0, _missileShotSettings.Length - 1);
                 if(isFirstShot) {
@@ -193,7 +203,11 @@ public class PlayerShot : MonoBehaviour
     private void FixedUpdate()
     {
         TimeRemainManege();
-        GetTargetAsteroid_InRectVersion();
+
+        if (_isStickControllFlag) {
+            GetTargetAsteroid_InRectVersion();
+        }
+        
         Dbg();
 
         if (ReticleController.Instance._userSuperAimAssistSystemFlags) {
@@ -208,7 +222,13 @@ public class PlayerShot : MonoBehaviour
         } else {
             // 強力エイムアシスト機能がOFFのとき
 
-            _reticle.MoveReticle(Input.GetAxis(_aimXAxisName), Input.GetAxis(_aimYAxisName), targetAsteroidCollider, tmpTarget);
+            float horizontal = Input.GetAxis(_aimXAxisName);
+            float vertical = Input.GetAxis(_aimYAxisName);
+            if (!_isStickControllFlag) {
+                horizontal = 0f;
+                vertical = 0f;
+            }
+            _reticle.MoveReticle(horizontal, vertical, targetAsteroidCollider, tmpTarget);
         }        
         
     }
@@ -419,6 +439,13 @@ public class PlayerShot : MonoBehaviour
                     // ここまで来たら、プレイヤーが狙っているものとし、ターゲットに設定します。
                     targetAsteroidCollider = tarcol.transform;
                     tmpTarget = null;
+
+                    // ターゲットがラスボス撃破演出シーン遷移用のターゲットなら
+                    // 最後の一撃のエフェクトをアクティブにする
+                    if (tarcol.IsFinalExcutionTgt) {
+                        _finalRockOnEffectSc.StartFinalTgtRockOnEffect(tarcol.transform);
+                        _reticle.IsFinalLockOn = true;
+                    }
 
                     // それがターゲットだと確定したので、処理を抜けます。
                     return;

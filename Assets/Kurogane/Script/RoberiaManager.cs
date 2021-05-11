@@ -71,15 +71,6 @@ public class RoberiaManager : MonoBehaviour
 
     void Update()
     {
-        if (_lastshotflg)
-        {
-            _textmanager.TextWindowOn(_textNo);
-            _letterbox.GetComponent<Animator>().SetBool("LetterKey", true);
-            _hpbar.SetActive(false);
-            _speedbar.SetActive(false);
-            Invoke("DelayChangeTextWindow", drawingTime);
-        }
-
         GameOverSceneChange();
         if (_roberiaPrefab) 
         {
@@ -99,7 +90,7 @@ public class RoberiaManager : MonoBehaviour
     void DelayChangeTextWindow()
     {
         _textmanager.TextWindowOff();
-        _letterbox.GetComponent<Animator>().SetBool("LetterKey", false);
+        //_letterbox.GetComponent<Animator>().SetBool("LetterKey", false);
         Invoke("DelayChangeWave", drawingTime - (drawingTime - 1));
     }
     void DelayChangeWave()
@@ -107,7 +98,6 @@ public class RoberiaManager : MonoBehaviour
         _letterbox.GetComponent<Animator>().SetTrigger("LetterTriger");
         GameClearOverManager._gameoverCount = 0;
         GameClearOverManager._gameoverCountColony = 0;
-        SceneManager.LoadScene("S3_EndingScene_Nagahama");
     }
 
     void GameOverSceneChange()
@@ -128,13 +118,25 @@ public class RoberiaManager : MonoBehaviour
     {
         if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= _roberiahp)
         {
-            _roberiacolliderPrefab.SetActive(true);
-            _roberiaPrefab.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed * 2, _earthPos);
+            if (!_lastshotflg) {
+                _lastshotflg = true;
+                _roberiacolliderPrefab.SetActive(true);
+                _roberiacolliderPrefab.GetComponent<TargetCollider>().IsFinalExcutionTgt = true;
+
+                _roberiaPrefab.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed * 2, _earthPos);
+
+                _textmanager.TextWindowOn(_textNo);
+                _letterbox.GetComponent<Animator>().SetBool("LetterKey", true);
+                _hpbar.SetActive(false);
+                _speedbar.SetActive(false);
+                Invoke("DelayChangeTextWindow", drawingTime);
+            }
+            
         }
 
         if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= _roberialasthp)
         {
-            _lastshotflg = true;
+            //_lastshotflg = true;
         }
     }
 }

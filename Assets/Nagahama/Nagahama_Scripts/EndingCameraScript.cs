@@ -29,7 +29,7 @@ public class EndingCameraScript : MonoBehaviour
             Vector3 targetDir = target.position - transform.position;
             targetDir.y = transform.position.y; //targetと高さが異なると体ごと上下を向いてしまうので制御
             float step = speed * Time.deltaTime;
-            Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 10.0F);
+            Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 10.0f);
             transform.rotation = Quaternion.LookRotation(newDir);
         }
 
