@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1610853497983339114}
   - component: {fileID: 1610853497983339115}
   - component: {fileID: 5726817995458862351}
-  - component: {fileID: 1808096449653195096}
   - component: {fileID: 2430290530930835555}
   m_Layer: 8
   m_Name: ConflictEventCamera
@@ -104,11 +103,17 @@ MonoBehaviour:
   _positionOffset: {x: 73.10423, y: -25.22326, z: -20}
   _rotationOffset: {x: -31.112, y: -26.643, z: 0}
   _missileFollowOffset: {x: 0, y: 5, z: -10}
+  _playerNearPosOffset: {x: 0, y: 0, z: 0}
   _missileFollowXRotate: 15
   _cameraPanSpeed: 20
+  _warpTimeofMovetoPlayerNearPos: 0.5
   _followModeSwitchDelay: 0.75
-  _resetDelay: 3
-  _lerpFactor: 6
+  _killCamResetDelay: 0
+  _conflictEventCamResetDelay: 0
+  _normalMoveLerpFactor: 6
+  _followMissileLerpFactor: 0.3
+  _showExplosionModeSwitchDelay: 1
+  _showExplosionZoomOutLerpFactor: 0.3
   _playerMove: {fileID: 0}
   _playerShot: {fileID: 0}
   _mainCamera: {fileID: 0}
@@ -174,19 +179,6 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
---- !u!114 &1808096449653195096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1610853497983339092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8960321e10f80b4c844cd91bf1ea437, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initiallyOpen: {fileID: 0}
 --- !u!114 &2430290530930835555
 MonoBehaviour:
   m_ObjectHideFlags: 0

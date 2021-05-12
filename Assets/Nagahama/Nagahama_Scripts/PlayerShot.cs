@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerShot : MonoBehaviour
 {
@@ -170,7 +171,7 @@ public class PlayerShot : MonoBehaviour
             if (Input.GetButtonDown(_missileFireButtonName) && missileShotTimeRemain <= 0f) {
 
                 if (_reticle.IsFinalLockOn) {
-                    FadeManager.Instance.LoadScene(4, 0);
+                    SceneManager.LoadScene(4);
                     return;
                 }
                 
