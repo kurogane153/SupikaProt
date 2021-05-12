@@ -9163,7 +9163,7 @@ PrefabInstance:
     - target: {fileID: 3414999311682562004, guid: 8dbebce2271a99c4f89a3ebd76baf566,
         type: 3}
       propertyPath: drawingTime
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3414999311682562004, guid: 8dbebce2271a99c4f89a3ebd76baf566,
         type: 3}
