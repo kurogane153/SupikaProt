@@ -86,12 +86,14 @@ public class RoberiaManager : MonoBehaviour
     public GameObject _waveText = null; // Textオブジェクト
 
     private bool _lastshotflg;
+    private bool _notasteroidcountflg;
     private int _roberiaasteroidcount = 0;
     private Vector3 _earthPos;
 
     void Start()
     {
         _lastshotflg = false;
+        _notasteroidcountflg = false;
         _earthPos = new Vector3(_earth.transform.position.x, 0, 0);
         _roberiaPrefab.GetComponent<AsteroidScript>().ChangeParam(_spawnedAsteroidSpeed, _earthPos);
         _roberiacolliderPrefab.SetActive(false);
@@ -162,6 +164,23 @@ public class RoberiaManager : MonoBehaviour
             }
             
         }
+
+        if (_roberiaPrefab.gameObject.GetComponent<AsteroidScript>().GetAsteroidHp() <= _roberiahp
+            && _roberiainstansasteroidcount > _roberiaasteroidcount)
+        {
+            if (!_notasteroidcountflg)
+            {
+                _notasteroidcountflg = true;
+                _textmanager.TextWindowOn(11);
+                Invoke("TextClose", drawingTime);
+            }
+
+        }
+    }
+
+    void TextClose()
+    {
+        _textmanager.TextWindowOff();
     }
 
     public void RoberiaAsteroidDestroyCount(int count)

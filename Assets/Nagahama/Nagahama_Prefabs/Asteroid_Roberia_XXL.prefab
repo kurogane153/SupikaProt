@@ -18,6 +18,7 @@ MonoBehaviour:
   _pointchildPredab: {fileID: 6386516808307077351}
   _spawnedAsteroidSpeed: 50
   Earth: {fileID: 0}
+  _roberiamanager: {fileID: 0}
 --- !u!65 &6220762130665647838
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63,6 +64,7 @@ MonoBehaviour:
   _pointchildPredab: {fileID: 3479622690911864772}
   _spawnedAsteroidSpeed: 50
   Earth: {fileID: 0}
+  _roberiamanager: {fileID: 0}
 --- !u!65 &1228918416127416450
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -162,6 +164,7 @@ MonoBehaviour:
   _pointchildPredab: {fileID: 726716531887914929}
   _spawnedAsteroidSpeed: 50
   Earth: {fileID: 6582865643300559827, guid: 50d9282d5cb6e1549bb142219f1b7c00, type: 3}
+  _roberiamanager: {fileID: 0}
 --- !u!114 &242713385118688071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +183,7 @@ MonoBehaviour:
   _pointchildPredab: {fileID: 1554807379229525438}
   _spawnedAsteroidSpeed: 50
   Earth: {fileID: 0}
+  _roberiamanager: {fileID: 0}
 --- !u!65 &521432023449360406
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -225,6 +229,7 @@ MonoBehaviour:
   _pointchildPredab: {fileID: 1060497490915771896}
   _spawnedAsteroidSpeed: 50
   Earth: {fileID: 0}
+  _roberiamanager: {fileID: 0}
 --- !u!65 &103789209561586065
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -270,6 +275,7 @@ MonoBehaviour:
   _pointchildPredab: {fileID: 7711918798438182579}
   _spawnedAsteroidSpeed: 50
   Earth: {fileID: 0}
+  _roberiamanager: {fileID: 0}
 --- !u!1 &8932848997244980696
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,7 +950,7 @@ PrefabInstance:
     - target: {fileID: 4231365030200066370, guid: 9162925c28049a34893d5fb02343fba6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.117
+      value: 0.207
       objectReference: {fileID: 0}
     - target: {fileID: 4231365030200066370, guid: 9162925c28049a34893d5fb02343fba6,
         type: 3}

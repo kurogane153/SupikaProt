@@ -2205,6 +2205,7 @@ MonoBehaviour:
   _asteroidwavemanager: {fileID: 1093809851}
   _asteroidspawntrigger: {fileID: 1950091426}
   dbgLine: 0
+  _rotate: {x: 500, y: 0, z: 0}
 --- !u!23 &295829607
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4257,6 +4258,11 @@ PrefabInstance:
       propertyPath: _se_WindowOpen
       value: 
       objectReference: {fileID: 8300000, guid: ac97ba553bec6e348bfe4cd0aac4e8fb, type: 3}
+    - target: {fileID: 420125569053828460, guid: 935752cc7a551f642bb36edf67e61531,
+        type: 3}
+      propertyPath: _text.Array.data[11]
+      value: "\u307E\u305A\u3044\u30B8\u30E5\u30D4\u30BF\u30FC\uFF01\n\u30ED\u30D9\u30EA\u30A2\u306E\u7834\u7247\u304C\u63A5\u8FD1\u3057\u3066\u3044\u308B\u3002\n\u3059\u3079\u3066\u7834\u58CA\u3059\u308B\u3093\u3060\uFF01\uFF01"
+      objectReference: {fileID: 0}
     - target: {fileID: 420125569053828461, guid: 935752cc7a551f642bb36edf67e61531,
         type: 3}
       propertyPath: m_Name
@@ -8740,7 +8746,7 @@ MonoBehaviour:
   _spikarendering: {fileID: 1799453316}
   _earthrendering: {fileID: 256281369}
   _spawnedAsteroidSpeed: 20
-  drawingTime: 5
+  drawingTime: 7
   _roberiahp: 80
   _roberiainstansasteroidcount: 10
   GameOverReloadTime: 3
@@ -9157,6 +9163,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WaveLog
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152552239906961953, guid: 39766a9e9d6e2d445bdf491bd1419cd2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2152552239906961965, guid: 39766a9e9d6e2d445bdf491bd1419cd2,
         type: 3}
