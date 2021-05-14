@@ -69,7 +69,7 @@ public class EndingPlayerScript : MonoBehaviour
         startRoopTimes = _roopTimes;
         StartCoroutine(nameof(MultiTargetMissileInstantiate));
         GameClearOverManager.isclear = true;
-
+        Pauser.isCanNotPausing = false;
     }
 
     void Update()

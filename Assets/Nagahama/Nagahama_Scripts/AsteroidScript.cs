@@ -11,7 +11,7 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField] private AudioClip _se_ExplosionStart1;
     [SerializeField] private AudioClip _se_ExplosionStart2;
 
-    [SerializeField] private GameObject _explosionEffect;   // 隕石消滅時爆発エフェクト
+    [SerializeField] private ParticleSystem _explosionEffect;   // 隕石消滅時爆発エフェクト
 
     [Space(10)]
     [SerializeField] private float _destroyTime = 10f;      // 自動消滅までの時間
@@ -77,8 +77,10 @@ public class AsteroidScript : MonoBehaviour
             if(0 < _explosionEffectDelaySec) {
                 StartCoroutine(nameof(DelaySelfDestroy));
             } else {
+                _explosionEffect.Play();
+                _explosionEffect.transform.parent = null;
                 SelfDestroy();
-                Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+                
             }
             if (SceneManager.GetActiveScene().name == "KuroganeScene")
             {
@@ -173,7 +175,10 @@ public class AsteroidScript : MonoBehaviour
         yield return new WaitForSeconds(_explosionEffectDelaySec);
         _soundPlayer.PlaySE(_se_Explosion);
         _soundPlayer.DestroyCall(3f);
-        Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+
+        _explosionEffect.Play();
+        _explosionEffect.transform.parent = null;
+
         SelfDestroy();
         
         

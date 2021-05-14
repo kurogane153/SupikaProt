@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LogolightOn : MonoBehaviour
 {
@@ -9,11 +7,6 @@ public class LogolightOn : MonoBehaviour
     void Start()
     {
         EffectOff.SetActive(false);
-    }
-
-    void Update()
-    {
-        
     }
 
     private void EffectOn()

@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PushStart : MonoBehaviour
 {
-    [SerializeField] private int _nextLoadSceneBuildIndex;
+    [SerializeField] private int _mainSceneBuildIndex;
+    [SerializeField] private int _tutorialSceneBuildIndex;
     [SerializeField] private float _fadeTimeLoadScene;
 
     [SerializeField] private SoundPlayer _soundPlayer;
@@ -14,8 +15,17 @@ public class PushStart : MonoBehaviour
     public void StartGame()
     {
         //スタートボタンを押したときメインゲームが始まる
-        FadeManager.Instance.LoadScene(_nextLoadSceneBuildIndex, _fadeTimeLoadScene);
+        FadeManager.Instance.LoadScene(_mainSceneBuildIndex, _fadeTimeLoadScene);
         _soundPlayer.PlaySE(_se_GameStart);
+    }
+
+    public void TutorialSceneLoad()
+    {
+        //スタートボタンを押したときメインゲームが始まる
+        FadeManager.Instance.LoadScene(_tutorialSceneBuildIndex, _fadeTimeLoadScene);
+        _soundPlayer.PlaySE(_se_GameStart);
+        OptionDataManagerScript.Instance.optionData._tutorialPlayedFlag = true;
+        OptionDataManagerScript.Instance.Save();
     }
 
     public void PushEnd()

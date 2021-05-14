@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,11 +20,6 @@ public class SoundPlayer : MonoBehaviour
     {
         OptionDataManagerScript.Instance.optionValueChanges.AddListener(ChangeSEVolume);
         ChangeSEVolume();
-    }
-
-    void Update()
-    {
-        
     }
 
     private void OnEnable()

@@ -10,7 +10,7 @@ public class HomingMissileScript : MonoBehaviour
     [SerializeField, Tooltip("効果音_爆発")] private AudioClip _se_Explosion;
 
     [Header("爆発エフェクト"), Space(10)]
-    [SerializeField, Tooltip("爆発エフェクト")] private GameObject _explosionEffect;   // 消滅時爆発エフェクト
+    [SerializeField, Tooltip("爆発エフェクト")] private ParticleSystem _explosionEffect;   // 消滅時爆発エフェクト
     [SerializeField] private ParticleSystem _smoke;
 
     [Space(10)]
@@ -148,7 +148,8 @@ public class HomingMissileScript : MonoBehaviour
         _soundPlayer.PlaySE(_se_Explosion);
         _soundPlayer.DestroyCall(3f);
 
-        Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+        _explosionEffect.Play();
+        _explosionEffect.transform.parent = null;
 
         Destroy(gameObject);
     }

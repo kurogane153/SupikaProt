@@ -1624,6 +1624,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _killCameraPause: 0
+--- !u!198 &453334727 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6695357030695999254, guid: d212804091069094a894dba5fec9a743,
+    type: 3}
+  m_PrefabInstance: {fileID: 5049553371678465331}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &619668830
 GameObject:
   m_ObjectHideFlags: 0
@@ -7302,6 +7308,10 @@ PrefabInstance:
       propertyPath: _canvasRenderers.Array.data[3]
       value: 
       objectReference: {fileID: 1638334338}
+    - target: {fileID: 1118515124, guid: cfdcd431ff0b12a42916b76097373625, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2471368941909752107, guid: cfdcd431ff0b12a42916b76097373625,
         type: 3}
       propertyPath: m_RootOrder
@@ -7356,6 +7366,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -5.381
+      objectReference: {fileID: 0}
+    - target: {fileID: 3709665408947389075, guid: cfdcd431ff0b12a42916b76097373625,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3709665408947389075, guid: cfdcd431ff0b12a42916b76097373625,
         type: 3}
@@ -7583,8 +7598,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _explosionEffect
       value: 
-      objectReference: {fileID: 9005811128934077058, guid: a2272b08e1e58f94390e72fff2eaa0ff,
-        type: 3}
+      objectReference: {fileID: 453334727}
     - target: {fileID: 1899931971487482821, guid: d212804091069094a894dba5fec9a743,
         type: 3}
       propertyPath: m_IsActive

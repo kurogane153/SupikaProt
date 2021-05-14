@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -86,4 +84,5 @@ public class OptionData
     [SerializeField, Range(0f, 2f)] public float _aimSensivity_Y = 1f;      // エイム感度Y軸
     [SerializeField] public bool _useAimAssistFlag = true;                  // エイムアシスト使うか
     [SerializeField, Range(0f, 2f)] public float _aimAssistIntensity = 1f;  // エイムアシスト強度
+    [SerializeField] public bool _tutorialPlayedFlag = false;              // チュートリアルをプレイしたことがあるか
 }

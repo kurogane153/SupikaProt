@@ -6,30 +6,23 @@ using UnityEngine.UI;
 public class TitleAnim : MonoBehaviour
 {
     [SerializeField] GameObject LogoOnOff;
-    [SerializeField] GameObject StartOnOff;
-    [SerializeField] GameObject OptionOnOff;
-    [SerializeField] GameObject EndOnOff;
-    [SerializeField] GameObject ButtonOnOff;
-    
+    [SerializeField] GameObject[] _buttons;
 
-    // Start is called before the first frame update
+    [SerializeField] GameObject _enterButtonUI;
+    
     void Start()
     {
         LogoOnOff.SetActive(false);
-        StartOnOff.SetActive(false);
-        OptionOnOff.SetActive(false);
-        EndOnOff.SetActive(false);
-        ButtonOnOff.SetActive(false);
+
+        foreach(var button in _buttons) {
+            button.SetActive(false);
+        }
+
+        _enterButtonUI.SetActive(false);
 
         Invoke("TitleOn", 3.0f);
         Invoke("PanelOn", 4.8f);
         Invoke("ButtonOn", 5.7f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void TitleOn()
@@ -39,15 +32,13 @@ public class TitleAnim : MonoBehaviour
 
     private void PanelOn()
     {
-        StartOnOff.SetActive(true);
-        OptionOnOff.SetActive(true);
-        EndOnOff.SetActive(true);
-
+        foreach (var button in _buttons) {
+            button.SetActive(true);
+        }
     }
 
     private void ButtonOn()
     {
-        ButtonOnOff.SetActive(true);
-        //StartOnOff.GetComponent<Selectable>().Select();
+        _enterButtonUI.SetActive(true);
     }
 }
