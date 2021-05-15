@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyGenerator : MonoBehaviour
+public class TutorialEnemyGenerator : MonoBehaviour
 {
-
     [Header("Set Asteroid Prefab")]
     //敵プレハブ
     public GameObject enemyPrefab;
@@ -28,40 +27,40 @@ public class EnemyGenerator : MonoBehaviour
     [Header("Set Interval Min and Max")]
     //時間間隔の最小値
     [Range(0f, 1f)]
-    public float minTime = 2f;
+    public float minTime = 0.5f;
     //時間間隔の最大値
     [Range(0f, 30f)]
-    public float maxTime = 5f;
-    
+    public float maxTime = 0.8f;
+
     [Header("隕石の速さ")]
     //隕石の速さ
-    public float _spawnedAsteroidSpeed = 50f;
-    
+    public float _spawnedAsteroidSpeed = 0f;
+
     [Header("X座標の最大値と最小値")]
     //X座標の最小値
     [Range(-1500f, 0f)]
-    public float xMinPosition = -10f;
+    public float xMinPosition = -1500f;
     //X座標の最大値
     [Range(0f, 1500f)]
-    public float xMaxPosition = 10f;
+    public float xMaxPosition = 1500f;
 
     [Header("Y座標の最大値と最小値")]
     //Y座標の最小値
     [Range(-500f, 0f)]
-    public float yMinPosition = 0f;
+    public float yMinPosition = -500f;
     //Y座標の最大値
     [Range(0f, 500f)]
-    public float yMaxPosition = 10f;
+    public float yMaxPosition = 500f;
 
     [Header("Z座標の最大値と最小値")]
     //Z座標の最小値
     [Range(-500f, 0f)]
-    public float zMinPosition = 0f;
+    public float zMinPosition = -500f;
     //Z座標の最大値
     [Range(0f, 500f)]
-    public float zMaxPosition = 0f;
+    public float zMaxPosition = 500f;
 
-    public AsteroidWaveManager _asteroidwavemanager;
+    public TutorialManager _asteroidtutorialwavemanager;
 
     public AsterdSpawnTrigger _asteroidspawntrigger;
 
@@ -95,7 +94,7 @@ public class EnemyGenerator : MonoBehaviour
         EarthPos = new Vector3(Earth.transform.position.x, 0, 0);
 
         #region デバッグ用スポーン範囲
-        if (dbgLine) 
+        if (dbgLine)
         {
             //GameObject asteroid = Instantiate(enemyPrefab);
             // LineRendererコンポーネントをゲームオブジェクトにアタッチする
@@ -146,12 +145,12 @@ public class EnemyGenerator : MonoBehaviour
         {
             if (_asteroidspawntrigger.GetAreaTrigger())
             {
-                if (_asteroidWaveCount < _asteroidwavemanager.GetAsteroidWaveCount())
+                if (_asteroidWaveCount < _asteroidtutorialwavemanager.GetAsteroidWaveCount())
                 {
-                    if (!_asteroidwavemanager.GetAsteroidInstansFlg())
+                    if (!_asteroidtutorialwavemanager.GetAsteroidInstansFlg())
                     {
                         //enemyをインスタンス化する(生成する)
-                        GameObject asteroid = Instantiate(AsteroidPrefab[SetAsteroidPrefab()]);
+                        GameObject asteroid = Instantiate(AsteroidPrefab[2]);
                         //生成した敵の位置をランダムに設定する
                         asteroid.transform.position = GetRandomPosition();
 
@@ -166,11 +165,11 @@ public class EnemyGenerator : MonoBehaviour
 
                         if (asteroid.GetComponent<AsteroidScript>().GetAsteroidNumber() == 5)
                         {
-                            _asteroidwavemanager.SetWaveAsteroidCount(3);
+                            _asteroidtutorialwavemanager.SetWaveAsteroidCount(3);
                         }
                         else
                         {
-                            _asteroidwavemanager.SetWaveAsteroidCount(1);
+                            _asteroidtutorialwavemanager.SetWaveAsteroidCount(1);
                         }
 
                         //経過時間を初期化して再度時間計測を始める
@@ -198,9 +197,9 @@ public class EnemyGenerator : MonoBehaviour
     private int SetAsteroidPrefab()
     {
         var range = Random.Range(0, AsteroidPrefab.Length);
-        
+
         //ウェーブ事の隕石の生成制御
-        switch (_asteroidwavemanager.GetWaveCount())
+        switch (_asteroidtutorialwavemanager.GetWaveCount())
         {
             case 0:
                 while (range == 0 || range == 4 || range == 5)
@@ -226,7 +225,7 @@ public class EnemyGenerator : MonoBehaviour
         }
 
         //分裂する隕石を生成するかどうか
-        if (_asteroidwavemanager.GetWaveAsteroid() <= (_asteroidwavemanager.GetWaveAsteroidInstansCount() + 4))
+        if (_asteroidtutorialwavemanager.GetWaveAsteroid() <= (_asteroidtutorialwavemanager.GetWaveAsteroidInstansCount() + 4))
         {
             while (range == 4)
             {

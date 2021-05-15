@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class AsteroidWaveManager : MonoBehaviour
@@ -36,6 +37,10 @@ public class AsteroidWaveManager : MonoBehaviour
     [Header("ウェーブ事の隕石の個数")]
     [SerializeField]
     private int[] _waveAsteroidcount = new int[4] { 7, 10, 15, 25 };
+
+    [Header("ウェーブ事の隕石の個数")]
+    [SerializeField]
+    private int _wavetutorialAsteroidcount = 5;
 
     [Header("表示するテキストナンバー")]
     [SerializeField]
@@ -93,7 +98,8 @@ public class AsteroidWaveManager : MonoBehaviour
         FAST = 1,
         SECOND,
         THIRD,
-        FORTH
+        FORTH,
+        ZERO = 0
     };
 
     private _wavecount _wave;
@@ -103,12 +109,26 @@ public class AsteroidWaveManager : MonoBehaviour
         _textno = 1;
         _spikaPos = new Vector3(_spika.transform.position.x, 0, 0);
         _earthPos = new Vector3(_earth.transform.position.x, 0, 0);
-        _wave = _wavecount.FAST;
-        _asteroidwavecount = 2;
-        _waveAsteroid = _waveAsteroidcount[0];
-        _asteroidinstansflg = true;
-        _gameCOProcess.SetGameClearCount(0);
-        FastText(0);
+        if (SceneManager.GetActiveScene().name == "S0_ProtoScene_Nagahama")
+        {
+            _wave = _wavecount.FAST;
+            _asteroidwavecount = 2;
+            _waveAsteroid = _waveAsteroidcount[0];
+            _asteroidinstansflg = true;
+            _gameCOProcess.SetGameClearCount(0);
+            FastText(0);
+        }
+        else if (SceneManager.GetActiveScene().name == "TutorialScene")
+        {
+            _waveAsteroid = _wavetutorialAsteroidcount;
+            _textno = 13;
+            _wave = _wavecount.ZERO;
+            _asteroidwavecount = 1;
+            _asteroidinstansflg = true;
+            _gameCOProcess.SetGameClearCount(0);
+            FastText(12);
+        }
+        
     }
 
     void Update()
@@ -116,7 +136,6 @@ public class AsteroidWaveManager : MonoBehaviour
         WaveCount();
         DoubleAsteroid();
         AretText();
-        OrbitShiftText();
         Dbg();
     }
 
@@ -203,6 +222,19 @@ public class AsteroidWaveManager : MonoBehaviour
                 }
 
                 break;
+
+            case _wavecount.ZERO:
+                if (_waveAsteroidInstansCount >= _waveAsteroid) _asteroidinstansflg = true;
+                if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
+                {
+                    if (!_textflg)
+                    {
+                        TutorialLastText();
+                    }
+                    _asteroidinstansflg = true;
+                }
+
+                break;
         }
 
     }
@@ -216,22 +248,6 @@ public class AsteroidWaveManager : MonoBehaviour
                 _fastarerttextflg = true;
                 _textmanager.TextWindowOn(10);
                 Invoke("TextClose", drawingTime);
-            }
-        }
-    }
-
-    void OrbitShiftText()
-    {
-        if (_orbitshift.activeSelf)
-        {
-            if (!_fastorbitshifttextflg)
-            {
-                if (!_textwindow.activeSelf)
-                {
-                    _textmanager.TextWindowOn(9);
-                    _fastorbitshifttextflg = true;
-                    Invoke("TextClose", drawingTime);
-                }
             }
         }
     }
@@ -277,6 +293,14 @@ public class AsteroidWaveManager : MonoBehaviour
         _textmanager.TextWindowOff();
     }
 
+    void TutorialLastText()
+    {
+        _textflg = true;
+        _textmanager.TextWindowOn(14);
+        _letterbox.GetComponent<Animator>().SetBool("LetterKey", true);
+    }
+
+
     private void DelayChangeWave()
     {
         _letterbox.GetComponent<Animator>().SetBool("LetterKey", false);
@@ -316,6 +340,7 @@ public class AsteroidWaveManager : MonoBehaviour
         return _asteroidinstansflg;
     }
 
+    #region デバッグ
     void Dbg()
     {
         _waveText.GetComponent<Text>().text = "ウエーブ：" + (int)_wave + "\n" 
@@ -355,4 +380,5 @@ public class AsteroidWaveManager : MonoBehaviour
         //Debug.Log("隕石生成のフラグ：" + _asteroidinstansflg);
 
     }
+    #endregion
 }
