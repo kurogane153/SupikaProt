@@ -33,6 +33,7 @@ public class ReticleController : MonoBehaviour
     [Header("サウンド系"), Space(10)]
     [SerializeField] private SoundPlayer _soundPlayer;
     [SerializeField] private AudioClip _se_LockOn;
+    [SerializeField] private float[] _lockOnSEPitchs;
 
     [Space(10)]
     [SerializeField] private GameObject _lockedOnReticlePrefab;
@@ -305,6 +306,7 @@ public class ReticleController : MonoBehaviour
                     canNotReticleMoveTime = _aimSpeedDecreaseTime;
                     tmpTarget = target;
 
+                    _soundPlayer.ChangePitchLevel(_lockOnSEPitchs[GeneratedReticleCount - 1]);
                     _soundPlayer.PlaySE(_se_LockOn);
                 }
             }

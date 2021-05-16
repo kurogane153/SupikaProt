@@ -12,6 +12,7 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField] private AudioClip _se_ExplosionStart2;
 
     [SerializeField] private ParticleSystem _explosionEffect;   // 隕石消滅時爆発エフェクト
+    [SerializeField] private ParticleSystem[] _childParticles;  // 子要素にしてある軌跡などのパーティクル
 
     [Space(10)]
     [SerializeField] private float _destroyTime = 10f;      // 自動消滅までの時間
@@ -79,6 +80,12 @@ public class AsteroidScript : MonoBehaviour
             } else {
                 _explosionEffect.Play();
                 _explosionEffect.transform.parent = null;
+
+                foreach(var particle in _childParticles) {
+                    particle.Stop();
+                    particle.transform.parent = null;
+                }
+
                 SelfDestroy();
                 
             }
@@ -178,6 +185,11 @@ public class AsteroidScript : MonoBehaviour
 
         _explosionEffect.Play();
         _explosionEffect.transform.parent = null;
+
+        foreach (var particle in _childParticles) {
+            particle.Stop();
+            particle.transform.parent = null;
+        }
 
         SelfDestroy();
         

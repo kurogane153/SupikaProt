@@ -107,6 +107,8 @@ MonoBehaviour:
   _se_ExplosionStart1: {fileID: 0}
   _se_ExplosionStart2: {fileID: 0}
   _explosionEffect: {fileID: 4257257283591942671}
+  _childParticles:
+  - {fileID: 7588367101490537311}
   _destroyTime: 360
   _hp: 100
   _speed: 50
@@ -564,6 +566,12 @@ PrefabInstance:
 --- !u!4 &3149425762499566549 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1320170520340854339, guid: c876aeb83812c674698728586e90f314,
+    type: 3}
+  m_PrefabInstance: {fileID: 4172358678166105494}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7588367101490537311 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5812029116244905673, guid: c876aeb83812c674698728586e90f314,
     type: 3}
   m_PrefabInstance: {fileID: 4172358678166105494}
   m_PrefabAsset: {fileID: 0}

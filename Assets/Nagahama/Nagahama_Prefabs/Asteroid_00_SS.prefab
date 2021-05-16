@@ -104,6 +104,10 @@ MonoBehaviour:
   _se_ExplosionStart1: {fileID: 0}
   _se_ExplosionStart2: {fileID: 0}
   _explosionEffect: {fileID: 8181366223246738659}
+  _childParticles:
+  - {fileID: 2235542735404828091}
+  - {fileID: 6810575313523307588}
+  - {fileID: 7464934913854039896}
   _destroyTime: 360
   _hp: 100
   _speed: 150
@@ -356,6 +360,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1236873477803884342, guid: c876aeb83812c674698728586e90f314,
         type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1236873477803884342, guid: c876aeb83812c674698728586e90f314,
+        type: 3}
+      propertyPath: stopAction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1236873477803884342, guid: c876aeb83812c674698728586e90f314,
+        type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 2
       objectReference: {fileID: 0}
@@ -416,6 +430,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2897645482437094442, guid: c876aeb83812c674698728586e90f314,
         type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897645482437094442, guid: c876aeb83812c674698728586e90f314,
+        type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897645482437094442, guid: c876aeb83812c674698728586e90f314,
+        type: 3}
+      propertyPath: stopAction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897645482437094442, guid: c876aeb83812c674698728586e90f314,
+        type: 3}
       propertyPath: simulationSpeed
       value: 12
       objectReference: {fileID: 0}
@@ -431,6 +460,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5812029116244905673, guid: c876aeb83812c674698728586e90f314,
         type: 3}
+      propertyPath: stopAction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812029116244905673, guid: c876aeb83812c674698728586e90f314,
+        type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 20
       objectReference: {fileID: 0}
@@ -439,6 +473,24 @@ PrefabInstance:
 --- !u!4 &6772419751832993073 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1320170520340854339, guid: c876aeb83812c674698728586e90f314,
+    type: 3}
+  m_PrefabInstance: {fileID: 5741605697133726578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2235542735404828091 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5812029116244905673, guid: c876aeb83812c674698728586e90f314,
+    type: 3}
+  m_PrefabInstance: {fileID: 5741605697133726578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6810575313523307588 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1236873477803884342, guid: c876aeb83812c674698728586e90f314,
+    type: 3}
+  m_PrefabInstance: {fileID: 5741605697133726578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7464934913854039896 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2897645482437094442, guid: c876aeb83812c674698728586e90f314,
     type: 3}
   m_PrefabInstance: {fileID: 5741605697133726578}
   m_PrefabAsset: {fileID: 0}
