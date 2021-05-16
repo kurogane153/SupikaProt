@@ -35,6 +35,8 @@ public class BGMFadeout : MonoBehaviour
     public void FadeoutStart(float interval)
     {
         isFadeout = true;
+        audioSource.volume = startVolume;
         _fadeoutSeconds = interval - 0.017f;
+        fadeDeltaTime = 0;
     }
 }

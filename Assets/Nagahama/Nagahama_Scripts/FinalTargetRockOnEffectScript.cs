@@ -1,30 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class FinalTargetRockOnEffectScript : MonoBehaviour
 {
-    [SerializeField] private SoundPlayer _soundPlanyer;
+    [SerializeField] private PostProcessVolume _postProcessVolume;
+    [SerializeField] float _filterColorChangeTime = 3f;
+
+    [SerializeField,Space(5)] private SoundPlayer _soundPlanyer;
+    [SerializeField] private float[] _lockOnSEPitchs;
     [SerializeField] private AudioClip _se_lockOn;
-    [SerializeField] private GameObject _lockOnMarkarPrefab;
-    [SerializeField] private CameraController _cameraController;
-    [SerializeField] private RadialBlur _radialBlur;
-    [SerializeField] private ParticleSystem _lineParticle;
-    [SerializeField] private PlayerMove _playerMove;
-    [SerializeField] private PlayerShot _playerShot;
-    [SerializeField] private GameObject[] _disableUIs;
+
+    [SerializeField, Space(5)] private GameObject _lockOnMarkarPrefab;
+    [SerializeField, Space(5)] private CameraController _cameraController;
+    [SerializeField, Space(5)] private RadialBlur _radialBlur;
+    [SerializeField, Space(5)] private ParticleSystem _lineParticle;
+    [SerializeField, Space(5)] private PlayerMove _playerMove;
+    [SerializeField, Space(5)] private PlayerShot _playerShot;
+    [SerializeField, Space(5)] private GameObject[] _disableUIs;
 
     [Space(10)]
     [SerializeField] private float _rotateTime = 1f;
     [SerializeField] private float[] _markarInstTimes;
     [SerializeField] private Vector3[] _markarScales;
 
+    private PostProcessProfile postProcessProfile;
+    private ColorGrading colorGrading;
     private Transform mainCamera;
     private Transform targetCollider;
     private bool isCanRotation;
 
     void Start()
     {
+        postProcessProfile = _postProcessVolume.sharedProfile;
+
+        colorGrading = postProcessProfile.GetSetting<ColorGrading>();
         mainCamera = _cameraController.transform;
     }
 
@@ -70,6 +81,7 @@ public class FinalTargetRockOnEffectScript : MonoBehaviour
         }
 
         StartCoroutine(nameof(InstLockOnMarkars));
+        StartCoroutine(nameof(PostProcessColorFilterChange));
     }
 
     private IEnumerator InstLockOnMarkars()
@@ -85,9 +97,35 @@ public class FinalTargetRockOnEffectScript : MonoBehaviour
             LockedOnReticle lockedOnReticle = newLockonReticle.GetComponent<LockedOnReticle>();
 
             lockedOnReticle.InstantiateSettings(canvas, targetCollider, mainCamera);
-            lockedOnReticle.transform.localScale = _markarScales[i++];
+            lockedOnReticle.transform.localScale = _markarScales[i];
             lockedOnReticle.GetComponent<Animator>().enabled = false;
+            _soundPlanyer.ChangePitchLevel(_lockOnSEPitchs[i++]);
             _soundPlanyer.PlaySE(_se_lockOn);
         }
     }
+
+    private IEnumerator PostProcessColorFilterChange()
+    {
+        float time = 0;
+
+        Color startColor = colorGrading.colorFilter.value;
+        Color white = new Color(1, 1, 1);
+        colorGrading.enabled.Override(true);
+        colorGrading.colorFilter.overrideState = true;
+        colorGrading.colorFilter.Override(startColor);
+
+
+        while (time < _filterColorChangeTime) {
+            time += Time.deltaTime;
+            float rate = time / _filterColorChangeTime;
+
+            colorGrading.colorFilter.Override(Color.Lerp(startColor, white, rate));
+            Debug.Log(colorGrading.colorFilter.value);
+            yield return new WaitForFixedUpdate();
+        }
+
+
+    }
+
+    
 }

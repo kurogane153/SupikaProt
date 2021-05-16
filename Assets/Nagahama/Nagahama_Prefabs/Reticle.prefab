@@ -175,11 +175,11 @@ MonoBehaviour:
   _soundPlayer: {fileID: 4063978718862799842}
   _se_LockOn: {fileID: 8300000, guid: ccc5cd169785fc34bb3cceedef0f2ffe, type: 3}
   _lockOnSEPitchs:
-  - 0.95
+  - 0.97
   - 1
-  - 1.05
-  - 1.1
-  - 1.15
+  - 1.03
+  - 1.06
+  - 1.09
   _lockedOnReticlePrefab: {fileID: 2127001005440325914, guid: 293ec4f45d4f025478756b7099bb749e,
     type: 3}
   _firstSelectButton: {fileID: 7015361749751168582}

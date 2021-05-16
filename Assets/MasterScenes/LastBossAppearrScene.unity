@@ -415,6 +415,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1228057784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 693687973616564463, guid: e6732f87fa26aac4aba01e62b53f5e4b,
+    type: 3}
+  m_PrefabInstance: {fileID: 974431673030594377}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1397702385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -548,6 +560,9 @@ MonoBehaviour:
   GameOverReloadTime: 3.5
   _minimapobj: {fileID: 0}
   _roberiaPrefab: {fileID: 0}
+  _textNo: 
+  drawingTime: 5
+  _textmanager: {fileID: 0}
 --- !u!43 &1959548754
 Mesh:
   m_ObjectHideFlags: 0
@@ -907,6 +922,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1840293993887901578, guid: 51ca9497968b8f1448302440af371a87,
         type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840293993887901578, guid: 51ca9497968b8f1448302440af371a87,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -1010,6 +1030,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046e9da64b959984a9ffc9f5f6710b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _postProcessVolume: {fileID: 1228057784}
+  _filterColor: {r: 0.8962264, g: 0.5538003, b: 0.8438553, a: 1}
+  _filterColorChangeTime: 1.5
   _nextSceneLoadedTime: 5
   _nextSceneBuildIndex: 3
   _viewPositions:

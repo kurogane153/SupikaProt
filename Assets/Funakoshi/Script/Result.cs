@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Result : MonoBehaviour
 {
- 
+    [SerializeField] private PostProcessVolume _postProcessVolume;
     [SerializeField] GameObject _earth;
     [SerializeField] GameObject _hellearth;
     [SerializeField] private int _restartSceneIndex;
@@ -24,6 +25,7 @@ public class Result : MonoBehaviour
     public GameObject GameOvertext = null;
     private Text GameClear_text;
     private Text GameOver_text;
+    private PostProcessProfile postProcessProfile;
 
 
     // Start is called before the first frame update
@@ -43,6 +45,15 @@ public class Result : MonoBehaviour
 
         ClearCameraObj.SetActive(false);
         OverCameraObj.SetActive(false);
+
+        postProcessProfile = _postProcessVolume.sharedProfile;
+
+        ColorGrading colorGrading = postProcessProfile.GetSetting<ColorGrading>();
+
+        Color startColor = colorGrading.colorFilter.value;
+        colorGrading.enabled.Override(true);
+        colorGrading.colorFilter.overrideState = true;
+        colorGrading.colorFilter.Override(startColor);
 
         //GameClearOverManager.isclear = true;
     }
@@ -81,4 +92,6 @@ public class Result : MonoBehaviour
         //BackToTitleのボタンを押すと、タイトルに戻る
         FadeManager.Instance.LoadScene(_titleSceneIndex, _fadeTimeLoadScene);
     }
+
+    
 }

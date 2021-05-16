@@ -56,6 +56,16 @@ public class DebugSc : MonoBehaviour
             SceneManager.LoadScene(4);
         }
 
+        if (Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.Alpha6)) {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(5);
+        }
+
+        if (Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.Alpha7)) {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(6);
+        }
+
         #endregion
     }
 
