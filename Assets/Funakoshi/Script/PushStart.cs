@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PushStart : MonoBehaviour
 {
@@ -11,12 +12,14 @@ public class PushStart : MonoBehaviour
 
     [SerializeField] private SoundPlayer _soundPlayer;
     [SerializeField] private AudioClip _se_GameStart;
+    [SerializeField] private EventSystem _eventSystem;
 
     public void StartGame()
     {
         //スタートボタンを押したときメインゲームが始まる
         FadeManager.Instance.LoadScene(_mainSceneBuildIndex, _fadeTimeLoadScene);
         _soundPlayer.PlaySE(_se_GameStart);
+        _eventSystem.enabled = false;
     }
 
     public void TutorialSceneLoad()
@@ -26,6 +29,7 @@ public class PushStart : MonoBehaviour
         _soundPlayer.PlaySE(_se_GameStart);
         OptionDataManagerScript.Instance.optionData._tutorialPlayedFlag = true;
         OptionDataManagerScript.Instance.Save();
+        _eventSystem.enabled = false;
     }
 
     public void PushEnd()

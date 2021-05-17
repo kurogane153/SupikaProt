@@ -382,7 +382,7 @@ PrefabInstance:
     - target: {fileID: 7285866410871912565, guid: 2ca5650b2a1ccee4588abe1ac824f3b0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7285866410871912565, guid: 2ca5650b2a1ccee4588abe1ac824f3b0,
         type: 3}
@@ -584,7 +584,7 @@ PrefabInstance:
     - target: {fileID: 3569977124298609039, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3569977124298609039, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}
@@ -2770,7 +2770,7 @@ GameObject:
   - component: {fileID: 671041458}
   - component: {fileID: 671041457}
   m_Layer: 0
-  m_Name: GameSystem
+  m_Name: ResultManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2794,6 +2794,7 @@ MonoBehaviour:
   _restartSceneIndex: 1
   _titleSceneIndex: 0
   _fadeTimeLoadScene: 2
+  _eventSystem: {fileID: 1724046100}
   PlayerOff: {fileID: 1439102818}
   GameCleartext: {fileID: 1523066544}
   GameOvertext: {fileID: 442713144}
@@ -2831,7 +2832,7 @@ PrefabInstance:
     - target: {fileID: 452874809485083365, guid: 30722ab09a7888a4aa22d370c970045f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 452874809485083365, guid: 30722ab09a7888a4aa22d370c970045f,
         type: 3}
@@ -5654,7 +5655,7 @@ PrefabInstance:
     - target: {fileID: 2152552239906961965, guid: 39766a9e9d6e2d445bdf491bd1419cd2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2152552239906961965, guid: 39766a9e9d6e2d445bdf491bd1419cd2,
         type: 3}
@@ -6814,7 +6815,7 @@ PrefabInstance:
     - target: {fileID: 7747950506902217627, guid: df2a187783c681a4c92b46210c98a932,
         type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 7747950506902217627, guid: df2a187783c681a4c92b46210c98a932,
         type: 3}
@@ -8982,7 +8983,7 @@ PrefabInstance:
     - target: {fileID: 6757728691016835464, guid: 49b09d3352260e14e8719f1260fc328e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6757728691016835464, guid: 49b09d3352260e14e8719f1260fc328e,
         type: 3}
@@ -9112,7 +9113,7 @@ PrefabInstance:
     - target: {fileID: 6882696715821184052, guid: 95a558f465315744fa97e0dd370b8f53,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6882696715821184052, guid: 95a558f465315744fa97e0dd370b8f53,
         type: 3}
@@ -9675,7 +9676,7 @@ PrefabInstance:
     - target: {fileID: 3271952565956156174, guid: 18dc8e2b22346ac41a45200b76d330ae,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3271952565956156174, guid: 18dc8e2b22346ac41a45200b76d330ae,
         type: 3}

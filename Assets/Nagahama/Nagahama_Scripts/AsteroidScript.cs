@@ -83,6 +83,7 @@ public class AsteroidScript : MonoBehaviour
 
                 foreach(var particle in _childParticles) {
                     particle.Stop();
+
                     particle.transform.parent = null;
                 }
 
@@ -178,21 +179,21 @@ public class AsteroidScript : MonoBehaviour
 
         _soundPlayer.PlaySE(_se_ExplosionStart1);
         _soundPlayer.PlaySE(_se_ExplosionStart2);
-       
-        yield return new WaitForSeconds(_explosionEffectDelaySec);
-        _soundPlayer.PlaySE(_se_Explosion);
-        _soundPlayer.DestroyCall(3f);
-
-        _explosionEffect.Play();
-        _explosionEffect.transform.parent = null;
 
         foreach (var particle in _childParticles) {
+            var main = particle.main;
+            main.loop = false;
             particle.Stop();
             particle.transform.parent = null;
         }
 
-        SelfDestroy();
-        
+        yield return new WaitForSeconds(_explosionEffectDelaySec);
+        _explosionEffect.Play();
+        _explosionEffect.transform.parent = null;
+
+        _soundPlayer.PlaySE(_se_Explosion, 3f);
+
+        SelfDestroy();        
         
     }
 

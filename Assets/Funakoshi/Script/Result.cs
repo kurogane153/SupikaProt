@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.EventSystems;
 
 public class Result : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Result : MonoBehaviour
     [SerializeField] private int _restartSceneIndex;
     [SerializeField] private int _titleSceneIndex;
     [SerializeField] private float _fadeTimeLoadScene;
+    [SerializeField] private EventSystem _eventSystem;
 
     //カメラ取得
     GameObject ClearCameraObj;
@@ -85,12 +87,14 @@ public class Result : MonoBehaviour
     {
         //Restartのボタンを押すと、メイン画面に戻る
         FadeManager.Instance.LoadScene(_restartSceneIndex, _fadeTimeLoadScene);
+        _eventSystem.enabled = false;
     }
 
     public void PushBackToTitle()
     {
         //BackToTitleのボタンを押すと、タイトルに戻る
         FadeManager.Instance.LoadScene(_titleSceneIndex, _fadeTimeLoadScene);
+        _eventSystem.enabled = false;
     }
 
     

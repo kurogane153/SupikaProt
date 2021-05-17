@@ -39,7 +39,11 @@ public class SpeedBarScript : MonoBehaviour
         nowSliderValue = slider.value;
         nowFillColor = _fillImage.color;
         _speedStatusText.text = _speedStatusName[periodNum];
-        StartCoroutine(SliderValuesChange(periodNum));
+
+        if (slider.gameObject.activeSelf) {
+            StartCoroutine(SliderValuesChange(periodNum));
+        }
+        
     }
 
     private IEnumerator SliderValuesChange(int newAryNum)

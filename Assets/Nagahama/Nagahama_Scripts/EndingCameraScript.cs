@@ -64,11 +64,12 @@ public class EndingCameraScript : MonoBehaviour
         transform.position = explosionViwePos.position;
         transform.rotation = explosionViwePos.rotation;
 
-        // ラスボスのHPが0になるタイミングで放射ブラー起動
+        // ディゾルブシェーダーアニメーション起動
         yield return new WaitForSeconds(1.3f + (0.35f * _looptimes));
         lastBossDisolve.StartDisovle();
 
-        yield return new WaitForSeconds(3.0f);
+        // ラスボスのHPが0になるタイミングで放射ブラー起動
+        yield return new WaitForSeconds(6.0f);
         radialBlur.EnableRadialBlur();
 
         // 爆発エフェクトが終了するタイミングで放射ブラーオフ

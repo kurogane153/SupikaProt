@@ -513,7 +513,7 @@ RectTransform:
   - {fileID: 1886452637}
   - {fileID: 325367215}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3238,7 +3238,7 @@ GameObject:
   - component: {fileID: 1818908102}
   - component: {fileID: 1818908101}
   m_Layer: 0
-  m_Name: GameSystem
+  m_Name: TitleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3261,6 +3261,7 @@ MonoBehaviour:
   _fadeTimeLoadScene: 3
   _soundPlayer: {fileID: 371147177}
   _se_GameStart: {fileID: 8300000, guid: 405cfe6972b4dac4e8e5000eeda58fc3, type: 3}
+  _eventSystem: {fileID: 1724046100}
 --- !u!4 &1818908102
 Transform:
   m_ObjectHideFlags: 0
@@ -3273,7 +3274,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1858862674 stripped
 MonoBehaviour:

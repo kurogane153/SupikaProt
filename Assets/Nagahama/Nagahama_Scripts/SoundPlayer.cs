@@ -60,6 +60,17 @@ public class SoundPlayer : MonoBehaviour
         StartCoroutine(SelfDestroy(time));
     }
 
+    public void PlaySE(AudioClip audioClip, float delayTime)
+    {
+        StartCoroutine(DelayPlaySE(audioClip, delayTime));
+    }
+
+    private IEnumerator DelayPlaySE(AudioClip audioClip, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        PlaySE(audioClip);
+    }
+
     public IEnumerator SelfDestroy(float time)
     {
         yield return new WaitForSeconds(time);
