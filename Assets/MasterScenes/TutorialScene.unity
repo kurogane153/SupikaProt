@@ -5624,12 +5624,12 @@ PrefabInstance:
     - target: {fileID: 823232047092441419, guid: 373d614b789fbbe47ade0d16f3909527,
         type: 3}
       propertyPath: _waveAsteroidcount.Array.data[1]
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 823232047092441419, guid: 373d614b789fbbe47ade0d16f3909527,
         type: 3}
       propertyPath: _waveAsteroidcount.Array.data[2]
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 823232047092441419, guid: 373d614b789fbbe47ade0d16f3909527,
         type: 3}
@@ -5728,7 +5728,7 @@ PrefabInstance:
     - target: {fileID: 5682392029843187116, guid: 822020da674bd5944a083a65b35a4c16,
         type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5682392029843187116, guid: 822020da674bd5944a083a65b35a4c16,
         type: 3}
