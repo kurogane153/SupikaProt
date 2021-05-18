@@ -5688,12 +5688,12 @@ PrefabInstance:
     - target: {fileID: 823232047092441419, guid: 373d614b789fbbe47ade0d16f3909527,
         type: 3}
       propertyPath: _waveAsteroidcount.Array.data[0]
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 823232047092441419, guid: 373d614b789fbbe47ade0d16f3909527,
         type: 3}
       propertyPath: _waveAsteroidcount.Array.data[1]
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 823232047092441419, guid: 373d614b789fbbe47ade0d16f3909527,
         type: 3}
