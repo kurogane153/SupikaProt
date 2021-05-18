@@ -5438,6 +5438,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
         type: 3}
+      propertyPath: _judgeRectSizeScaling
+      value: 1.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
       propertyPath: _targetLockonmoveFlags
       value: 1
       objectReference: {fileID: 0}
@@ -5455,6 +5460,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _reticleRectSizeScaling
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015361749325490770, guid: 82af22d6a7c795a42a0e738b02916d6c,
+        type: 3}
+      propertyPath: _aimAssistJudgeInputIntensity
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 7015361749325490782, guid: 82af22d6a7c795a42a0e738b02916d6c,
         type: 3}

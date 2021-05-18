@@ -53,6 +53,7 @@ public class ReticleController : MonoBehaviour
 
     [Header("スティック倒した方向に移動するエイムアシストジャッジレクト"), Space(10)]
     [SerializeField] private RectTransform _aimAssistJudgeRect;
+    [SerializeField] private float _aimAssistJudgeInputIntensity;
     [SerializeField] private float _judgeRectSizeScaling;
     private float judgeRectWidth;
     private float judgeRectHeight;
@@ -399,8 +400,8 @@ public class ReticleController : MonoBehaviour
 
     private void MoveAimAssistJudgeRect(float horizontal, float vertical)
     {
-        float newX = judgeRectWidth * horizontal * -1;
-        float newY = judgeRectHeight * vertical * -1;
+        float newX = judgeRectWidth * -horizontal * _aimAssistJudgeInputIntensity;
+        float newY = judgeRectHeight * -vertical * _aimAssistJudgeInputIntensity;
         Vector3 newPos = new Vector3(newX, newY);
 
         _aimAssistJudgeRect.position = transform.position + newPos;

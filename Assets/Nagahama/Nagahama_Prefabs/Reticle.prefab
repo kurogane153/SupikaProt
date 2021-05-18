@@ -189,15 +189,16 @@ MonoBehaviour:
   _speedX: 25
   _speedY: 25
   _reticleRectSizeScaling: 0.7
-  _aimAssistDegreeX: 2
-  _aimAssistDegreeY: 2
+  _aimAssistDegreeX: 3
+  _aimAssistDegreeY: 3
   _aimSpeedDecreaseTime: 0.28
-  _aimAssistIntensity: 14
+  _aimAssistIntensity: 20
   _aimDeadZoneX: 0.1
   _aimDeadZoneY: 0.1
   _generateReticleMax: 5
   _aimAssistJudgeRect: {fileID: 382610432161563547}
-  _judgeRectSizeScaling: 1
+  _aimAssistJudgeInputIntensity: 0.75
+  _judgeRectSizeScaling: 1.08
   _lockOnTargetOnLockOnButtonDown: 0
   _targetLockonmoveFlags: 1
   _userSuperAimAssistSystemFlags: 0
