@@ -2378,7 +2378,7 @@ PrefabInstance:
     - target: {fileID: 2897645482437094442, guid: c876aeb83812c674698728586e90f314,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2897645482437094442, guid: c876aeb83812c674698728586e90f314,
         type: 3}
@@ -2414,6 +2414,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key2.r
       value: 0.23529413
+      objectReference: {fileID: 0}
+    - target: {fileID: 3351292325877465478, guid: c876aeb83812c674698728586e90f314,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3735336275023714322, guid: c876aeb83812c674698728586e90f314,
         type: 3}

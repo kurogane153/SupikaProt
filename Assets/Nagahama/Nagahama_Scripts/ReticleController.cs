@@ -51,6 +51,13 @@ public class ReticleController : MonoBehaviour
     [SerializeField] private float _aimDeadZoneY = 0.2f;
     [SerializeField] private int _generateReticleMax = 3;
 
+    [Header("スティック倒した方向に移動するエイムアシストジャッジレクト"), Space(10)]
+    [SerializeField] private RectTransform _aimAssistJudgeRect;
+    [SerializeField] private float _aimAssistJudgeInputIntensity;
+    [SerializeField] private float _judgeRectSizeScaling;
+    private float judgeRectWidth;
+    private float judgeRectHeight;
+
     [Header("ロックオンボタンを押してロックオンする"), Space(10)]
     [SerializeField] public bool _lockOnTargetOnLockOnButtonDown;
 
@@ -178,6 +185,9 @@ public class ReticleController : MonoBehaviour
             Debug.Log(gameObject.name + "が_mainCameraをFindで取得した");
         }
 
+        judgeRectWidth = _aimAssistJudgeRect.rect.x;
+        judgeRectHeight = _aimAssistJudgeRect.rect.y;
+
         OptionDataManagerScript.Instance.optionValueChanges.AddListener(ChangeReticleControllerValues);
         ChangeReticleControllerValues();
 
@@ -254,13 +264,24 @@ public class ReticleController : MonoBehaviour
             y = 0;
         }
 
+        MoveAimAssistJudgeRect(x, y);
+
         if ((0 < canNotReticleMoveTime &&_targetLockonmoveFlags && target && Mathf.Abs(x) < _aimDeadZoneX && Mathf.Abs(y) < _aimDeadZoneY) || isFinalLockOn) {
             TargetLockOnMove(target);
         }
         
         Vector3 newvec = Vector3.zero;
+        bool isAimAssistTargetInJudgeRect = false;
 
-        if (_useSoftAimAssistFlags && aimassisttarget && (Mathf.Abs(x) > _aimDeadZoneX || Mathf.Abs(y) > _aimDeadZoneY)) {
+        if (aimassisttarget) {
+            Vector3 tarcolviewportpos = _mainCamera.WorldToViewportPoint(aimassisttarget.position);
+            Rect rect = GetAimAssistJudgeRectRect();
+            isAimAssistTargetInJudgeRect = rect.Contains(tarcolviewportpos);
+        }
+
+        Debug.Log(isAimAssistTargetInJudgeRect);
+       
+        if (_useSoftAimAssistFlags && isAimAssistTargetInJudgeRect && aimassisttarget && (Mathf.Abs(x) > _aimDeadZoneX || Mathf.Abs(y) > _aimDeadZoneY)) {
             newvec = _mainCamera.WorldToScreenPoint(aimassisttarget.position) - rectTransform.position;
             newvec.z = 0;
             newvec = newvec.normalized;
@@ -271,7 +292,7 @@ public class ReticleController : MonoBehaviour
         float newY = y * _speedY;
         bool isNowTargeting = false;
 
-        if (_useSoftAimAssistFlags && aimassisttarget) {
+        if (_useSoftAimAssistFlags && isAimAssistTargetInJudgeRect && aimassisttarget) {
             newX /= _aimAssistDegreeX;
             newY /= _aimAssistDegreeY;
         }
@@ -373,6 +394,26 @@ public class ReticleController : MonoBehaviour
 
         Vector2 size = Vector2.Scale(rectsize / screensize, rectTransform.localScale);
         Rect rect = new Rect((Vector2)(rectTransform.position / screensize) - (size * 0.5f), size * _reticleRectSizeScaling);
+
+        return rect;
+    }
+
+    private void MoveAimAssistJudgeRect(float horizontal, float vertical)
+    {
+        float newX = judgeRectWidth * -horizontal * _aimAssistJudgeInputIntensity;
+        float newY = judgeRectHeight * -vertical * _aimAssistJudgeInputIntensity;
+        Vector3 newPos = new Vector3(newX, newY);
+
+        _aimAssistJudgeRect.position = transform.position + newPos;
+    }
+
+    private Rect GetAimAssistJudgeRectRect()
+    {
+        Vector2 rectsize = _aimAssistJudgeRect.rect.size;
+        Vector2 screensize = new Vector2(Screen.width, Screen.height);
+
+        Vector2 size = Vector2.Scale(rectsize / screensize, _aimAssistJudgeRect.localScale);
+        Rect rect = new Rect((Vector2)(_aimAssistJudgeRect.position / screensize) - (size * 0.5f), size * _judgeRectSizeScaling);
 
         return rect;
     }
