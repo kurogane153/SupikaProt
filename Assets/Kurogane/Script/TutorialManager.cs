@@ -12,6 +12,18 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     public TextWindowManager _textmanager;
 
+    [Header("Set SpawnPoint")]
+    [SerializeField]
+    public GameObject[] _asteroidspawner;
+
+    [Header("Set AlatObject")]
+    [SerializeField]
+    public GameObject ArertText = null; // Textオブジェクト
+
+    [Header("Set AlatObject")]
+    [SerializeField]
+    public GameObject _arertobj = null; // Textオブジェクト
+
     [Header("テキストの表示秒数（ウェーブ事の遅延秒数）")]
     public int drawingTime = 3;
 
@@ -24,9 +36,22 @@ public class TutorialManager : MonoBehaviour
 
     [Header("ウェーブ事の隕石の個数")]
     [SerializeField]
-    private int[] _waveAsteroidcount = new int[3] { 3, 5, 6};
+    private int[] _waveAsteroidcount = new int[2] { 3, 5,};
+
+    [Header("ウェーブ事のスポーン一個当たりの隕石の個数")]
+    [SerializeField]
+    private int[] _waveAsteroidspaencount = new int[2] { 1, 3, };
+
+    [Header("ウェーブ２でどのスポーンを生成させなくするか(TutorialManager上で設定されてる番号)")]
+    [SerializeField]
+    private int[] _asteroidspaenpoint = new int[2] { 4, 5, };
 
     public GameClearOver_Process _gameCOProcess;
+    public AlertFlush _alertflush;
+
+    private Text ArertMessage;
+    Image img;
+    Animator anim;
 
     //一つのスポーンに対してのスポーン数
     private int _asteroidwavecount;
@@ -45,7 +70,9 @@ public class TutorialManager : MonoBehaviour
     public GameObject _textwindow;
     private bool _fastorbitshifttextflg = false;
 
-    private bool _textflg = false;
+    private bool _textlastflg = false;
+    private bool _textfastflg = false;
+    private bool _textsecondflg = false;
 
     //デバッグ用
     public GameObject _waveText = null; // Textオブジェクト
@@ -62,9 +89,15 @@ public class TutorialManager : MonoBehaviour
 
     void Start()
     {
+        img = _arertobj.GetComponent<Image>();
+        anim = _arertobj.GetComponent<Animator>();
+        img.color = Color.clear;
+        anim.SetBool("AretKey", false);
+        ArertMessage = ArertText.GetComponentInChildren<Text>();
+        _waveText.SetActive(false);
         _asteroidinstansflg = true;
         _wave = _wavecount.FAST;
-        _asteroidwavecount = 1;
+        _asteroidwavecount = _waveAsteroidspaencount[(int)_wavecount.FAST - 1];
         _waveAsteroid = _waveAsteroidcount[0];
         FastText(12);
     }
@@ -87,7 +120,10 @@ public class TutorialManager : MonoBehaviour
                 {
                     _wave = _wavecount.SECOND;
                     _textmanager.TextWindowOn(14);
+                    _asteroidspawner[_asteroidspaenpoint[0]].SetActive(false);
+                    _asteroidspawner[_asteroidspaenpoint[1]].SetActive(false);
                     _waveAsteroid = _waveAsteroidcount[(int)_wavecount.FAST];
+                    _asteroidwavecount = _waveAsteroidspaencount[(int)_wavecount.SECOND - 1];
                     Invoke("DelayChangeWave", drawingTime);
                 }
 
@@ -95,23 +131,35 @@ public class TutorialManager : MonoBehaviour
             case _wavecount.SECOND:
                 if (_waveAsteroidInstansCount >= _waveAsteroid) _asteroidinstansflg = true;
 
-                if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
+                if (_gameCOProcess.GetGameClearCount() >= 1)
                 {
-                    _wave = _wavecount.THIRD;
-                    _textmanager.TextWindowOn(16);
-                    _waveAsteroid = _waveAsteroidcount[(int)_wavecount.SECOND];
-                    Invoke("DelayChangeWave", drawingTime);
+                    if (!_textfastflg)
+                    {
+                        if (!_textwindow.activeSelf)
+                        {
+                            _textmanager.TextWindowOn(15);
+                            Invoke("TextClose", drawingTime);
+                            _textfastflg = true;
+                        }
+                    }
                 }
 
-                break;
-
-            case _wavecount.THIRD:
-                if (_waveAsteroidInstansCount >= _waveAsteroid) _asteroidinstansflg = true;
+                if (_gameCOProcess.GetGameClearCount() >= 4)
+                {
+                    if (!_textsecondflg)
+                    {
+                        if (!_textwindow.activeSelf)
+                        {
+                            _textmanager.TextWindowOn(16);
+                            Invoke("TextClose", drawingTime);
+                            _textsecondflg = true;
+                        }
+                    }
+                }
 
                 if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
                 {
-
-                    if (!_textflg)
+                    if (!_textlastflg)
                     {
                         lastText();
                     }
@@ -119,6 +167,21 @@ public class TutorialManager : MonoBehaviour
                 }
 
                 break;
+
+            //case _wavecount.THIRD:
+            //    if (_waveAsteroidInstansCount >= _waveAsteroid) _asteroidinstansflg = true;
+
+            //    if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid)
+            //    {
+
+            //        if (!_textflg)
+            //        {
+            //            lastText();
+            //        }
+            //        _asteroidinstansflg = true;
+            //    }
+
+            //    break;
         }
     }
 
@@ -167,14 +230,25 @@ public class TutorialManager : MonoBehaviour
 
     void lastText()
     {
-        _textflg = true;
+        _textlastflg = true;
         _textmanager.TextWindowOn(17);
         _letterbox.GetComponent<Animator>().SetBool("LetterKey", true);
-        Invoke("LastSecondText", drawingTime);
+        Invoke("Alet", drawingTime);
+    }
+
+    void Alet()
+    {
+        TextClose();
+        ArertText.SetActive(true);
+        ArertMessage.text = "緊急事態";
+        anim.SetBool("AretKey", true);
+        Invoke("LastSecondText", 3);
     }
 
     void LastSecondText()
     {
+        anim.SetBool("AretKey", false);
+        ArertText.SetActive(false);
         _textmanager.TextWindowOn(18);
         Invoke("LastThirdText", drawingTime);
     }
@@ -224,6 +298,10 @@ public class TutorialManager : MonoBehaviour
     #region デバッグ
     void Dbg()
     {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            _waveText.SetActive(true);
+        }
         _waveText.GetComponent<Text>().text = "ウエーブ：" + (int)_wave + "\n"
             + "ウエーブの隕石：" + _waveAsteroid + "\n" + "隕石破壊数：" + _gameCOProcess.GetGameClearCount() + "\n"
             + "生成した隕石の数：" + _waveAsteroidInstansCount + "\n" + "隕石生成のフラグ：" + _asteroidinstansflg +
@@ -235,18 +313,21 @@ public class TutorialManager : MonoBehaviour
             _asteroidwavecount = 2;
             _waveAsteroid = _waveAsteroidcount[0];
         }
+
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             _asteroidwavecount++;
             _wave = _wavecount.SECOND;
             _waveAsteroid = _waveAsteroidcount[1];
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            _asteroidwavecount++;
-            _wave = _wavecount.THIRD;
-            _waveAsteroid = _waveAsteroidcount[2];
-        }
+
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //{
+        //    _asteroidwavecount++;
+        //    _wave = _wavecount.THIRD;
+        //    _waveAsteroid = _waveAsteroidcount[2];
+        //}
+
         //Debug.Log("ウエーブ：" + _wave);
         //Debug.Log("ウエーブの隕石：" + _waveAsteroid);
         //Debug.Log("隕石破壊数：" + _gameCOProcess.GetGameClearCount());

@@ -242,6 +242,16 @@ public class TutorialEnemyGenerator : MonoBehaviour
         return Random.Range(minTime, maxTime);
     }
 
+    public void SetAsteroidSpownTimeMin(float tim)
+    {
+        minTime = tim;
+    }
+
+    public void SetAsteroidSpownTimeMax(float tim)
+    {
+        maxTime = tim;
+    }
+
     //ランダムな位置を生成する関数
     private Vector3 GetRandomPosition()
     {
