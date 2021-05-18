@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class QuitProcessScript : MonoBehaviour
 {
-    
+    public void GoToTitle()
+    {
+        Time.timeScale = 1f;
+        FadeManager.Instance.LoadScene(0, 3f);
+        Debug.Log("ふぇーど");
+    }
 
     public void Quit()
     {
