@@ -93,6 +93,8 @@ public class TutorialManager : MonoBehaviour
         anim = _arertobj.GetComponent<Animator>();
         img.color = Color.clear;
         anim.SetBool("AretKey", false);
+        _waveAsteroidInstansCount = 0;
+        _gameCOProcess.SetGameClearCount(0);
         ArertMessage = ArertText.GetComponentInChildren<Text>();
         _waveText.SetActive(false);
         _asteroidinstansflg = true;
