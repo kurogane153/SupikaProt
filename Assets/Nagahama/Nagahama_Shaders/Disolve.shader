@@ -2,6 +2,8 @@
     Properties{
         _Color("Main Color", Color) = (.5,.5,.5,1)
         _MainTex("Base (RGB)", 2D) = "white" {}
+        _EmissionMap("Emission Map", 2D) = "black" {}
+        [HDR] _EmissionColor("Emission Color", Color) = (0,0,0)
         _DissolveTex("Desolve (RGB)", 2D) = "white" {}
         _CutOff("Cut off", Range(0.0, 1.0)) = 0.0
         _Width("Width", Float) = 0.01
@@ -28,6 +30,9 @@
                 float4 _Color;
                 float _CutOff;
                 float _Width;
+
+                uniform sampler2D _EmissionMap;
+                float4 _EmissionColor;
 
                 struct appdata {
                     float4 vertex : POSITION;
@@ -59,7 +64,7 @@
                         discard;
                     }
 
-                    return col;
+                    return col + tex2D(_EmissionMap, i.texcoord) * _EmissionColor;
                 }
                 ENDCG
             }

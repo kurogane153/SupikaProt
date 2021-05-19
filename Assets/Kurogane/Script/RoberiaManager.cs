@@ -49,6 +49,8 @@ public class RoberiaManager : MonoBehaviour
     [Header("Set EarthRendering Prefab")]
     public GameObject _earthrendering;
 
+    [SerializeField, Header("ロベリアのエフェクト")] private ParticleSystem[] _lastBossParticles;
+
     [Header("ロベリアの速さ")]
     //隕石の速さ
     public float _spawnedAsteroidSpeed = 20f;
@@ -161,6 +163,12 @@ public class RoberiaManager : MonoBehaviour
                 _hpbar.SetActive(false);
                 _speedbar.SetActive(false);
                 Invoke("DelayChangeTextWindow", drawingTime);
+                // ロベリアのエフェクトをストップ
+                foreach (var par in _lastBossParticles) {
+                    var main = par.main;
+                    main.loop = false;
+                    par.Stop();
+                }
             }
             
         }
@@ -175,6 +183,12 @@ public class RoberiaManager : MonoBehaviour
                 Invoke("TextClose", drawingTime);
             }
 
+            // ロベリアのエフェクトをストップ
+            foreach (var par in _lastBossParticles) {
+                var main = par.main;
+                main.loop = false;
+                par.Stop();
+            }
         }
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PushStart : MonoBehaviour
 {
@@ -13,6 +14,20 @@ public class PushStart : MonoBehaviour
     [SerializeField] private SoundPlayer _soundPlayer;
     [SerializeField] private AudioClip _se_GameStart;
     [SerializeField] private EventSystem _eventSystem;
+    [SerializeField] private PostProcessVolume _postProcessVolume;
+
+    private PostProcessProfile postProcessProfile;
+
+    private void Start()
+    {
+        postProcessProfile = _postProcessVolume.sharedProfile;
+
+        ColorGrading colorGrading = postProcessProfile.GetSetting<ColorGrading>();
+        Color white = new Color(1, 1, 1);
+        colorGrading.enabled.Override(true);
+        colorGrading.colorFilter.overrideState = true;
+        colorGrading.colorFilter.Override(white);
+    }
 
     public void StartGame()
     {

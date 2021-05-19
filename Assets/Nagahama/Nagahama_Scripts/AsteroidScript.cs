@@ -17,6 +17,7 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField] private ParticleSystem[] _childParticles;  // 子要素にしてある軌跡などのパーティクル
 
     [Space(10)]
+    [SerializeField] private bool _isLastBoss;
     [SerializeField] private float _destroyTime = 10f;      // 自動消滅までの時間
     [SerializeField] private int _hp = 6;
     [SerializeField] private float _speed = 5f;
@@ -72,7 +73,12 @@ public class AsteroidScript : MonoBehaviour
 
         if (_hp <= 0) {
             if(0 < _explosionEffectDelaySec) {
-                StartCoroutine(nameof(DelaySelfDestroy));
+                if (_isLastBoss) {
+                    StartCoroutine(nameof(LastBossDelaySelfDestroy));
+                } else {
+                    StartCoroutine(nameof(NormalDelaySelfDestroy));
+                }
+                
             } else {
                 _explosionEffect.Play();
                 _explosionEffect.transform.parent = null;
@@ -162,7 +168,7 @@ public class AsteroidScript : MonoBehaviour
         }
     }
 
-    private IEnumerator DelaySelfDestroy()
+    private IEnumerator LastBossDelaySelfDestroy()
     {
         _soundPlayer.gameObject.transform.parent = null;
 
@@ -189,6 +195,18 @@ public class AsteroidScript : MonoBehaviour
 
         SelfDestroy();        
         
+    }
+
+    private IEnumerator NormalDelaySelfDestroy()
+    {
+        yield return new WaitForSeconds(_explosionEffectDelaySec);
+        _explosionEffect.Play();
+        _explosionEffect.transform.parent = null;
+
+        _soundPlayer.gameObject.transform.parent = null;
+        _soundPlayer.PlaySE(_se_Explosion);
+
+        SelfDestroy();
     }
 
 }

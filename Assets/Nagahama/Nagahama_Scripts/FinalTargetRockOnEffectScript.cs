@@ -17,7 +17,9 @@ public class FinalTargetRockOnEffectScript : MonoBehaviour
     [SerializeField, Space(5)] private ParticleSystem _lineParticle;
     [SerializeField, Space(5)] private PlayerMove _playerMove;
     [SerializeField, Space(5)] private PlayerShot _playerShot;
+    [SerializeField, Space(5)] private GameObject _fireButtonGuide;
     [SerializeField, Space(5)] private GameObject[] _disableUIs;
+    
 
     [Space(10)]
     [SerializeField] private float _rotateTime = 1f;
@@ -67,6 +69,7 @@ public class FinalTargetRockOnEffectScript : MonoBehaviour
 
         _playerMove.enabled = false;
         _playerShot._isStickControllFlag = false;
+        _playerShot._isMissileFireControllFlag = false;
 
         isCanRotation = true;
 
@@ -96,6 +99,11 @@ public class FinalTargetRockOnEffectScript : MonoBehaviour
             _soundPlanyer.ChangePitchLevel(_lockOnSEPitchs[i++]);
             _soundPlanyer.PlaySE(_se_lockOn);
         }
+
+        _fireButtonGuide.SetActive(true);
+        _fireButtonGuide.transform.localPosition = new Vector3(199f, -177, 0);
+        _fireButtonGuide.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+        _playerShot._isMissileFireControllFlag = true;
     }
 
     private IEnumerator PostProcessColorFilterChange()

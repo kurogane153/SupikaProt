@@ -100,13 +100,7 @@ public class EndingPlayerScript : MonoBehaviour
         }
 
         if(_roopTimes == 0) {
-            yield return new WaitForSeconds(_moveStartWaitTime);
-            moveflg = true;
-            yield return new WaitForSeconds(2.5f);
-            logo.SetActive(true);
-
-            yield return new WaitForSeconds(5f);
-            SceneManager.LoadScene("Result");
+            
         }
        
 
@@ -121,6 +115,13 @@ public class EndingPlayerScript : MonoBehaviour
             StartCoroutine(nameof(MultiTargetMissileInstantiate));
         }
 
+        yield return new WaitForSeconds(_moveStartWaitTime);
+        moveflg = true;
+        yield return new WaitForSeconds(2.5f);
+        logo.SetActive(true);
+
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene("Result");
     }
 
     /// <summary>

@@ -20,21 +20,6 @@ public class CursorLockManager : MonoBehaviour
             }
         }
 
-        // 強制終了
-        if (Input.GetButtonDown("RStickButton")) {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-            UnityEngine.Application.Quit();
-#endif
-        }
-
-        // シーンリロード
-        if (Input.GetButtonDown("LStickButton")) {
-            Scene loadScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(loadScene.name);
-        }
-
     }
 
     // カーソルをロックし非表示にする

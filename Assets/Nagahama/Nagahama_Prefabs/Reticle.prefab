@@ -180,7 +180,7 @@ MonoBehaviour:
   - 1
   - 1.03
   - 1.06
-  - 1.09
+  - 1.11
   _lockedOnReticlePrefab: {fileID: 2127001005440325914, guid: 293ec4f45d4f025478756b7099bb749e,
     type: 3}
   _firstSelectButton: {fileID: 7015361749751168582}
@@ -192,13 +192,13 @@ MonoBehaviour:
   _aimAssistDegreeX: 3
   _aimAssistDegreeY: 3
   _aimSpeedDecreaseTime: 0.28
-  _aimAssistIntensity: 20
+  _aimAssistIntensity: 30
   _aimDeadZoneX: 0.1
   _aimDeadZoneY: 0.1
   _generateReticleMax: 5
   _aimAssistJudgeRect: {fileID: 382610432161563547}
-  _aimAssistJudgeInputIntensity: 0.75
-  _judgeRectSizeScaling: 1.08
+  _aimAssistJudgeInputIntensity: 0.7
+  _judgeRectSizeScaling: 1
   _lockOnTargetOnLockOnButtonDown: 0
   _targetLockonmoveFlags: 1
   _userSuperAimAssistSystemFlags: 0

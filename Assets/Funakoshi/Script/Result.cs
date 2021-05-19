@@ -52,10 +52,10 @@ public class Result : MonoBehaviour
 
         ColorGrading colorGrading = postProcessProfile.GetSetting<ColorGrading>();
 
-        Color startColor = colorGrading.colorFilter.value;
+        Color white = new Color(1, 1, 1);
         colorGrading.enabled.Override(true);
         colorGrading.colorFilter.overrideState = true;
-        colorGrading.colorFilter.Override(startColor);
+        colorGrading.colorFilter.Override(white);
 
         //GameClearOverManager.isclear = true;
     }
