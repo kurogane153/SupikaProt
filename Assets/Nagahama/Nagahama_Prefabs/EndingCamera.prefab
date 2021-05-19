@@ -104,8 +104,8 @@ MonoBehaviour:
   _shader: {fileID: 4800000, guid: c09ef855bec33c6439a0ee830bfcff70, type: 3}
   _sampleCount: 6
   _strength: 0
-  _maxStrength: 0.25
-  _arrivalTimeOfMaxStrength: 5
+  _maxStrength: 0.4
+  _arrivalTimeOfMaxStrength: 2
   _arrivalTimeOfStrengthToZero: 2
   _magnitude: 2
 --- !u!114 &8447290170898197864
@@ -194,9 +194,9 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 87.92
-  m_SpotAngle: 105.3
-  m_InnerSpotAngle: 21.80208
+  m_Range: 90
+  m_SpotAngle: 105
+  m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -227,12 +227,12 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 5377
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -259,6 +259,8 @@ MonoBehaviour:
   target: {fileID: 0}
   explosionViwePos: {fileID: 0}
   speed: 11
+  lastBossDisolve: {fileID: 0}
+  _looptimes: 4
 --- !u!1001 &2890628573562583930
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &750903327459708617
 Transform:
@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Spika: {fileID: 0}
   Earth: {fileID: 0}
+  Cursor: {fileID: 0}
+  Player: {fileID: 0}
   Spikaflg: 0
   drawingTime: 3
   ArertText: {fileID: 0}

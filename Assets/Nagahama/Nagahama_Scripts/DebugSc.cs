@@ -1,16 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DebugSc : MonoBehaviour
 {
     [SerializeField] private bool isUIEnabled = true;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -18,9 +11,7 @@ public class DebugSc : MonoBehaviour
         // Rトリガー押しながらビューボタンでデバッグカメラ起動
         if ((Input.GetAxis("L_R_Trigger") >= 0.5f && Input.GetButtonDown("DebugPause")) || Input.GetButtonDown("DebugCamera")) {
             DebugCamera.Instance.IsEnable = !DebugCamera.Instance.IsEnable;
-        }
-
-        
+        }        
 
         // Lトリガー押しながらビューボタンで操作説明非表示切り替え
         if ((Input.GetAxis("L_R_Trigger") <= -0.5f && Input.GetButtonDown("Reload")) || Input.GetKeyDown(KeyCode.U)) {

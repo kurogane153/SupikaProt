@@ -44,11 +44,6 @@ public class OptionDataManagerScript : MonoBehaviour
         Load();
     }
 
-    void Start()
-    {
-        
-    }
-
     public void Save()
     {
         optionValueChanges.Invoke();

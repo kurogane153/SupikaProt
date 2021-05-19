@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5054093584554773712
+--- !u!1 &175627143052189693
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5054093584554773740}
-  - component: {fileID: 5054093584554773741}
-  - component: {fileID: 5054093584554773742}
-  - component: {fileID: 5054093584554773743}
-  - component: {fileID: 2234039889239350155}
-  - component: {fileID: 8197529552988735207}
-  m_Layer: 8
-  m_Name: KillCamera
-  m_TagString: SubCamera
+  - component: {fileID: 175627143052189692}
+  - component: {fileID: 175627143052189689}
+  - component: {fileID: 175627143052189694}
+  - component: {fileID: 6865927898981873140}
+  - component: {fileID: 6286612346650446539}
+  - component: {fileID: 9117006064089671171}
+  - component: {fileID: 2010288063908149361}
+  m_Layer: 0
+  m_Name: LastBossAppearEventCamera
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5054093584554773740
+--- !u!4 &175627143052189692
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5054093584554773712}
-  m_LocalRotation: {x: -0.26608407, y: 0.12020831, z: 0.033463266, w: 0.9558397}
-  m_LocalPosition: {x: -327.77817, y: -23.423264, z: 208.50845}
+  m_GameObject: {fileID: 175627143052189693}
+  m_LocalRotation: {x: 0.024617065, y: 0.9702075, z: -0.111972116, w: 0.21343309}
+  m_LocalPosition: {x: -2221.3445, y: 1391.912, z: 4866.8022}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -31.112001, y: 14.336, z: 0}
---- !u!20 &5054093584554773741
+  m_LocalEulerAnglesHint: {x: 11, y: -183.2, z: -1}
+--- !u!20 &175627143052189689
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5054093584554773712}
-  m_Enabled: 0
+  m_GameObject: {fileID: 175627143052189693}
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
@@ -63,10 +64,10 @@ Camera:
   field of view: 70
   orthographic: 0
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 48949
+    m_Bits: 32567
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -78,54 +79,21 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5054093584554773742
+--- !u!81 &175627143052189694
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5054093584554773712}
+  m_GameObject: {fileID: 175627143052189693}
   m_Enabled: 1
---- !u!114 &5054093584554773743
+--- !u!114 &6865927898981873140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5054093584554773712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8455e19d47960647be45d91ee1dc611, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cameraType: 0
-  _followTarget: {fileID: 0}
-  _positionOffset: {x: -5, y: 30, z: 5}
-  _rotationOffset: {x: 9.19, y: 20, z: 3.29}
-  _missileFollowOffset: {x: 0, y: 5, z: -10}
-  _playerNearPosOffset: {x: 0, y: 0, z: 0}
-  _missileFollowXRotate: 15
-  _cameraPanSpeed: 60
-  _warpTimeofMovetoPlayerNearPos: 0.5
-  _followModeSwitchDelay: 1.7
-  _killCamResetDelay: 1
-  _conflictEventCamResetDelay: 2
-  _normalMoveLerpFactor: 6
-  _followMissileLerpFactor: 0.319
-  _showExplosionModeSwitchDelay: 1
-  _showExplosionZoomOutLerpFactor: 0.17
-  _playerMove: {fileID: 0}
-  _playerShot: {fileID: 0}
-  _mainCamera: {fileID: 0}
-  _conflictTooltip: {fileID: 0}
-  _orbitShiftTooltip: {fileID: 0}
---- !u!114 &2234039889239350155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5054093584554773712}
+  m_GameObject: {fileID: 175627143052189693}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
@@ -179,16 +147,53 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
---- !u!114 &8197529552988735207
+--- !u!114 &6286612346650446539
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5054093584554773712}
+  m_GameObject: {fileID: 175627143052189693}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe42b7f859a03674b8f5ac772538b081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _killCameraPause: 0
+--- !u!114 &9117006064089671171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175627143052189693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8654f494e24c445b308534dc4ed401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nextSceneLoadedTime: 15
+  _nextSceneBuildIndex: 3
+--- !u!114 &2010288063908149361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175627143052189693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046e9da64b959984a9ffc9f5f6710b67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _postProcessVolume: {fileID: 0}
+  _filterColor: {r: 0.8962264, g: 0.5538003, b: 0.8438553, a: 1}
+  _filterColorChangeTime: 1.5
+  _nextSceneLoadedTime: 5
+  _nextSceneBuildIndex: 3
+  _viewPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  _nextPosChangeTime:
+  - 5
+  - 4

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3414999311682562003}
   - component: {fileID: 3414999311682562004}
+  - component: {fileID: 2182154643857492756}
   m_Layer: 0
   m_Name: AsteroidWaveManager
   m_TagString: Untagged
@@ -51,4 +52,29 @@ MonoBehaviour:
   _earth: {fileID: 0}
   _spikaflg: 0
   _spawnedAsteroidSpeed: 40
+  drawingTime: 3
+  _waveAsteroidcount: 070000000a0000000f00000019000000
+  _wavetutorialAsteroidcount: 5
+  _textNo: 
+  _textmanager: {fileID: 0}
+  _letterbox: {fileID: 0}
+  _orbitshift: {fileID: 0}
+  _textwindow: {fileID: 0}
   _gameCOProcess: {fileID: 0}
+  _gameCOProcessspika: {fileID: 0}
+  _alertLine: {fileID: 0}
+  _alertLinespika: {fileID: 0}
+  _waveText: {fileID: 0}
+--- !u!114 &2182154643857492756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3414999311682562005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe42b7f859a03674b8f5ac772538b081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _killCameraPause: 0

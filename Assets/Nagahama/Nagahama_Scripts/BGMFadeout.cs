@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class BGMFadeout : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class BGMFadeout : MonoBehaviour
                 fadeDeltaTime = _fadeoutSeconds;
                 isFadeout = false;
             }
-            audioSource.volume = (float)(startVolume - fadeDeltaTime / _fadeoutSeconds);
+            audioSource.volume = (startVolume - fadeDeltaTime / _fadeoutSeconds);
 
             if (!isFadeout) {
                 BGMManagerScript.Instance.StopBGM();
@@ -38,5 +39,38 @@ public class BGMFadeout : MonoBehaviour
         audioSource.volume = startVolume;
         _fadeoutSeconds = interval - 0.017f;
         fadeDeltaTime = 0;
+    }
+
+    public void TmpFadeEffect(float outStartDelay, float outTime, float inStartDelay, float inTime)
+    {
+        StartCoroutine(TmpFadeOutAndFadeIn(outStartDelay, outTime, inStartDelay, inTime));
+    }
+
+    private IEnumerator TmpFadeOutAndFadeIn(float outStartDelay, float outTime, float inStartDelay, float inTime)
+    {
+        yield return new WaitForSeconds(outStartDelay);
+        audioSource.volume = startVolume;
+        _fadeoutSeconds = outTime;
+        fadeDeltaTime = 0;
+
+        while(fadeDeltaTime < _fadeoutSeconds) {
+            fadeDeltaTime += Time.deltaTime;
+            audioSource.volume = (startVolume - fadeDeltaTime / _fadeoutSeconds);
+
+            yield return new WaitForFixedUpdate();
+        }
+        audioSource.Pause();
+
+        yield return new WaitForSeconds(inStartDelay);
+        audioSource.UnPause();
+        _fadeoutSeconds = inTime;
+        fadeDeltaTime = 0;
+
+        while (fadeDeltaTime < _fadeoutSeconds) {
+            fadeDeltaTime += Time.deltaTime;
+            audioSource.volume = (fadeDeltaTime / _fadeoutSeconds * startVolume);
+
+            yield return new WaitForFixedUpdate();
+        }
     }
 }

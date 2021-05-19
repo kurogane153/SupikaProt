@@ -10,6 +10,9 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField] private AudioClip _se_Explosion;
     [SerializeField] private AudioClip _se_ExplosionStart1;
     [SerializeField] private AudioClip _se_ExplosionStart2;
+    [SerializeField] private AudioClip _se_Explosion3;
+    [SerializeField] private AudioClip _se_Explosion4;
+    [SerializeField] private AudioClip _se_Explosion5;
 
     [SerializeField] private ParticleSystem _explosionEffect;   // 隕石消滅時爆発エフェクト
     [SerializeField] private ParticleSystem[] _childParticles;  // 子要素にしてある軌跡などのパーティクル
@@ -192,6 +195,11 @@ public class AsteroidScript : MonoBehaviour
         _explosionEffect.transform.parent = null;
 
         _soundPlayer.PlaySE(_se_Explosion, 3f);
+        _soundPlayer.PlaySE(_se_Explosion5, 3.3f);
+        _soundPlayer.PlaySE(_se_Explosion3, 0.02f);
+        _soundPlayer.PlaySE(_se_Explosion4, 1.7f);
+
+        BGMManagerScript.Instance.gameObject.GetComponent<BGMFadeout>().TmpFadeEffect(1f, 0.6f, 2f, 0.7f);
 
         SelfDestroy();        
         
