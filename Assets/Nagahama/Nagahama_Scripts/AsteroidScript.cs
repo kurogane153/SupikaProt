@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -37,12 +36,6 @@ public class AsteroidScript : MonoBehaviour
         get { return isMovePause; }
         set { isMovePause = value; }
     }
-
-    #region デバッグ用変数
-    [HideInInspector]
-    public int _dgb_hp;
-
-    #endregion
 
     // 速度と接近対象位置を変更
     public void ChangeParam(float speed, Vector3 pos)
@@ -124,11 +117,6 @@ public class AsteroidScript : MonoBehaviour
         Debug.Log(gameObject.name + "の自動消滅まで：" + _destroyTime + "秒");   
     }
 
-    void Update()
-    {
-        Dbg();
-    }
-
     private void FixedUpdate()
     {
         if (isMovePause) return;
@@ -143,8 +131,6 @@ public class AsteroidScript : MonoBehaviour
         }
 
     }
-
-    
 
     // 時間経過で自動消滅させる
     private IEnumerator AutoDestroy()
@@ -205,13 +191,4 @@ public class AsteroidScript : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-    }    
-
-    private void Dbg()
-    {
-        _dgb_hp = _hp;
-    }
 }

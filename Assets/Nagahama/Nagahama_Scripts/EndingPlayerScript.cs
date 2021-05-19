@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,7 +35,7 @@ public class EndingPlayerScript : MonoBehaviour
 
     [SerializeField] private EndingCameraScript _endCam;
 
-    public bool moveflg = false;
+    [HideInInspector] public bool moveflg = false;
     public Quaternion angleAxis;
     public Transform orbitOrigin;
     public GameObject logo;

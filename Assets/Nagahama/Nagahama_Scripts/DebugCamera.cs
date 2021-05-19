@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // 自由に動かせるカメラ
 public class DebugCamera : MonoBehaviour

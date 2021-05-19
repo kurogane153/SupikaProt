@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
@@ -15,9 +14,6 @@ public class RadialBlur : MonoBehaviour
 
     private Material _material;
     private float startTime;
-    private bool shakeFlags;
-    private bool beforeShake;
-    private Vector3 beforeLocalPos;
 
     private void Start()
     {
@@ -27,14 +23,12 @@ public class RadialBlur : MonoBehaviour
     public void EnableRadialBlur()
     {
         enabled = true;
-        shakeFlags = true;
         StopCoroutine(nameof(RadiulBlurEnd));
         StartCoroutine(nameof(RadiulBlurStart));
     }
 
     public void DisableRadialBlur()
     {
-        shakeFlags = false;
         StopCoroutine(nameof(RadiulBlurStart));
         StartCoroutine(nameof(RadiulBlurEnd));
     }
@@ -64,37 +58,6 @@ public class RadialBlur : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         enabled = false;
-    }
-
-    private void CameraShake()
-    {
-        if (!shakeFlags) return;
-
-        if (beforeShake) {
-
-            transform.localPosition = beforeLocalPos;
-
-            beforeShake = false;
-
-        } else {
-             
-            var pos = transform.localPosition;
-            beforeLocalPos = pos;
-
-            var x = pos.x + Random.Range(-1f, 1f) * _magnitude;
-            var y = pos.y + Random.Range(-1f, 1f) * _magnitude;
-
-            transform.localPosition = new Vector3(x, y, pos.z);
-
-            beforeShake = true;
-        }
-
-        
-    }
-
-    private void Update()
-    {
-        //CameraShake();
     }
 
     private void OnRenderImage(RenderTexture source, RenderTexture dest)

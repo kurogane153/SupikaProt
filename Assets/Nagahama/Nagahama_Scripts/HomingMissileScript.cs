@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // 自動追尾ミサイル
@@ -52,11 +51,6 @@ public class HomingMissileScript : MonoBehaviour
         } else {
             NonTargetMove();
         }
-    }
-
-    private void FixedUpdate()
-    {
-        
     }
 
     /// <summary>
@@ -167,7 +161,7 @@ public class HomingMissileScript : MonoBehaviour
     {
         if (other.CompareTag("Asteroid") && other.transform == targetTransform.root) {
             impactTime = 0f;
-            Debug.Log("しょうとつ！！！");
+            Debug.Log("隕石に衝突した。OnTrigger");
         }
     }
 

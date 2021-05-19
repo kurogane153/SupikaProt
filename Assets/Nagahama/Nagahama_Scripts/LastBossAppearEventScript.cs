@@ -1,9 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.PostProcessing;
-
 
 public class LastBossAppearEventScript : MonoBehaviour
 {
@@ -21,9 +19,7 @@ public class LastBossAppearEventScript : MonoBehaviour
     {
         StartCoroutine(nameof(CameraPosChangeing));
         StartCoroutine(nameof(PostProcessColorFilterChange));
-    }
-
-    
+    }    
 
     private IEnumerator CameraPosChangeing()
     {
@@ -40,6 +36,7 @@ public class LastBossAppearEventScript : MonoBehaviour
 
     }
 
+    // ポストプロセスのカラーフィルターの色を徐々に変更する
     private IEnumerator PostProcessColorFilterChange()
     {
         float time = 0;
@@ -53,7 +50,6 @@ public class LastBossAppearEventScript : MonoBehaviour
         colorGrading.colorFilter.overrideState = true;
         colorGrading.colorFilter.Override(startColor);
 
-
         while (time < _filterColorChangeTime) {
             time += Time.deltaTime;
             float rate = time / _filterColorChangeTime;
@@ -65,8 +61,5 @@ public class LastBossAppearEventScript : MonoBehaviour
 
         
     }
-
-    
-
 
 }

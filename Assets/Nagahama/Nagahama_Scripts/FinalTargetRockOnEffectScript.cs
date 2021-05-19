@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -37,11 +36,6 @@ public class FinalTargetRockOnEffectScript : MonoBehaviour
 
         colorGrading = postProcessProfile.GetSetting<ColorGrading>();
         mainCamera = _cameraController.transform;
-    }
-
-    void Update()
-    {
-        
     }
 
     private void LateUpdate()
@@ -124,8 +118,6 @@ public class FinalTargetRockOnEffectScript : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-
     }
 
-    
 }

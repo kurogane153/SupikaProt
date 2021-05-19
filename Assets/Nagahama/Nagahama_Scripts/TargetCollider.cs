@@ -1,5 +1,4 @@
-﻿    using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class TargetCollider : MonoBehaviour
@@ -128,12 +127,6 @@ public class TargetCollider : MonoBehaviour
             buttonObj.GetComponent<AsteroidSelectButton>().DisableLockOnMark();
         }
 
-        Rect rect = GetReticleRect();
-        Debug.Log("<color=yellow>ReticleRect.X : " + rect.x + "</color>");
-        Debug.Log("<color=yellow>ReticleRect.Y : " + rect.y + "</color>");
-        Debug.Log("<color=yellow>ReticleRect.Width : " + rect.width + "</color>");
-        Debug.Log("<color=yellow>ReticleRect.Height : " + rect.height + "</color>");
-
         Debug.Log(gameObject.name + "が" + nameof(RectInAsteroidContainer) + "のListに追加された！" + mainCamera.WorldToViewportPoint(transform.position));
     }
 
@@ -171,8 +164,4 @@ public class TargetCollider : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-       //RectInAsteroidContainer.Instance.targetColliders.Remove(this);
-    }
 }

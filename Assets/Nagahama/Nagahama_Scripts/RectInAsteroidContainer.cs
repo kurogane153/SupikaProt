@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class RectInAsteroidContainer : MonoBehaviour
@@ -27,25 +25,4 @@ public class RectInAsteroidContainer : MonoBehaviour
 
     public List<TargetCollider> targetColliders = new List<TargetCollider>(); // 当たり判定対象の隕石たち
 
-    private void Update()
-    {
-        // list内の隕石をすべて出力する
-        if (Input.GetKeyDown(KeyCode.L)) {
-            ShowListContentsInTheDebugLog(targetColliders);
-        }
-    }
-
-    public void ShowListContentsInTheDebugLog<T>(List<T> list)
-    {
-        string log = "";
-
-        foreach (var content in list.Select((val, idx) => new { val, idx })) {
-            if (content.idx == list.Count - 1)
-                log += content.val.ToString();
-            else
-                log += content.val.ToString() + ", ";
-        }
-
-        Debug.Log("<color=red>" + log + "</color>");
-    }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -63,7 +62,6 @@ public class PlayerShot : MonoBehaviour
     [Header("発射設定全般"), Space(10)]
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private FinalTargetRockOnEffectScript _finalRockOnEffectSc;
-    [SerializeField] private bool _onDrawGizmosFlags;
     [SerializeField] private ReticleController _reticle;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Transform _launchPoint;
@@ -93,12 +91,6 @@ public class PlayerShot : MonoBehaviour
     private float missileShotTimeRemain;
     private bool isFirstShot;
     private int lastMissileSettingsArrayNum;
-
-    #region デバッグ用変数
-    [Watch, HideInInspector] public string _dbg_targetAsteroid = "None";
-    [Watch, HideInInspector] public string _dbg_tmptarget = "None";
-
-    #endregion
 
     private void Awake()
     {
@@ -137,12 +129,6 @@ public class PlayerShot : MonoBehaviour
             _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
             Debug.Log(gameObject.name + "が_mainCameraをFindで取得した");
         }
-
-        if (!_reloadFlags) {
-            //_reticle._missileGuage.gameObject.SetActive(false);
-        }
-
-        _onDrawGizmosFlags = true;
 
     }
 
@@ -183,21 +169,7 @@ public class PlayerShot : MonoBehaviour
                 confirmTarget = targetAsteroidCollider;
                 MultiTargetFire(arynum);
             }
-        }
-
-        // リロード用　あとで消すこと リロードシステムのオンオフをゲーム中に変更できる
-        /*
-        if (Input.GetAxis("D_Pad_V") > 0.5f) {
-            _reloadFlags = true;
-            _reticle._missileGuage.gameObject.SetActive(true);
-            reloadTimeRemain = 0f;
-            missileNum = 6;
-        } else if (Input.GetAxis("D_Pad_V") < -0.5f) {
-            _reloadFlags = false;
-            _reticle._missileGuage.gameObject.SetActive(false);
-            reloadTimeRemain = 0f;
-            missileNum = 6;
-        } */
+        }       
 
     }
 
@@ -209,8 +181,6 @@ public class PlayerShot : MonoBehaviour
             GetTargetAsteroid_InRectVersion();
         }
         
-        Dbg();
-
         if (ReticleController.Instance._userSuperAimAssistSystemFlags) {
             // 強力エイムアシスト機能がオンのとき
 
@@ -455,19 +425,4 @@ public class PlayerShot : MonoBehaviour
         }        
     }
 
-    private void Dbg()
-    {
-        if (targetAsteroidCollider) {
-            _dbg_targetAsteroid = targetAsteroidCollider.root.name;
-        } else {
-            _dbg_targetAsteroid = "Null";
-        }
-
-        if (tmpTarget) {
-            _dbg_tmptarget = tmpTarget.root.name;
-        } else {
-            _dbg_tmptarget = "Null";
-        }
-
-    }
 }

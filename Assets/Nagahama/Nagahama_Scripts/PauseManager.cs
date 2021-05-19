@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
@@ -27,7 +25,7 @@ public class PauseManager : MonoBehaviour
     void Update()
     {
         // Menuボタンでポーズ
-        if ((!Pauser.isCanNotPausing && Input.GetButtonDown("Pause")) || Input.GetButtonDown("DebugPause_TAB")) {
+        if (!Pauser.isCanNotPausing && Input.GetButtonDown("Pause")) {
             if (Pauser.isPaused) {
                 Resume();
             } else {

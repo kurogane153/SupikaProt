@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LockedOnReticle : MonoBehaviour
 {
@@ -24,7 +22,6 @@ public class LockedOnReticle : MonoBehaviour
 
     void Start()
     {
-        //canvas = GetComponentInParent<Canvas>();
         canvasRectTransform = canvas.GetComponent<RectTransform>();
         rectTransform = GetComponent<RectTransform>();
     }

@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class SoundPlayer : MonoBehaviour
 {
@@ -18,6 +17,7 @@ public class SoundPlayer : MonoBehaviour
 
     void Start()
     {
+        // オプションで音量変更したとき、このAudioSourceの音量をオプションの変更に対応させる
         OptionDataManagerScript.Instance.optionValueChanges.AddListener(ChangeSEVolume);
         ChangeSEVolume();
     }

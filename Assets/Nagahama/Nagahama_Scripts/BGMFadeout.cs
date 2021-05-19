@@ -46,6 +46,7 @@ public class BGMFadeout : MonoBehaviour
         StartCoroutine(TmpFadeOutAndFadeIn(outStartDelay, outTime, inStartDelay, inTime));
     }
 
+    // ラスボス撃破演出で音を一瞬フェードアウトさせて、すぐにフェードインする用
     private IEnumerator TmpFadeOutAndFadeIn(float outStartDelay, float outTime, float inStartDelay, float inTime)
     {
         yield return new WaitForSeconds(outStartDelay);

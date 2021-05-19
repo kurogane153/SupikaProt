@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // プレイヤー移動処理
@@ -80,13 +79,6 @@ public class PlayerMove : MonoBehaviour
         get { return periodNum; }
     }
 
-    #region デバッグ用変数
-    [Watch, HideInInspector] public float _dbg_playerNowAngle;
-    [Watch, HideInInspector] public bool _dbg_isAcceptedOrbitChange;
-    [Watch, HideInInspector] public string _dbg_orbitOriginPlanet;
-    [Watch, HideInInspector] public float _dbg_distance_player_to_planet;
-    #endregion
-
     private void Awake()
     {
         period = _startPeriod;
@@ -154,7 +146,6 @@ public class PlayerMove : MonoBehaviour
         FixDistance();              // 惑星の原点との距離が設定した値以上、また以下のとき、設定した値まで戻します
         OrbitShift();               // 軌道を変更します
 
-        Dbg();                      // デバッグ用変数表示を更新します
     }
 
     private void FixedUpdate()
@@ -417,22 +408,6 @@ public class PlayerMove : MonoBehaviour
         if (_speedBar != null) {
             _speedBar.SetPeriodNum(periodNum);
         }
-    }    
-
-    private void Dbg()
-    {
-        _dbg_playerNowAngle = nowAngle;
-        _dbg_isAcceptedOrbitChange = isAcceptedOrbitChange;
-        _dbg_orbitOriginPlanet = _enum_orbitOriginPlanet.ToString();
-        _dbg_distance_player_to_planet = (transform.position - orbitOrigin.position).magnitude;
     }
-
-    private IEnumerator DelayChange_isAcceptedOrbitChange()
-    {
-        yield return new WaitForSeconds(1f);
-
-        isAcceptedOrbitChange = false;
-    }
-
 
 }

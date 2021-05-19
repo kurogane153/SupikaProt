@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ReticleController : MonoBehaviour
 {
     #region Singleton
+
     private static ReticleController instance;
 
     public static ReticleController Instance
@@ -23,7 +24,9 @@ public class ReticleController : MonoBehaviour
             return instance;
         }
     }
+
     #endregion
+
     [Header("デバッグ用")]
     [SerializeField] public bool _debug;
 
@@ -75,7 +78,6 @@ public class ReticleController : MonoBehaviour
     private RectTransform rectTransform;
     private Image image;
     private Image[] chiledImages;
-    private Transform tmpTarget;
     private Color defaultColor;
     private float canNotReticleMoveTime;
     private bool isBeforeTargeting;
@@ -251,7 +253,7 @@ public class ReticleController : MonoBehaviour
         if(0 < canNotReticleMoveTime) {
             canNotReticleMoveTime -= Time.deltaTime;
             if(canNotReticleMoveTime <= 0) {
-                tmpTarget = null;
+                
             }
         }
     }
@@ -325,7 +327,6 @@ public class ReticleController : MonoBehaviour
                     GeneratedReticleCount += 1;
 
                     canNotReticleMoveTime = _aimSpeedDecreaseTime;
-                    tmpTarget = target;
 
                     _soundPlayer.ChangePitchLevel(_lockOnSEPitchs[GeneratedReticleCount - 1]);
                     _soundPlayer.PlaySE(_se_LockOn);

@@ -32,11 +32,6 @@ public class OrbitGuideLightScript : MonoBehaviour
         particleSystem = GetComponent<ParticleSystem>();
     }
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
 
@@ -134,6 +129,5 @@ public class OrbitGuideLightScript : MonoBehaviour
         changeFlg = false;
         nownum = afterOrbitNum;
     }
-
 
 }

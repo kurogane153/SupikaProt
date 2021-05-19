@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class QuitProcessScript : MonoBehaviour
 {
@@ -8,7 +6,6 @@ public class QuitProcessScript : MonoBehaviour
     {
         Time.timeScale = 1f;
         FadeManager.Instance.LoadScene(0, 3f);
-        Debug.Log("ふぇーど");
     }
 
     public void Quit()

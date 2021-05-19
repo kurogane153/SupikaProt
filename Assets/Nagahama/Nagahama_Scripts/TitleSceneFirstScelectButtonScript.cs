@@ -2,7 +2,6 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-
 public class TitleSceneFirstScelectButtonScript : MonoBehaviour
 {
     private EventSystem eventSystem;
