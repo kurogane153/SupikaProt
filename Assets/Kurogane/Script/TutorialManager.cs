@@ -106,7 +106,7 @@ public class TutorialManager : MonoBehaviour
     {
         WaveCount();
         OrbitShiftText();
-        Dbg();
+        //Dbg();
     }
 
     void WaveCount()
@@ -262,6 +262,7 @@ public class TutorialManager : MonoBehaviour
 
     void SceneChange()
     {
+        _wave = _wavecount.FAST;
         SceneManager.LoadScene("OpeningScene");
     }
 

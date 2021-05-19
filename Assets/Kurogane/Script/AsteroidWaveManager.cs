@@ -136,7 +136,7 @@ public class AsteroidWaveManager : MonoBehaviour
         WaveCount();
         DoubleAsteroid();
         AretText();
-        Dbg();
+        //Dbg();
     }
 
     void DoubleAsteroid()

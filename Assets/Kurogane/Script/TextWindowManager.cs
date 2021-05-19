@@ -19,7 +19,7 @@ public class TextWindowManager : MonoBehaviour
 
     //表示するテキスト
     [SerializeField]
-    [TextArea(1, 6)]
+    [TextArea(1, 7)]
     public string[] _text;
 
     private Animator textWindowAnimator;
