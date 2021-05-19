@@ -95,24 +95,24 @@ public class EnemyGenerator : MonoBehaviour
         EarthPos = new Vector3(Earth.transform.position.x, 0, 0);
 
         #region デバッグ用スポーン範囲
-        if (dbgLine) 
-        {
-            //GameObject asteroid = Instantiate(enemyPrefab);
-            // LineRendererコンポーネントをゲームオブジェクトにアタッチする
-            var lineRendererX = gameObject.GetComponent<LineRenderer>();
+        //if (dbgLine) 
+        //{
+        //    //GameObject asteroid = Instantiate(enemyPrefab);
+        //    // LineRendererコンポーネントをゲームオブジェクトにアタッチする
+        //    var lineRendererX = gameObject.GetComponent<LineRenderer>();
 
-            var positionsX = new Vector3[]{
-            new Vector3(_rotate.x + xMinPosition + this.transform.position.x, this.transform.position.y, this.transform.position.z),
-            //new Vector3(xMinPosition + this.transform.position.x, this.transform.position.y,this.transform.position.z),// 開始点
-            new Vector3(xMaxPosition + this.transform.position.x, this.transform.position.y, this.transform.position.z + _rotate.x),               // 終了点
-        };
-            // 点の数を指定する
-            //lineRendererX.positionCount = positionsX.Length;
-            lineRendererX.startWidth = 10f;                   // 開始点の太さ
-            lineRendererX.endWidth = 10f;                     // 終了点の太さ
-            // 線を引く場所を指定する
-            lineRendererX.SetPositions(positionsX);
-        }
+        //    var positionsX = new Vector3[]{
+        //    new Vector3(_rotate.x + xMinPosition + this.transform.position.x, this.transform.position.y, this.transform.position.z),
+        //    //new Vector3(xMinPosition + this.transform.position.x, this.transform.position.y,this.transform.position.z),// 開始点
+        //    new Vector3(xMaxPosition + this.transform.position.x, this.transform.position.y, this.transform.position.z + _rotate.x),               // 終了点
+        //};
+        //    // 点の数を指定する
+        //    //lineRendererX.positionCount = positionsX.Length;
+        //    lineRendererX.startWidth = 10f;                   // 開始点の太さ
+        //    lineRendererX.endWidth = 10f;                     // 終了点の太さ
+        //    // 線を引く場所を指定する
+        //    lineRendererX.SetPositions(positionsX);
+        //}
         #endregion
     }
 
@@ -122,7 +122,7 @@ public class EnemyGenerator : MonoBehaviour
         time += Time.deltaTime;
 
         AsteroidInstens();
-        dbg();
+        //dbg();
     }
 
     void dbg()

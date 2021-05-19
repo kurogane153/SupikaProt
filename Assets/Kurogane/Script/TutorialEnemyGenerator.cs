@@ -121,7 +121,7 @@ public class TutorialEnemyGenerator : MonoBehaviour
         time += Time.deltaTime;
 
         AsteroidInstens();
-        dbg();
+        //dbg();
     }
 
     void dbg()
