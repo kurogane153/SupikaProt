@@ -12,6 +12,9 @@ public class PlayerMove : MonoBehaviour
     [Header("操作を有効にするか")]
     [SerializeField] private bool _isControl;
 
+    [Header("速度操作を有効にするか")]
+    [SerializeField] private bool _isSpeedControl = true;
+
     [SerializeField, Space(10)] private PlayerAnimation _playerAnimation;
     [SerializeField] private CameraController _mainCameraController;
     [SerializeField] private RadialBlur _mainCameraRadialBlur;
@@ -63,6 +66,14 @@ public class PlayerMove : MonoBehaviour
     private float speedChangeTimeRemain;
     private float period;
     private int periodNum;
+
+    public bool IsSpeedControll
+    {
+        get { return _isSpeedControl; }
+        set { _isSpeedControl = value;
+            _speedBar.gameObject.SetActive(_isSpeedControl);
+        }
+    }
 
     public OrbitOriginPlanet OriginPlanet
     {
@@ -162,12 +173,12 @@ public class PlayerMove : MonoBehaviour
 
     private void SpeedControllInput()
     {
-        if (_isControl && speedChangeTimeRemain <= 0f && Input.GetButtonDown(_speedUpButtonName)) {
+        if (_isControl && _isSpeedControl && speedChangeTimeRemain <= 0f && Input.GetButtonDown(_speedUpButtonName)) {
             SpeedUp();
             Debug.Log(gameObject.name + "が速度を上げた。現在" + period);
         }
 
-        if (_isControl && speedChangeTimeRemain <= 0f && Input.GetButtonDown(_speedDownButtonName)) {
+        if (_isControl && _isSpeedControl && speedChangeTimeRemain <= 0f && Input.GetButtonDown(_speedDownButtonName)) {
             SpeedDown();
             Debug.Log(gameObject.name + "が速度を下げた。現在" + period);
         }
@@ -371,14 +382,16 @@ public class PlayerMove : MonoBehaviour
             _mainCameraRadialBlur.EnableRadialBlur();
             _boostEffect.PlayBoostParticles();
             _soundPlayer.PlaySE(_se_SpeedUp);
-        } else {
+        } else if(beforennum != periodNum) {
             _soundPlayer.PlaySE(_se_SpeedUpNormal);
         }
 
-        period = _periods[periodNum];
-        _playerAnimation.Spiral(_speedChangeDelay);
-        speedChangeTimeRemain = _speedChangeDelay;
-        _loopSoundPlayer.ChangePitchLevel(_inFlightSoundPitchLevels[periodNum]);
+        if(beforennum != periodNum) {
+            period = _periods[periodNum];
+            _playerAnimation.Spiral(_speedChangeDelay);
+            speedChangeTimeRemain = _speedChangeDelay;
+            _loopSoundPlayer.ChangePitchLevel(_inFlightSoundPitchLevels[periodNum]);
+        }        
 
         if (_speedBar != null) {
             _speedBar.SetPeriodNum(periodNum);
@@ -398,12 +411,14 @@ public class PlayerMove : MonoBehaviour
             _boostEffect.StopBoostParticles();
         }
 
-        period = _periods[periodNum];
-        _playerAnimation.AcrobatLoop(_speedChangeDelay);
-        speedChangeTimeRemain = _speedChangeDelay;
+        if(beforennum != periodNum) {
+            period = _periods[periodNum];
+            _playerAnimation.AcrobatLoop(_speedChangeDelay);
+            speedChangeTimeRemain = _speedChangeDelay;
 
-        _soundPlayer.PlaySE(_se_SpeedDown);
-        _loopSoundPlayer.ChangePitchLevel(_inFlightSoundPitchLevels[periodNum]);
+            _soundPlayer.PlaySE(_se_SpeedDown);
+            _loopSoundPlayer.ChangePitchLevel(_inFlightSoundPitchLevels[periodNum]);
+        }        
 
         if (_speedBar != null) {
             _speedBar.SetPeriodNum(periodNum);
