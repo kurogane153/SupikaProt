@@ -191,7 +191,7 @@ public class AsteroidScript : MonoBehaviour
         _soundPlayer.PlaySE(_se_Explosion3, 0.02f);
         _soundPlayer.PlaySE(_se_Explosion4, 1.7f);
 
-        BGMManagerScript.Instance.gameObject.GetComponent<BGMFadeout>().TmpFadeEffect(1f, 0.6f, 2f, 0.7f);
+        BGMManagerScript.Instance.gameObject.GetComponent<BGMFadeout>().TmpFadeEffect(1f, 0.6f, 1.8f, 1.5f);
 
         SelfDestroy();        
         

@@ -24,7 +24,7 @@ public class BGMFadeout : MonoBehaviour
                 fadeDeltaTime = _fadeoutSeconds;
                 isFadeout = false;
             }
-            audioSource.volume = (startVolume - fadeDeltaTime / _fadeoutSeconds);
+            audioSource.volume = ((_fadeoutSeconds - fadeDeltaTime) / _fadeoutSeconds * startVolume);
 
             if (!isFadeout) {
                 BGMManagerScript.Instance.StopBGM();
@@ -56,7 +56,7 @@ public class BGMFadeout : MonoBehaviour
 
         while(fadeDeltaTime < _fadeoutSeconds) {
             fadeDeltaTime += Time.deltaTime;
-            audioSource.volume = (startVolume - fadeDeltaTime / _fadeoutSeconds);
+            audioSource.volume = ((_fadeoutSeconds - fadeDeltaTime) / _fadeoutSeconds * startVolume);
 
             yield return new WaitForFixedUpdate();
         }

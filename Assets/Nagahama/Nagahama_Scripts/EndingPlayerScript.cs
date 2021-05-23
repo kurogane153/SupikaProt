@@ -121,7 +121,7 @@ public class EndingPlayerScript : MonoBehaviour
         logo.SetActive(true);
 
         yield return new WaitForSeconds(5f);
-        SceneManager.LoadScene("Result");
+        FadeManager.Instance.LoadScene(2, 4f);
     }
 
     /// <summary>
