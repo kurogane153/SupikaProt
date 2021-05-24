@@ -638,7 +638,7 @@ PrefabInstance:
     - target: {fileID: 3569977124865647117, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 552
+      value: 504
       objectReference: {fileID: 0}
     - target: {fileID: 3569977124865647118, guid: 00cbe7a6cef33e9429a04d0ce7dd042b,
         type: 3}
@@ -942,17 +942,17 @@ PrefabInstance:
     - target: {fileID: 420125569053828460, guid: 935752cc7a551f642bb36edf67e61531,
         type: 3}
       propertyPath: _text.Array.data[9]
-      value: "\u30B8\u30E5\u30D4\u30BF\u30FC\u3002\n\u524D\u65B9\u306B\u898B\u3048\u308B\u306E\u304C\u30E9\u30B0\u30E9\u30F3\u30B8\u30E5\u30DD\u30A4\u30F3\u30C8\u3060\u3002\n\u3042\u305D\u3053\u304B\u3089\u30B3\u30ED\u30CB\u30FC\u306E\u885B\u661F\u8ECC\u9053\u306B\n\u4E57\u308A\u79FB\u308B\u3053\u3068\u304C\u51FA\u6765\u308B\u305E"
+      value: "\u30B8\u30E5\u30D4\u30BF\u30FC\u3002\r\n\u524D\u65B9\u306B\u898B\u3048\u308B\u306E\u304C\u3010\u30E9\u30B0\u30E9\u30F3\u30B8\u30E5\u30DD\u30A4\u30F3\u30C8\u3011\u3060\u3002\r\n\u30B9\u30D4\u30AB\u306E\u8ECC\u9053\u3092\u5207\u308A\u66FF\u3048\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u305E\u3002\n\u3084\u3063\u3066\u307F\u308D\u3002"
       objectReference: {fileID: 0}
     - target: {fileID: 420125569053828460, guid: 935752cc7a551f642bb36edf67e61531,
         type: 3}
       propertyPath: _text.Array.data[12]
-      value: "\u30B8\u30E5\u30D4\u30BF\u30FC\u3002\u3053\u3061\u3089\u56FD\u969B\u5B87\u5B99\u9632\u885B\u6A5F\u95A2\uFF08ISDA\uFF09\n\u8ECC\u9053\u9632\u885B\u968A\u30DE\u30FC\u30BA\u3060\u3002\n\u53EA\u4ECA\u304B\u3089\u5730\u7403\u3068\u30B3\u30ED\u30CB\u30FC\u3078\u306E\n\u9695\u77F3\u306E\u63A5\u8FD1\u3092\u60F3\u5B9A\u3057\u305F\u9632\u885B\u8A13\u7DF4\u3092\u958B\u59CB\u3059\u308B\u3002"
+      value: "\u30B8\u30E5\u30D4\u30BF\u30FC\u3002\r\n\u3053\u3061\u3089ISDA\u3001\u8ECC\u9053\u9632\u885B\u968A\u30DE\u30FC\u30BA\u3060\u3002\r\n\u3053\u308C\u3088\u308A\u9632\u885B\u570F\u3078\u306E\u9695\u77F3\u63A5\u8FD1\u3092\u60F3\u5B9A\u3057\u305F\n\u8A13\u7DF4\u3092\u884C\u3046\u3002"
       objectReference: {fileID: 0}
     - target: {fileID: 420125569053828460, guid: 935752cc7a551f642bb36edf67e61531,
         type: 3}
       propertyPath: _text.Array.data[13]
-      value: "\u304A\u524D\u304C\u306E\u3063\u3066\u3044\u308B\"\u30B9\u30D4\u30AB\"\u306B\u306F\n\u6700\u65B0\u92ED\u306E\u9AD8\u901F\u8FFD\u5C3E\u30DF\u30B5\u30A4\u30EB\u304C\u642D\u8F09\u3055\u308C\u3066\u3044\u308B\u3002\n\u305D\u306E\u30DF\u30B5\u30A4\u30EB\u3067\u6D6E\u904A\u3057\u3066\u3044\u308B\n\u5CA9\u3092\u7834\u58CA\u3057\u3066\u307F\u3066\u304F\u308C"
+      value: "\u304A\u524D\u306E\u4E57\u3063\u3066\u3044\u308B\u6A5F\u4F53\u540D\u3010\u30B9\u30D4\u30AB\u3011\u306B\u306F\u3001\r\n\u6700\u65B0\u92ED\u306E\u9AD8\u901F\u8FFD\u5C3E\u30DF\u30B5\u30A4\u30EB\u304C\u642D\u8F09\u3055\u308C\u3066\u3044\u308B\u3002\n\r\u305D\u306E\u30DF\u30B5\u30A4\u30EB\u3067\u6D6E\u904A\u3057\u3066\u3044\u308B\u5CA9\u3092\n\u7834\u58CA\u3057\u3066\u307F\u3066\u304F\u308C\u3002"
       objectReference: {fileID: 0}
     - target: {fileID: 420125569053828460, guid: 935752cc7a551f642bb36edf67e61531,
         type: 3}
@@ -962,7 +962,7 @@ PrefabInstance:
     - target: {fileID: 420125569053828460, guid: 935752cc7a551f642bb36edf67e61531,
         type: 3}
       propertyPath: _text.Array.data[15]
-      value: "\u30B8\u30E5\u30D4\u30BF\u30FC\n\u30B9\u30D4\u30FC\u30C9\u3092\u4E0A\u3052\u3066\u307F\u308D\u3002\n\u30B9\u30D4\u30AB\u306E\u6700\u5927\u52A0\u901F\u6642\u306E\u9AD8\u8CA0\u8377\u306B\n\u4ECA\u3067\u6163\u308C\u3066\u304A\u304F\u3068\u3044\u3044\u3002"
+      value: "\u30B8\u30E5\u30D4\u30BF\u30FC\u3001\u30B9\u30D4\u30FC\u30C9\u3092\u4E0A\u3052\u3066\u307F\u308D\u3002\r\n\u6700\u5927\u52A0\u901F\u6642\u306B\u306F\u9AD8\u8CA0\u8377\u304C\u304B\u304B\u308B\u3002\r\n\u4ECA\u306E\u3046\u3061\u306B\u6163\u308C\u3066\u304A\u304F\u3068\u3044\u3044\u3002"
       objectReference: {fileID: 0}
     - target: {fileID: 420125569053828460, guid: 935752cc7a551f642bb36edf67e61531,
         type: 3}
@@ -2324,7 +2324,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 7810902951316145010}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1570409757}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3b4e092e2cd76c4796e7a3afc81c294, type: 3}
@@ -2562,7 +2562,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 7810902951316145010}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1570409757}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b374eeadc0832a842bae5dd2d23e2da2, type: 3}
@@ -3751,6 +3751,12 @@ GameObject:
 --- !u!1 &1567422183 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8789682081905496023, guid: f6de751e9dcc43646b9cbbaa467344ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7810902951316145010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1570409757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7809379644624649669, guid: f6de751e9dcc43646b9cbbaa467344ab,
     type: 3}
   m_PrefabInstance: {fileID: 7810902951316145010}
   m_PrefabAsset: {fileID: 0}
@@ -5850,6 +5856,11 @@ PrefabInstance:
       objectReference: {fileID: 329334729}
     - target: {fileID: 823232047092441419, guid: 373d614b789fbbe47ade0d16f3909527,
         type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1570409757}
+    - target: {fileID: 823232047092441419, guid: 373d614b789fbbe47ade0d16f3909527,
+        type: 3}
       propertyPath: _alatobj
       value: 
       objectReference: {fileID: 1495211172}
@@ -6008,7 +6019,7 @@ PrefabInstance:
     - target: {fileID: 823232047092441419, guid: 373d614b789fbbe47ade0d16f3909527,
         type: 3}
       propertyPath: _waveAsteroidcount.Array.data[0]
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 823232047092441419, guid: 373d614b789fbbe47ade0d16f3909527,
         type: 3}

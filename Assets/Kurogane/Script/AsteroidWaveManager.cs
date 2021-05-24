@@ -8,6 +8,10 @@ using TMPro;
 public class AsteroidWaveManager : MonoBehaviour
 {
 
+    [Header("Player")]
+    [SerializeField]
+    public GameObject _player;
+
     [Header("Set Asteroid Prefab")]
     //敵プレハブ
     public GameObject _enemyPrefab;
@@ -106,6 +110,8 @@ public class AsteroidWaveManager : MonoBehaviour
 
     void Start()
     {
+        _player.GetComponent<PlayerMove>().IsSpeedControll = true;
+        _player.GetComponent<PlayerMove>().IsOrbitChangeControll = true;
         _textno = 1;
         _spikaPos = new Vector3(_spika.transform.position.x, 0, 0);
         _earthPos = new Vector3(_earth.transform.position.x, 0, 0);
