@@ -3311,7 +3311,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1049964891 stripped
 Transform:
@@ -3787,6 +3787,36 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1155964333}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1159980328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1159980329}
+  m_Layer: 0
+  m_Name: ExplosionViwePos_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1159980329
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159980328}
+  m_LocalRotation: {x: 0.055232637, y: 0.09111275, z: 0.0051451754, w: -0.9942944}
+  m_LocalPosition: {x: -2085.0408, y: 75.77306, z: 774.3625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1165474119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4356,20 +4386,40 @@ PrefabInstance:
       value: 0.62
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
-      propertyPath: _missileShotSettings._missileShotPower.Array.data[6]
+      propertyPath: _missileShotSettings._missileShotPower.Array.data[1]
       value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
+      propertyPath: _missileShotSettings._missileShotPower.Array.data[2]
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
+      propertyPath: _missileShotSettings._missileShotPower.Array.data[3]
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
+      propertyPath: _missileShotSettings._missileShotPower.Array.data[4]
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
+      propertyPath: _missileShotSettings._missileShotPower.Array.data[5]
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
+      propertyPath: _missileShotSettings._missileShotPower.Array.data[6]
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[7]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[8]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[9]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._instantiateTimes.Array.data[10]
@@ -4429,59 +4479,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[10]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[11]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[12]
-      value: 70
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[13]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[14]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[15]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[16]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[17]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[18]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[19]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[20]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[21]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[22]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1209490220, guid: 6b5ae807ab6519d4780de59271ffdb4d, type: 3}
       propertyPath: _missileShotSettings._missileShotPower.Array.data[23]
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 4537248478739440122, guid: 6b5ae807ab6519d4780de59271ffdb4d,
         type: 3}
@@ -4680,6 +4730,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1270537433}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1273999280 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 925291099398320179, guid: d212804091069094a894dba5fec9a743,
+    type: 3}
+  m_PrefabInstance: {fileID: 5049553371678465331}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdadaa82fa3e4824b868117be90c0e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1275233019 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5951496028403495313, guid: 6b5ae807ab6519d4780de59271ffdb4d,
@@ -5972,6 +6034,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5049553371678465331}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1446515367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1446515368}
+  m_Layer: 0
+  m_Name: PlayerBehindPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1446515368
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446515367}
+  m_LocalRotation: {x: 0.015183222, y: -0.97494763, z: -0.07031699, w: -0.21048073}
+  m_LocalPosition: {x: -2049.4902, y: -12.183162, z: 112.617325}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1455334555 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8983355358063582607, guid: d212804091069094a894dba5fec9a743,
@@ -9346,6 +9438,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2890628573876591924, guid: d8e7fec9843625f4eaed45166d90760a,
         type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890628573876591924, guid: d8e7fec9843625f4eaed45166d90760a,
+        type: 3}
       propertyPath: lastBossDisolve
       value: 
       objectReference: {fileID: 1702849439}
@@ -9356,13 +9453,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2890628573876591924, guid: d8e7fec9843625f4eaed45166d90760a,
         type: 3}
+      propertyPath: playerBehindPos
+      value: 
+      objectReference: {fileID: 1446515368}
+    - target: {fileID: 2890628573876591924, guid: d8e7fec9843625f4eaed45166d90760a,
+        type: 3}
       propertyPath: explosionViwePos
       value: 
       objectReference: {fileID: 1040179575}
     - target: {fileID: 2890628573876591924, guid: d8e7fec9843625f4eaed45166d90760a,
         type: 3}
+      propertyPath: explosionViwePos_2
+      value: 
+      objectReference: {fileID: 1159980329}
+    - target: {fileID: 2890628573876591924, guid: d8e7fec9843625f4eaed45166d90760a,
+        type: 3}
+      propertyPath: lastBossAsteroidSC
+      value: 
+      objectReference: {fileID: 1273999280}
+    - target: {fileID: 2890628573876591924, guid: d8e7fec9843625f4eaed45166d90760a,
+        type: 3}
+      propertyPath: _slowMotionEndDelay
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890628573876591924, guid: d8e7fec9843625f4eaed45166d90760a,
+        type: 3}
+      propertyPath: _slowMotionStartDelay
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890628573876591924, guid: d8e7fec9843625f4eaed45166d90760a,
+        type: 3}
       propertyPath: _moveExplosionPosDelay
-      value: 2.25
+      value: 1.52
       objectReference: {fileID: 0}
     - target: {fileID: 2890628573876591924, guid: d8e7fec9843625f4eaed45166d90760a,
         type: 3}

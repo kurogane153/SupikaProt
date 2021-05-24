@@ -32,7 +32,16 @@ public class EndingCameraScript : MonoBehaviour
     public Transform target;
 
     [Header("ラスボスが爆発するさまを見る座標"), Space(5)]
-    public Transform explosionViwePos;    
+    public Transform playerBehindPos;
+
+    [Header("ラスボスが爆発するさまを見る座標"), Space(5)]
+    public Transform explosionViwePos;
+
+    [Header("ラスボスが爆発するさまを見る座標_2"), Space(5)]
+    public Transform explosionViwePos_2;
+
+    [Header("ラスボスのAsteroidScript"), Space(5)]
+    public AsteroidScript lastBossAsteroidSC;
 
     [Header("ラスボスのディゾルブ制御スクリプト"), Space(5)]
     public LastBossDisolveEffectScript lastBossDisolve;
@@ -44,9 +53,12 @@ public class EndingCameraScript : MonoBehaviour
 
     [Space(10)]
     [HideInInspector] public bool rotflg = false;
+    [HideInInspector] public bool panflg = false;
     [HideInInspector] public bool followflg = false;
-    
+    [HideInInspector] public bool diagonallyMoveflg = false;
+
     RadialBlur radialBlur;
+    private bool isLastBossExplosion;
 
     void Start()
     {
@@ -68,47 +80,81 @@ public class EndingCameraScript : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(newDir);
         }
 
-        if(followflg) {
+        if (panflg) {
+            transform.Translate(-Vector3.forward * Time.deltaTime * 20f);
+        }
+
+        if(followflg && target != null) {
             Vector3 desiredPosition = target.position + new Vector3(0, 10, -90);
             transform.position = Vector3.Lerp(transform.position, desiredPosition, 0.059f);
+        }
+
+        if (diagonallyMoveflg) {
+            Vector3 desiredPosition = transform.position + new Vector3(0f, 0f, -1f);
+            transform.position = desiredPosition;
+        }
+
+        if(lastBossAsteroidSC != null && lastBossAsteroidSC.GetAsteroidHp() <= 0 && !isLastBossExplosion) {
+            StartCoroutine(nameof(LastBossExplosionStart));
+            isLastBossExplosion = true;
         }
     }
 
     private IEnumerator TimeScaleDown()
     {
+        yield return new WaitForSeconds(_slowMotionStartDelay);
+
         // ミサイル1発目が発射されるタイミングに合わせて回転フラグオン
         // スローモーションにするためにtimeScaleを下げる
-        yield return new WaitForSeconds(_slowMotionStartDelay);
         Time.timeScale = 0.2f;
         rotflg = true;
+        yield return new WaitForSeconds(_slowMotionEndDelay * 0.2f);
 
-        // 2秒間ミサイルに向き続け、スローモーション解除
+        // _slowMotionEndDelay秒間ミサイルに向き続け、スローモーション解除
         // ミサイルの進行方向にカメラを向け、ミサイルの背後にカメラを移動する
-        yield return new WaitForSeconds(2f * 0.2f);
-        Time.timeScale = 1f;
         rotflg = false;
+        Time.timeScale = 1f;
+        transform.position = playerBehindPos.position;
+        transform.rotation = playerBehindPos.rotation;
+        panflg = true;
+        yield return new WaitForSeconds(1.5f);
+
+        // 数秒間プレイヤーの背後からミサイルが飛ぶさまを見せる
+        panflg = false;
+        
         transform.rotation = target.rotation;
         transform.Rotate(9, 180, 8);
         Vector3 desiredPosition = target.position + new Vector3(0, 10, -15);
         transform.position = desiredPosition;
         followflg = true;
-
-        // 2秒後、爆発を鑑賞する位置に移動する
         yield return new WaitForSeconds(_moveExplosionPosDelay);
+
+        // _moveExplosionPosDelay秒後、爆発を鑑賞する位置に移動する
         followflg = false;
+        diagonallyMoveflg = true;
+        transform.position = explosionViwePos_2.position;
+        transform.rotation = explosionViwePos_2.rotation;
+        
+    }
+
+    private IEnumerator LastBossExplosionStart()
+    {        
+        lastBossDisolve.StartDisovle();
+        yield return new WaitForSeconds(0.4f);
+        diagonallyMoveflg = false;
         transform.position = explosionViwePos.position;
         transform.rotation = explosionViwePos.rotation;
+        panflg = true;
+        yield return new WaitForSeconds(1.6f);
+        panflg = false;
 
-        // ディゾルブシェーダーアニメーション起動
-        yield return new WaitForSeconds(_disolveEffectStartDelay + (0.35f * _looptimes));
-        lastBossDisolve.StartDisovle();
+        yield return new WaitForSeconds(_radiulBlurStartDelay - 3f);
 
         // ラスボスのHPが0になるタイミングで放射ブラー起動
-        yield return new WaitForSeconds(_radiulBlurStartDelay);
         radialBlur.EnableRadialBlur();
+        yield return new WaitForSeconds(_radiulBlurEndDelay);
 
         // 爆発エフェクトが終了するタイミングで放射ブラーオフ
-        yield return new WaitForSeconds(_radiulBlurEndDelay);
         radialBlur.DisableRadialBlur();
     }
 }

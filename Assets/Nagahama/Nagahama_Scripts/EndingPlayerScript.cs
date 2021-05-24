@@ -144,6 +144,10 @@ public class EndingPlayerScript : MonoBehaviour
             _endCam.rotflg = true;
         }
 
+        if (index == 7 && _roopTimes == startRoopTimes) {
+            _endCam.target = missile.transform;
+        }
+
         return missile;
     }
 }

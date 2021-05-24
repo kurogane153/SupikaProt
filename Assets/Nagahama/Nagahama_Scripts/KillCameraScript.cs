@@ -103,7 +103,6 @@ public class KillCameraScript : MonoBehaviour
     private void StopPhase_CameraPanMove()
     {
         transform.Translate(-Vector3.forward * Time.deltaTime * _cameraPanSpeed);
-        
     }
 
     private void StopPhase_CameraZoomMove()
