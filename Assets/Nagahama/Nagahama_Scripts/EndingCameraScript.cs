@@ -86,12 +86,13 @@ public class EndingCameraScript : MonoBehaviour
 
         if(followflg && target != null) {
             Vector3 desiredPosition = target.position + new Vector3(0, 10, -90);
-            transform.position = Vector3.Lerp(transform.position, desiredPosition, 0.059f);
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, 0.05f);
         }
 
         if (diagonallyMoveflg) {
-            Vector3 desiredPosition = transform.position + new Vector3(0f, 0f, -1f);
-            transform.position = desiredPosition;
+            //Vector3 desiredPosition = transform.position + new Vector3(0f, 0f, 1f);
+            //transform.position = desiredPosition;
+            transform.Translate(Vector3.forward * Time.deltaTime * 30f);
         }
 
         if(lastBossAsteroidSC != null && lastBossAsteroidSC.GetAsteroidHp() <= 0 && !isLastBossExplosion) {
@@ -117,13 +118,13 @@ public class EndingCameraScript : MonoBehaviour
         transform.position = playerBehindPos.position;
         transform.rotation = playerBehindPos.rotation;
         panflg = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.3f);
 
         // 数秒間プレイヤーの背後からミサイルが飛ぶさまを見せる
         panflg = false;
         
         transform.rotation = target.rotation;
-        transform.Rotate(9, 180, 8);
+        transform.Rotate(9, 90, 8);
         Vector3 desiredPosition = target.position + new Vector3(0, 10, -15);
         transform.position = desiredPosition;
         followflg = true;
@@ -140,12 +141,14 @@ public class EndingCameraScript : MonoBehaviour
     private IEnumerator LastBossExplosionStart()
     {        
         lastBossDisolve.StartDisovle();
-        yield return new WaitForSeconds(0.4f);
-        diagonallyMoveflg = false;
         transform.position = explosionViwePos.position;
         transform.rotation = explosionViwePos.rotation;
+        diagonallyMoveflg = false;
         panflg = true;
-        yield return new WaitForSeconds(1.6f);
+        yield return new WaitForSeconds(1.3f);
+        
+        
+        yield return new WaitForSeconds(0.7f);
         panflg = false;
 
         yield return new WaitForSeconds(_radiulBlurStartDelay - 3f);
@@ -156,5 +159,7 @@ public class EndingCameraScript : MonoBehaviour
 
         // 爆発エフェクトが終了するタイミングで放射ブラーオフ
         radialBlur.DisableRadialBlur();
+        
+      
     }
 }
