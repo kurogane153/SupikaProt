@@ -15,6 +15,9 @@ public class PlayerMove : MonoBehaviour
     [Header("速度操作を有効にするか")]
     [SerializeField] private bool _isSpeedControl = true;
 
+    [Header("ラグランジュポイント切り替え操作を有効にするか")]
+    [SerializeField] private bool _isOrbitChangeControll = true;
+
     [SerializeField, Space(10)] private PlayerAnimation _playerAnimation;
     [SerializeField] private CameraController _mainCameraController;
     [SerializeField] private RadialBlur _mainCameraRadialBlur;
@@ -73,6 +76,12 @@ public class PlayerMove : MonoBehaviour
         set { _isSpeedControl = value;
             _speedBar.gameObject.SetActive(_isSpeedControl);
         }
+    }
+
+    public bool IsOrbitChangeControll
+    {
+        get { return _isOrbitChangeControll; }
+        set { _isOrbitChangeControll = value; }
     }
 
     public OrbitOriginPlanet OriginPlanet
@@ -238,7 +247,7 @@ public class PlayerMove : MonoBehaviour
     {
         // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作がまだのとき
         // 軌道変更操作ヘルプを表示し、軌道変更ガイドライトエフェクトをアクティブにします
-        if(_isControl && _orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
+        if(_isControl && _isOrbitChangeControll && _orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
             !isAcceptedOrbitChange) {
 
 
@@ -248,7 +257,7 @@ public class PlayerMove : MonoBehaviour
 
         // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作を受け付けた状態のとき
         // 軌道変更をキャンセルするヘルプを表示します
-        } else if(_isControl && _orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
+        } else if(_isControl && _isOrbitChangeControll && _orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
             isAcceptedOrbitChange) {
 
 
@@ -266,7 +275,7 @@ public class PlayerMove : MonoBehaviour
         // 軌道変更ボタンを押したとき、
         // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作がまだなら
         // 軌道変更を受け付けて、軌道変更ガイドライトエフェクトにもそれを知らせます
-        if (_isControl && Input.GetButtonDown(_orbitOriginChangeButtonName) && 
+        if (_isControl && _isOrbitChangeControll && Input.GetButtonDown(_orbitOriginChangeButtonName) && 
             _orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
             !isAcceptedOrbitChange) {
 
@@ -279,7 +288,7 @@ public class PlayerMove : MonoBehaviour
         // 軌道変更ボタンを押したとき、
         // ラグランジュポイント変更可能範囲に入ってるときかつ変更操作を受け付けた状態なら
         // 軌道変更をキャンセルします。
-        } else if (_isControl && Input.GetButtonDown(_orbitOriginChangeButtonName) &&
+        } else if (_isControl && _isOrbitChangeControll && Input.GetButtonDown(_orbitOriginChangeButtonName) &&
             _orbitOriginChangeCanMinAngle[(int)_enum_orbitOriginPlanet] < nowAngle && nowAngle < _orbitOriginChangeCanMaxAngle[(int)_enum_orbitOriginPlanet] &&
             isAcceptedOrbitChange) {
 
@@ -391,9 +400,12 @@ public class PlayerMove : MonoBehaviour
             _playerAnimation.Spiral(_speedChangeDelay);
             speedChangeTimeRemain = _speedChangeDelay;
             _loopSoundPlayer.ChangePitchLevel(_inFlightSoundPitchLevels[periodNum]);
-        }        
+        } else {
+            speedChangeTimeRemain = 0.5f;
+            _speedBar.SpeedChangeError();
+        }
 
-        if (_speedBar != null) {
+        if (_speedBar != null && beforennum != periodNum) {
             _speedBar.SetPeriodNum(periodNum);
         }
     }
@@ -418,9 +430,12 @@ public class PlayerMove : MonoBehaviour
 
             _soundPlayer.PlaySE(_se_SpeedDown);
             _loopSoundPlayer.ChangePitchLevel(_inFlightSoundPitchLevels[periodNum]);
-        }        
+        } else {
+            speedChangeTimeRemain = 0.5f;
+            _speedBar.SpeedChangeError();
+        }
 
-        if (_speedBar != null) {
+        if (_speedBar != null && beforennum != periodNum) {
             _speedBar.SetPeriodNum(periodNum);
         }
     }

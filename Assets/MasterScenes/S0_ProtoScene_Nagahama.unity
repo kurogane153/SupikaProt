@@ -9489,6 +9489,11 @@ PrefabInstance:
       propertyPath: _mainCameraRadialBlur
       value: 
       objectReference: {fileID: 244839680}
+    - target: {fileID: 4718281315527212042, guid: f6de751e9dcc43646b9cbbaa467344ab,
+        type: 3}
+      propertyPath: _isOrbitChangeControll
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6939610111869954872, guid: f6de751e9dcc43646b9cbbaa467344ab,
         type: 3}
       propertyPath: m_Volume

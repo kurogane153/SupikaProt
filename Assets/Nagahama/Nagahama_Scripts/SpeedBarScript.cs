@@ -16,6 +16,7 @@ public class SpeedBarScript : MonoBehaviour
     private int nowPeriodNum;
     private float nowSliderValue;
     private Color nowFillColor;
+    private bool isChangeError;
 
     private void Awake()
     {
@@ -31,6 +32,43 @@ public class SpeedBarScript : MonoBehaviour
     public void Init(float speedChangeDelay)
     {
         valueChangeDelay = speedChangeDelay;
+    }
+
+    public void SpeedChangeError()
+    {
+        if (isChangeError) return;
+        StartCoroutine(nameof(ChangeErrorAnimation));
+    }
+
+    private IEnumerator ChangeErrorAnimation()
+    {
+        isChangeError = true;
+
+        float waitTime = 0.4f;
+        float time = 0;
+        float startTime;
+        Color startColor = _fillImage.color;
+        Color errorColor = new Color(1, 1, 1, 1);
+
+        while (time < waitTime) {
+            startTime = Time.timeSinceLevelLoad;
+
+            _fillImage.color = errorColor;
+
+            for(int i = 0; i < 3; i++) {
+                yield return new WaitForFixedUpdate();
+            }
+
+            _fillImage.color = startColor;
+
+            for (int i = 0; i < 3; i++) {
+                yield return new WaitForFixedUpdate();
+            }
+
+            time += Time.timeSinceLevelLoad - startTime;
+        }
+
+        isChangeError = false;
     }
 
     public void SetPeriodNum(int periodNum)
@@ -49,6 +87,7 @@ public class SpeedBarScript : MonoBehaviour
     {
         float time = 0;
 
+        Debug.Log("おおん！");
         while (time < valueChangeDelay) {
             time += Time.deltaTime;
             float rate = time / valueChangeDelay;
