@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 public class TutorialManager : MonoBehaviour
 {
 
+    [Header("Player")]
+    [SerializeField]
+    public GameObject _player;
+
     [Header("TextWindowManager")]
     [SerializeField]
     public TextWindowManager _textmanager;
@@ -89,6 +93,8 @@ public class TutorialManager : MonoBehaviour
 
     void Start()
     {
+        _player.GetComponent<PlayerMove>().IsSpeedControll = false;
+        _player.GetComponent<PlayerMove>().IsOrbitChangeControll = true;
         img = _arertobj.GetComponent<Image>();
         anim = _arertobj.GetComponent<Animator>();
         img.color = Color.clear;
@@ -140,6 +146,7 @@ public class TutorialManager : MonoBehaviour
                         if (!_textwindow.activeSelf)
                         {
                             _textmanager.TextWindowOn(15);
+                            _player.GetComponent<PlayerMove>().IsSpeedControll = true;
                             Invoke("TextClose", drawingTime);
                             _textfastflg = true;
                         }
