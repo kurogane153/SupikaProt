@@ -160,7 +160,7 @@ public class TutorialManager : MonoBehaviour
                         if (!_textwindow.activeSelf)
                         {
                             _textmanager.TextWindowOn(16);
-                            Invoke("TextClose", drawingTime);
+                            Invoke("TextClose", 4);
                             _textsecondflg = true;
                         }
                     }
@@ -170,7 +170,10 @@ public class TutorialManager : MonoBehaviour
                 {
                     if (!_textlastflg)
                     {
-                        lastText();
+                        if (!_textwindow.activeSelf)
+                        {
+                            lastText();
+                        }
                     }
                     _asteroidinstansflg = true;
                 }
