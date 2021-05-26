@@ -126,7 +126,13 @@ public class GameClearOver_Process : MonoBehaviour
     {
         AsteroidScript asteroidSC = asteroid.GetComponent<AsteroidScript>();
         impactPos = asteroid.transform.position;
+
+        
         Vector3 desiredPos = (impactPos - transform.position).normalized * EventCameraDistance + transform.position;
+        if (GameOverCount >= GameOverAsteroid) {
+            desiredPos = (impactPos - transform.position).normalized * 2000 + transform.position;
+        }
+
         Vector3 explosionpos = (impactPos - transform.position) + transform.position;
         bool isLastBossImpact = asteroid.name == _roberiaPrefab.name;
 

@@ -36,6 +36,7 @@ public class BGMFadeout : MonoBehaviour
     public void FadeoutStart(float interval)
     {
         isFadeout = true;
+        startVolume = audioSource.volume;
         audioSource.volume = startVolume;
         _fadeoutSeconds = interval - 0.017f;
         fadeDeltaTime = 0;
@@ -49,6 +50,7 @@ public class BGMFadeout : MonoBehaviour
     // ラスボス撃破演出で音を一瞬フェードアウトさせて、すぐにフェードインする用
     private IEnumerator TmpFadeOutAndFadeIn(float outStartDelay, float outTime, float inStartDelay, float inTime)
     {
+        startVolume = audioSource.volume;
         yield return new WaitForSeconds(outStartDelay);
         audioSource.volume = startVolume;
         _fadeoutSeconds = outTime;
