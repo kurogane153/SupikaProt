@@ -326,7 +326,7 @@ public class KillCameraScript : MonoBehaviour
         conflictStagingPhase = ConflictStagingPhase.ShowExplosion;
         yield return new WaitForSeconds(0.2f);
 
-        _conflictTooltip.SetTooltipActive(true , false);
+        //_conflictTooltip.SetTooltipActive(true , false);
 
         yield return new WaitForSeconds(_conflictEventCamResetDelay);
         CFCameraReset();
@@ -336,6 +336,7 @@ public class KillCameraScript : MonoBehaviour
     {
         if(0f < waittime) {
             _conflictEventCamResetDelay = waittime;
+            ReticleController.Instance.GetCanvas().enabled = false;
         }
 
         transform.position = pos;
@@ -350,10 +351,10 @@ public class KillCameraScript : MonoBehaviour
         Time.timeScale = 1f;
 
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((lookPos - transform.position).normalized), 1);
+
         if(waittime == 0) {
             transform.position += transform.right * _positionOffset.x + transform.up * _positionOffset.y + transform.forward * _positionOffset.z;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((lookPos - transform.position).normalized), 1);
-
         }
 
         StartCoroutine(nameof(ConflictSwitchStagingPhase_ShowExplosion));
@@ -371,7 +372,7 @@ public class KillCameraScript : MonoBehaviour
         Pauser.SoftResume();
         Time.timeScale = 1f;
 
-        _conflictTooltip.SetTooltipActive(false);
+        //_conflictTooltip.SetTooltipActive(false);
     }
 
     #endregion

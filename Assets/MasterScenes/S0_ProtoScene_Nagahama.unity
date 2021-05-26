@@ -1912,7 +1912,7 @@ PrefabInstance:
     - target: {fileID: 1742407085957939567, guid: 172776644ed3dfb48958625641d4653d,
         type: 3}
       propertyPath: GameOverReloadTime
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1742407085957939567, guid: 172776644ed3dfb48958625641d4653d,
         type: 3}
@@ -4046,44 +4046,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1180026663 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1610853497983339092, guid: 4772895ffa7645548a6007da63834761,
-    type: 3}
-  m_PrefabInstance: {fileID: 5798764878010353363}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1180026670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180026663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2646d0396c50e480c8d5f544528d08c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask: DangerousAsteroid
-  Post_Outline: {fileID: 4800000, guid: 3a46ca1a6c0a24a5089173f22b6bac4f, type: 3}
-  DrawSimple: {fileID: 4800000, guid: 72cf56135f9ff430681384af31083ee2, type: 3}
-  outlineColor: {r: 1, g: 0, b: 0.09163618, a: 1}
---- !u!114 &1180026671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180026663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2646d0396c50e480c8d5f544528d08c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask: Asteroid
-  Post_Outline: {fileID: 4800000, guid: 3a46ca1a6c0a24a5089173f22b6bac4f, type: 3}
-  DrawSimple: {fileID: 4800000, guid: 72cf56135f9ff430681384af31083ee2, type: 3}
-  outlineColor: {r: 0, g: 0.108670235, b: 1, a: 1}
 --- !u!1001 &1238106408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5721,16 +5683,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConflictEventCamera: {fileID: 5054093583828618424}
-  EventCameraDistance: 850
+  EventCameraDistance: 750
   _soundPlayer: {fileID: 364138603}
   _se_Explosion: {fileID: 8300000, guid: 6796b76f7cd9c174c8b45664a7e929e7, type: 3}
+  _se_Explosion2: {fileID: 8300000, guid: 37f533d50aa87fa4c8aaccbeec983236, type: 3}
+  _halo: {fileID: 0}
+  _lastBossGameOverViewPos: {fileID: 0}
+  _atmosphericEntryEffect: {fileID: 7955294579992841025, guid: 5bcbf6cd0afae834b89e1015208f2425,
+    type: 3}
+  _lastBossGameOverEffect: {fileID: 0}
   _smallTeraExplosion: {fileID: 7385564711172147870, guid: ccc03c762d3dce742a32bb1a6337acf8,
     type: 3}
   _teraExplosion: {fileID: 8417664149193540011, guid: bb797b132049c004b90d3a4b2e9ed808,
     type: 3}
   _hellMaterial: {fileID: 2100000, guid: f1e414df15385d64cb021b6cbdc8056b, type: 2}
   GameOverAsteroid: 3
-  GameOverReloadTime: 6
+  GameOverReloadTime: 10
   _minimapobj: {fileID: 1747989151}
   _roberiaPrefab: {fileID: 8932848997244980696, guid: 09f57f74ffbd4304d919540a15440c0a,
     type: 3}
@@ -8175,7 +8143,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 5798764878010353363}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180026663}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8455e19d47960647be45d91ee1dc611, type: 3}
@@ -8643,11 +8611,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1610853497983339114, guid: 4772895ffa7645548a6007da63834761,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1610853497983339115, guid: 4772895ffa7645548a6007da63834761,
         type: 3}
       propertyPath: _mainCamera
@@ -8678,21 +8641,6 @@ PrefabInstance:
       propertyPath: _orbitShiftTooltip
       value: 
       objectReference: {fileID: 8297952111884073229}
-    - target: {fileID: 1610853497983339115, guid: 4772895ffa7645548a6007da63834761,
-        type: 3}
-      propertyPath: _conflictEventCamResetDelay
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2430290530930835555, guid: 4772895ffa7645548a6007da63834761,
-        type: 3}
-      propertyPath: _killCameraPause
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726817995458862351, guid: 4772895ffa7645548a6007da63834761,
-        type: 3}
-      propertyPath: volumeTrigger
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4772895ffa7645548a6007da63834761, type: 3}
 --- !u!1001 &6582865642158403310
@@ -8733,6 +8681,11 @@ PrefabInstance:
         type: 3}
       propertyPath: GameClearAsteroid
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6582865642158403314, guid: 50d9282d5cb6e1549bb142219f1b7c00,
+        type: 3}
+      propertyPath: GameOverReloadTime
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6582865642158403314, guid: 50d9282d5cb6e1549bb142219f1b7c00,
         type: 3}

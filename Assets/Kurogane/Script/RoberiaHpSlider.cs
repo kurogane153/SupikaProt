@@ -36,10 +36,13 @@ public class RoberiaHpSlider : MonoBehaviour
         }
         else
         {
-            _slider.value = _roberiaPrefab.GetComponent<AsteroidScript>().GetAsteroidHp();
+            if(_roberiaPrefab != null) {
+                _slider.value = _roberiaPrefab.GetComponent<AsteroidScript>().GetAsteroidHp();
+            }
             
         }
-        if (_roberiaPrefab.GetComponent<AsteroidScript>().GetAsteroidHp() <= 20)
+
+        if (_roberiaPrefab != null && _roberiaPrefab.GetComponent<AsteroidScript>().GetAsteroidHp() <= 20)
         {
             //Destroy(this.gameObject);
             _slider.value = 0;

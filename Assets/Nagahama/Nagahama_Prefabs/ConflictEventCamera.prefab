@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1610853497983339115}
   - component: {fileID: 5726817995458862351}
   - component: {fileID: 2430290530930835555}
+  - component: {fileID: 1180026670}
+  - component: {fileID: 1180026671}
   m_Layer: 8
   m_Name: ConflictEventCamera
   m_TagString: SubCamera
@@ -28,13 +30,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610853497983339092}
-  m_LocalRotation: {x: -0.2660808, y: 0.120210096, z: 0.033463206, w: 0.95584035}
+  m_LocalRotation: {x: -0.26608407, y: 0.12020831, z: 0.033463266, w: 0.9558397}
   m_LocalPosition: {x: -327.77817, y: -23.423264, z: 208.50845}
   m_LocalScale: {x: 1, y: 1, z: 1.0000001}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -31.112001, y: 14.336, z: 0}
 --- !u!20 &1610853497983339113
 Camera:
   m_ObjectHideFlags: 0
@@ -85,7 +87,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610853497983339092}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &1610853497983339115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +111,7 @@ MonoBehaviour:
   _warpTimeofMovetoPlayerNearPos: 0.5
   _followModeSwitchDelay: 0.75
   _killCamResetDelay: 0
-  _conflictEventCamResetDelay: 0
+  _conflictEventCamResetDelay: 4.5
   _normalMoveLerpFactor: 6
   _followMissileLerpFactor: 0.3
   _showExplosionModeSwitchDelay: 1
@@ -192,3 +194,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _killCameraPause: 0
+--- !u!114 &1180026670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610853497983339092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2646d0396c50e480c8d5f544528d08c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask: DangerousAsteroid
+  Post_Outline: {fileID: 4800000, guid: 3a46ca1a6c0a24a5089173f22b6bac4f, type: 3}
+  DrawSimple: {fileID: 4800000, guid: 72cf56135f9ff430681384af31083ee2, type: 3}
+  outlineColor: {r: 1, g: 0, b: 0.09163618, a: 1}
+--- !u!114 &1180026671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610853497983339092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2646d0396c50e480c8d5f544528d08c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask: Asteroid
+  Post_Outline: {fileID: 4800000, guid: 3a46ca1a6c0a24a5089173f22b6bac4f, type: 3}
+  DrawSimple: {fileID: 4800000, guid: 72cf56135f9ff430681384af31083ee2, type: 3}
+  outlineColor: {r: 0, g: 0.108670235, b: 1, a: 1}

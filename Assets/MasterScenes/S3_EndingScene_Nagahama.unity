@@ -1242,7 +1242,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -7864,6 +7864,7 @@ MonoBehaviour:
   EventCameraDistance: 750
   _soundPlayer: {fileID: 364138603}
   _se_Explosion: {fileID: 8300000, guid: 6796b76f7cd9c174c8b45664a7e929e7, type: 3}
+  _smallTeraExplosion: {fileID: 0}
   _teraExplosion: {fileID: 0}
   _hellMaterial: {fileID: 0}
   GameOverAsteroid: 3

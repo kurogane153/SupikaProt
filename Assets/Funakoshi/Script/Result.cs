@@ -80,6 +80,15 @@ public class Result : MonoBehaviour
             BGMManagerScript.Instance.PlayBGM(3);
         }
 
+        if (GameClearOverManager.isLastBossGameOver) {
+            _earth.SetActive(false);
+            _hellearth.SetActive(false);
+            PlayerOff.SetActive(false);
+            OverCameraObj.SetActive(true);
+            GameOvertext.SetActive(true);
+            BGMManagerScript.Instance.PlayBGM(4);
+        }
+
         
     }
 

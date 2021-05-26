@@ -149,13 +149,19 @@ MonoBehaviour:
   EventCameraDistance: 2000
   _soundPlayer: {fileID: 5811846110160915816}
   _se_Explosion: {fileID: 8300000, guid: 6796b76f7cd9c174c8b45664a7e929e7, type: 3}
+  _se_Explosion2: {fileID: 8300000, guid: 37f533d50aa87fa4c8aaccbeec983236, type: 3}
+  _halo: {fileID: 0}
+  _lastBossGameOverViewPos: {fileID: 0}
+  _atmosphericEntryEffect: {fileID: 7955294579992841025, guid: 5bcbf6cd0afae834b89e1015208f2425,
+    type: 3}
+  _lastBossGameOverEffect: {fileID: 0}
   _smallTeraExplosion: {fileID: 5484104952482766632, guid: 0314cdf44e6550543a1f356e09179204,
     type: 3}
   _teraExplosion: {fileID: 125124029251386215, guid: 2b74a516f3398384d8b0668e62dba03f,
     type: 3}
   _hellMaterial: {fileID: 2100000, guid: f1e414df15385d64cb021b6cbdc8056b, type: 2}
   GameOverAsteroid: 3
-  GameOverReloadTime: 6
+  GameOverReloadTime: 10
   _minimapobj: {fileID: 0}
   _roberiaPrefab: {fileID: 0}
   _textNo: 
@@ -332,8 +338,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8819265751437537516, guid: 2b599fe3dd41a0746806869b5c9b1276,
         type: 3}
+      propertyPath: Priority
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819265751437537516, guid: 2b599fe3dd41a0746806869b5c9b1276,
+        type: 3}
       propertyPath: m_Volume
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8819265751437537516, guid: 2b599fe3dd41a0746806869b5c9b1276,
         type: 3}

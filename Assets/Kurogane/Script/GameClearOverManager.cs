@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameClearOverManager : MonoBehaviour
 {
     public static bool isclear = false;
+    public static bool isLastBossGameOver = false;
     public static int _gameoverCount = 0;
     public static int _gameoverCountColony = 0;
 
@@ -25,6 +26,7 @@ public class GameClearOverManager : MonoBehaviour
     void Start()
     {
         isclear = false;
+        isLastBossGameOver = false;
     }
 
     void Update()

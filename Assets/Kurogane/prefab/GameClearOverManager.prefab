@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e92162007d5624580a2db6ee4a4f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOverAsteroid: 3
   GameClearAsteroid: 20
-  GameOverReloadTime: 3.5
+  GameOverReloadTime: 8
+  GameClearReloadTime: 8
   Spika: {fileID: 0}
   Earth: {fileID: 0}
