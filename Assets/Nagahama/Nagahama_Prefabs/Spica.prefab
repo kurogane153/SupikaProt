@@ -116,7 +116,6 @@ GameObject:
   - component: {fileID: 5150451266752021412}
   - component: {fileID: 5150451266756193180}
   - component: {fileID: 5150451268004788591}
-  - component: {fileID: 2026933532578039370}
   m_Layer: 11
   m_Name: EarthRendering
   m_TagString: Untagged
@@ -231,26 +230,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 20.000004
+  m_Radius: 22
   m_Height: 39.999996
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2026933532578039370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5150451266749896438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd716275e45d3ee4c8810831d8ca0203, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameOverCountText: {fileID: 0}
-  GameOverText: {fileID: 0}
-  GameOverAsteroid: 3
-  GameOverReloadTime: 3.5
 --- !u!1001 &3583043939177630826
 PrefabInstance:
   m_ObjectHideFlags: 0

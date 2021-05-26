@@ -332,13 +332,15 @@ public class KillCameraScript : MonoBehaviour
         CFCameraReset();
     }
 
-    public void ConflictEventCameraActive(GameObject target, Vector3 pos, float waittime = 0f)
+    public void ConflictEventCameraActive(Vector3 lookPos, Vector3 pos, float waittime = 0f)
     {
         if(0f < waittime) {
             _conflictEventCamResetDelay = waittime;
         }
+
         transform.position = pos;
-        _followTarget = target.transform;
+        
+
         GetCamera().enabled = true;
         
         _playerMove.enabled = false;
@@ -347,7 +349,12 @@ public class KillCameraScript : MonoBehaviour
         Pauser.SoftPause();
         Time.timeScale = 1f;
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((_followTarget.position - transform.position).normalized), 1);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((lookPos - transform.position).normalized), 1);
+        if(waittime == 0) {
+            transform.position += transform.right * _positionOffset.x + transform.up * _positionOffset.y + transform.forward * _positionOffset.z;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((lookPos - transform.position).normalized), 1);
+
+        }
 
         StartCoroutine(nameof(ConflictSwitchStagingPhase_ShowExplosion));
     }

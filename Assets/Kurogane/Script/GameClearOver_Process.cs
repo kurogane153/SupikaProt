@@ -21,8 +21,12 @@ public class GameClearOver_Process : MonoBehaviour
     [SerializeField] private SoundPlayer _soundPlayer;
     [SerializeField] private AudioClip _se_Explosion;
 
+    [Header("小エクスプロージョン")]
+    [SerializeField] private GameObject _smallTeraExplosion;
+
     [Header("テラエクスプロージョン")]
-    [SerializeField] private GameObject _teraExplosion;
+    [SerializeField] private GameObject _teraExplosion;    
+
     [Header("世界崩壊マテリアル")]
     [SerializeField] private Material _hellMaterial;
 
@@ -116,7 +120,7 @@ public class GameClearOver_Process : MonoBehaviour
         }
 
         impactPos = asteroid.transform.position;
-        Vector3 desiredPos = (impactPos - transform.position).normalized * EventCameraDistance + transform.position;
+        
         GameOverCount++;
         if (asteroid.name == _roberiaPrefab.name)
         {
@@ -125,10 +129,16 @@ public class GameClearOver_Process : MonoBehaviour
         _minimapobj.GetComponent<MinimapObjectScript>().ChangeColor(GameOverCount - 1);
 
         if (GameOverCount >= GameOverAsteroid) {
+            Vector3 desiredPos = (impactPos - transform.position).normalized * EventCameraDistance + transform.position;
+            Vector3 explosionpos = (impactPos - transform.position) + transform.position;
             GameOverProcess();
-            ConflictEventCamera.ConflictEventCameraActive(gameObject, desiredPos, GameOverReloadTime);
+            ConflictEventCamera.ConflictEventCameraActive(explosionpos, desiredPos, GameOverReloadTime);
+
         } else {
-            ConflictEventCamera.ConflictEventCameraActive(gameObject, desiredPos);
+            Vector3 desiredPos = (impactPos - transform.position).normalized * EventCameraDistance + transform.position;
+            Vector3 explosionpos = (impactPos - transform.position) + transform.position;
+            Instantiate(_smallTeraExplosion, explosionpos, Quaternion.identity);
+            ConflictEventCamera.ConflictEventCameraActive(explosionpos, desiredPos);
         }
     }
 

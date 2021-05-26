@@ -129,7 +129,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 20.000004
+  m_Radius: 22
   m_Height: 39.999996
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -146,15 +146,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConflictEventCamera: {fileID: 0}
-  EventCameraDistance: 2250
+  EventCameraDistance: 2000
   _soundPlayer: {fileID: 5811846110160915816}
   _se_Explosion: {fileID: 8300000, guid: 6796b76f7cd9c174c8b45664a7e929e7, type: 3}
-  _teraExplosion: {fileID: 670532402792323021, guid: 157a1eab67ecfb7498962bb89ad77a53,
+  _smallTeraExplosion: {fileID: 5484104952482766632, guid: 0314cdf44e6550543a1f356e09179204,
+    type: 3}
+  _teraExplosion: {fileID: 125124029251386215, guid: 2b74a516f3398384d8b0668e62dba03f,
     type: 3}
   _hellMaterial: {fileID: 2100000, guid: f1e414df15385d64cb021b6cbdc8056b, type: 2}
   GameOverAsteroid: 3
-  GameClearAsteroid: 25
   GameOverReloadTime: 6
+  _minimapobj: {fileID: 0}
+  _roberiaPrefab: {fileID: 0}
+  _textNo: 
+  drawingTime: 5
+  _textmanager: {fileID: 0}
 --- !u!1 &6582865643300559827
 GameObject:
   m_ObjectHideFlags: 0

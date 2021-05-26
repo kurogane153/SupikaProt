@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraType: 1
   _followTarget: {fileID: 0}
-  _positionOffset: {x: 73.10423, y: -25.22326, z: -20}
+  _positionOffset: {x: -300, y: -200, z: 100}
   _rotationOffset: {x: -31.112, y: -26.643, z: 0}
   _missileFollowOffset: {x: 0, y: 5, z: -10}
   _playerNearPosOffset: {x: 0, y: 0, z: 0}
