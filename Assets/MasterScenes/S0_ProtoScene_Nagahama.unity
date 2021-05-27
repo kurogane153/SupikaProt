@@ -5683,7 +5683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConflictEventCamera: {fileID: 5054093583828618424}
-  EventCameraDistance: 750
+  EventCameraDistance: 900
   _soundPlayer: {fileID: 364138603}
   _se_Explosion: {fileID: 8300000, guid: 6796b76f7cd9c174c8b45664a7e929e7, type: 3}
   _se_Explosion2: {fileID: 8300000, guid: 37f533d50aa87fa4c8aaccbeec983236, type: 3}
