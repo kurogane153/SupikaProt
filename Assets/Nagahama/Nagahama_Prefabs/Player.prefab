@@ -1913,6 +1913,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isControl: 0
+  _isSpeedControl: 1
+  _isOrbitChangeControll: 1
   _playerAnimation: {fileID: 6295996902850967912}
   _mainCameraController: {fileID: 0}
   _mainCameraRadialBlur: {fileID: 0}
@@ -1924,6 +1926,8 @@ MonoBehaviour:
   _se_SpeedUp: {fileID: 8300000, guid: 405cfe6972b4dac4e8e5000eeda58fc3, type: 3}
   _se_SpeedUpNormal: {fileID: 8300000, guid: 361b48149c0c9d54bb4a9e5bcbce32f6, type: 3}
   _se_SpeedDown: {fileID: 8300000, guid: d794f309c10bcff4aa886c885af96aee, type: 3}
+  _se_SpeedChangeError: {fileID: 8300000, guid: dad669c7096532e458ff2b056a64b2f8,
+    type: 3}
   _se_OrbitChangeAccept: {fileID: 8300000, guid: 6f11c0efe0875514bbdfbe9aeea5d2f4,
     type: 3}
   _inFlightSoundPitchLevels:
@@ -1959,10 +1963,6 @@ MonoBehaviour:
   - 268
   - 360
   _lagrangePointAngle: 270
-  _dbg_playerNowAngle: 0
-  _dbg_isAcceptedOrbitChange: 0
-  _dbg_orbitOriginPlanet: 
-  _dbg_distance_player_to_planet: 0
 --- !u!114 &135166656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1990,7 +1990,6 @@ MonoBehaviour:
   _killCameraActiveCount: 3
   _mainCamera: {fileID: 0}
   _finalRockOnEffectSc: {fileID: 0}
-  _onDrawGizmosFlags: 0
   _reticle: {fileID: 0}
   _layerMask:
     serializedVersion: 2
@@ -2105,8 +2104,6 @@ MonoBehaviour:
     - 0.45
     - 0.5
     - 0.55
-  _dbg_targetAsteroid: None
-  _dbg_tmptarget: None
 --- !u!114 &4099869561920642162
 MonoBehaviour:
   m_ObjectHideFlags: 0

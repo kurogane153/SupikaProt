@@ -31,6 +31,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private AudioClip _se_SpeedUp;
     [SerializeField] private AudioClip _se_SpeedUpNormal;
     [SerializeField] private AudioClip _se_SpeedDown;
+    [SerializeField] private AudioClip _se_SpeedChangeError;
     [SerializeField] private AudioClip _se_OrbitChangeAccept;
     [SerializeField] private float[] _inFlightSoundPitchLevels;
 
@@ -403,6 +404,7 @@ public class PlayerMove : MonoBehaviour
         } else {
             speedChangeTimeRemain = 0.5f;
             _speedBar.SpeedChangeError();
+            _soundPlayer.PlaySE(_se_SpeedChangeError);
         }
 
         if (_speedBar != null && beforennum != periodNum) {
@@ -433,6 +435,7 @@ public class PlayerMove : MonoBehaviour
         } else {
             speedChangeTimeRemain = 0.5f;
             _speedBar.SpeedChangeError();
+            _soundPlayer.PlaySE(_se_SpeedChangeError);
         }
 
         if (_speedBar != null && beforennum != periodNum) {
