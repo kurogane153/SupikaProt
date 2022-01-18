@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MasterScenes/TutorialScene.unity
     guid: 7340adfe1e0babe41a9c99ca6230695d
+  - enabled: 1
+    path: Assets/MasterScenes/S8_ScoreAttackScene.unity
+    guid: 73550fffd62d15e499c50f0d68c03ec4
   m_configObjects: {}

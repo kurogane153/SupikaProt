@@ -9,6 +9,7 @@ public class PushStart : MonoBehaviour
 {
     [SerializeField] private int _mainSceneBuildIndex;
     [SerializeField] private int _tutorialSceneBuildIndex;
+    [SerializeField] private int _scoreAttackSceneBuildIndex;
     [SerializeField] private float _fadeTimeLoadScene;
 
     [SerializeField] private SoundPlayer _soundPlayer;
@@ -44,6 +45,13 @@ public class PushStart : MonoBehaviour
         _soundPlayer.PlaySE(_se_GameStart);
         OptionDataManagerScript.Instance.optionData._tutorialPlayedFlag = true;
         OptionDataManagerScript.Instance.Save();
+        _eventSystem.enabled = false;
+    }
+
+    public void ScoreAttackSceneLoad()
+    {
+        FadeManager.Instance.LoadScene(_scoreAttackSceneBuildIndex, _fadeTimeLoadScene);
+        _soundPlayer.PlaySE(_se_GameStart);
         _eventSystem.enabled = false;
     }
 

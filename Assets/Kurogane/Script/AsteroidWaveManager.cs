@@ -99,11 +99,12 @@ public class AsteroidWaveManager : MonoBehaviour
 
     enum _wavecount
     {
+        ZERO = 0,
         FAST = 1,
         SECOND,
         THIRD,
         FORTH,
-        ZERO = 0
+        LOOP = 99
     };
 
     private _wavecount _wave;
@@ -117,6 +118,8 @@ public class AsteroidWaveManager : MonoBehaviour
         _earthPos = new Vector3(_earth.transform.position.x, 0, 0);
         if (SceneManager.GetActiveScene().name == "S0_ProtoScene_Nagahama")
         {
+
+            // ノーマルモード
             _wave = _wavecount.FAST;
             _asteroidwavecount = 2;
             _waveAsteroid = _waveAsteroidcount[0];
@@ -126,6 +129,8 @@ public class AsteroidWaveManager : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "TutorialScene")
         {
+
+            // チュートリアルモード
             _waveAsteroid = _wavetutorialAsteroidcount;
             _textno = 13;
             _wave = _wavecount.ZERO;
@@ -134,7 +139,19 @@ public class AsteroidWaveManager : MonoBehaviour
             _gameCOProcess.SetGameClearCount(0);
             FastText(12);
         }
-        
+        else if (SceneManager.GetActiveScene().buildIndex == 8) 
+        {
+
+            // スコアアタックモード
+            _waveAsteroid = _waveAsteroidcount[0];
+            _textno = 21;
+            _wave = _wavecount.LOOP;
+            _asteroidwavecount = 2;
+            _asteroidinstansflg = true;
+            _gameCOProcess.SetGameClearCount(0);
+            FastText(20);
+        }
+
     }
 
     void Update()
@@ -239,7 +256,28 @@ public class AsteroidWaveManager : MonoBehaviour
                     }
                     _asteroidinstansflg = true;
                 }
+                break;
 
+            // スコアアタックモード用
+            case _wavecount.LOOP:
+
+                if (_waveAsteroidInstansCount >= _waveAsteroid) _asteroidinstansflg = true;
+                if (_gameCOProcess.GetGameClearCount() >= _waveAsteroid) {
+
+                    // ウェーブカウントは増え続ける
+                    _asteroidwavecount++;
+
+                    // ウェーブ毎の生成数設定配列の要素数を超えないようにする
+                    if(_waveAsteroidcount.Length - 1 <= _asteroidwavecount) {
+                        _asteroidwavecount = _waveAsteroidcount.Length - 1;
+                    }
+
+                    // 隕石がスポーンしすぎないように生成数制限設定している
+                    _waveAsteroid = _waveAsteroidcount[_asteroidwavecount];
+                    _asteroidinstansflg = false;
+                    _waveAsteroidInstansCount = 0;
+                    _gameCOProcess.SetGameClearCount(0);
+                }
                 break;
         }
 

@@ -6,6 +6,12 @@ using UnityEngine.UI;
 public class EnemyGenerator : MonoBehaviour
 {
 
+    [Header("一定時間経過毎にスポーンさせるか")]
+    [SerializeField] private bool _spawnPerTimer;
+
+    [Header("この時間が経過する毎にスポーンさせる")]
+    [SerializeField] private float _spawnTime;
+
     [Header("Set Asteroid Prefab")]
     //敵プレハブ
     public GameObject enemyPrefab;
@@ -72,6 +78,9 @@ public class EnemyGenerator : MonoBehaviour
     //経過時間
     private float time = 0f;
 
+    // 一定時間毎にスポーンさせる用タイマー
+    private float spawnWaitTime = 0f;
+
     private int _asteroidWaveCount = 0;
 
     //カメラに表示されているか
@@ -89,6 +98,8 @@ public class EnemyGenerator : MonoBehaviour
 
     void Start()
     {
+        spawnWaitTime = _spawnTime;
+
         //時間間隔を決定する
         interval = GetRandomTime();
         SpikaPos = new Vector3(Spika.transform.position.x, 0, 0);
@@ -121,6 +132,9 @@ public class EnemyGenerator : MonoBehaviour
         //時間計測
         time += Time.deltaTime;
 
+        // スポーン待機時間
+        spawnWaitTime -= Time.deltaTime;
+
         AsteroidInstens();
         //dbg();
     }
@@ -144,7 +158,10 @@ public class EnemyGenerator : MonoBehaviour
         //経過時間が生成時間になったとき(生成時間より大きくなったとき)
         if (time > interval)
         {
-            if (_asteroidspawntrigger.GetAreaTrigger())
+
+            // スポーン範囲トリガーに触れたときに生成処理
+            // 一定時間経過でもスポーンさせる場合はそれも条件に加える
+            if (_asteroidspawntrigger.GetAreaTrigger() || (_spawnPerTimer && spawnWaitTime <= 0))
             {
                 if (_asteroidWaveCount < _asteroidwavemanager.GetAsteroidWaveCount())
                 {
@@ -179,6 +196,9 @@ public class EnemyGenerator : MonoBehaviour
                         interval = GetRandomTime();
                         //isRendered = false;
                         _asteroidWaveCount++;
+
+                        // スポーン待機時間再セット
+                        spawnWaitTime = _spawnTime;
                     }
                     else
                     {
@@ -199,7 +219,7 @@ public class EnemyGenerator : MonoBehaviour
     {
         var range = Random.Range(0, AsteroidPrefab.Length);
         
-        //ウェーブ事の隕石の生成制御
+        //ウェーブ毎の隕石の生成制御
         switch (_asteroidwavemanager.GetWaveCount())
         {
             case 0:
