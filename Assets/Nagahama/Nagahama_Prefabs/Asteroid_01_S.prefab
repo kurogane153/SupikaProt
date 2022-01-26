@@ -110,6 +110,10 @@ MonoBehaviour:
   _explosionEffect: {fileID: 7078664622680582095}
   _childParticles:
   - {fileID: 3534775411313275542}
+  _isLastBoss: 0
+  _pointTextObject: {fileID: 4158283241776938138, guid: 485923f24e7533f4f9e6e7f4401e8668,
+    type: 3}
+  _point: 200
   _destroyTime: 360
   _hp: 200
   _speed: 10

@@ -18,6 +18,12 @@ public class AsteroidScript : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private bool _isLastBoss;
+    [SerializeField] private GameObject _pointTextObject;   // 撃破時のポイント表示テキスト（スコアアタックモード）
+    [SerializeField] private int _point;                    // 撃破時のポイント（スコアアタックモード）
+    public int Point
+    {
+        get { return _point; }
+    }
     [SerializeField] private float _destroyTime = 10f;      // 自動消滅までの時間
     [SerializeField] private int _hp = 6;
     [SerializeField] private float _speed = 5f;
@@ -98,10 +104,29 @@ public class AsteroidScript : MonoBehaviour
             }
             GameClearOver_Process.GameClearCount++;
 
+            // スコアアタックモード時のみ処理
+            if(SceneManager.GetActiveScene().buildIndex == 8) {
+                GameObject textObj = Instantiate(_pointTextObject);
+
+                ScoreManager.Instance.Combo++;
+
+                Camera killCam = ScoreManager.Instance.killCamera;
+
+                if (ScoreManager.Instance.IsKillCameraEnable) {
+                    textObj.GetComponent<DeletePointText>().SetDeletePointText((_point * Mathf.Pow(ScoreManager.Instance.Combo, 2)).ToString("N0"), killCam.WorldToScreenPoint(transform.position), true);
+                }
+                else {
+                    textObj.GetComponent<DeletePointText>().SetDeletePointText((_point * Mathf.Pow(ScoreManager.Instance.Combo, 2)).ToString("N0"), Camera.main.WorldToScreenPoint(transform.position), true);
+                }
+                
+
+                ScoreManager.Instance.AddScore(Point);
+            }
+
             if (_asteroidnumber == AsteroidWaveManager._asteroidnum)
             {
                 AsteroidWaveManager._instansflg = true;
-                AsteroidWaveManager._instantiatePosition = this.transform.position;
+                AsteroidWaveManager._instantiatePosition = transform.position;
             }
         }
     }

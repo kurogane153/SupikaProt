@@ -125,9 +125,11 @@ public class FadeManager : MonoBehaviour
 		float time = 0;
 		while (time <= interval) {
 			fadeAlpha = Mathf.Lerp(0f, 1f, time / interval);
-			time += Time.deltaTime;
+			time += Time.unscaledDeltaTime;
 			yield return 0;
 		}
+
+		Time.timeScale = 1f;
 
 		//シーン切替
 		SceneManager.LoadScene(scene);

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class KillCameraScript : MonoBehaviour
 {
@@ -82,6 +83,10 @@ public class KillCameraScript : MonoBehaviour
         camera = GetComponent<Camera>();
 
         startFollowTarget = _followTarget;
+
+        if (SceneManager.GetActiveScene().buildIndex == 8 && _cameraType == CameraType.KillCamera) {
+            ScoreManager.Instance.killCamera = camera;
+        }
     }
 
     void Update()
@@ -302,6 +307,10 @@ public class KillCameraScript : MonoBehaviour
         transform.position = _mainCamera.transform.position;
         transform.rotation = _mainCamera.transform.rotation;
 
+        if(SceneManager.GetActiveScene().buildIndex == 8) {
+            ScoreManager.Instance.IsKillCameraEnable = true;
+        }
+
     }
 
     public void Reset()
@@ -314,6 +323,10 @@ public class KillCameraScript : MonoBehaviour
         Pauser.SoftResume();
         Time.timeScale = 1f;
         _playerShot.enabled = true;
+
+        if (SceneManager.GetActiveScene().buildIndex == 8) {
+            ScoreManager.Instance.IsKillCameraEnable = false;
+        }
     }
 
     #endregion

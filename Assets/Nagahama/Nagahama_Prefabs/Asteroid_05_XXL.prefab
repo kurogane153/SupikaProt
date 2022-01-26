@@ -106,9 +106,16 @@ MonoBehaviour:
   _se_Explosion: {fileID: 8300000, guid: b64a3f6fc4dbc394ea5c305e5c613668, type: 3}
   _se_ExplosionStart1: {fileID: 0}
   _se_ExplosionStart2: {fileID: 0}
+  _se_Explosion3: {fileID: 0}
+  _se_Explosion4: {fileID: 0}
+  _se_Explosion5: {fileID: 0}
   _explosionEffect: {fileID: 4257257283591942671}
   _childParticles:
   - {fileID: 7588367101490537311}
+  _isLastBoss: 0
+  _pointTextObject: {fileID: 4158283241776938138, guid: 485923f24e7533f4f9e6e7f4401e8668,
+    type: 3}
+  _point: 100
   _destroyTime: 360
   _hp: 100
   _speed: 50
@@ -119,7 +126,6 @@ MonoBehaviour:
   _explosionEffectDelaySec: 0.01
   targetPosition: {x: 0, y: 0, z: 0}
   _asteroidnumber: 5
-  _dgb_hp: 0
 --- !u!54 &1271347040457265111
 Rigidbody:
   m_ObjectHideFlags: 0

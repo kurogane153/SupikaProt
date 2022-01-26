@@ -35,14 +35,14 @@ public class AsteroidWaveManager : MonoBehaviour
     //隕石の速さ
     public float _spawnedAsteroidSpeed = 50f;
 
-    [Header("テキストの表示秒数（ウェーブ事の遅延秒数）")]
+    [Header("テキストの表示秒数（ウェーブ毎の遅延秒数）")]
     public int drawingTime = 3;
 
-    [Header("ウェーブ事の隕石の個数")]
+    [Header("ウェーブ毎の隕石の個数")]
     [SerializeField]
     private int[] _waveAsteroidcount = new int[4] { 7, 10, 15, 25 };
 
-    [Header("ウェーブ事の隕石の個数")]
+    [Header("ウェーブ毎の隕石の個数")]
     [SerializeField]
     private int _wavetutorialAsteroidcount = 5;
 
@@ -97,6 +97,14 @@ public class AsteroidWaveManager : MonoBehaviour
     //デバッグ用
     public GameObject _waveText = null; // Textオブジェクト
 
+    // スコアアタックモードのタイマー
+    public TextMeshProUGUI _timerText;
+
+    private float scoreAttackTimer = 180f;
+    private bool isTimerStart;
+
+    private PlayerMove playerMove;
+
     enum _wavecount
     {
         ZERO = 0,
@@ -111,11 +119,13 @@ public class AsteroidWaveManager : MonoBehaviour
 
     void Start()
     {
-        _player.GetComponent<PlayerMove>().IsSpeedControll = true;
-        _player.GetComponent<PlayerMove>().IsOrbitChangeControll = true;
+        playerMove = _player.GetComponent<PlayerMove>();
+        playerMove.IsSpeedControll = true;
+        playerMove.IsOrbitChangeControll = true;
         _textno = 1;
         _spikaPos = new Vector3(_spika.transform.position.x, 0, 0);
         _earthPos = new Vector3(_earth.transform.position.x, 0, 0);
+
         if (SceneManager.GetActiveScene().name == "S0_ProtoScene_Nagahama")
         {
 
@@ -150,6 +160,7 @@ public class AsteroidWaveManager : MonoBehaviour
             _asteroidinstansflg = true;
             _gameCOProcess.SetGameClearCount(0);
             FastText(20);
+
         }
 
     }
@@ -160,6 +171,19 @@ public class AsteroidWaveManager : MonoBehaviour
         DoubleAsteroid();
         AretText();
         //Dbg();
+
+        if (isTimerStart && playerMove.enabled) {
+            scoreAttackTimer -= Time.deltaTime;
+
+            if(scoreAttackTimer <= 0) {
+                FindObjectOfType<PauseManager>().Pause();
+            }
+        }
+
+        int minutes = Mathf.FloorToInt(scoreAttackTimer / 60F);
+        int seconds = Mathf.FloorToInt(scoreAttackTimer - minutes * 60);
+        int mseconds = Mathf.FloorToInt((scoreAttackTimer - minutes * 60 - seconds) * 100);
+        _timerText.text = string.Format("{0:00}:{1:00}.{2:00}", minutes, seconds, mseconds);
     }
 
     void DoubleAsteroid()
@@ -352,6 +376,18 @@ public class AsteroidWaveManager : MonoBehaviour
         _waveAsteroidInstansCount = 0;
         _gameCOProcess.SetGameClearCount(0);
         _textmanager.TextWindowOff();
+
+        // スコアアタックモード時のみ、タイマースタートフラグを建てる
+        if(SceneManager.GetActiveScene().buildIndex == 8) {
+            Invoke("DelayTimerStart", 1f);
+        }
+        
+    }
+
+    // スコアアタックモード時のみ呼ばれる
+    private void DelayTimerStart()
+    {
+        isTimerStart = true;
     }
 
     public int GetWaveAsteroidInstansCount()

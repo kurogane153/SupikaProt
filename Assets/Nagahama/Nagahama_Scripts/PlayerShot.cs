@@ -249,6 +249,11 @@ public class PlayerShot : MonoBehaviour
             return;
         }
 
+        // スコアアタックモード時のみ処理
+        if(SceneManager.GetActiveScene().buildIndex == 8) {
+            ScoreManager.Instance.Combo = 0;
+        }
+
         // キルカメラ発動可能数なら、キルカメラ用の番号を起動する
         if (reticles.Length >= _killCameraActiveCount) {
             num = _killCamSettingsNumber;

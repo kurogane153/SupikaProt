@@ -79,5 +79,6 @@ public class OptionData
     [SerializeField, Range(0f, 2f)] public float _aimSensivity_Y = 1f;      // エイム感度Y軸
     [SerializeField] public bool _useAimAssistFlag = true;                  // エイムアシスト使うか
     [SerializeField, Range(0f, 2f)] public float _aimAssistIntensity = 1f;  // エイムアシスト強度
-    [SerializeField] public bool _tutorialPlayedFlag = false;              // チュートリアルをプレイしたことがあるか
+    [SerializeField] public bool _tutorialPlayedFlag = false;               // チュートリアルをプレイしたことがあるか
+    [SerializeField] public int _highScore = 0;                             // スコアアタックモードのハイスコア
 }
